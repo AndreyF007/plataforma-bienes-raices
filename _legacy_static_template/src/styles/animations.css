@@ -1,0 +1,172 @@
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS — Microinteractions & Scroll Reveals
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Scroll Reveal Base ───────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--duration-slower) var(--ease-out),
+              transform var(--duration-slower) var(--ease-out);
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.reveal-stagger--visible > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger--visible > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger--visible > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger--visible > *:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger--visible > *:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger--visible > *:nth-child(6) { transition-delay: 400ms; }
+
+.reveal-stagger--visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Reveal Variants ──────────────────────────────────────────── */
+.reveal--left {
+  transform: translateX(-30px);
+}
+
+.reveal--left.reveal--visible {
+  transform: translateX(0);
+}
+
+.reveal--right {
+  transform: translateX(30px);
+}
+
+.reveal--right.reveal--visible {
+  transform: translateX(0);
+}
+
+.reveal--scale {
+  transform: scale(0.95);
+}
+
+.reveal--scale.reveal--visible {
+  transform: scale(1);
+}
+
+/* ── Hero Entrance ────────────────────────────────────────────── */
+.hero__badge {
+  animation: hero-fade-in 0.8s var(--ease-out) 0.2s both;
+}
+
+.hero__title {
+  animation: hero-fade-in 0.8s var(--ease-out) 0.4s both;
+}
+
+.hero__subtitle {
+  animation: hero-fade-in 0.8s var(--ease-out) 0.6s both;
+}
+
+.hero__actions {
+  animation: hero-fade-in 0.8s var(--ease-out) 0.8s both;
+}
+
+.hero__scroll-indicator {
+  animation: hero-fade-in 0.8s var(--ease-out) 1.2s both;
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Trust Bar Counter Animation ──────────────────────────────── */
+.trust-bar__value {
+  transition: var(--transition-slow);
+}
+
+/* ── Navbar Animation ─────────────────────────────────────────── */
+.navbar {
+  animation: navbar-slide-in 0.5s var(--ease-out) both;
+}
+
+@keyframes navbar-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Mobile Menu Link Animation ───────────────────────────────── */
+.mobile-menu--active .mobile-menu__link:nth-child(1) { transition-delay: 100ms; }
+.mobile-menu--active .mobile-menu__link:nth-child(2) { transition-delay: 150ms; }
+.mobile-menu--active .mobile-menu__link:nth-child(3) { transition-delay: 200ms; }
+.mobile-menu--active .mobile-menu__link:nth-child(4) { transition-delay: 250ms; }
+.mobile-menu--active .mobile-menu__link:nth-child(5) { transition-delay: 300ms; }
+.mobile-menu--active .mobile-menu__link:nth-child(6) { transition-delay: 350ms; }
+.mobile-menu--active .mobile-menu__link:nth-child(7) { transition-delay: 400ms; }
+
+/* ── Parallax Background ──────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__background img {
+    transition: transform 0.1s linear;
+  }
+}
+
+/* ── Loading skeleton ─────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-100) 25%,
+    var(--color-cream) 50%,
+    var(--color-gray-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Accent line animation ────────────────────────────────────── */
+@keyframes accent-line {
+  from { width: 0; }
+  to { width: 60px; }
+}
+
+.divider--animated {
+  width: 0;
+}
+
+.divider--animated.reveal--visible {
+  animation: accent-line 0.6s var(--ease-out) 0.3s forwards;
+}
+
+/* ── Smooth image load ────────────────────────────────────────── */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-out);
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}

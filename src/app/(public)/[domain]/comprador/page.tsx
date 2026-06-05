@@ -1,0 +1,222 @@
+import { notFound } from 'next/navigation';
+import { db } from '@/lib/db';
+import Navbar from '@/components/ui/Navbar';
+import FloatingContact from '@/components/ui/FloatingContact';
+import TestimonialSlider from '@/components/ui/TestimonialSlider';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import Link from 'next/link';
+import Footer from '@/components/ui/Footer';
+
+export default async function BuyersGuidePage(props: { params: Promise<{ domain: string }> }) {
+  const params = await props.params;
+  const decodedDomain = decodeURIComponent(params.domain);
+  
+  const tenantData = await db.tenant.findUnique({
+    where: { domain: decodedDomain },
+  });
+  
+  if (!tenantData) return notFound();
+
+  const steps = [
+    {
+      num: "1",
+      title: "INVESTIGUE",
+      desc: "¿Ya sabe dónde quiere comprar? ¿Si quiere un condominio, una casa adosada o una casa unifamiliar? ¿Qué características le gustan y cuáles no? ¿Qué hay disponible en el mercado ahora? Si respondió que no a alguna de estas preguntas, ahora es el momento de comenzar a investigar. Además de buscar casas que le interesen, tome nota de cualquier cambio en los precios de venta. Esto podría brindarle información valiosa sobre las tendencias de vivienda en vecindarios específicos y ayudarlo cuando llegue el momento de hacer una oferta.",
+      img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      num: "2",
+      title: "DECIDA SU PRESUPUESTO",
+      desc: "Observe que dije que decida su presupuesto, no determine cuánto le dará la compañía hipotecaria. En muchos casos, una compañía hipotecaria lo preaprobará por más de lo que se siente cómodo gastando, por lo que debe determinar el pago mensual con el que se siente cómodo antes de hablar con un prestamista. Esto probablemente incluye hacer un presupuesto completo del hogar y tener en cuenta qué cambios además del pago de una hipoteca ocurrirán una vez que se mude a su nuevo hogar. Si ha vivido en un apartamento o con compañeros de cuarto, es posible que pase por alto nuevos gastos como basura, agua o tarifas de HOA que podrían arruinar fácilmente su presupuesto.",
+      img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      num: "3",
+      title: "OBTENGA UNA PRECALIFICACIÓN",
+      desc: "El hecho de que crea que puede pagar un cierto pago cada mes no significa que la compañía hipotecaria esté de acuerdo. Así como pueden aprobarlo por una cantidad demasiado grande, también pueden aprobarlo por una cantidad menor o negarle una hipoteca por completo. La falta de tiempo en un trabajo, crédito insuficiente, quiebras pasadas u otros problemas financieros pueden causar problemas importantes al tratar de asegurar una hipoteca. Antes de fijarse en una casa, hable con un profesional hipotecario para averiguar para qué cantidad puede calificar. Esto también será una ventaja cuando haga una oferta por una casa, ya que algunos vendedores no considerarán las ofertas de aquellos que no están precalificados para un préstamo.",
+      img: "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      num: "4",
+      title: "ELIJA UN AGENTE INMOBILIARIO",
+      desc: "¿Puede buscar, ver y, en última instancia, hacer una oferta por una casa sin un agente inmobiliario? Técnicamente sí, pero ¿por qué lo haría cuando no le cuesta nada a un agente como yo quitarle gran parte del estrés de los hombros? No solo lo ayudaré a identificar propiedades en las que podría estar interesado, organizar visitas y, en última instancia, manejar el proceso de oferta, sino que también tengo un conocimiento del mercado que usted no posee. Es posible que pueda alejarlo de ciertas casas o vecindarios, sugerir gemas ocultas o darle consejos que lo ayudarán a encontrar la casa de sus sueños por el precio correcto. Mi objetivo es brindarle el servicio más personalizado diseñado para ayudarlo a comprar la casa de sus sueños.",
+      img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      num: "5",
+      title: "ENCUENTRE LA CASA ADECUADA",
+      desc: "Este debería ser el paso más agradable de todo el proceso (¡además de mudarse!). Organizaré exhibiciones de las casas que le interesan y que se ajusten a su presupuesto. Tome notas sobre lo que le gusta y lo que no, y asegúrese de prestar atención a los detalles. Encienda y apague los interruptores de luz, abra y cierre las puertas y deje correr los grifos en varias habitaciones. No limite su inspección a la casa en sí. Asegúrese de tomarse el tiempo para explorar el vecindario y estar atento al tráfico en ciertos momentos del día, la situación del estacionamiento y lo cerca que está de las necesidades como escuelas y supermercados.",
+      img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      num: "6",
+      title: "HAGA UNA OFERTA",
+      desc: "Una vez que haya seleccionado la casa perfecta, trabaje con su agente para elaborar una oferta justa basada en el valor de viviendas comparables en el mercado. Dependiendo del precio de venta de la casa y de si el entorno actual es un mercado de compradores o vendedores, su oferta puede estar por debajo, al mismo nivel o incluso por encima del precio de venta. Podré ayudarlo a negociar si recibe una contraoferta y llega a un acuerdo. En este punto, la casa entrará en plica (escrow).",
+      img: "https://images.unsplash.com/photo-1556156653-e5a7c69cc263?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      num: "7",
+      title: "HAGA INSPECCIONAR LA CASA",
+      desc: "En la mayoría de los casos, su oferta estará condicionada a la inspección de la casa para asegurarse de que no haya daños estructurales importantes ni grandes reparaciones necesarias. Puedo ayudarlo a organizarlo y puede programarlo a los pocos días de hacer una oferta. Si no hay problemas importantes, el proceso pasa al paso ocho. Si los hay, puede renegociar su oferta en función de lo que deba arreglarse, o puede retirarla.",
+      img: "https://images.unsplash.com/photo-1504307651254-35680f356fce?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      num: "8",
+      title: "SELECCIONE SU PRÉSTAMO",
+      desc: "Ahora es el momento de volver al prestamista hipotecario que lo preaprobó o precalificó y elegir su hipoteca. Se le presentarán varias opciones en función de su situación financiera única, incluidas tasas fijas, tasas variables, a 15 años, a 30 años o programas especiales. Trabaje con su prestamista hipotecario para seleccionar la opción con la que se sienta más cómodo.",
+      img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      num: "9",
+      title: "OBTENGA UNA TASACIÓN",
+      desc: "Su prestamista hará que tasen su nueva casa para tener su valor independiente de ella. La tasación es para asegurar que todas las partes involucradas están pagando un precio justo por la casa.",
+      img: "https://images.unsplash.com/photo-1460472178825-e5240623afd5?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      num: "10",
+      title: "TERMINE EL PAPELEO",
+      desc: "Nadie espera con ansias todo el papeleo involucrado en la compra de una casa, pero es una parte necesaria del proceso. Afortunadamente, todo será organizado por su prestamista y la compañía de títulos y, cuando haya terminado, sabrá que es el propietario legal de su nuevo hogar.",
+      img: "https://images.unsplash.com/photo-1571216656722-1d6ebfa77da1?auto=format&fit=crop&w=1200&q=80"
+    }
+  ];
+
+  const actionButtons = [
+    { title: "BARRIOS", img: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=600&q=80", link: "/#comunidades" },
+    { title: "CARTERA", img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80", link: "/#testimonios" },
+    { title: "BÚSQUEDA DE CASAS", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80", link: "/portal" },
+    { title: "TRABAJA CON ELENA", img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80", link: "mailto:info@example.com" }
+  ];
+
+  return (
+    <main className="w-full flex flex-col min-h-screen bg-white text-black font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
+      
+      <Navbar tenantName={tenantData.name} />
+      <FloatingContact />
+
+      {/* 1. HERO SECTION */}
+      <section className="group relative w-full h-[60vh] md:h-[80vh] flex flex-col justify-center items-center overflow-hidden bg-black pt-20">
+        <div className="absolute inset-0 z-0 bg-black">
+          <div 
+            className="w-full h-full bg-cover bg-center bg-fixed opacity-60"
+            style={{ backgroundImage: `url('https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=1920&q=80')` }}
+          />
+        </div>
+        
+        <div className="relative z-10 flex flex-col items-center text-center px-6 mt-10 max-w-[900px]">
+          <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] text-white/80 uppercase tracking-[0.2em] mb-4">
+            COMPRADORES | {tenantData.name.toUpperCase()}
+          </p>
+          <h1 className="text-[36px] md:text-[60px] font-[family-name:var(--font-raleway)] font-light text-white tracking-[0.2em] uppercase mb-8 leading-tight">
+            TRABAJANDO CON COMPRADORES
+          </h1>
+          <p className="text-[18px] md:text-[24px] text-white font-[family-name:var(--font-quicksand)] leading-[1.6]">
+            Permítanos encontrar la casa de sus sueños. ¡Estoy emocionada de ayudarle!
+          </p>
+        </div>
+      </section>
+
+      {/* 2. INTRODUCCIÓN */}
+      <section className="bg-white py-[80px] md:py-[120px] px-6 text-center flex flex-col items-center">
+         <h2 className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] font-medium uppercase tracking-[0.2em] text-black/50 mb-4">
+           PASO A PASO
+         </h2>
+         <h3 className="text-[32px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black leading-tight mb-[40px]">
+           GUÍA DEL COMPRADOR
+         </h3>
+         <p className="text-[16px] md:text-[18px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[60px]">
+           Comprar una casa es uno de los hitos más emocionantes de su vida. Para prepararse para este momento, debe saber qué esperar durante el proceso. Esta guía paso a paso para compradores primerizos creada por su agente lo ayudará a reducir el estrés de comprar una casa y lo ayudará a disfrutar el viaje tanto como sea posible.
+         </p>
+         <button className="px-10 py-5 border border-black text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors">
+           HAGA CLIC AQUÍ PARA LA GUÍA DE COMPRADORES
+         </button>
+      </section>
+
+      {/* 3. LOS 10 PASOS (Alternando Izquierda/Derecha) */}
+      <section className="bg-white w-full">
+         {steps.map((step, idx) => (
+            <div key={idx} className={`group w-full flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} min-h-[50vh] overflow-hidden`}>
+               
+               {/* Imagen */}
+               <div className="w-full md:w-1/2 relative min-h-[300px] md:min-h-full overflow-hidden">
+                  <img src={step.img} alt={step.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-in-out" />
+               </div>
+
+               {/* Texto */}
+               <div className="w-full md:w-1/2 flex flex-col justify-center p-12 md:p-24 bg-[#fafafa]">
+                  <h3 className="text-[24px] md:text-[32px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.15em] text-black mb-6 leading-tight">
+                    PASO {step.num}: {step.title}
+                  </h3>
+                  <p className="text-[16px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8]">
+                    {step.desc}
+                  </p>
+                  
+                  {step.num === "4" && (
+                    <div className="mt-8">
+                       <a href="mailto:info@example.com" className="inline-block px-10 py-4 border border-black text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors">
+                         PROGRAMAR UNA CONSULTA
+                       </a>
+                    </div>
+                  )}
+               </div>
+
+            </div>
+         ))}
+         
+         <div className="py-24 px-6 text-center max-w-[800px] mx-auto">
+            <h3 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.15em] text-black mb-8 leading-tight">
+               ¡FELICIDADES!
+            </h3>
+            <p className="text-[16px] md:text-[18px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8]">
+               Después de firmar el papeleo final para completar la compra, ahora es el propietario de una casa nueva. Puede tomar unos días para que se financie su préstamo una vez que el papeleo haya sido devuelto al prestamista, pero una vez que ese cheque se entregue al vendedor, estará todo listo para mudarse a la casa de sus sueños.
+            </p>
+         </div>
+      </section>
+
+      {/* 4. TESTIMONIOS */}
+      <section className="bg-white pt-[60px] pb-[100px] px-6 border-t border-black/5">
+        <div className="text-center mb-[60px]">
+           <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[30px] leading-tight">
+              TESTIMONIOS
+           </h2>
+        </div>
+        <TestimonialSlider tenantName={tenantData.name} />
+      </section>
+
+      {/* 5. BOTONES DE ACCIÓN (4 BLOQUES IMÁGENES) */}
+      <section className="w-full flex flex-col md:flex-row h-auto md:h-[400px]">
+         {actionButtons.map((btn, i) => (
+           <Link href={btn.link} key={i} className="group relative w-full md:w-1/4 h-[250px] md:h-full overflow-hidden block">
+             <div className="absolute inset-0 bg-black z-10 opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+             <img src={btn.img} alt={btn.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+             <div className="absolute inset-0 z-20 flex items-center justify-center p-6 text-center">
+               <h3 className="text-white text-[16px] md:text-[20px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.2em] group-hover:-translate-y-2 transition-transform duration-300">
+                 {btn.title}
+               </h3>
+             </div>
+           </Link>
+         ))}
+      </section>
+
+      {/* 6. CIERRE / CTA FILOSOFÍA */}
+      <section className="bg-white py-[100px] px-6 text-center flex flex-col items-center">
+         <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] text-black mb-8 max-w-[800px] leading-tight">
+           "La filosofía de {tenantData.name} es simple: los clientes son lo primero."
+         </h2>
+         <p className="text-[16px] md:text-[18px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[40px]">
+           Se compromete a estar en constante comunicación con sus clientes, manteniéndolos completamente informados durante todo el proceso de compra o venta.
+         </p>
+         <a 
+           href="https://wa.me/50660413905?text=Hola,%20me%20gustar%C3%ADa%20comprar%20o%20vender%20una%20propiedad"
+           target="_blank"
+           rel="noopener noreferrer"
+           className="inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black border border-black transition-colors"
+         >
+           CONECTÉMONOS
+         </a>
+      </section>
+
+      {/* 7. FOOTER */}
+      <Footer tenantName={tenantData.name} domain={tenantData.domain} />
+    </main>
+  );
+}

@@ -1,0 +1,266 @@
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile-First Breakpoints
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Max 1200px — Smaller desktops ────────────────────────────── */
+@media (max-width: 1200px) {
+  .zones__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+/* ── Max 1024px — Tablets landscape ───────────────────────────── */
+@media (max-width: 1024px) {
+  :root {
+    --section-py: var(--space-3xl);
+  }
+
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about__grid {
+    gap: var(--space-xl);
+  }
+
+  .cta-final__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+
+  .cta-final__content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-final__actions {
+    justify-content: center;
+  }
+
+  .process__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Max 768px — Tablets portrait ─────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --section-py: var(--space-2xl);
+    --container-px: var(--space-sm);
+  }
+
+  /* Navbar */
+  .navbar__menu {
+    display: none;
+  }
+
+  .navbar__cta--desktop {
+    display: none;
+  }
+
+  .navbar__toggle {
+    display: flex;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero__content {
+    padding: var(--space-xl) var(--container-px);
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hero__scroll-indicator {
+    display: none;
+  }
+
+  /* Trust Bar */
+  .trust-bar__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .trust-bar__item:nth-child(n+4) {
+    display: none;
+  }
+
+  .trust-bar__item:not(:last-child)::after {
+    display: none;
+  }
+
+  .trust-bar__value {
+    font-size: var(--fs-h3);
+  }
+
+  /* About */
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .about__image-wrapper {
+    aspect-ratio: 16 / 10;
+    max-height: 400px;
+    order: -1;
+  }
+
+  .about__content {
+    max-width: 100%;
+  }
+
+  .about__highlights {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Services */
+  .services__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  /* Properties */
+  .properties__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Zones */
+  .zones__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+  }
+
+  .zone-card {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* Testimonials */
+  .testimonials__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer */
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .footer__bottom-inner {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  /* Section headers */
+  .section__header {
+    margin-bottom: var(--space-xl);
+  }
+}
+
+/* ── Max 480px — Small phones ─────────────────────────────────── */
+@media (max-width: 480px) {
+  :root {
+    --section-py: var(--space-xl);
+    --container-px: var(--space-sm);
+  }
+
+  .trust-bar__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trust-bar__item:nth-child(n+3) {
+    display: none;
+  }
+
+  .about__highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .zones__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .zone-card {
+    aspect-ratio: 3 / 2;
+  }
+
+  .hero__badge {
+    font-size: 0.6875rem;
+  }
+
+  .whatsapp-float {
+    bottom: var(--space-sm);
+    right: var(--space-sm);
+    width: 52px;
+    height: 52px;
+  }
+
+  .whatsapp-float__tooltip {
+    display: none;
+  }
+
+  .process-step {
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+  }
+
+  .process-step__number {
+    min-width: auto;
+  }
+
+  .cta-final__form {
+    padding: var(--space-md);
+  }
+}
+
+/* ── Reduce motion ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ── Print ────────────────────────────────────────────────────── */
+@media print {
+  .navbar,
+  .whatsapp-float,
+  .hero__scroll-indicator,
+  .mobile-menu {
+    display: none !important;
+  }
+
+  .section {
+    padding: 1rem 0;
+  }
+
+  body {
+    font-size: 12pt;
+    color: #000;
+    background: #fff;
+  }
+}

@@ -1,0 +1,154 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// NextAuth schema requirements
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  password      String?
+  image         String?
+  role          String    @default("tenant") // "superadmin" or "tenant"
+  accounts      Account[]
+  sessions      Session[]
+  
+  // Relationship to Tenant
+  tenantId      String?
+  tenant        Tenant?   @relation(fields: [tenantId], references: [id])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// SaaS Models
+model Tenant {
+  id          String   @id @default(cuid())
+  name        String
+  domain      String   @unique // e.g., "andres.com" or "localhost:3000"
+  
+  // Landing Page configuration (Elena Licari Clone)
+  heroImage   String?
+  heroTitle   String?
+  siteSettings String @default("{}")
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  users       User[]
+  stats       Stat[]
+  properties  Property[]
+  zones       Zone[]
+  subscribers NewsletterSubscriber[]
+  testimonials Testimonial[]
+  valuations  ValuationRequest[]
+}
+
+model Stat {
+  id       String  @id @default(cuid())
+  value    String
+  label    String
+  tenantId String
+  tenant   Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+model Property {
+  id          String  @id @default(cuid())
+  title       String
+  description String?
+  location    String
+  price       String
+  beds        Int     @default(0)
+  baths       Int     @default(0)
+  constructionArea Int @default(0)
+  lotArea     Int     @default(0)
+  yearBuilt   Int?
+  floors      Int     @default(1)
+  propertyType String @default("Casa")
+  status      String  @default("En Venta")
+  images      String  @default("[]")
+  tenantId    String
+  tenant      Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  
+  province    String  @default("Guanacaste")
+  canton      String  @default("Santa Cruz")
+}
+
+model Zone {
+  id       String  @id @default(cuid())
+  name     String
+  image    String
+  tenantId String
+  tenant   Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Testimonial {
+  id         String   @id @default(cuid())
+  clientName String
+  role       String   // e.g., "Seller", "Buyer", "Investor"
+  content    String
+  rating     Int      @default(5)
+  isApproved Boolean  @default(false)
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+}
+
+model ValuationRequest {
+  id        String   @id @default(cuid())
+  address   String
+  name      String
+  email     String
+  phone     String
+  timeframe String?
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
