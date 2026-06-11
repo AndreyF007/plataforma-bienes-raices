@@ -20,7 +20,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
 
   return (
     <>
-      <nav className={`fixed top-0 w-full z-[90] transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md border-b border-black/5 shadow-sm py-2' : 'bg-transparent py-4'}`}>
+      <nav className={`fixed top-0 w-full z-[90] transition-all duration-300 ${scrolled ? 'bg-white/50 backdrop-blur-xl border-b border-white/20 shadow-sm py-2' : 'bg-transparent py-4'}`}>
         <div className="w-full px-6 md:px-12 h-12 flex justify-between items-center">
           
           {/* LOGO MÓVIL (Oculto en escritorio) */}
