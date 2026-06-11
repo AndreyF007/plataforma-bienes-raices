@@ -48,7 +48,14 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
     socialLinkedIn: "#",
     socialYoutube: "#",
     
-    footerText: "Todos los derechos reservados. Luxury Real Estate."
+    footerText: "Todos los derechos reservados. Luxury Real Estate.",
+    
+    statsList: [
+      { value: "15+", label: "AÑOS DE EXPERIENCIA" },
+      { value: "$50M+", label: "EN VENTAS TOTALES" },
+      { value: "TOP 1%", label: "EN COSTA RICA" },
+      { value: "200+", label: "FAMILIAS FELICES" }
+    ]
   };
 
   let parsedSettings = defaultSettings;
@@ -102,6 +109,14 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
   const handleSettingsChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setSettings(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleStatChange = (index: number, field: 'value' | 'label', val: string) => {
+    setSettings(prev => {
+      const newList = [...(prev.statsList || defaultSettings.statsList)];
+      newList[index] = { ...newList[index], [field]: val };
+      return { ...prev, statsList: newList };
+    });
   };
 
   const tabs = [
@@ -352,6 +367,22 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
                 <div>
                   <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Título Gigante</label>
                   <input type="text" name="statsSectionTitle" value={settings.statsSectionTitle} onChange={handleSettingsChange} className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" />
+                </div>
+                
+                <div className="pt-4 border-t border-gray-200 mt-4">
+                  <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-4">Cifras y Datos (Los 4 logros)</label>
+                  <div className="grid gap-3">
+                    {(settings.statsList || defaultSettings.statsList).map((stat: any, idx: number) => (
+                      <div key={idx} className="flex gap-4">
+                        <div className="w-1/3">
+                          <input type="text" placeholder="Ej: 15+" value={stat.value} onChange={e => handleStatChange(idx, 'value', e.target.value)} className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-bold" />
+                        </div>
+                        <div className="w-2/3">
+                          <input type="text" placeholder="Ej: AÑOS DE EXPERIENCIA" value={stat.label} onChange={e => handleStatChange(idx, 'label', e.target.value)} className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 

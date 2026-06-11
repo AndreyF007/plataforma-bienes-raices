@@ -77,32 +77,37 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
       />
 
       {/* 4. CONFIANZA / STATS SECTION */}
-      {tenantData.stats && tenantData.stats.length > 0 && (
-        <section className="bg-white py-[80px] md:py-[120px] px-6">
-          <div className="max-w-[800px] mx-auto text-center flex flex-col items-center">
-             <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] font-light tracking-[0.25em] text-black uppercase mb-[60px]">
-               {statsSectionSubtitle}
-             </p>
+      {(() => {
+        const statsList = settings.statsList || tenantData.stats || [];
+        if (!statsList || statsList.length === 0) return null;
+        
+        return (
+          <section className="bg-white py-[80px] md:py-[120px] px-6">
+            <div className="max-w-[800px] mx-auto text-center flex flex-col items-center">
+               <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] font-light tracking-[0.25em] text-black uppercase mb-[60px]">
+                 {statsSectionSubtitle}
+               </p>
 
-             <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black leading-tight mb-[40px]">
-               {statsSectionTitle}
-             </h2>
+               <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black leading-tight mb-[40px]">
+                 {statsSectionTitle}
+               </h2>
 
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full mt-[60px]">
-               {tenantData.stats.map(stat => (
-                 <div key={stat.id} className="flex flex-col items-center">
-                   <span className="text-[40px] md:text-[50px] font-[family-name:var(--font-raleway)] font-light text-black tracking-widest mb-2">
-                     {stat.value}
-                   </span>
-                   <span className="text-[12px] md:text-[14px] text-black/60 font-[family-name:var(--font-quicksand)] uppercase tracking-wider font-bold">
-                     {stat.label}
-                   </span>
-                 </div>
-               ))}
-             </div>
-          </div>
-        </section>
-      )}
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full mt-[60px]">
+                 {statsList.map((stat: any, idx: number) => (
+                   <div key={stat.id || idx} className="flex flex-col items-center">
+                     <span className="text-[40px] md:text-[50px] font-[family-name:var(--font-raleway)] font-light text-black tracking-widest mb-2">
+                       {stat.value}
+                     </span>
+                     <span className="text-[12px] md:text-[14px] text-black/60 font-[family-name:var(--font-quicksand)] uppercase tracking-wider font-bold">
+                       {stat.label}
+                     </span>
+                   </div>
+                 ))}
+               </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* 5. TU GUÍA (ABOUT) SECTION */}
       <section id="about" className="bg-white py-[40px] px-0 md:px-6">
