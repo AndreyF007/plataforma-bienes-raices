@@ -202,12 +202,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
                 ESTOY RECOPILANDO INFORMACIÓN SOBRE SU PROPIEDAD. SU INFORME DE VALORACIÓN DE VIVIENDA LLEGARÁ A SU BUZÓN.
               </p>
               
-              <a 
-                href="/portal"
-                className="inline-block px-12 py-4 border border-white text-white hover:bg-white hover:text-black transition-colors uppercase tracking-[0.2em] text-[12px] font-bold"
-              >
-                VER TODOS LOS LISTAS
-              </a>
+
             </div>
           )}
 
