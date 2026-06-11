@@ -158,14 +158,7 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
       </section>
 
       {/* 6. TESTIMONIOS */}
-      <section id="testimonios" className="bg-[#f4f4f4] py-[80px] md:py-[100px]">
-        <div className="max-w-[1200px] mx-auto text-center px-6">
-          <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] font-light tracking-[0.25em] text-black uppercase mb-10">
-            LO QUE DICEN NUESTROS CLIENTES
-          </p>
-          <TestimonialSlider tenantName={tenantData.name} />
-        </div>
-      </section>
+      <TestimonialSlider tenantName={tenantData.name} />
 
       {/* 7. VALORACIÓN DE VIVIENDA */}
       <ValuationForm tenantId={tenantData.id} />

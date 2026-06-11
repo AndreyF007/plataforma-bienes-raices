@@ -13,8 +13,16 @@ interface Testimonial {
 
 export default function TestimonialSlider({ tenantName }: { tenantName: string }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [bgIndex, setBgIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+  const backgrounds = [
+    "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=2000&q=80", // Nature house
+    "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=2000&q=80", // Luxury landscape
+    "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=2000&q=80", // Coastal view
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2000&q=80"  // Nature mountains
+  ];
 
   useEffect(() => {
     const fetchTestimonials = async () => {
@@ -32,6 +40,13 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
     };
     if (tenantName) fetchTestimonials();
   }, [tenantName]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % backgrounds.length);
+    }, 6000); // Change background every 6 seconds
+    return () => clearInterval(interval);
+  }, [backgrounds.length]);
 
   // Fallback data if DB is empty
   const displayData = testimonials.length > 0 ? testimonials : [
@@ -53,81 +68,101 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
   const prev = () => setCurrentIndex((prev) => (prev === 0 ? displayData.length - 1 : prev - 1));
 
   return (
-    <div className="relative w-full max-w-[1000px] mx-auto px-4 md:px-16 flex flex-col items-center">
+    <section id="testimonios" className="relative w-full overflow-hidden flex flex-col items-center justify-center min-h-[800px] py-[100px]">
       
-      {/* Sleek Side Arrows (Hidden on mobile, absolute positioning) */}
-      <button 
-        onClick={prev} 
-        className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 border border-black/20 rounded-full items-center justify-center hover:bg-black hover:text-white transition-all duration-300"
-      >
-        <ChevronLeft className="w-5 h-5 stroke-[1.5]" />
-      </button>
+      {/* Dynamic Backgrounds */}
+      {backgrounds.map((bg, idx) => (
+        <div 
+          key={bg}
+          className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out ${idx === bgIndex ? 'opacity-100' : 'opacity-0'}`}
+          style={{ backgroundImage: `url(${bg})` }}
+        />
+      ))}
       
-      <button 
-        onClick={next} 
-        className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 border border-black/20 rounded-full items-center justify-center hover:bg-black hover:text-white transition-all duration-300"
-      >
-        <ChevronRight className="w-5 h-5 stroke-[1.5]" />
-      </button>
+      {/* Dark Overlay for readability */}
+      <div className="absolute inset-0 bg-black/60"></div>
 
-      {/* Main Content */}
-      <div className="w-full flex flex-col items-center text-center min-h-[400px] justify-center px-4">
+      <div className="relative z-10 w-full max-w-[1000px] mx-auto px-4 md:px-16 flex flex-col items-center">
         
-        {/* Luxury Quote Mark */}
-        <div className="text-[120px] leading-none font-serif text-black/10 select-none mb-[-40px]">
-          "
-        </div>
-
-        {/* The Testimonial Text */}
-        <p className="text-[20px] md:text-[28px] lg:text-[32px] text-black leading-relaxed font-light font-[family-name:var(--font-raleway)] mb-12 italic max-w-[800px]">
-          {displayData[currentIndex].content}
+        {/* Section Title */}
+        <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] font-light tracking-[0.25em] text-white/80 uppercase mb-16 text-center">
+          LO QUE DICEN NUESTROS CLIENTES
         </p>
 
-        {/* Stars */}
-        <div className="flex gap-1.5 mb-8">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className={`w-4 h-4 ${i < displayData[currentIndex].rating ? "fill-black text-black" : "text-black/10"}`} />
-          ))}
-        </div>
-
-        {/* Client Info */}
-        <div className="flex flex-col items-center">
-          <div className="w-10 h-[1px] bg-black/20 mb-6"></div>
-          <h3 className="text-[14px] md:text-[16px] font-[family-name:var(--font-raleway)] font-semibold uppercase tracking-[0.25em] mb-2 text-black">
-            {displayData[currentIndex].clientName}
-          </h3>
-          <p className="text-[10px] md:text-[11px] uppercase tracking-widest text-black/40">
-            {displayData[currentIndex].role}
-          </p>
-        </div>
-
-      </div>
-
-      {/* Mobile Arrows (Visible only on small screens) */}
-      <div className="flex md:hidden gap-4 mt-8">
-        <button onClick={prev} className="w-12 h-12 border border-black/20 rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300">
+        {/* Sleek Side Arrows (Hidden on mobile, absolute positioning) */}
+        <button 
+          onClick={prev} 
+          className="hidden md:flex absolute left-0 top-[60%] -translate-y-1/2 w-12 h-12 border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all duration-300 text-white"
+        >
           <ChevronLeft className="w-5 h-5 stroke-[1.5]" />
         </button>
-        <button onClick={next} className="w-12 h-12 border border-black/20 rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300">
+        
+        <button 
+          onClick={next} 
+          className="hidden md:flex absolute right-0 top-[60%] -translate-y-1/2 w-12 h-12 border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all duration-300 text-white"
+        >
           <ChevronRight className="w-5 h-5 stroke-[1.5]" />
         </button>
+
+        {/* Main Content */}
+        <div className="w-full flex flex-col items-center text-center px-4 transition-all duration-500 ease-in-out">
+          
+          {/* Luxury Quote Mark */}
+          <div className="text-[120px] leading-none font-serif text-white/20 select-none mb-[-40px]">
+            "
+          </div>
+
+          {/* The Testimonial Text */}
+          <p className="text-[20px] md:text-[28px] lg:text-[32px] text-white leading-relaxed font-light font-[family-name:var(--font-raleway)] mb-12 italic max-w-[800px]">
+            {displayData[currentIndex].content}
+          </p>
+
+          {/* Stars */}
+          <div className="flex gap-1.5 mb-8">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className={`w-4 h-4 ${i < displayData[currentIndex].rating ? "fill-white text-white" : "text-white/20"}`} />
+            ))}
+          </div>
+
+          {/* Client Info */}
+          <div className="flex flex-col items-center">
+            <div className="w-10 h-[1px] bg-white/30 mb-6"></div>
+            <h3 className="text-[14px] md:text-[16px] font-[family-name:var(--font-raleway)] font-semibold uppercase tracking-[0.25em] mb-2 text-white">
+              {displayData[currentIndex].clientName}
+            </h3>
+            <p className="text-[10px] md:text-[11px] uppercase tracking-widest text-white/50">
+              {displayData[currentIndex].role}
+            </p>
+          </div>
+
+        </div>
+
+        {/* Mobile Arrows (Visible only on small screens) */}
+        <div className="flex md:hidden gap-4 mt-12 text-white">
+          <button onClick={prev} className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300">
+            <ChevronLeft className="w-5 h-5 stroke-[1.5]" />
+          </button>
+          <button onClick={next} className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300">
+            <ChevronRight className="w-5 h-5 stroke-[1.5]" />
+          </button>
+        </div>
+
+        <div className="mt-16">
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="px-10 py-4 border border-white text-[11px] uppercase tracking-[0.2em] font-medium text-white hover:bg-white hover:text-black transition-colors duration-300"
+          >
+            COMPARTIR EXPERIENCIA
+          </button>
+        </div>
+
+        <TestimonialSubmitModal 
+          tenantName={tenantName}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+
       </div>
-
-      <div className="mt-16">
-        <button 
-          onClick={() => setIsModalOpen(true)}
-          className="px-10 py-4 border border-black text-[11px] uppercase tracking-[0.2em] font-medium text-black hover:bg-black hover:text-white transition-colors duration-300"
-        >
-          COMPARTIR EXPERIENCIA
-        </button>
-      </div>
-
-      <TestimonialSubmitModal 
-        tenantName={tenantName}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
-
-    </div>
+    </section>
   );
 }
