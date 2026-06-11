@@ -107,10 +107,9 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
       {/* 5. TU GUÍA (ABOUT) SECTION */}
       <section id="about" className="bg-white py-[40px] px-0 md:px-6">
         <div className="max-w-[1200px] mx-auto">
-          <div 
-             className="w-full aspect-[4/3] md:aspect-[21/9] mb-[40px] bg-fixed bg-cover bg-center"
-             style={{ backgroundImage: `url(${aboutImage})` }}
-          />
+          <div className="w-full aspect-[4/3] md:aspect-[21/9] mb-[40px]">
+             <img src={aboutImage} alt="Sobre Nosotros" className="w-full h-full object-cover" />
+          </div>
           
           <div className="px-6 md:px-0 text-center max-w-[800px] mx-auto">
              <h3 className="text-[18px] md:text-[22px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[30px] text-left md:text-center">

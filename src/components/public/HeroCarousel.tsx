@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Play } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface HeroCarouselProps {
   images: string[];
@@ -26,6 +27,16 @@ export default function HeroCarousel({
 }: HeroCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const containerRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Efecto Parallax: Mueve la imagen hacia abajo un 50% de la altura al hacer scroll
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
   useEffect(() => {
     if (images.length <= 1) return;
     const interval = setInterval(() => {
@@ -35,25 +46,23 @@ export default function HeroCarousel({
   }, [images.length]);
 
   return (
-    <section id="hero" className="relative w-full h-[100vh] flex flex-col justify-center items-center overflow-hidden">
-      {/* Background Images with Fade Transition and Parallax (bg-fixed) */}
+    <section ref={containerRef} id="hero" className="relative w-full h-[100vh] flex flex-col justify-center items-center overflow-hidden bg-black">
+      {/* Background Images with Fade Transition and Framer Motion Parallax */}
       {images.map((img, index) => (
-        <div
+        <motion.div
           key={index}
+          style={{ y }}
           className={`absolute inset-0 z-0 bg-black transition-opacity duration-1000 ease-in-out ${
             index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
           }`}
-          style={{ willChange: 'opacity' }}
         >
           <div 
-            className="w-full h-full bg-cover bg-center bg-fixed opacity-60"
+            className="w-full h-[120vh] bg-cover bg-center opacity-60 absolute top-[-10vh]"
             style={{ 
-              backgroundImage: `url(${img})`,
-              WebkitTransform: 'translate3d(0,0,0)',
-              transform: 'translate3d(0,0,0)'
+              backgroundImage: `url(${img})`
             }}
           />
-        </div>
+        </motion.div>
       ))}
 
       {/* Hero Content */}
