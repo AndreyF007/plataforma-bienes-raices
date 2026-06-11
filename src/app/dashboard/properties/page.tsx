@@ -28,7 +28,7 @@ export default async function PropertiesAdminPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-light uppercase tracking-widest text-black">Propiedades Activas</h1>
+        <h1 className="text-2xl font-light uppercase tracking-widest text-black dark:text-white">Propiedades Activas</h1>
         <p className="text-sm text-gray-500 mt-2">Gestiona el inventario de casas que aparecen en la sección de propiedades.</p>
       </div>
 

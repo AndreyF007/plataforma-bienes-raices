@@ -29,12 +29,12 @@ export default function PrivacyModal({ tenantName }: PrivacyModalProps) {
           />
 
           {/* Modal Content */}
-          <div className="relative w-full max-w-[800px] max-h-[90vh] bg-white text-black overflow-hidden flex flex-col shadow-2xl animate-in zoom-in-95 duration-300">
+          <div className="relative w-full max-w-[800px] max-h-[90vh] bg-white dark:bg-neutral-950 text-black dark:text-white overflow-hidden flex flex-col shadow-2xl animate-in zoom-in-95 duration-300">
             
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-black/10 bg-gray-50">
               <div className="flex items-center gap-3">
-                <ShieldCheck className="w-6 h-6 text-black" />
+                <ShieldCheck className="w-6 h-6 text-black dark:text-white" />
                 <h2 className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] uppercase tracking-widest font-bold">
                   Política de Privacidad
                 </h2>
@@ -48,7 +48,7 @@ export default function PrivacyModal({ tenantName }: PrivacyModalProps) {
             </div>
 
             {/* Scrollable Body */}
-            <div className="overflow-y-auto p-6 md:p-10 text-[14px] leading-[1.8] font-[family-name:var(--font-quicksand)] text-black/80 flex flex-col gap-6 text-left">
+            <div className="overflow-y-auto p-6 md:p-10 text-[14px] leading-[1.8] font-[family-name:var(--font-quicksand)] text-black/80 dark:text-white/80 flex flex-col gap-6 text-left">
               
               <p>Última actualización: <strong>Octubre 2026</strong></p>
               
@@ -57,14 +57,14 @@ export default function PrivacyModal({ tenantName }: PrivacyModalProps) {
               </p>
 
               <div>
-                <h3 className="text-[16px] font-bold text-black uppercase tracking-widest mb-2 font-[family-name:var(--font-raleway)]">1. Información que Recopilamos</h3>
+                <h3 className="text-[16px] font-bold text-black dark:text-white uppercase tracking-widest mb-2 font-[family-name:var(--font-raleway)]">1. Información que Recopilamos</h3>
                 <p>
                   Recopilamos información que usted nos proporciona directamente al llenar formularios (como el boletín o formularios de contacto), lo que puede incluir su nombre, dirección de correo electrónico, número de teléfono y preferencias de búsqueda de propiedades.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-[16px] font-bold text-black uppercase tracking-widest mb-2 font-[family-name:var(--font-raleway)]">2. Uso de la Información</h3>
+                <h3 className="text-[16px] font-bold text-black dark:text-white uppercase tracking-widest mb-2 font-[family-name:var(--font-raleway)]">2. Uso de la Información</h3>
                 <p>
                   Utilizamos su información para:
                 </p>
@@ -77,14 +77,14 @@ export default function PrivacyModal({ tenantName }: PrivacyModalProps) {
               </div>
 
               <div>
-                <h3 className="text-[16px] font-bold text-black uppercase tracking-widest mb-2 font-[family-name:var(--font-raleway)]">3. Protección de Datos</h3>
+                <h3 className="text-[16px] font-bold text-black dark:text-white uppercase tracking-widest mb-2 font-[family-name:var(--font-raleway)]">3. Protección de Datos</h3>
                 <p>
                   Implementamos rigurosas medidas de seguridad técnicas y organizativas para proteger su información personal contra accesos no autorizados, alteración, divulgación o destrucción. 
                 </p>
               </div>
 
               <div>
-                <h3 className="text-[16px] font-bold text-black uppercase tracking-widest mb-2 font-[family-name:var(--font-raleway)]">4. Sus Derechos</h3>
+                <h3 className="text-[16px] font-bold text-black dark:text-white uppercase tracking-widest mb-2 font-[family-name:var(--font-raleway)]">4. Sus Derechos</h3>
                 <p>
                   Usted tiene derecho a acceder, rectificar o solicitar la eliminación de sus datos personales en nuestra base de datos. Para ejercer estos derechos o darse de baja de nuestras comunicaciones, puede contactarnos a través de los canales provistos en este sitio.
                 </p>

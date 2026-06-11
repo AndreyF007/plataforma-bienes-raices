@@ -103,7 +103,7 @@ export default function NewsletterForm({ tenantName, isMainPage = false }: Newsl
       <button 
         type="submit" 
         disabled={status === 'loading'}
-        className="w-full border border-white py-4 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white flex justify-center items-center h-[54px]"
+        className="w-full border border-white py-4 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white flex justify-center items-center h-[54px]"
       >
         {status === 'loading' ? <Loader2 className="w-5 h-5 animate-spin" /> : 'ENTREGAR'}
       </button>

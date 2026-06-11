@@ -28,7 +28,7 @@ export default async function ZonesAdminPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-light uppercase tracking-widest text-black">Zonas de Mercado</h1>
+        <h1 className="text-2xl font-light uppercase tracking-widest text-black dark:text-white">Zonas de Mercado</h1>
         <p className="text-sm text-gray-500 mt-2">Gestiona las áreas, barrios o ciudades donde ofreces tus servicios.</p>
       </div>
 

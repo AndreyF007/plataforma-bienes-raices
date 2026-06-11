@@ -96,7 +96,7 @@ export default function NewsletterModal({ tenantName, isOpen, onClose }: Newslet
             </p>
             <button 
               onClick={onClose}
-              className="mt-10 px-12 py-4 border border-white text-[12px] uppercase tracking-widest hover:bg-white hover:text-black transition-colors"
+              className="mt-10 px-12 py-4 border border-white text-[12px] uppercase tracking-widest hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors"
             >
               Cerrar Ventana
             </button>
@@ -144,7 +144,7 @@ export default function NewsletterModal({ tenantName, isOpen, onClose }: Newslet
                 <button 
                   type="submit" 
                   disabled={status === 'loading'}
-                  className="w-full md:w-1/4 border border-white py-4 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white flex justify-center items-center h-[50px] mt-4 md:mt-0"
+                  className="w-full md:w-1/4 border border-white py-4 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white flex justify-center items-center h-[50px] mt-4 md:mt-0"
                 >
                   {status === 'loading' ? <Loader2 className="w-5 h-5 animate-spin" /> : 'SUBMIT'}
                 </button>

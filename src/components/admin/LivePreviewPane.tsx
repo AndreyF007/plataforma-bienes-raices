@@ -30,7 +30,7 @@ export default function LivePreviewPane({ previewUrl }: { previewUrl: string }) 
 
   return (
     <aside className="fixed inset-0 z-[100] flex flex-col w-full h-full bg-gray-100 animate-in fade-in slide-in-from-right-8 duration-300">
-      <div className="flex-shrink-0 p-3 bg-white border-b border-gray-300 flex justify-between items-center">
+      <div className="flex-shrink-0 p-3 bg-white dark:bg-neutral-950 border-b border-gray-300 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <button 
             onClick={() => setIsExpanded(false)}
@@ -57,7 +57,7 @@ export default function LivePreviewPane({ previewUrl }: { previewUrl: string }) 
           </a>
         </div>
       </div>
-      <div className="flex-1 bg-white relative w-full h-full overflow-hidden">
+      <div className="flex-1 bg-white dark:bg-neutral-950 relative w-full h-full overflow-hidden">
         <iframe 
           ref={iframeRef}
           src={previewUrl} 

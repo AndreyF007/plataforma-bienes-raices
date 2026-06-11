@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import NewsletterModal from '../public/NewsletterModal';
+import { ThemeToggle } from '../ThemeToggle';
 
 export default function Navbar({ tenantName }: { tenantName: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,16 +21,16 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
 
   return (
     <>
-      <nav className={`fixed top-0 w-full z-[90] transition-all duration-300 ${scrolled ? 'bg-white/50 backdrop-blur-xl border-b border-white/20 shadow-sm py-2' : 'bg-transparent py-4'}`}>
+      <nav className={`fixed top-0 w-full z-[90] transition-all duration-300 ${scrolled ? 'bg-white/50 dark:bg-black/50 backdrop-blur-xl border-b border-black/5 dark:border-white/10 shadow-sm py-2' : 'bg-transparent py-4'}`}>
         <div className="w-full px-6 md:px-12 h-12 flex justify-between items-center">
           
           {/* LOGO MÓVIL (Oculto en escritorio) */}
           <div className="flex flex-1 lg:hidden">
             <div className="flex flex-col items-center w-fit">
-               <div className={`w-8 h-8 rounded-full border flex items-center justify-center ${scrolled ? 'border-black' : 'border-white'}`}>
-                 <span className={`text-[10px] font-light ${scrolled ? 'text-black' : 'text-white'}`}>EL</span>
+               <div className={`w-8 h-8 rounded-full border flex items-center justify-center ${scrolled ? 'border-black dark:border-white' : 'border-white'}`}>
+                 <span className={`text-[10px] font-light ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>EL</span>
                </div>
-               <span className={`text-[8px] tracking-[0.2em] uppercase mt-1 ${scrolled ? 'text-black' : 'text-white'}`}>{tenantName}</span>
+               <span className={`text-[8px] tracking-[0.2em] uppercase mt-1 ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>{tenantName}</span>
             </div>
           </div>
           
@@ -55,20 +56,21 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
                     setIsNewsletterOpen(true);
                   }
                 }}
-                className={`whitespace-nowrap text-[8.5px] xl:text-[9.5px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.1em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black' : 'text-white'}`}
+                className={`whitespace-nowrap text-[8.5px] xl:text-[9.5px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.1em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}
               >
                 {item.label}
               </Link>
             ))}
           </div>
           
-          <div className="flex flex-1 justify-end items-center gap-6">
-            <a href="https://wa.me/50660413905" target="_blank" rel="noopener noreferrer" className={`hidden lg:block text-[11px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.15em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black' : 'text-white'}`}>
+          <div className="flex flex-1 justify-end items-center gap-4 lg:gap-6">
+            <a href="https://wa.me/50660413905" target="_blank" rel="noopener noreferrer" className={`hidden lg:block text-[11px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.15em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>
               +506 6041 3905
             </a>
+            <ThemeToggle className={scrolled ? 'text-black dark:text-white' : 'text-white'} />
             <button 
               onClick={() => setIsOpen(true)} 
-              className={`p-2 hover:opacity-50 transition-opacity ${scrolled ? 'text-black' : 'text-white'}`}
+              className={`p-2 hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}
             >
               <Menu className="w-8 h-8 stroke-1" />
             </button>
@@ -84,15 +86,15 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
       />
 
       {/* Fullscreen Menu */}
-      <div className={`fixed inset-0 bg-white z-[100] transition-transform duration-500 flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="w-full px-6 h-20 flex justify-between items-center border-b border-black/10">
+      <div className={`fixed inset-0 bg-white dark:bg-black z-[100] transition-transform duration-500 flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="w-full px-6 h-20 flex justify-between items-center border-b border-black/10 dark:border-white/10">
            <div className="flex flex-col items-center w-fit">
-               <div className="w-8 h-8 rounded-full border border-black flex items-center justify-center">
-                 <span className="text-[10px] font-light text-black">EL</span>
+               <div className="w-8 h-8 rounded-full border border-black dark:border-white flex items-center justify-center">
+                 <span className="text-[10px] font-light text-black dark:text-white">EL</span>
                </div>
-               <span className="text-[8px] tracking-[0.2em] uppercase mt-1 text-black">{tenantName}</span>
+               <span className="text-[8px] tracking-[0.2em] uppercase mt-1 text-black dark:text-white">{tenantName}</span>
             </div>
-          <button onClick={() => setIsOpen(false)} className="p-2 text-black">
+          <button onClick={() => setIsOpen(false)} className="p-2 text-black dark:text-white">
             <X className="w-8 h-8 stroke-1" />
           </button>
         </div>
@@ -129,7 +131,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
                     setIsOpen(false);
                   }
                 }}
-                className="text-[18px] md:text-[24px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-6 text-black hover:opacity-50 transition-opacity"
+                className="text-[18px] md:text-[24px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-6 text-black dark:text-white hover:opacity-50 transition-opacity"
              >
                {item.label}
              </Link>

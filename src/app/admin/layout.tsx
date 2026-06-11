@@ -37,7 +37,7 @@ export default function SuperAdminLayout({ children }: { children: ReactNode }) 
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto">
-        <header className="h-16 bg-white border-b border-gray-200 flex items-center px-8">
+        <header className="h-16 bg-white dark:bg-neutral-950 border-b border-gray-200 flex items-center px-8">
           <h1 className="text-lg font-medium text-gray-900">Platform Overview</h1>
         </header>
         <div className="p-8">

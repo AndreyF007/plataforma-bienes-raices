@@ -33,16 +33,16 @@ export default function Footer({
                <h3 className="text-[24px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] mb-2">{tenantName}</h3>
                <p className="text-[12px] uppercase tracking-[0.1em] text-white/50 mb-6">Experto Inmobiliario de Costa Rica</p>
                <div className="flex gap-4">
-                  <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                  <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors">
                      <span className="text-[12px] uppercase font-bold">ig</span>
                   </a>
-                  <a href={facebookUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                  <a href={facebookUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors">
                      <span className="text-[12px] uppercase font-bold">f</span>
                   </a>
-                  <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                  <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors">
                      <span className="text-[12px] uppercase font-bold">in</span>
                   </a>
-                  <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                  <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors">
                      <span className="text-[12px] uppercase font-bold">yt</span>
                   </a>
                </div>

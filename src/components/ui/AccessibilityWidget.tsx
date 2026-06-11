@@ -42,7 +42,7 @@ export default function AccessibilityWidget() {
       
       {/* Popover Menu */}
       {isOpen && (
-        <div className="absolute bottom-[60px] right-0 w-[300px] bg-white border border-black/10 shadow-2xl rounded-xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 z-[100]">
+        <div className="absolute bottom-[60px] right-0 w-[300px] bg-white dark:bg-neutral-950 border border-black/10 shadow-2xl rounded-xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300 z-[100]">
           
           {/* Header */}
           <div className="bg-[#0044ff] text-white p-4 flex justify-between items-center">
@@ -60,7 +60,7 @@ export default function AccessibilityWidget() {
             
             <button 
               onClick={() => setLargeText(!largeText)}
-              className={`flex items-center gap-4 p-3 rounded-lg border transition-all ${largeText ? 'border-[#0044ff] bg-[#0044ff]/10 text-[#0044ff]' : 'border-black/10 hover:border-black/30 text-black'}`}
+              className={`flex items-center gap-4 p-3 rounded-lg border transition-all ${largeText ? 'border-[#0044ff] bg-[#0044ff]/10 text-[#0044ff]' : 'border-black/10 hover:border-black/30 text-black dark:text-white'}`}
             >
               <Type className="w-6 h-6" />
               <div className="text-left">
@@ -71,7 +71,7 @@ export default function AccessibilityWidget() {
 
             <button 
               onClick={() => setHighContrast(!highContrast)}
-              className={`flex items-center gap-4 p-3 rounded-lg border transition-all ${highContrast ? 'border-[#0044ff] bg-[#0044ff]/10 text-[#0044ff]' : 'border-black/10 hover:border-black/30 text-black'}`}
+              className={`flex items-center gap-4 p-3 rounded-lg border transition-all ${highContrast ? 'border-[#0044ff] bg-[#0044ff]/10 text-[#0044ff]' : 'border-black/10 hover:border-black/30 text-black dark:text-white'}`}
             >
               <Contrast className="w-6 h-6" />
               <div className="text-left">
@@ -82,7 +82,7 @@ export default function AccessibilityWidget() {
 
             <button 
               onClick={() => setHighlightLinks(!highlightLinks)}
-              className={`flex items-center gap-4 p-3 rounded-lg border transition-all ${highlightLinks ? 'border-[#0044ff] bg-[#0044ff]/10 text-[#0044ff]' : 'border-black/10 hover:border-black/30 text-black'}`}
+              className={`flex items-center gap-4 p-3 rounded-lg border transition-all ${highlightLinks ? 'border-[#0044ff] bg-[#0044ff]/10 text-[#0044ff]' : 'border-black/10 hover:border-black/30 text-black dark:text-white'}`}
             >
               <LinkIcon className="w-6 h-6" />
               <div className="text-left">
@@ -93,7 +93,7 @@ export default function AccessibilityWidget() {
 
             <button 
               onClick={() => setStopAnimations(!stopAnimations)}
-              className={`flex items-center gap-4 p-3 rounded-lg border transition-all ${stopAnimations ? 'border-[#0044ff] bg-[#0044ff]/10 text-[#0044ff]' : 'border-black/10 hover:border-black/30 text-black'}`}
+              className={`flex items-center gap-4 p-3 rounded-lg border transition-all ${stopAnimations ? 'border-[#0044ff] bg-[#0044ff]/10 text-[#0044ff]' : 'border-black/10 hover:border-black/30 text-black dark:text-white'}`}
             >
               <PlaySquare className="w-6 h-6" />
               <div className="text-left">
@@ -108,7 +108,7 @@ export default function AccessibilityWidget() {
           <div className="p-4 bg-gray-50 border-t border-black/5">
             <button 
               onClick={resetAll}
-              className="flex items-center justify-center gap-2 w-full py-2 text-[12px] font-bold uppercase tracking-widest text-black/50 hover:text-red-500 transition-colors"
+              className="flex items-center justify-center gap-2 w-full py-2 text-[12px] font-bold uppercase tracking-widest text-black/50 dark:text-white/50 hover:text-red-500 transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
               Restablecer Ajustes
@@ -120,7 +120,7 @@ export default function AccessibilityWidget() {
       {/* Main Trigger Button */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-10 h-10 rounded-full bg-[#0066ff] border border-white/20 text-white flex items-center justify-center shadow-lg hover:bg-white hover:text-[#0066ff] hover:border-[#0066ff] transition-all duration-300"
+        className="w-10 h-10 rounded-full bg-[#0066ff] border border-white/20 text-white flex items-center justify-center shadow-lg hover:bg-white dark:bg-neutral-950 hover:text-[#0066ff] hover:border-[#0066ff] transition-all duration-300"
         aria-label="Abrir menú de accesibilidad"
       >
         <Accessibility className="w-4 h-4 stroke-[1.5]" />

@@ -53,7 +53,7 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
   const newsletterText = settings.newsletterText || "Únase a nuestra lista VIP y reciba acceso anticipado a propiedades fuera del mercado y análisis profundo del sector de lujo.";
 
   return (
-    <main className="w-full flex flex-col min-h-screen bg-white text-black font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
+    <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
       
       {/* 1. Navbar de Pantalla Completa */}
       <Navbar tenantName={tenantData.name} />
@@ -82,23 +82,23 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
         if (!statsList || statsList.length === 0) return null;
         
         return (
-          <section className="bg-white py-[80px] md:py-[120px] px-6">
+          <section className="bg-white dark:bg-black transition-colors duration-300 py-[80px] md:py-[120px] px-6">
             <div className="max-w-[800px] mx-auto text-center flex flex-col items-center">
-               <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] font-light tracking-[0.25em] text-black uppercase mb-[60px]">
+               <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] font-light tracking-[0.25em] text-black dark:text-white uppercase mb-[60px]">
                  {statsSectionSubtitle}
                </p>
 
-               <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black leading-tight mb-[40px]">
+               <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black dark:text-white leading-tight mb-[40px]">
                  {statsSectionTitle}
                </h2>
 
                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full mt-[60px]">
                  {statsList.map((stat: any, idx: number) => (
                    <div key={stat.id || idx} className="flex flex-col items-center">
-                     <span className="text-[40px] md:text-[50px] font-[family-name:var(--font-raleway)] font-light text-black tracking-widest mb-2">
+                     <span className="text-[40px] md:text-[50px] font-[family-name:var(--font-raleway)] font-light text-black dark:text-white tracking-widest mb-2">
                        {stat.value}
                      </span>
-                     <span className="text-[12px] md:text-[14px] text-black/60 font-[family-name:var(--font-quicksand)] uppercase tracking-wider font-bold">
+                     <span className="text-[12px] md:text-[14px] text-black/60 dark:text-white/60 font-[family-name:var(--font-quicksand)] uppercase tracking-wider font-bold">
                        {stat.label}
                      </span>
                    </div>
@@ -110,46 +110,46 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
       })()}
 
       {/* 5. TU GUÍA (ABOUT) SECTION */}
-      <section id="about" className="bg-white py-[80px] md:py-[120px] px-6">
+      <section id="about" className="bg-white dark:bg-black transition-colors duration-300 py-[80px] md:py-[120px] px-6">
         <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
           
           {/* Image Column */}
           <div className="w-full md:w-1/2">
-             <div className="w-full aspect-[4/5] relative bg-gray-100">
+             <div className="w-full aspect-[4/5] relative bg-gray-100 dark:bg-neutral-900">
                <img src={aboutImage} alt="Sobre Nosotros" className="absolute inset-0 w-full h-full object-cover" />
              </div>
           </div>
           
           {/* Text Column */}
           <div className="w-full md:w-1/2 flex flex-col items-start text-left">
-             <h3 className="text-[14px] md:text-[16px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[20px] text-black/60">
+             <h3 className="text-[14px] md:text-[16px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[20px] text-black/60 dark:text-white/60">
                {aboutTitle}
              </h3>
-             <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] mb-[40px] leading-tight">
+             <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] mb-[40px] leading-tight dark:text-white">
                {aboutSubtitle.toUpperCase()}<sup className="text-xl">®</sup>
              </h2>
              
              {aboutText1 && (
-               <p className="text-[15px] md:text-[17px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[20px]">
+               <p className="text-[15px] md:text-[17px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[20px]">
                  {aboutText1}
                </p>
              )}
              {aboutText2 && (
-               <p className="text-[15px] md:text-[17px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[20px]">
+               <p className="text-[15px] md:text-[17px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[20px]">
                  {aboutText2}
                </p>
              )}
              {aboutText3 && (
-               <p className="text-[15px] md:text-[17px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[50px]">
+               <p className="text-[15px] md:text-[17px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[50px]">
                  {aboutText3}
                </p>
              )}
 
              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-               <a href="/portal" className="px-10 py-5 border border-black text-[12px] text-black uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors text-center w-full sm:w-auto">
+               <a href="/portal" className="px-10 py-5 border border-black dark:border-white text-[12px] text-black dark:text-white uppercase tracking-[0.2em] font-medium hover:bg-black dark:hover:bg-white dark:bg-neutral-950 hover:text-white dark:hover:text-black dark:text-white transition-colors text-center w-full sm:w-auto">
                  {aboutButton1Text}
                </a>
-               <a href={`mailto:${settings.contactEmail || 'info@example.com'}`} className="px-10 py-5 border border-black bg-black text-[12px] text-white uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black transition-colors text-center w-full sm:w-auto">
+               <a href={`mailto:${settings.contactEmail || 'info@example.com'}`} className="px-10 py-5 border border-black dark:border-white bg-black dark:bg-white text-[12px] text-white dark:text-black uppercase tracking-[0.2em] font-medium hover:bg-transparent dark:hover:bg-transparent hover:text-black dark:text-white dark:hover:text-white transition-colors text-center w-full sm:w-auto">
                  {aboutButton2Text}
                </a>
              </div>

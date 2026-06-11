@@ -28,7 +28,7 @@ export default async function DashboardPage() {
       </h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white p-8 border border-gray-100 shadow-sm">
+        <div className="bg-white dark:bg-neutral-950 p-8 border border-gray-100 shadow-sm">
           <h2 className="text-sm font-semibold tracking-widest uppercase mb-6 text-gray-500">Configuración Actual</h2>
           
           <div className="space-y-4">
@@ -50,26 +50,26 @@ export default async function DashboardPage() {
             </div>
           </div>
           
-          <button className="mt-8 px-6 py-3 border border-black text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-colors">
+          <button className="mt-8 px-6 py-3 border border-black dark:border-white/20 text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-colors">
             Editar Configuración
           </button>
         </div>
         
         <div className="space-y-8">
-          <div className="bg-white p-8 border border-gray-100 shadow-sm flex items-center justify-between">
+          <div className="bg-white dark:bg-neutral-950 p-8 border border-gray-100 shadow-sm flex items-center justify-between">
             <div>
               <h3 className="text-2xl font-light">3</h3>
               <p className="text-xs text-gray-500 uppercase tracking-widest mt-1">Propiedades Activas</p>
             </div>
-            <a href="/dashboard/properties" className="text-xs uppercase tracking-widest border-b border-black pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors">Gestionar</a>
+            <a href="/dashboard/properties" className="text-xs uppercase tracking-widest border-b border-black dark:border-white/20 pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors">Gestionar</a>
           </div>
           
-          <div className="bg-white p-8 border border-gray-100 shadow-sm flex items-center justify-between">
+          <div className="bg-white dark:bg-neutral-950 p-8 border border-gray-100 shadow-sm flex items-center justify-between">
             <div>
               <h3 className="text-2xl font-light">3</h3>
               <p className="text-xs text-gray-500 uppercase tracking-widest mt-1">Zonas de Mercado</p>
             </div>
-            <a href="/dashboard/zones" className="text-xs uppercase tracking-widest border-b border-black pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors">Gestionar</a>
+            <a href="/dashboard/zones" className="text-xs uppercase tracking-widest border-b border-black dark:border-white/20 pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors">Gestionar</a>
           </div>
         </div>
       </div>

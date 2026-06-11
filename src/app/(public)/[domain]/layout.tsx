@@ -54,7 +54,7 @@ export default async function TenantLayout(props: {
   }
 
   return (
-    <div className={`min-h-screen ${quicksand.variable} ${raleway.variable} font-sans antialiased bg-white text-black`}>
+    <div className={`min-h-screen ${quicksand.variable} ${raleway.variable} font-sans antialiased bg-white dark:bg-neutral-950 text-black dark:text-white`}>
       {props.children}
     </div>
   );

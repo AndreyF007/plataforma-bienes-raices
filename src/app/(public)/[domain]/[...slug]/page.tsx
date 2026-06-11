@@ -17,7 +17,7 @@ export default async function DummyPage(props: { params: Promise<{ domain: strin
   const title = params.slug.join(' ').toUpperCase().replace(/-/g, ' ');
 
   return (
-    <main className="w-full flex flex-col min-h-screen bg-white text-black font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
+    <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
       <Navbar tenantName={tenantData.name} />
       <FloatingContact />
 
@@ -25,11 +25,11 @@ export default async function DummyPage(props: { params: Promise<{ domain: strin
          <h1 className="text-[30px] md:text-[50px] font-[family-name:var(--font-raleway)] font-light tracking-[0.2em] mb-8 uppercase leading-tight">
            {title}
          </h1>
-         <p className="text-[16px] md:text-[20px] max-w-[600px] text-black/60 leading-relaxed">
+         <p className="text-[16px] md:text-[20px] max-w-[600px] text-black/60 dark:text-white/60 leading-relaxed">
            Esta página se encuentra en construcción. Muy pronto publicaremos contenido exclusivo para ti.
          </p>
          
-         <a href="/" className="mt-12 py-4 px-10 border border-black text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors">
+         <a href="/" className="mt-12 py-4 px-10 border border-black dark:border-white/20 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors">
            VOLVER AL INICIO
          </a>
       </section>

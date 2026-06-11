@@ -64,7 +64,7 @@ export default function AccountForm({ initialEmail }: AccountFormProps) {
             required
             value={email}
             onChange={e => setEmail(e.target.value)}
-            className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" 
+            className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
           />
         </div>
 
@@ -80,7 +80,7 @@ export default function AccountForm({ initialEmail }: AccountFormProps) {
               type="password" 
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" 
+              className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
             />
           </div>
 
@@ -90,7 +90,7 @@ export default function AccountForm({ initialEmail }: AccountFormProps) {
               type="password" 
               value={confirmPassword}
               onChange={e => setConfirmPassword(e.target.value)}
-              className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" 
+              className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
             />
           </div>
         </div>

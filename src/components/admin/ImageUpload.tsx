@@ -90,7 +90,7 @@ export default function ImageUpload({ label, value, onChange, multiple = false }
       {(!value || (multiple && value)) && (
         <div 
           onClick={() => !isUploading && fileInputRef.current?.click()}
-          className={`border-2 border-dashed border-gray-300 p-8 text-center cursor-pointer hover:border-black hover:bg-gray-50 transition-colors flex flex-col items-center justify-center gap-3 ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`border-2 border-dashed border-gray-300 p-8 text-center cursor-pointer hover:border-black dark:border-white/20 hover:bg-gray-50 transition-colors flex flex-col items-center justify-center gap-3 ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           {isUploading ? (
             <Loader2 className="w-8 h-8 text-gray-400 animate-spin" />
@@ -102,7 +102,7 @@ export default function ImageUpload({ label, value, onChange, multiple = false }
               <span>Subiendo archivo...</span>
             ) : (
               <span>
-                <span className="font-bold text-black">Toca aquí</span> para abrir tu galería o explorador de archivos
+                <span className="font-bold text-black dark:text-white">Toca aquí</span> para abrir tu galería o explorador de archivos
               </span>
             )}
           </div>

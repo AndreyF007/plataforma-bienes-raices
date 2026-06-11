@@ -65,7 +65,7 @@ export default function TestimonialList({ initialTestimonials }: { initialTestim
 
   if (testimonials.length === 0) {
     return (
-      <div className="bg-white border border-gray-200 rounded-sm p-12 text-center">
+      <div className="bg-white dark:bg-neutral-950 border border-gray-200 rounded-sm p-12 text-center">
         <p className="text-gray-500">Aún no tienes ningún testimonio. Cuando los clientes llenen el formulario en tu web, aparecerán aquí para tu aprobación.</p>
       </div>
     );
@@ -74,7 +74,7 @@ export default function TestimonialList({ initialTestimonials }: { initialTestim
   return (
     <div className="grid gap-4">
       {testimonials.map((t) => (
-        <div key={t.id} className="bg-white border border-gray-200 rounded-sm p-6 flex flex-col md:flex-row gap-6 relative">
+        <div key={t.id} className="bg-white dark:bg-neutral-950 border border-gray-200 rounded-sm p-6 flex flex-col md:flex-row gap-6 relative">
           
           <div className="flex-1 space-y-4">
             <div className="flex items-center gap-3">

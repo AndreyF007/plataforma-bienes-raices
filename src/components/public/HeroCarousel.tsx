@@ -72,10 +72,10 @@ export default function HeroCarousel({
 
         {/* Action Buttons */}
         <div className="flex flex-col gap-4 w-full max-w-[400px] animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-700">
-          <a href={button1Link} className="w-full py-4 border border-white text-[12px] text-white uppercase tracking-[0.2em] font-medium hover:bg-white hover:text-black transition-colors block text-center">
+          <a href={button1Link} className="w-full py-4 border border-white text-[12px] text-white uppercase tracking-[0.2em] font-medium hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors block text-center">
             {button1Text}
           </a>
-          <a href={button2Link} className="w-full py-4 border border-white text-[12px] text-white uppercase tracking-[0.2em] font-medium hover:bg-white hover:text-black transition-colors block text-center">
+          <a href={button2Link} className="w-full py-4 border border-white text-[12px] text-white uppercase tracking-[0.2em] font-medium hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors block text-center">
             {button2Text}
           </a>
         </div>
@@ -89,7 +89,7 @@ export default function HeroCarousel({
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`w-12 h-[2px] transition-all duration-300 ${
-                index === currentIndex ? 'bg-white' : 'bg-white/30 hover:bg-white/50'
+                index === currentIndex ? 'bg-white dark:bg-neutral-950' : 'bg-white/30 hover:bg-white/50'
               }`}
               aria-label={`Ir a imagen ${index + 1}`}
             />

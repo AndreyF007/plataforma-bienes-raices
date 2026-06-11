@@ -76,7 +76,7 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
   ];
 
   return (
-    <main className="w-full flex flex-col min-h-screen bg-white text-black font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
+    <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
       
       <Navbar tenantName={tenantData.name} />
       <FloatingContact />
@@ -103,23 +103,23 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
       </section>
 
       {/* 2. INTRODUCCIÓN */}
-      <section className="bg-white py-[80px] md:py-[120px] px-6 text-center flex flex-col items-center">
-         <h2 className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] font-medium uppercase tracking-[0.2em] text-black/50 mb-4">
+      <section className="bg-white dark:bg-neutral-950 py-[80px] md:py-[120px] px-6 text-center flex flex-col items-center">
+         <h2 className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] font-medium uppercase tracking-[0.2em] text-black/50 dark:text-white/50 mb-4">
            PASO A PASO
          </h2>
-         <h3 className="text-[32px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black leading-tight mb-[40px]">
+         <h3 className="text-[32px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black dark:text-white leading-tight mb-[40px]">
            GUÍA PARA VENDEDORES PRIMERIZOS
          </h3>
-         <p className="text-[16px] md:text-[18px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[60px]">
+         <p className="text-[16px] md:text-[18px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[60px]">
            Poner su casa en el mercado puede ser un proceso estresante, especialmente cuando no sabe qué esperar. Afortunadamente, con la ayuda de un agente experimentado y esta guía fácil de seguir, puede completar el proceso sin problemas. Seguir estos pasos le ayudará a prepararse para organizarse y vender su casa al mejor precio posible.
          </p>
-         <button className="px-10 py-5 border border-black text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors">
+         <button className="px-10 py-5 border border-black dark:border-white/20 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors">
            HAGA CLIC AQUÍ PARA LA GUÍA DE VENDEDORES
          </button>
       </section>
 
       {/* 3. LOS 8 PASOS (Alternando Izquierda/Derecha) */}
-      <section className="bg-white w-full">
+      <section className="bg-white dark:bg-neutral-950 w-full">
          {steps.map((step, idx) => (
             <div key={idx} className={`group w-full flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} min-h-[50vh] overflow-hidden`}>
                
@@ -130,10 +130,10 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
 
                {/* Texto */}
                <div className="w-full md:w-1/2 flex flex-col justify-center p-12 md:p-24 bg-[#fafafa]">
-                  <h3 className="text-[24px] md:text-[32px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.15em] text-black mb-6 leading-tight">
+                  <h3 className="text-[24px] md:text-[32px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.15em] text-black dark:text-white mb-6 leading-tight">
                     PASO {step.num}: {step.title}
                   </h3>
-                  <p className="text-[16px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8]">
+                  <p className="text-[16px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8]">
                     {step.desc}
                   </p>
                </div>
@@ -142,17 +142,17 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
          ))}
          
          <div className="py-24 px-6 text-center max-w-[800px] mx-auto">
-            <h3 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.15em] text-black mb-8 leading-tight">
+            <h3 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.15em] text-black dark:text-white mb-8 leading-tight">
                ¡FELICIDADES!
             </h3>
-            <p className="text-[16px] md:text-[18px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8]">
+            <p className="text-[16px] md:text-[18px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8]">
                Una vez que haya vendido su casa, es libre de dar el siguiente paso en su viaje. Ya sea mudarse a una nueva ciudad, mudarse a una casa más grande o reducir el tamaño y disfrutar de su vida como nidos vacíos, saber que todas sus responsabilidades de venta han sido atendidas le ayudará a lograr paz mental para su nuevo camino.
             </p>
          </div>
       </section>
 
       {/* 4. TESTIMONIOS */}
-      <section className="bg-white pt-[60px] pb-[100px] px-6 border-t border-black/5">
+      <section className="bg-white dark:bg-neutral-950 pt-[60px] pb-[100px] px-6 border-t border-black/5">
         <div className="text-center mb-[60px]">
            <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[30px] leading-tight">
               TESTIMONIOS
@@ -180,18 +180,18 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
       </section>
 
       {/* 7. CIERRE / CTA FILOSOFÍA */}
-      <section className="bg-white py-[100px] px-6 text-center flex flex-col items-center">
-         <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] text-black mb-8 max-w-[800px] leading-tight">
+      <section className="bg-white dark:bg-neutral-950 py-[100px] px-6 text-center flex flex-col items-center">
+         <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] text-black dark:text-white mb-8 max-w-[800px] leading-tight">
            "La filosofía de {tenantData.name} es simple: los clientes son lo primero."
          </h2>
-         <p className="text-[16px] md:text-[18px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[40px]">
+         <p className="text-[16px] md:text-[18px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[40px]">
            Se compromete a estar en constante comunicación con sus clientes, manteniéndolos completamente informados durante todo el proceso de compra o venta.
          </p>
          <a 
            href="https://wa.me/50660413905?text=Hola,%20me%20gustar%C3%ADa%20comprar%20o%20vender%20una%20propiedad"
            target="_blank"
            rel="noopener noreferrer"
-           className="inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black border border-black transition-colors"
+           className="inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black dark:text-white border border-black dark:border-white/20 transition-colors"
          >
            CONECTÉMONOS
          </a>

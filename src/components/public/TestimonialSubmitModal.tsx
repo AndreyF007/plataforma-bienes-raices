@@ -62,7 +62,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
       />
 
       {/* Modal Content */}
-      <div className="relative w-full max-w-[600px] bg-white text-black overflow-hidden flex flex-col shadow-2xl animate-in zoom-in-95 duration-300">
+      <div className="relative w-full max-w-[600px] bg-white dark:bg-neutral-950 text-black dark:text-white overflow-hidden flex flex-col shadow-2xl animate-in zoom-in-95 duration-300">
         
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-black/10 bg-gray-50">
@@ -97,7 +97,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
         ) : (
           <form onSubmit={handleSubmit} className="p-6 md:p-8 flex flex-col gap-6">
             
-            <p className="text-[14px] text-black/60 font-[family-name:var(--font-quicksand)] leading-relaxed mb-2">
+            <p className="text-[14px] text-black/60 dark:text-white/60 font-[family-name:var(--font-quicksand)] leading-relaxed mb-2">
               Tu opinión es muy importante para nosotros. Por favor, tómate un momento para calificar tu experiencia.
             </p>
 
@@ -136,7 +136,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
                   disabled={status === 'loading'}
-                  className="w-full bg-white border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black disabled:opacity-50"
+                  className="w-full bg-white dark:bg-neutral-950 border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black dark:border-white/20 disabled:opacity-50"
                   placeholder="Ej. Ana García"
                 />
               </div>
@@ -147,7 +147,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                   disabled={status === 'loading'}
-                  className="w-full bg-white border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black disabled:opacity-50"
+                  className="w-full bg-white dark:bg-neutral-950 border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black dark:border-white/20 disabled:opacity-50"
                 >
                   <option value="Comprador">Comprador</option>
                   <option value="Vendedor">Vendedor</option>
@@ -164,7 +164,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
                 onChange={(e) => setContent(e.target.value)}
                 disabled={status === 'loading'}
                 rows={4}
-                className="w-full bg-white border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black disabled:opacity-50 resize-none"
+                className="w-full bg-white dark:bg-neutral-950 border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black dark:border-white/20 disabled:opacity-50 resize-none"
                 placeholder="Cuéntanos cómo fue tu experiencia..."
               />
             </div>

@@ -26,11 +26,11 @@ export default async function SettingsAdminPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-light uppercase tracking-widest text-black">Configuración General</h1>
+        <h1 className="text-2xl font-light uppercase tracking-widest text-black dark:text-white">Configuración General</h1>
         <p className="text-sm text-gray-500 mt-2">Personaliza la información principal de tu agencia inmobiliaria.</p>
       </div>
 
-      <div className="bg-white border border-gray-200 p-8 shadow-sm">
+      <div className="bg-white dark:bg-neutral-950 border border-gray-200 p-8 shadow-sm">
         <SettingsForm 
           initialName={user.tenant.name} 
           initialHeroTitle={user.tenant.heroTitle || ""} 
@@ -40,10 +40,10 @@ export default async function SettingsAdminPage() {
       </div>
 
       <div className="mt-8">
-        <h1 className="text-2xl font-light uppercase tracking-widest text-black">Seguridad</h1>
+        <h1 className="text-2xl font-light uppercase tracking-widest text-black dark:text-white">Seguridad</h1>
         <p className="text-sm text-gray-500 mt-2 mb-6">Cambia el correo electrónico y la contraseña para iniciar sesión en tu panel.</p>
         
-        <div className="bg-white border border-gray-200 p-8 shadow-sm">
+        <div className="bg-white dark:bg-neutral-950 border border-gray-200 p-8 shadow-sm">
           <AccountForm initialEmail={user.email} />
         </div>
       </div>

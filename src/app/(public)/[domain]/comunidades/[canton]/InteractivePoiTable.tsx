@@ -105,8 +105,8 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
              onClick={() => setActiveTab(tab.id)}
              className={`px-6 py-2 rounded-full border border-black/20 text-[13px] transition-all
                ${activeTab === tab.id 
-                 ? 'bg-black text-white border-black' 
-                 : 'bg-transparent text-black hover:bg-black/5'
+                 ? 'bg-black text-white border-black dark:border-white/20' 
+                 : 'bg-transparent text-black dark:text-white hover:bg-black/5'
                }`}
            >
              {tab.label}
@@ -115,7 +115,7 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
        </div>
 
        {/* Table Header */}
-       <div className="hidden md:grid grid-cols-[2.5fr_1.2fr_1fr_1fr_1.5fr] gap-4 pb-4 border-b border-black/10 text-[11px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.15em] text-black/60 font-semibold">
+       <div className="hidden md:grid grid-cols-[2.5fr_1.2fr_1fr_1fr_1.5fr] gap-4 pb-4 border-b border-black/10 text-[11px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.15em] text-black/60 dark:text-white/60 font-semibold">
           <div>NAME</div>
           <div>CATEGORY</div>
           <div>DISTANCE</div>
@@ -127,10 +127,10 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
        <div className="flex flex-col relative min-h-[300px]">
          {loading && apiKey ? (
             <div className="absolute inset-0 bg-[#fafafa]/80 backdrop-blur-sm z-10 flex items-center justify-center">
-               <Loader2 className="w-8 h-8 animate-spin text-black" />
+               <Loader2 className="w-8 h-8 animate-spin text-black dark:text-white" />
             </div>
          ) : isLoadedAndEmpty ? (
-            <div className="flex flex-col items-center justify-center py-16 text-black/50 text-[14px]">
+            <div className="flex flex-col items-center justify-center py-16 text-black/50 dark:text-white/50 text-[14px]">
                <MapPin className="w-8 h-8 mb-3 opacity-30" />
                <p>No se encontraron lugares en la categoría "{tabs.find(t => t.id === activeTab)?.label}" para {cantonName}.</p>
             </div>
@@ -143,11 +143,11 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
                       <img src={poi.img} alt={poi.name} className="w-full h-full object-cover" />
                    </div>
                    <div className="flex flex-col">
-                      <h4 className="text-[14px] font-medium text-black flex items-center gap-1">
+                      <h4 className="text-[14px] font-medium text-black dark:text-white flex items-center gap-1">
                         {poi.name} <span className="text-[10px]">↗</span>
                       </h4>
                       {poi.address && (
-                        <span className="text-[12px] text-black/60 mt-0.5 line-clamp-1">{poi.address}</span>
+                        <span className="text-[12px] text-black/60 dark:text-white/60 mt-0.5 line-clamp-1">{poi.address}</span>
                       )}
                    </div>
                 </div>

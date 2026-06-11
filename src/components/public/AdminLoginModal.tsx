@@ -52,12 +52,12 @@ export default function AdminLoginModal() {
           />
 
           {/* Modal Content */}
-          <div className="relative w-full max-w-[450px] bg-white text-black overflow-hidden flex flex-col shadow-2xl animate-in zoom-in-95 duration-300">
+          <div className="relative w-full max-w-[450px] bg-white dark:bg-neutral-950 text-black dark:text-white overflow-hidden flex flex-col shadow-2xl animate-in zoom-in-95 duration-300">
             
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-black/10 bg-gray-50">
               <div className="flex items-center gap-3">
-                <Lock className="w-5 h-5 text-black" />
+                <Lock className="w-5 h-5 text-black dark:text-white" />
                 <h2 className="text-[14px] font-[family-name:var(--font-raleway)] uppercase tracking-widest font-bold">
                   Acceso Privado
                 </h2>
@@ -74,7 +74,7 @@ export default function AdminLoginModal() {
             <form onSubmit={handleSubmit} className="p-8 flex flex-col gap-6 text-left">
               
               <div className="text-center mb-4">
-                <h1 className="text-[24px] font-light uppercase tracking-widest text-black mb-2 font-[family-name:var(--font-raleway)]">Portal Admin</h1>
+                <h1 className="text-[24px] font-light uppercase tracking-widest text-black dark:text-white mb-2 font-[family-name:var(--font-raleway)]">Portal Admin</h1>
                 <p className="text-[12px] text-gray-500 font-[family-name:var(--font-quicksand)]">Accede a tu panel para gestionar propiedades y testimonios.</p>
               </div>
 
@@ -93,7 +93,7 @@ export default function AdminLoginModal() {
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); if(status==='error') setStatus('idle'); }}
                   disabled={status === 'loading'}
-                  className="w-full bg-white border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black transition-colors disabled:opacity-50"
+                  className="w-full bg-white dark:bg-neutral-950 border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black dark:border-white/20 transition-colors disabled:opacity-50"
                   required
                 />
               </div>
@@ -105,7 +105,7 @@ export default function AdminLoginModal() {
                   value={password}
                   onChange={(e) => { setPassword(e.target.value); if(status==='error') setStatus('idle'); }}
                   disabled={status === 'loading'}
-                  className="w-full bg-white border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black transition-colors disabled:opacity-50"
+                  className="w-full bg-white dark:bg-neutral-950 border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black dark:border-white/20 transition-colors disabled:opacity-50"
                   required
                 />
               </div>

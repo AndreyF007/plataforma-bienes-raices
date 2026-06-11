@@ -80,7 +80,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
         <div className="flex gap-12 items-center mb-16 relative">
           {[1, 2, 3].map((num) => (
              <div key={num} className="flex flex-col items-center relative z-10">
-               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-[family-name:var(--font-raleway)] transition-colors duration-500 ${step === num ? 'bg-[#e5d4c3] text-black font-bold' : step > num ? 'text-white' : 'text-white/50'}`}>
+               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-[family-name:var(--font-raleway)] transition-colors duration-500 ${step === num ? 'bg-[#e5d4c3] text-black dark:text-white font-bold' : step > num ? 'text-white' : 'text-white/50'}`}>
                  {num}
                </div>
              </div>
@@ -114,7 +114,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
                 <button 
                   onClick={handleNext}
                   disabled={!formData.address.trim()}
-                  className="mt-12 px-12 py-4 border border-white text-white hover:bg-white hover:text-black transition-colors uppercase tracking-[0.2em] text-[12px] font-bold disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white"
+                  className="mt-12 px-12 py-4 border border-white text-white hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors uppercase tracking-[0.2em] text-[12px] font-bold disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white"
                 >
                   SIGUIENTE
                 </button>
@@ -158,7 +158,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
                   <label className="block text-[10px] text-white uppercase tracking-widest mb-2 font-bold">Marco Temporal: (Opcional)</label>
                   <select 
                     name="timeframe" value={formData.timeframe} onChange={handleChange}
-                    className="w-full bg-transparent border-0 border-b border-white/50 text-white py-2 focus:ring-0 focus:outline-none focus:border-white text-[16px] [&>option]:text-black"
+                    className="w-full bg-transparent border-0 border-b border-white/50 text-white py-2 focus:ring-0 focus:outline-none focus:border-white text-[16px] [&>option]:text-black dark:text-white"
                   >
                     <option value="">Seleccione una opción</option>
                     <option value="Lo antes posible">Lo antes posible</option>
@@ -182,7 +182,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
                   <button 
                     type="submit"
                     disabled={loading || !formData.consent}
-                    className="px-12 py-4 border border-white text-white hover:bg-white hover:text-black transition-colors uppercase tracking-[0.2em] text-[12px] font-bold disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white flex items-center justify-center mx-auto gap-2 min-w-[250px]"
+                    className="px-12 py-4 border border-white text-white hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors uppercase tracking-[0.2em] text-[12px] font-bold disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white flex items-center justify-center mx-auto gap-2 min-w-[250px]"
                   >
                     {loading && <Loader2 className="w-4 h-4 animate-spin" />}
                     OBTENGA MI VALORACIÓN

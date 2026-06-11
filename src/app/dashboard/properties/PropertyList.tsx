@@ -272,9 +272,9 @@ export default function PropertyList({ initialProperties }: { initialProperties:
   return (
     <div>
       {/* HEADER & CONTROLS */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 bg-white p-6 shadow-sm border border-black/5">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 bg-white dark:bg-neutral-950 p-6 shadow-sm border border-black/5">
         <div className="w-full md:w-auto">
-          <h1 className="text-3xl font-[family-name:var(--font-raleway)] text-black mb-1">
+          <h1 className="text-3xl font-[family-name:var(--font-raleway)] text-black dark:text-white mb-1">
              Inventario de Lujo
           </h1>
           <p className="text-[11px] uppercase tracking-widest text-black/40 font-semibold">
@@ -290,11 +290,11 @@ export default function PropertyList({ initialProperties }: { initialProperties:
               placeholder="Buscar por nombre, cantón..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-gray-50 border border-gray-200 pl-10 pr-4 py-3 text-[13px] font-[family-name:var(--font-quicksand)] focus:border-black focus:ring-0 outline-none transition-all placeholder:text-gray-400 group-hover:bg-white"
+              className="w-full bg-gray-50 border border-gray-200 pl-10 pr-4 py-3 text-[13px] font-[family-name:var(--font-quicksand)] focus:border-black dark:border-white/20 focus:ring-0 outline-none transition-all placeholder:text-gray-400 group-hover:bg-white dark:bg-neutral-950"
             />
             <Search className="w-4 h-4 absolute left-3 top-3.5 text-black/30" />
             {searchQuery && (
-              <button onClick={() => setSearchQuery("")} className="absolute right-3 top-3.5 text-black/30 hover:text-black">
+              <button onClick={() => setSearchQuery("")} className="absolute right-3 top-3.5 text-black/30 hover:text-black dark:text-white">
                 <X className="w-4 h-4" />
               </button>
             )}
@@ -310,10 +310,10 @@ export default function PropertyList({ initialProperties }: { initialProperties:
 
       {/* BREADCRUMBS & NAVIGATION */}
       {!isSearchActive && (
-        <div className="flex items-center gap-2 text-[11px] uppercase tracking-widest font-bold text-black/40 mb-6 bg-white py-4 px-6 border border-black/5 shadow-sm">
+        <div className="flex items-center gap-2 text-[11px] uppercase tracking-widest font-bold text-black/40 mb-6 bg-white dark:bg-neutral-950 py-4 px-6 border border-black/5 shadow-sm">
           <button 
             onClick={() => { setViewMode('PROVINCES'); setSelectedProvince(null); setSelectedCanton(null); }}
-            className={`hover:text-black transition-colors ${viewMode === 'PROVINCES' ? 'text-black' : ''}`}
+            className={`hover:text-black dark:text-white transition-colors ${viewMode === 'PROVINCES' ? 'text-black dark:text-white' : ''}`}
           >
             Provincias
           </button>
@@ -323,7 +323,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
               <ArrowRight className="w-3 h-3" />
               <button 
                 onClick={() => { setViewMode('CANTONS'); setSelectedCanton(null); }}
-                className={`hover:text-black transition-colors ${viewMode === 'CANTONS' ? 'text-black' : ''}`}
+                className={`hover:text-black dark:text-white transition-colors ${viewMode === 'CANTONS' ? 'text-black dark:text-white' : ''}`}
               >
                 {selectedProvince}
               </button>
@@ -333,7 +333,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
           {viewMode === 'PROPERTIES' && selectedCanton && (
             <>
               <ArrowRight className="w-3 h-3" />
-              <span className="text-black">{selectedCanton}</span>
+              <span className="text-black dark:text-white">{selectedCanton}</span>
             </>
           )}
         </div>
@@ -383,11 +383,11 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                   setSelectedCanton(canton);
                   setViewMode('PROPERTIES');
                 }}
-                className="group relative bg-white aspect-square cursor-pointer overflow-hidden border border-black/10 shadow-sm hover:shadow-xl transition-all duration-300"
+                className="group relative bg-white dark:bg-neutral-950 aspect-square cursor-pointer overflow-hidden border border-black/10 shadow-sm hover:shadow-xl transition-all duration-300"
               >
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-black bg-gray-50 group-hover:bg-white transition-colors">
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-black dark:text-white bg-gray-50 group-hover:bg-white dark:bg-neutral-950 transition-colors">
                   <h3 className="text-lg font-[family-name:var(--font-raleway)] font-medium text-center mb-2">{canton}</h3>
-                  <span className={`text-[10px] uppercase tracking-widest font-bold ${count > 0 ? 'text-black/60' : 'text-black/20'}`}>
+                  <span className={`text-[10px] uppercase tracking-widest font-bold ${count > 0 ? 'text-black/60 dark:text-white/60' : 'text-black/20'}`}>
                     {count} {count === 1 ? 'Propiedad' : 'Propiedades'}
                   </span>
                 </div>
@@ -406,7 +406,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
             const currentIndex = cardImageIndices[p.id] || 0;
 
             return (
-              <div key={p.id} className="bg-white border border-gray-200 shadow-sm flex flex-col group">
+              <div key={p.id} className="bg-white dark:bg-neutral-950 border border-gray-200 shadow-sm flex flex-col group">
                 {/* Carrusel de la tarjeta */}
                 <div 
                   className="h-56 bg-black relative overflow-hidden cursor-pointer"
@@ -425,20 +425,20 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                     <div className="absolute inset-0 flex items-center justify-between p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <button 
                         onClick={(e) => { e.stopPropagation(); prevCardImage(p.id, imgs.length); }}
-                        className="bg-white/80 hover:bg-white text-black p-1.5 rounded-full shadow-md transition-colors"
+                        className="bg-white/80 hover:bg-white dark:bg-neutral-950 text-black dark:text-white p-1.5 rounded-full shadow-md transition-colors"
                       >
                         <ChevronLeft className="w-4 h-4" />
                       </button>
                       <button 
                         onClick={(e) => { e.stopPropagation(); nextCardImage(p.id, imgs.length); }}
-                        className="bg-white/80 hover:bg-white text-black p-1.5 rounded-full shadow-md transition-colors"
+                        className="bg-white/80 hover:bg-white dark:bg-neutral-950 text-black dark:text-white p-1.5 rounded-full shadow-md transition-colors"
                       >
                         <ChevronRight className="w-4 h-4" />
                       </button>
                     </div>
                   )}
                   
-                  <div className="absolute top-3 left-3 bg-white text-black text-[9px] uppercase px-3 py-1 font-bold shadow-md">
+                  <div className="absolute top-3 left-3 bg-white dark:bg-neutral-950 text-black dark:text-white text-[9px] uppercase px-3 py-1 font-bold shadow-md">
                     {p.status}
                   </div>
                 </div>
@@ -449,7 +449,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                     <span className="text-[9px] bg-black text-white px-2 py-0.5 uppercase tracking-wider font-semibold">{p.propertyType}</span>
                   </div>
                   <p className="text-xs text-gray-500 mb-3 flex items-center gap-1 font-[family-name:var(--font-quicksand)]"><MapPin className="w-3 h-3"/> {p.canton}, {p.province}</p>
-                  <p className="text-lg font-[family-name:var(--font-raleway)] font-medium text-black mb-4">{p.price}</p>
+                  <p className="text-lg font-[family-name:var(--font-raleway)] font-medium text-black dark:text-white mb-4">{p.price}</p>
                   
                   <div className="grid grid-cols-2 gap-y-3 gap-x-2 text-[10px] text-gray-600 mb-2 uppercase tracking-wide font-bold">
                     <div className="flex items-center gap-1.5"><Bed className="w-3.5 h-3.5 text-black/40"/> {p.beds} Camas</div>
@@ -489,12 +489,12 @@ export default function PropertyList({ initialProperties }: { initialProperties:
       {isModalOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={handleCloseModal} />
-          <div className="relative bg-white w-full max-w-4xl shadow-2xl p-8 max-h-[90vh] overflow-y-auto custom-scrollbar">
+          <div className="relative bg-white dark:bg-neutral-950 w-full max-w-4xl shadow-2xl p-8 max-h-[90vh] overflow-y-auto custom-scrollbar">
             <div className="flex justify-between items-center mb-8 pb-4 border-b border-black/10">
               <h2 className="text-lg font-[family-name:var(--font-raleway)] font-bold uppercase tracking-widest">
                 {editingId ? 'Editar Propiedad de Lujo' : 'Nueva Propiedad de Lujo'}
               </h2>
-              <button onClick={handleCloseModal} className="text-gray-400 hover:text-black transition-colors">
+              <button onClick={handleCloseModal} className="text-gray-400 hover:text-black dark:text-white transition-colors">
                 <X className="w-6 h-6" />
               </button>
             </div>
@@ -513,7 +513,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                         const newProv = e.target.value;
                         setFormData({...formData, province: newProv, canton: LOCATION_DATA[newProv][0]});
                       }} 
-                      className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none bg-white font-[family-name:var(--font-quicksand)]"
+                      className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none bg-white dark:bg-neutral-950 font-[family-name:var(--font-quicksand)]"
                     >
                       {PROVINCES.map(p => <option key={p} value={p}>{p}</option>)}
                     </select>
@@ -523,7 +523,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                     <select 
                       value={formData.canton} 
                       onChange={e => setFormData({...formData, canton: e.target.value})} 
-                      className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none bg-white font-[family-name:var(--font-quicksand)]"
+                      className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none bg-white dark:bg-neutral-950 font-[family-name:var(--font-quicksand)]"
                     >
                       {LOCATION_DATA[formData.province].map(c => <option key={c} value={c}>{c}</option>)}
                     </select>
@@ -535,7 +535,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                       required
                       value={formData.location}
                       onChange={e => setFormData({...formData, location: e.target.value})}
-                      className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" 
+                      className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
                       placeholder="Ej. Condominio Del Sol, Casa 4"
                     />
                   </div>
@@ -551,7 +551,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                     required
                     value={formData.title}
                     onChange={e => setFormData({...formData, title: e.target.value})}
-                    className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" 
+                    className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
                     placeholder="Ej. VILLA PACÍFICO"
                   />
                 </div>
@@ -562,7 +562,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                     required
                     value={formData.price}
                     onChange={e => setFormData({...formData, price: e.target.value})}
-                    className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" 
+                    className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
                     placeholder="Ej. $1,250,000"
                   />
                 </div>
@@ -572,7 +572,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
               <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
                 <div className="col-span-2">
                   <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Tipo de Propiedad</label>
-                  <select value={formData.propertyType} onChange={e => setFormData({...formData, propertyType: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none bg-white font-[family-name:var(--font-quicksand)]">
+                  <select value={formData.propertyType} onChange={e => setFormData({...formData, propertyType: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none bg-white dark:bg-neutral-950 font-[family-name:var(--font-quicksand)]">
                     <option value="Casa">Casa</option>
                     <option value="Apartamento">Apartamento</option>
                     <option value="Lote">Lote</option>
@@ -582,7 +582,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                 </div>
                 <div className="col-span-2">
                   <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Estado</label>
-                  <select value={formData.status} onChange={e => setFormData({...formData, status: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none bg-white font-[family-name:var(--font-quicksand)]">
+                  <select value={formData.status} onChange={e => setFormData({...formData, status: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none bg-white dark:bg-neutral-950 font-[family-name:var(--font-quicksand)]">
                     <option value="En Venta">En Venta</option>
                     <option value="Vendido">Vendido</option>
                     <option value="Alquiler">Alquiler</option>
@@ -590,11 +590,11 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                 </div>
                 <div className="col-span-1">
                   <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Cuartos</label>
-                  <input type="number" min="0" value={formData.beds} onChange={e => setFormData({...formData, beds: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" />
+                  <input type="number" min="0" value={formData.beds} onChange={e => setFormData({...formData, beds: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
                 </div>
                 <div className="col-span-1">
                   <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Baños</label>
-                  <input type="number" min="0" step="0.5" value={formData.baths} onChange={e => setFormData({...formData, baths: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" />
+                  <input type="number" min="0" step="0.5" value={formData.baths} onChange={e => setFormData({...formData, baths: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
                 </div>
               </div>
 
@@ -602,19 +602,19 @@ export default function PropertyList({ initialProperties }: { initialProperties:
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
                   <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Construcción m²</label>
-                  <input type="number" min="0" value={formData.constructionArea} onChange={e => setFormData({...formData, constructionArea: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" />
+                  <input type="number" min="0" value={formData.constructionArea} onChange={e => setFormData({...formData, constructionArea: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
                 </div>
                 <div>
                   <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Lote m²</label>
-                  <input type="number" min="0" value={formData.lotArea} onChange={e => setFormData({...formData, lotArea: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" />
+                  <input type="number" min="0" value={formData.lotArea} onChange={e => setFormData({...formData, lotArea: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
                 </div>
                 <div>
                   <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Año Const.</label>
-                  <input type="number" min="1800" max="2100" value={formData.yearBuilt} onChange={e => setFormData({...formData, yearBuilt: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" placeholder="Ej. 2024" />
+                  <input type="number" min="1800" max="2100" value={formData.yearBuilt} onChange={e => setFormData({...formData, yearBuilt: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" placeholder="Ej. 2024" />
                 </div>
                 <div>
                   <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Pisos</label>
-                  <input type="number" min="1" value={formData.floors} onChange={e => setFormData({...formData, floors: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black outline-none font-[family-name:var(--font-quicksand)]" />
+                  <input type="number" min="1" value={formData.floors} onChange={e => setFormData({...formData, floors: e.target.value})} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
                 </div>
               </div>
 
@@ -625,7 +625,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                   rows={4}
                   value={formData.description}
                   onChange={e => setFormData({...formData, description: e.target.value})}
-                  className="w-full border border-gray-300 p-4 text-sm focus:border-black outline-none resize-y font-[family-name:var(--font-quicksand)] leading-loose" 
+                  className="w-full border border-gray-300 p-4 text-sm focus:border-black dark:border-white/20 outline-none resize-y font-[family-name:var(--font-quicksand)] leading-loose" 
                   placeholder="Escribe aquí los detalles, amenidades y características destacadas..."
                 />
               </div>
@@ -634,7 +634,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
               <div className="bg-gray-50 p-6 border border-gray-100">
                 <div className="flex justify-between items-center mb-4">
                   <label className="block text-[10px] uppercase tracking-[0.2em] font-bold text-black/40">Galería Fotográfica (Máx 10)</label>
-                  <span className="text-xs text-black font-bold">{existingImages.length + selectedFiles.length}/10</span>
+                  <span className="text-xs text-black dark:text-white font-bold">{existingImages.length + selectedFiles.length}/10</span>
                 </div>
                 
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-4">
@@ -659,7 +659,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                   {existingImages.length + selectedFiles.length < 10 && (
                     <div 
                       onClick={() => fileInputRef.current?.click()}
-                      className="h-24 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 hover:text-black hover:border-black cursor-pointer transition-colors bg-white"
+                      className="h-24 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 hover:text-black dark:text-white hover:border-black dark:border-white/20 cursor-pointer transition-colors bg-white dark:bg-neutral-950"
                     >
                       <Upload className="w-6 h-6 mb-1" />
                       <span className="text-[10px] font-bold uppercase">Añadir</span>
@@ -697,7 +697,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
             className="absolute inset-0 bg-white/90 backdrop-blur-xl z-0 cursor-pointer"
             onClick={() => setPreviewProperty(null)}
           />
-          <div className="relative z-10 w-full h-full md:h-auto md:max-h-[90vh] max-w-6xl bg-white shadow-2xl flex flex-col md:flex-row overflow-hidden border border-black/5">
+          <div className="relative z-10 w-full h-full md:h-auto md:max-h-[90vh] max-w-6xl bg-white dark:bg-neutral-950 shadow-2xl flex flex-col md:flex-row overflow-hidden border border-black/5">
             <button 
               onClick={() => setPreviewProperty(null)}
               className="absolute top-6 right-6 z-50 bg-black text-white hover:bg-black/70 p-3 rounded-full transition-colors shadow-lg"
@@ -723,10 +723,10 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                     if (previewImgs.length > 1) {
                       return (
                         <div className="absolute inset-0 flex items-center justify-between p-6 opacity-0 group-hover/modal:opacity-100 transition-opacity duration-500 pointer-events-none">
-                          <button onClick={(e) => { e.stopPropagation(); prevCardImage(previewProperty.id, previewImgs.length); }} className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white text-white hover:text-black p-4 rounded-full border border-white/20 transition-colors">
+                          <button onClick={(e) => { e.stopPropagation(); prevCardImage(previewProperty.id, previewImgs.length); }} className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white dark:bg-neutral-950 text-white hover:text-black dark:text-white p-4 rounded-full border border-white/20 transition-colors">
                             <ChevronLeft className="w-6 h-6" />
                           </button>
-                          <button onClick={(e) => { e.stopPropagation(); nextCardImage(previewProperty.id, previewImgs.length); }} className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white text-white hover:text-black p-4 rounded-full border border-white/20 transition-colors">
+                          <button onClick={(e) => { e.stopPropagation(); nextCardImage(previewProperty.id, previewImgs.length); }} className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white dark:bg-neutral-950 text-white hover:text-black dark:text-white p-4 rounded-full border border-white/20 transition-colors">
                             <ChevronRight className="w-6 h-6" />
                           </button>
                         </div>
@@ -759,24 +759,24 @@ export default function PropertyList({ initialProperties }: { initialProperties:
               })()}
             </div>
             
-            <div className="w-full md:w-[45%] bg-white p-8 md:p-12 overflow-y-auto flex flex-col custom-scrollbar">
+            <div className="w-full md:w-[45%] bg-white dark:bg-neutral-950 p-8 md:p-12 overflow-y-auto flex flex-col custom-scrollbar">
               <div className="text-[10px] uppercase tracking-[0.3em] font-semibold text-black/40 mb-6 flex items-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
                 {previewProperty.status} <span className="text-black/20">|</span> {previewProperty.propertyType}
               </div>
               
-              <h2 className="text-[36px] md:text-[42px] font-[family-name:var(--font-raleway)] font-light text-black mb-2 leading-[1.1] uppercase tracking-wide">
+              <h2 className="text-[36px] md:text-[42px] font-[family-name:var(--font-raleway)] font-light text-black dark:text-white mb-2 leading-[1.1] uppercase tracking-wide">
                 {previewProperty.title}
               </h2>
-              <p className="text-[16px] font-[family-name:var(--font-quicksand)] font-bold text-black/50 mb-2 flex items-center gap-2">
+              <p className="text-[16px] font-[family-name:var(--font-quicksand)] font-bold text-black/50 dark:text-white/50 mb-2 flex items-center gap-2">
                 <MapPin className="w-4 h-4" /> {previewProperty.canton}, {previewProperty.province}
               </p>
-              <p className="text-[14px] font-[family-name:var(--font-quicksand)] text-black/60 mb-10 flex items-center gap-2">
+              <p className="text-[14px] font-[family-name:var(--font-quicksand)] text-black/60 dark:text-white/60 mb-10 flex items-center gap-2">
                  {previewProperty.location}
               </p>
               
               <div className="bg-gray-50 border border-gray-100 p-8 mb-10 text-center">
-                <p className="text-[32px] font-medium font-[family-name:var(--font-raleway)] text-black">{previewProperty.price}</p>
+                <p className="text-[32px] font-medium font-[family-name:var(--font-raleway)] text-black dark:text-white">{previewProperty.price}</p>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-black/40 mt-1">Precio de Venta</p>
               </div>
               
@@ -815,7 +815,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
 
               <div className="w-8 h-px bg-black/20 mb-8"></div>
               
-              <h4 className="text-[11px] uppercase tracking-[0.25em] font-bold mb-6 text-black">Acerca de la Propiedad</h4>
+              <h4 className="text-[11px] uppercase tracking-[0.25em] font-bold mb-6 text-black dark:text-white">Acerca de la Propiedad</h4>
               <div className="text-[14px] text-black/70 font-[family-name:var(--font-quicksand)] leading-loose mb-12 whitespace-pre-wrap break-words">
                 {previewProperty.description || "Póngase en contacto con nosotros para obtener más información exclusiva sobre esta propiedad de lujo."}
               </div>

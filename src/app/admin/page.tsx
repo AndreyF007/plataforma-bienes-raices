@@ -9,7 +9,7 @@ export default function SuperAdminPage() {
           { label: 'Total Properties', value: '3,492', trend: '+8%' },
           { label: 'Global Leads', value: '18,293', trend: '+24%' },
         ].map((stat, i) => (
-          <div key={i} className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+          <div key={i} className="bg-white dark:bg-neutral-950 p-6 rounded-xl border border-gray-100 shadow-sm">
             <p className="text-sm font-medium text-gray-500 mb-1">{stat.label}</p>
             <div className="flex items-end justify-between">
               <h3 className="text-3xl font-semibold text-gray-900">{stat.value}</h3>
@@ -22,7 +22,7 @@ export default function SuperAdminPage() {
       </div>
 
       {/* Recent Tenants */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-neutral-950 rounded-xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center">
           <h2 className="font-medium text-gray-900">Recent Tenants (Agencies)</h2>
           <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">View all</button>

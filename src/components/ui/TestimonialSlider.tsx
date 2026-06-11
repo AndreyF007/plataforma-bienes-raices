@@ -93,14 +93,14 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
         {/* Sleek Side Arrows (Hidden on mobile, absolute positioning) */}
         <button 
           onClick={prev} 
-          className="hidden md:flex absolute left-0 top-[60%] -translate-y-1/2 w-12 h-12 border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all duration-300 text-white"
+          className="hidden md:flex absolute left-0 top-[60%] -translate-y-1/2 w-12 h-12 border border-white/30 rounded-full items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-all duration-300 text-white"
         >
           <ChevronLeft className="w-5 h-5 stroke-[1.5]" />
         </button>
         
         <button 
           onClick={next} 
-          className="hidden md:flex absolute right-0 top-[60%] -translate-y-1/2 w-12 h-12 border border-white/30 rounded-full items-center justify-center hover:bg-white hover:text-black transition-all duration-300 text-white"
+          className="hidden md:flex absolute right-0 top-[60%] -translate-y-1/2 w-12 h-12 border border-white/30 rounded-full items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-all duration-300 text-white"
         >
           <ChevronRight className="w-5 h-5 stroke-[1.5]" />
         </button>
@@ -140,10 +140,10 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
 
         {/* Mobile Arrows (Visible only on small screens) */}
         <div className="flex md:hidden gap-4 mt-12 text-white">
-          <button onClick={prev} className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300">
+          <button onClick={prev} className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-all duration-300">
             <ChevronLeft className="w-5 h-5 stroke-[1.5]" />
           </button>
-          <button onClick={next} className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300">
+          <button onClick={next} className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-all duration-300">
             <ChevronRight className="w-5 h-5 stroke-[1.5]" />
           </button>
         </div>
@@ -151,7 +151,7 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
         <div className="mt-16">
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="px-10 py-4 border border-white text-[11px] uppercase tracking-[0.2em] font-medium text-white hover:bg-white hover:text-black transition-colors duration-300"
+            className="px-10 py-4 border border-white text-[11px] uppercase tracking-[0.2em] font-medium text-white hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors duration-300"
           >
             COMPARTIR EXPERIENCIA
           </button>

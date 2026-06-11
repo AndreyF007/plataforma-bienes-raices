@@ -80,7 +80,7 @@ export default function ClientNeighborhoods() {
   });
 
   return (
-    <div className="w-full bg-white pb-20">
+    <div className="w-full bg-white dark:bg-neutral-950 pb-20">
        
        {/* BARRA DE BÚSQUEDA Y FILTROS */}
        <div className="w-full max-w-[1200px] mx-auto px-6 py-12">
@@ -95,8 +95,8 @@ export default function ClientNeighborhoods() {
                     onClick={() => setSelectedProvince(prov)}
                     className={`px-4 py-2 text-[10px] md:text-[12px] uppercase tracking-[0.1em] font-medium transition-all duration-300 border-b-2 ${
                       selectedProvince === prov 
-                        ? 'border-black text-black' 
-                        : 'border-transparent text-black/40 hover:text-black/80'
+                        ? 'border-black dark:border-white/20 text-black dark:text-white' 
+                        : 'border-transparent text-black/40 hover:text-black/80 dark:text-white/80'
                     }`}
                   >
                     {prov}
@@ -111,7 +111,7 @@ export default function ClientNeighborhoods() {
                   placeholder="BUSCAR CANTÓN..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full border-b border-black/30 py-2 pl-8 pr-4 text-[12px] uppercase tracking-[0.1em] font-light focus:outline-none focus:border-black placeholder:text-black/30"
+                  className="w-full border-b border-black/30 py-2 pl-8 pr-4 text-[12px] uppercase tracking-[0.1em] font-light focus:outline-none focus:border-black dark:border-white/20 placeholder:text-black/30"
                 />
                 <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-black/40" />
              </div>
@@ -119,7 +119,7 @@ export default function ClientNeighborhoods() {
           </div>
 
           {/* Resultados de Búsqueda Info */}
-          <div className="text-[12px] text-black/50 uppercase tracking-[0.1em] mb-8">
+          <div className="text-[12px] text-black/50 dark:text-white/50 uppercase tracking-[0.1em] mb-8">
             MOSTRANDO {filteredCantons.length} {filteredCantons.length === 1 ? 'CANTÓN' : 'CANTONES'} EN {selectedProvince.toUpperCase()}
           </div>
        </div>
@@ -161,7 +161,7 @@ export default function ClientNeighborhoods() {
        ) : (
          <div className="w-full py-20 text-center flex flex-col items-center justify-center min-h-[300px]">
             <Search className="w-12 h-12 text-black/20 mb-4" />
-            <p className="text-[14px] text-black/50 uppercase tracking-[0.1em] font-light">NO SE ENCONTRARON CANTONES CON ESE NOMBRE.</p>
+            <p className="text-[14px] text-black/50 dark:text-white/50 uppercase tracking-[0.1em] font-light">NO SE ENCONTRARON CANTONES CON ESE NOMBRE.</p>
          </div>
        )}
     </div>

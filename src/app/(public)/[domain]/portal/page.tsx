@@ -71,7 +71,7 @@ export default async function PortalPage(props: {
   const portalHeroTitle = settings.portalHeroTitle || "Descubre nuestra selección de propiedades de lujo";
 
   return (
-    <main className="w-full flex flex-col min-h-screen bg-[#fafafa] text-black font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
+    <main className="w-full flex flex-col min-h-screen bg-[#fafafa] text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
       <Navbar tenantName={tenant.name} />
 
       {/* 1. HERO PORTAL (COVER) */}

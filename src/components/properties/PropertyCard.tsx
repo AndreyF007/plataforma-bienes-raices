@@ -45,7 +45,7 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
     <>
       <div 
         onClick={() => setIsModalOpen(true)}
-        className="group flex flex-col bg-white hover:shadow-2xl transition-all duration-700 overflow-hidden cursor-pointer h-full border border-black/5"
+        className="group flex flex-col bg-white dark:bg-neutral-950 hover:shadow-2xl transition-all duration-700 overflow-hidden cursor-pointer h-full border border-black/5"
       >
         {/* CARRUSEL DE IMÁGENES (Premium Aspect) */}
         <div className="relative w-full aspect-[4/5] overflow-hidden bg-black">
@@ -57,7 +57,7 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/80 pointer-events-none" />
           
           <div className="absolute top-6 left-6 z-10 flex gap-2">
-            <span className="bg-white/90 backdrop-blur-sm text-black text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 font-bold">
+            <span className="bg-white/90 backdrop-blur-sm text-black dark:text-white text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 font-bold">
                 {prop.status}
             </span>
             <span className="bg-black/50 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 font-medium border border-white/20">
@@ -83,13 +83,13 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
             <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <button 
                 onClick={prevImg}
-                className="bg-black/40 backdrop-blur-md hover:bg-white text-white hover:text-black p-2 rounded-full border border-white/20 transition-all duration-300 transform -translate-x-4 group-hover:translate-x-0"
+                className="bg-black/40 backdrop-blur-md hover:bg-white dark:bg-neutral-950 text-white hover:text-black dark:text-white p-2 rounded-full border border-white/20 transition-all duration-300 transform -translate-x-4 group-hover:translate-x-0"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button 
                 onClick={nextImg}
-                className="bg-black/40 backdrop-blur-md hover:bg-white text-white hover:text-black p-2 rounded-full border border-white/20 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0"
+                className="bg-black/40 backdrop-blur-md hover:bg-white dark:bg-neutral-950 text-white hover:text-black dark:text-white p-2 rounded-full border border-white/20 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -98,30 +98,30 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
         </div>
         
         {/* Detalles Rápidos Premium */}
-        <div className="flex flex-col p-6 bg-white flex-grow">
+        <div className="flex flex-col p-6 bg-white dark:bg-neutral-950 flex-grow">
           <div className="flex justify-between items-center w-full pb-4 border-b border-black/10">
               <div className="flex flex-col items-center justify-center">
-                <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black">{prop.beds}</span>
+                <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.beds}</span>
                 <span className="text-[9px] uppercase tracking-[0.2em] text-black/40">Camas</span>
               </div>
               <div className="w-[1px] h-6 bg-black/10"></div>
               <div className="flex flex-col items-center justify-center">
-                <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black">{prop.baths}</span>
+                <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.baths}</span>
                 <span className="text-[9px] uppercase tracking-[0.2em] text-black/40">Baños</span>
               </div>
               <div className="w-[1px] h-6 bg-black/10"></div>
               <div className="flex flex-col items-center justify-center">
-                <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black">{prop.constructionArea}</span>
+                <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.constructionArea}</span>
                 <span className="text-[9px] uppercase tracking-[0.2em] text-black/40">m² Const</span>
               </div>
           </div>
           
-          <p className="text-[13px] text-black/50 line-clamp-3 mt-4 mb-6 font-[family-name:var(--font-quicksand)] leading-loose break-words whitespace-pre-wrap">
+          <p className="text-[13px] text-black/50 dark:text-white/50 line-clamp-3 mt-4 mb-6 font-[family-name:var(--font-quicksand)] leading-loose break-words whitespace-pre-wrap">
              {prop.description || "Descubre los detalles de esta exclusiva propiedad."}
           </p>
 
           <div className="mt-auto flex items-center justify-between group/btn">
-            <span className="text-[11px] uppercase tracking-[0.25em] font-bold text-black border-b border-transparent group-hover/btn:border-black transition-colors pb-1">
+            <span className="text-[11px] uppercase tracking-[0.25em] font-bold text-black dark:text-white border-b border-transparent group-hover/btn:border-black dark:border-white/20 transition-colors pb-1">
               Ver Detalles
             </span>
             <span className="w-8 h-px bg-black group-hover/btn:w-16 transition-all duration-500"></span>
@@ -139,7 +139,7 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
           />
           
           {/* Contenedor del Modal */}
-          <div className="relative z-10 w-full h-full md:h-auto md:max-h-[90vh] max-w-6xl bg-white shadow-2xl border border-black/5 flex flex-col md:flex-row overflow-hidden">
+          <div className="relative z-10 w-full h-full md:h-auto md:max-h-[90vh] max-w-6xl bg-white dark:bg-neutral-950 shadow-2xl border border-black/5 flex flex-col md:flex-row overflow-hidden">
             <button 
               onClick={() => setIsModalOpen(false)}
               className="absolute top-6 right-6 z-50 bg-black text-white hover:bg-black/70 p-3 rounded-full transition-colors shadow-lg"
@@ -157,10 +157,10 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
                 />
                 {images.length > 1 && (
                   <div className="absolute inset-0 flex items-center justify-between p-6 opacity-0 group-hover/modal:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <button onClick={prevImg} className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white text-white hover:text-black p-4 rounded-full border border-white/20 transition-colors">
+                    <button onClick={prevImg} className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white dark:bg-neutral-950 text-white hover:text-black dark:text-white p-4 rounded-full border border-white/20 transition-colors">
                       <ChevronLeft className="w-6 h-6" />
                     </button>
-                    <button onClick={nextImg} className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white text-white hover:text-black p-4 rounded-full border border-white/20 transition-colors">
+                    <button onClick={nextImg} className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white dark:bg-neutral-950 text-white hover:text-black dark:text-white p-4 rounded-full border border-white/20 transition-colors">
                       <ChevronRight className="w-6 h-6" />
                     </button>
                   </div>
@@ -184,21 +184,21 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
             </div>
 
             {/* Lado Derecho: Detalles Completos */}
-            <div className="w-full md:w-[45%] bg-white p-8 md:p-12 overflow-y-auto flex flex-col custom-scrollbar">
+            <div className="w-full md:w-[45%] bg-white dark:bg-neutral-950 p-8 md:p-12 overflow-y-auto flex flex-col custom-scrollbar">
               <div className="text-[10px] uppercase tracking-[0.3em] font-semibold text-black/40 mb-6 flex items-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
                 {prop.status} <span className="text-black/20">|</span> {prop.type}
               </div>
               
-              <h2 className="text-[36px] md:text-[42px] font-[family-name:var(--font-raleway)] font-light text-black mb-2 leading-[1.1] uppercase tracking-wide">
+              <h2 className="text-[36px] md:text-[42px] font-[family-name:var(--font-raleway)] font-light text-black dark:text-white mb-2 leading-[1.1] uppercase tracking-wide">
                 {prop.title}
               </h2>
-              <p className="text-[20px] font-[family-name:var(--font-quicksand)] text-black/60 mb-10 flex items-center gap-2">
+              <p className="text-[20px] font-[family-name:var(--font-quicksand)] text-black/60 dark:text-white/60 mb-10 flex items-center gap-2">
                 <MapPin className="w-4 h-4" /> {prop.address}
               </p>
               
               <div className="bg-gray-50 border border-gray-100 p-8 mb-10 text-center">
-                <p className="text-[32px] font-medium font-[family-name:var(--font-raleway)] text-black">{prop.priceStr}</p>
+                <p className="text-[32px] font-medium font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.priceStr}</p>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-black/40 mt-1">Precio de Venta</p>
               </div>
               
@@ -237,7 +237,7 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
 
               <div className="w-8 h-px bg-black/20 mb-8"></div>
               
-              <h4 className="text-[11px] uppercase tracking-[0.25em] font-bold mb-6 text-black">Acerca de la Propiedad</h4>
+              <h4 className="text-[11px] uppercase tracking-[0.25em] font-bold mb-6 text-black dark:text-white">Acerca de la Propiedad</h4>
               <div className="text-[14px] text-black/70 font-[family-name:var(--font-quicksand)] leading-loose mb-12 whitespace-pre-wrap break-words">
                 {prop.description || "Póngase en contacto con nosotros para obtener más información exclusiva sobre esta propiedad de lujo."}
               </div>
