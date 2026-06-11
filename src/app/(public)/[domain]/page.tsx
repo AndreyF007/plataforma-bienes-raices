@@ -110,41 +110,46 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
       })()}
 
       {/* 5. TU GUÍA (ABOUT) SECTION */}
-      <section id="about" className="bg-white py-[40px] px-0 md:px-6">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="w-full aspect-[4/3] md:aspect-[21/9] mb-[40px]">
-             <img src={aboutImage} alt="Sobre Nosotros" className="w-full h-full object-cover" />
+      <section id="about" className="bg-white py-[80px] md:py-[120px] px-6">
+        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
+          
+          {/* Image Column */}
+          <div className="w-full md:w-1/2">
+             <div className="w-full aspect-[4/5] relative bg-gray-100">
+               <img src={aboutImage} alt="Sobre Nosotros" className="absolute inset-0 w-full h-full object-cover" />
+             </div>
           </div>
           
-          <div className="px-6 md:px-0 text-center max-w-[800px] mx-auto">
-             <h3 className="text-[18px] md:text-[22px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[30px] text-left md:text-center">
+          {/* Text Column */}
+          <div className="w-full md:w-1/2 flex flex-col items-start text-left">
+             <h3 className="text-[14px] md:text-[16px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[20px] text-black/60">
                {aboutTitle}
              </h3>
-             <h2 className="text-[40px] md:text-[60px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] mb-[40px] text-left md:text-center">
+             <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] mb-[40px] leading-tight">
                {aboutSubtitle.toUpperCase()}<sup className="text-xl">®</sup>
              </h2>
              
              {aboutText1 && (
-               <p className="text-[16px] text-black/80 leading-[1.8] text-left md:text-center mb-[40px]">
+               <p className="text-[15px] md:text-[17px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[20px]">
                  {aboutText1}
                </p>
              )}
              {aboutText2 && (
-               <p className="text-[16px] text-black/80 leading-[1.8] text-left md:text-center mb-[40px]">
+               <p className="text-[15px] md:text-[17px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[20px]">
                  {aboutText2}
                </p>
              )}
              {aboutText3 && (
-               <p className="text-[16px] text-black/80 leading-[1.8] text-left md:text-center mb-[60px]">
+               <p className="text-[15px] md:text-[17px] text-black/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[50px]">
                  {aboutText3}
                </p>
              )}
 
-             <div className="flex flex-col gap-4 w-full">
-               <a href="/portal" className="w-full py-5 border border-black text-[12px] text-black uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors block text-center">
+             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+               <a href="/portal" className="px-10 py-5 border border-black text-[12px] text-black uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors text-center w-full sm:w-auto">
                  {aboutButton1Text}
                </a>
-               <a href={`mailto:${settings.contactEmail || 'info@example.com'}`} className="w-full py-5 border border-black bg-black text-[12px] text-white uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black transition-colors block text-center">
+               <a href={`mailto:${settings.contactEmail || 'info@example.com'}`} className="px-10 py-5 border border-black bg-black text-[12px] text-white uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black transition-colors text-center w-full sm:w-auto">
                  {aboutButton2Text}
                </a>
              </div>
