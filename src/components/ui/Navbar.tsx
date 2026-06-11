@@ -33,7 +33,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
             </div>
           </div>
           
-          <div className="hidden lg:flex flex-[4] justify-center items-center gap-2 xl:gap-5 flex-nowrap overflow-hidden">
+          <div className="hidden lg:flex flex-[5] justify-center items-center gap-2 xl:gap-4 flex-wrap px-2">
              {[
                { label: 'BOLETÍN', href: '/#newsletter' },
                { label: 'GUÍA DEL VENDEDOR', href: '/vendedor' },
@@ -55,7 +55,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
                     setIsNewsletterOpen(true);
                   }
                 }}
-                className={`whitespace-nowrap text-[9px] xl:text-[10px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.1em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black' : 'text-white'}`}
+                className={`whitespace-nowrap text-[8.5px] xl:text-[9.5px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.1em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black' : 'text-white'}`}
               >
                 {item.label}
               </Link>

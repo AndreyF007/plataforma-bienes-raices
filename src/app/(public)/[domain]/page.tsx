@@ -30,11 +30,11 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
     settings = JSON.parse(tenantData.siteSettings || "{}");
   } catch(e) {}
 
-  const heroSubtitle = settings.heroSubtitle || "LUXURY REAL ESTATE AGENT";
-  const heroText = settings.heroText || "Silicon Valley's luxury market moves fast. You need a guide who knows every neighborhood, wins negotiations, and makes the process effortless.";
-  const heroButton1Text = settings.heroButton1Text || "SEARCH ALL HOMES";
+  const heroSubtitle = settings.heroSubtitle || "AGENTE INMOBILIARIO DE LUJO";
+  const heroText = settings.heroText || "El mercado inmobiliario de lujo se mueve rápido. Necesitas un guía que conozca cada barrio, gane las negociaciones y haga el proceso sin esfuerzo.";
+  const heroButton1Text = settings.heroButton1Text || "BUSCAR PROPIEDADES";
   const heroButton1Link = settings.heroButton1Link || "/portal";
-  const heroButton2Text = settings.heroButton2Text || "LET'S CONNECT";
+  const heroButton2Text = settings.heroButton2Text || "HABLEMOS";
   const heroButton2Link = settings.heroButton2Link || `mailto:${settings.contactEmail || 'info@example.com'}`;
 
   const aboutTitle = settings.aboutTitle || "TU GUÍA";

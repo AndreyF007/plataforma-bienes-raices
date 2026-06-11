@@ -15,11 +15,11 @@ interface SettingsFormProps {
 export default function SettingsForm({ initialName, initialHeroTitle, initialHeroImage, initialSiteSettings }: SettingsFormProps) {
   
   const defaultSettings = {
-    heroSubtitle: "LUXURY REAL ESTATE AGENT",
-    heroText: "Silicon Valley's luxury market moves fast. You need a guide who knows every neighborhood, wins negotiations, and makes the process effortless.",
-    heroButton1Text: "SEARCH ALL HOMES",
+    heroSubtitle: "AGENTE INMOBILIARIO DE LUJO",
+    heroText: "El mercado inmobiliario de lujo se mueve rápido. Necesitas un guía que conozca cada barrio, gane las negociaciones y haga el proceso sin esfuerzo.",
+    heroButton1Text: "BUSCAR PROPIEDADES",
     heroButton1Link: "/portal",
-    heroButton2Text: "LET'S CONNECT",
+    heroButton2Text: "HABLEMOS",
     heroButton2Link: "mailto:info@example.com",
     
     aboutTitle: "TU GUÍA",

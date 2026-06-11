@@ -50,7 +50,7 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
         {/* CARRUSEL DE IMÁGENES (Premium Aspect) */}
         <div className="relative w-full aspect-[4/5] overflow-hidden bg-black">
           <img 
-              src={images[currentImg]} 
+              src={images[currentImg] || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"} 
               alt={prop.title} 
               className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-out" 
           />
@@ -151,7 +151,7 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
             <div className="w-full md:w-[55%] h-[50vh] md:h-full relative bg-[#0a0a0a] group/modal flex flex-col">
               <div className="flex-1 relative overflow-hidden">
                 <img 
-                  src={images[currentImg]} 
+                  src={images[currentImg] || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"} 
                   alt={prop.title} 
                   className="w-full h-full object-contain transition-opacity duration-700 p-4" 
                 />
@@ -176,7 +176,7 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
                       onClick={() => setCurrentImg(idx)}
                       className={`h-16 w-24 flex-shrink-0 transition-all duration-300 overflow-hidden ${idx === currentImg ? 'border-b-2 border-white opacity-100 scale-105' : 'opacity-40 hover:opacity-100'}`}
                     >
-                      <img src={img} className="w-full h-full object-cover" />
+                      <img src={img || undefined} className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
