@@ -26,7 +26,7 @@ export default async function DashboardLayout({
   const previewUrl = `${protocol}://${tenantDomain}`;
 
   return (
-    <div className="flex h-screen bg-gray-50 font-sans text-black dark:text-white">
+    <div className="flex h-screen bg-gray-50 dark:bg-neutral-950 font-sans text-black dark:text-white">
       {/* Sidebar */}
       <aside className="w-64 bg-black text-white border-r border-gray-800 flex flex-col">
         <div className="p-6 border-b border-white/10">
