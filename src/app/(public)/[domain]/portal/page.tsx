@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
 import { db } from '@/lib/db';
