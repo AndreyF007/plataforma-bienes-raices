@@ -65,7 +65,7 @@ export default function Footer({
                  <Mail className="w-6 h-6 stroke-1 text-white/50" />
                   <div>
                    <div className="uppercase tracking-widest text-[11px] mb-1 text-white/50">CORREO ELECTRÓNICO</div>
-                   <a href={`mailto:${contactEmail}`} className="underline underline-offset-4 hover:text-white/70 transition-colors">{contactEmail.toUpperCase()}</a>
+                   <a href={`mailto:${contactEmail}`} className="underline underline-offset-4 hover:text-white/70 transition-colors">{contactEmail.toLowerCase()}</a>
                  </div>
                </div>
                <div className="flex items-center gap-4">
