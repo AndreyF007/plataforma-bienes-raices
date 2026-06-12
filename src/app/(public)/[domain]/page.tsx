@@ -151,6 +151,37 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
         </div>
       </section>
 
+      {/* 5.5 ZONAS DE COBERTURA */}
+      {tenantData.zones && tenantData.zones.length > 0 && (
+        <section className="bg-[#fcfcfc] dark:bg-neutral-900 py-[80px] md:py-[120px] px-6">
+          <div className="max-w-[1200px] mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black dark:text-white">
+                Zonas de Cobertura
+              </h2>
+              <div className="w-12 h-px bg-black dark:bg-white mx-auto mt-6"></div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+              {tenantData.zones.map((zone) => (
+                <div key={zone.id} className="group relative w-full aspect-[4/3] overflow-hidden bg-black cursor-pointer">
+                  <img 
+                    src={zone.image} 
+                    alt={zone.name} 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" 
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <h3 className="text-white text-[16px] md:text-[20px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] drop-shadow-md">
+                      {zone.name}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* 6. TESTIMONIOS */}
       <TestimonialSlider tenantName={tenantData.name} />
 
