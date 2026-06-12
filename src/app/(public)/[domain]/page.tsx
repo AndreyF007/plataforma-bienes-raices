@@ -164,7 +164,11 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
               {tenantData.zones.map((zone) => (
-                <div key={zone.id} className="group relative w-full aspect-[4/3] overflow-hidden bg-black cursor-pointer">
+                <a 
+                  key={zone.id} 
+                  href={`/comunidades?zona=${encodeURIComponent(zone.name)}`}
+                  className="group relative w-full aspect-[4/3] overflow-hidden bg-black cursor-pointer block"
+                >
                   <img 
                     src={zone.image} 
                     alt={zone.name} 
@@ -175,7 +179,7 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
                       {zone.name}
                     </h3>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>

@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 
 interface Canton {
   name: string;
@@ -10,9 +11,11 @@ interface Canton {
   img: string;
 }
 
-export default function ClientNeighborhoods() {
+function ClientNeighborhoodsContent() {
+  const searchParams = useSearchParams();
+  const initialZone = searchParams.get('zona') || 'Todas';
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedProvince, setSelectedProvince] = useState('Todas');
+  const [selectedProvince, setSelectedProvince] = useState(initialZone);
 
   const provinces = ["Todas", "San José", "Alajuela", "Cartago", "Heredia", "Guanacaste", "Puntarenas", "Limón"];
 
@@ -165,5 +168,13 @@ export default function ClientNeighborhoods() {
          </div>
        )}
     </div>
+  );
+}
+
+export default function ClientNeighborhoods() {
+  return (
+    <Suspense fallback={<div className="w-full bg-white dark:bg-neutral-950 pb-20 min-h-screen"></div>}>
+      <ClientNeighborhoodsContent />
+    </Suspense>
   );
 }
