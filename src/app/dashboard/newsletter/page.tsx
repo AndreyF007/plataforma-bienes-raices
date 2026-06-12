@@ -50,7 +50,7 @@ export default async function NewsletterAdminPage() {
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-neutral-800">
               {subscribers.map((sub) => (
-                <tr key={sub.id} className="hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-900 transition-colors">
+                <tr key={sub.id} className="hover:bg-gray-50 dark:hover:bg-neutral-900 transition-colors">
                   <td className="px-6 py-4">
                     <div className="font-bold text-black dark:text-white">{sub.name}</div>
                   </td>

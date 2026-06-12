@@ -51,7 +51,7 @@ export default async function ValuationsAdminPage() {
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-neutral-800">
               {valuations.map((val) => (
-                <tr key={val.id} className="hover:bg-gray-50 dark:bg-neutral-900 transition-colors">
+                <tr key={val.id} className="hover:bg-gray-50 dark:hover:bg-neutral-900 transition-colors">
                   <td className="px-6 py-4">
                     <div className="font-bold text-black dark:text-white">{val.name}</div>
                     <div className="flex flex-col gap-1 mt-2 text-xs text-gray-500 dark:text-gray-400">
