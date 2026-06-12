@@ -62,9 +62,7 @@ export default function HeroCarousel({
           {title}<sup className="text-sm md:text-xl relative -top-6">®</sup>
         </h1>
 
-        <div className="w-[80px] h-[80px] md:w-[100px] md:h-[100px] rounded-full border border-white flex items-center justify-center backdrop-blur-sm bg-black/20 hover:bg-white/30 transition-colors cursor-pointer mb-8 animate-in zoom-in fade-in duration-1000 delay-300">
-          <Play className="w-10 h-10 md:w-12 md:h-12 text-white fill-white ml-2 opacity-80" />
-        </div>
+
 
         <p className="text-[16px] md:text-[20px] text-white font-[family-name:var(--font-quicksand)] max-w-[800px] leading-[1.6] mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
           {text}
