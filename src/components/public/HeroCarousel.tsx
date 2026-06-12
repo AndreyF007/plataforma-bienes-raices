@@ -70,15 +70,7 @@ export default function HeroCarousel({
           {text}
         </p>
 
-        {/* Action Buttons */}
-        <div className="flex flex-col gap-4 w-full max-w-[400px] animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-700">
-          <a href={button1Link} className="w-full py-4 border border-white text-[12px] text-white uppercase tracking-[0.2em] font-medium hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors block text-center">
-            {button1Text}
-          </a>
-          <a href={button2Link} className="w-full py-4 border border-white text-[12px] text-white uppercase tracking-[0.2em] font-medium hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors block text-center">
-            {button2Text}
-          </a>
-        </div>
+
       </div>
 
       {/* Carousel Indicators */}
