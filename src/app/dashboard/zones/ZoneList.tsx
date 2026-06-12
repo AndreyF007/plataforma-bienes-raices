@@ -108,7 +108,7 @@ export default function ZoneList({ initialZones }: { initialZones: Zone[] }) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {zones.map((z) => (
-          <div key={z.id} className="bg-white dark:bg-neutral-950 border border-gray-200 shadow-sm flex flex-col relative overflow-hidden group">
+          <div key={z.id} className="bg-white dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800 shadow-sm flex flex-col relative overflow-hidden group">
             <div className="h-48 bg-gray-100 relative">
               <img src={z.image} alt={z.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
@@ -119,13 +119,13 @@ export default function ZoneList({ initialZones }: { initialZones: Zone[] }) {
             <div className="flex bg-white dark:bg-neutral-950">
               <button 
                 onClick={() => handleOpenModal(z)}
-                className="flex-1 py-3 text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors border-r border-gray-100"
+                className="flex-1 py-3 text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-neutral-900 transition-colors border-r border-gray-100 dark:border-neutral-800"
               >
                 <Edit2 className="w-3 h-3" /> Editar
               </button>
               <button 
                 onClick={() => handleDelete(z.id)}
-                className="flex-1 py-3 text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2 hover:bg-red-50 text-red-600 transition-colors"
+                className="flex-1 py-3 text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2 hover:bg-red-50 dark:hover:bg-red-950/30 text-red-600 transition-colors"
               >
                 <Trash2 className="w-3 h-3" /> Eliminar
               </button>
@@ -133,7 +133,7 @@ export default function ZoneList({ initialZones }: { initialZones: Zone[] }) {
           </div>
         ))}
         {zones.length === 0 && (
-          <div className="col-span-full py-12 text-center text-gray-500 bg-white dark:bg-neutral-950 border border-gray-200">
+          <div className="col-span-full py-12 text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800">
             No hay zonas creadas. Haz clic en "Agregar Zona" para empezar.
           </div>
         )}
@@ -144,7 +144,7 @@ export default function ZoneList({ initialZones }: { initialZones: Zone[] }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={handleCloseModal} />
           <div className="relative bg-white dark:bg-neutral-950 w-full max-w-lg shadow-xl p-6">
-            <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
+            <div className="flex justify-between items-center mb-6 border-b border-gray-100 dark:border-neutral-800 pb-4">
               <h2 className="text-sm font-bold uppercase tracking-widest">
                 {editingId ? 'Editar Zona' : 'Nueva Zona'}
               </h2>
