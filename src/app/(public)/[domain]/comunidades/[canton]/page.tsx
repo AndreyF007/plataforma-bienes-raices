@@ -46,8 +46,8 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
     beds: 3,
     baths: 2,
     sqm: 250,
-    img: p.image,
-    images: [p.image],
+    img: JSON.parse(p.images || '[]')[0] || '/images/placeholder.jpg',
+    images: JSON.parse(p.images || '[]'),
     status: 'Disponible'
   }));
 
