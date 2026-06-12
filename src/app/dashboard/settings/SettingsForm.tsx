@@ -286,7 +286,6 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
             <div>
               <h2 className="text-xl font-light uppercase tracking-widest mb-6 border-b border-gray-100 pb-4">Contacto y Redes Sociales</h2>
             </div>
-            
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-gray-50 p-6 border border-gray-100 space-y-4">
                  <h3 className="text-[10px] uppercase tracking-widest font-bold">Datos de Contacto</h3>
@@ -297,6 +296,10 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
                  <div>
                   <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Correo Electrónico</label>
                   <input type="email" name="contactEmail" value={settings.contactEmail} onChange={handleSettingsChange} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
+                 </div>
+                 <div>
+                  <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Dirección de la Oficina</label>
+                  <textarea name="officeAddress" value={settings.officeAddress} onChange={handleSettingsChange} rows={2} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)] resize-none" />
                  </div>
               </div>
               
@@ -314,6 +317,32 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
                   <label className="text-[11px] uppercase tracking-widest text-black/50 mb-2 block font-bold">TikTok URL</label>
                   <input type="url" name="socialTiktok" value={settings.socialTiktok} onChange={handleSettingsChange} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
                </div>
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-6 mt-6">
+              <div className="bg-gray-50 p-6 border border-gray-100 space-y-4">
+                 <h3 className="text-[10px] uppercase tracking-widest font-bold">Perfil del Agente (Footer)</h3>
+                 <div>
+                  <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Foto del Agente (URL)</label>
+                  <ImageUpload 
+                    value={settings.agentPhoto || ""} 
+                    onChange={(url) => setSettings({ ...settings, agentPhoto: url })} 
+                    label="Subir Foto del Agente"
+                  />
+                 </div>
+                 <div>
+                  <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Título del Agente</label>
+                  <input type="text" name="agentTitle" value={settings.agentTitle} onChange={handleSettingsChange} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
+                 </div>
+              </div>
+              
+              <div className="bg-gray-50 p-6 border border-gray-100 space-y-4">
+                 <h3 className="text-[10px] uppercase tracking-widest font-bold">Aviso Legal (Disclaimer)</h3>
+                 <div>
+                  <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Texto Legal (Footer)</label>
+                  <textarea name="disclaimerText" value={settings.disclaimerText} onChange={handleSettingsChange} rows={8} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)] resize-y" />
+                 </div>
               </div>
             </div>
           </div>
