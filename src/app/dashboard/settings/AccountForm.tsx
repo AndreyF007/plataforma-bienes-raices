@@ -53,44 +53,44 @@ export default function AccountForm({ initialEmail }: AccountFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <h2 className="text-xl font-light uppercase tracking-widest mb-6 border-b border-gray-100 pb-4">Credenciales de Acceso</h2>
+        <h2 className="text-xl font-light uppercase tracking-widest mb-6 border-b border-gray-100 dark:border-neutral-800 pb-4">Credenciales de Acceso</h2>
       </div>
 
       <div className="grid gap-6 max-w-md">
         <div>
-          <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Correo Electrónico (Para Iniciar Sesión)</label>
+          <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 dark:text-gray-400 mb-2">Correo Electrónico (Para Iniciar Sesión)</label>
           <input 
             type="email" 
             required
             value={email}
             onChange={e => setEmail(e.target.value)}
-            className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
+            className="w-full bg-transparent border border-gray-300 dark:border-neutral-700 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
           />
         </div>
 
-        <div className="p-4 bg-gray-50 border border-gray-100 space-y-4">
-          <h3 className="text-[10px] uppercase tracking-widest font-bold text-gray-500">Cambiar Contraseña</h3>
+        <div className="p-4 bg-gray-50 dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 space-y-4">
+          <h3 className="text-[10px] uppercase tracking-widest font-bold text-gray-500 dark:text-gray-400">Cambiar Contraseña</h3>
           <p className="text-xs text-gray-400 font-[family-name:var(--font-quicksand)] mb-4">
             Deja los campos en blanco si no deseas cambiar tu contraseña actual.
           </p>
 
           <div>
-            <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Nueva Contraseña</label>
+            <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 dark:text-gray-400 mb-2">Nueva Contraseña</label>
             <input 
               type="password" 
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
+              className="w-full bg-transparent border border-gray-300 dark:border-neutral-700 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
             />
           </div>
 
           <div>
-            <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">Confirmar Nueva Contraseña</label>
+            <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 dark:text-gray-400 mb-2">Confirmar Nueva Contraseña</label>
             <input 
               type="password" 
               value={confirmPassword}
               onChange={e => setConfirmPassword(e.target.value)}
-              className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
+              className="w-full bg-transparent border border-gray-300 dark:border-neutral-700 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" 
             />
           </div>
         </div>
