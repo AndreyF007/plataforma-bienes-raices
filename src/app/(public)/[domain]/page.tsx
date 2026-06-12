@@ -145,14 +145,7 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
                </p>
              )}
 
-             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-               <a href="/portal" className="px-10 py-5 border border-black dark:border-white text-[12px] text-black dark:text-white uppercase tracking-[0.2em] font-medium hover:bg-black dark:hover:bg-white dark:bg-neutral-950 hover:text-white dark:hover:text-black dark:text-white transition-colors text-center w-full sm:w-auto">
-                 {aboutButton1Text}
-               </a>
-               <a href={`mailto:${settings.contactEmail || 'info@example.com'}`} className="px-10 py-5 border border-black dark:border-white bg-black dark:bg-white text-[12px] text-white dark:text-black uppercase tracking-[0.2em] font-medium hover:bg-transparent dark:hover:bg-transparent hover:text-black dark:text-white dark:hover:text-white transition-colors text-center w-full sm:w-auto">
-                 {aboutButton2Text}
-               </a>
-             </div>
+
           </div>
         </div>
       </section>
