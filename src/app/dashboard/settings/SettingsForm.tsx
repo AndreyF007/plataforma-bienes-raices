@@ -314,7 +314,7 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
                   <input type="url" name="socialFacebook" value={settings.socialFacebook} onChange={handleSettingsChange} className="w-full bg-transparent border border-gray-300 dark:border-neutral-700 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
                  </div>
                  <div>
-                  <label className="text-[11px] uppercase tracking-widest text-black/50 mb-2 block font-bold">TikTok URL</label>
+                  <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 dark:text-gray-400 mb-2">TikTok URL</label>
                   <input type="url" name="socialTiktok" value={settings.socialTiktok} onChange={handleSettingsChange} className="w-full bg-transparent border border-gray-300 dark:border-neutral-700 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
                </div>
               </div>
