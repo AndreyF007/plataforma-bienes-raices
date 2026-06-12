@@ -45,8 +45,8 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
     
     socialFacebook: "#",
     socialInstagram: "#",
-    socialLinkedIn: "#",
     socialYoutube: "#",
+    socialTiktok: "#",
     
     footerText: "Todos los derechos reservados. Luxury Real Estate.",
     
@@ -311,9 +311,9 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
                   <input type="url" name="socialFacebook" value={settings.socialFacebook} onChange={handleSettingsChange} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
                  </div>
                  <div>
-                  <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-2">LinkedIn</label>
-                  <input type="url" name="socialLinkedIn" value={settings.socialLinkedIn} onChange={handleSettingsChange} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
-                 </div>
+                  <label className="text-[11px] uppercase tracking-widest text-black/50 mb-2 block font-bold">TikTok URL</label>
+                  <input type="url" name="socialTiktok" value={settings.socialTiktok} onChange={handleSettingsChange} className="w-full border border-gray-300 p-3 text-sm focus:border-black dark:border-white/20 outline-none font-[family-name:var(--font-quicksand)]" />
+               </div>
               </div>
             </div>
           </div>

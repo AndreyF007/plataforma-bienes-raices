@@ -7,8 +7,8 @@ interface FooterProps {
   domain?: string;
   facebookUrl?: string;
   instagramUrl?: string;
-  linkedinUrl?: string;
   youtubeUrl?: string;
+  tiktokUrl?: string;
   footerText?: string;
 }
 
@@ -17,8 +17,8 @@ export default function Footer({
   domain = "localhost:3000",
   facebookUrl = "#",
   instagramUrl = "#",
-  linkedinUrl = "#",
   youtubeUrl = "#",
+  tiktokUrl = "#",
   footerText = "Todos los derechos reservados. Luxury Real Estate."
 }: FooterProps) {
   return (
@@ -39,11 +39,11 @@ export default function Footer({
                   <a href={facebookUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors">
                      <span className="text-[12px] uppercase font-bold">f</span>
                   </a>
-                  <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors">
-                     <span className="text-[12px] uppercase font-bold">in</span>
-                  </a>
                   <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors">
                      <span className="text-[12px] uppercase font-bold">yt</span>
+                  </a>
+                  <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors">
+                     <span className="text-[12px] uppercase font-bold">tt</span>
                   </a>
                </div>
             </div>
@@ -89,6 +89,8 @@ export default function Footer({
              <span className="text-[12px] uppercase tracking-[0.2em] text-white/30">SÍGUENOS:</span>
              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-[12px] font-bold transition-colors">IG</a>
              <a href={facebookUrl} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-[12px] font-bold transition-colors">FB</a>
+             <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-[12px] font-bold transition-colors">YT</a>
+             <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-[12px] font-bold transition-colors">TT</a>
           </div>
         </div>
       </footer>
