@@ -173,7 +173,7 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
           <p className="text-[16px] font-[family-name:var(--font-quicksand)] text-white/80 mb-10 leading-[1.8]">
             {newsletterText}
           </p>
-          <NewsletterForm tenantId={tenantData.id} />
+          <NewsletterForm tenantName={tenantData.name} />
         </div>
       </section>
 
