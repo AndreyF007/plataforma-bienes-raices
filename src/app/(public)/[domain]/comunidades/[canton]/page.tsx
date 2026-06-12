@@ -48,7 +48,11 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
     sqm: 250,
     img: JSON.parse(p.images || '[]')[0] || '/images/placeholder.jpg',
     images: JSON.parse(p.images || '[]'),
-    status: 'Disponible'
+    status: 'Disponible',
+    constructionArea: p.constructionArea,
+    lotArea: p.lotArea,
+    yearBuilt: p.yearBuilt,
+    floors: p.floors
   }));
 
   const combinedProperties = [...dbProps, ...allProperties];

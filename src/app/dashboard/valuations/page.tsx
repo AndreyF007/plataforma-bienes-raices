@@ -3,6 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { MapPin, Phone, Mail, Calendar } from "lucide-react";
+import DeleteValuationButton from "@/components/admin/DeleteValuationButton";
 
 export const dynamic = 'force-dynamic';
 
@@ -47,6 +48,7 @@ export default async function ValuationsAdminPage() {
                 <th className="px-6 py-4 font-bold">Propiedad</th>
                 <th className="px-6 py-4 font-bold">Plazo</th>
                 <th className="px-6 py-4 font-bold text-right">Fecha</th>
+                <th className="px-6 py-4"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-neutral-800">
@@ -79,6 +81,9 @@ export default async function ValuationsAdminPage() {
                       <Calendar className="w-3 h-3" />
                       {new Date(val.createdAt).toLocaleDateString()}
                     </div>
+                  </td>
+                  <td className="px-6 py-4 align-top text-right">
+                    <DeleteValuationButton id={val.id} />
                   </td>
                 </tr>
               ))}

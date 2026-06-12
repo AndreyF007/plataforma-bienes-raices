@@ -3,6 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { Mail, Calendar } from "lucide-react";
+import DeleteNewsletterButton from "@/components/admin/DeleteNewsletterButton";
 
 export const dynamic = 'force-dynamic';
 
@@ -44,8 +45,9 @@ export default async function NewsletterAdminPage() {
             <thead>
               <tr className="bg-gray-50 dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-800 text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400">
                 <th className="px-6 py-4 font-bold">Nombre</th>
-                <th className="px-6 py-4 font-bold">Correo Electrónico</th>
-                <th className="px-6 py-4 font-bold text-right">Fecha de Suscripción</th>
+                <th className="px-6 py-4 font-bold">Correo</th>
+                <th className="px-6 py-4 font-bold text-right">Suscripción</th>
+                <th className="px-6 py-4"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-neutral-800">
@@ -59,11 +61,14 @@ export default async function NewsletterAdminPage() {
                       <Mail className="w-4 h-4" /> {sub.email}
                     </a>
                   </td>
-                  <td className="px-6 py-4 align-top text-right text-sm text-gray-500 dark:text-gray-400">
+                  <td className="px-6 py-4 text-right text-sm text-gray-500 dark:text-gray-400">
                     <div className="flex items-center justify-end gap-2">
                       <Calendar className="w-3 h-3" />
                       {new Date(sub.createdAt).toLocaleDateString()}
                     </div>
+                  </td>
+                  <td className="px-6 py-4 align-top text-right">
+                    <DeleteNewsletterButton id={sub.id} />
                   </td>
                 </tr>
               ))}
