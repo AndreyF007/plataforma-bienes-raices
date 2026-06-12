@@ -179,6 +179,12 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
          tiktokUrl={settings.socialTiktok}
          youtubeUrl={settings.socialYoutube}
          footerText={settings.footerText}
+         agentPhoto={settings.agentPhoto}
+         agentTitle={settings.agentTitle}
+         contactEmail={settings.contactEmail}
+         contactPhone={settings.contactPhone}
+         officeAddress={settings.officeAddress}
+         disclaimerText={settings.disclaimerText}
       />
 
     </main>
