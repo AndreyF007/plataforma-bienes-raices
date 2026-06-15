@@ -23,7 +23,7 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
       <FloatingContact />
 
       {/* 1. HERO SECTION */}
-      <section className="relative w-full h-[50vh] md:h-[60vh] flex flex-col justify-center items-center overflow-hidden bg-[#fafafa] pt-20 border-b border-black/10">
+      <section className="relative w-full h-[50vh] md:h-[60vh] flex flex-col justify-center items-center overflow-hidden bg-[#fafafa] dark:bg-neutral-900 pt-20 border-b border-black/10 dark:border-white/10">
         <div className="relative z-10 flex flex-col items-center text-center px-6 mt-10 max-w-[900px]">
           <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] text-black/50 dark:text-white/50 uppercase tracking-[0.2em] mb-4">
             CANTONES DE COSTA RICA
@@ -41,11 +41,11 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
       <ClientNeighborhoods />
 
       {/* 3. CTA DE BÚSQUEDA */}
-      <section className="bg-[#eeeeee] py-[100px] px-6 text-center flex flex-col items-center border-t border-black/10">
+      <section className="bg-[#eeeeee] dark:bg-neutral-900 py-[100px] px-6 text-center flex flex-col items-center border-t border-black/10 dark:border-white/10">
          <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] text-black dark:text-white mb-4 max-w-[800px] leading-tight">
            COMIENCE SU BÚSQUEDA DE PROPIEDADES
          </h2>
-         <a href="/portal" className="mt-8 inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black dark:text-white border border-black dark:border-white/20 transition-colors">
+         <a href="/portal" className="mt-8 inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black dark:hover:text-white border border-black dark:border-white/20 transition-colors">
            EXPLORAR CASAS
          </a>
       </section>
@@ -62,7 +62,7 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
            href="https://wa.me/50660413905?text=Hola,%20me%20gustar%C3%ADa%20comprar%20o%20vender%20una%20propiedad"
            target="_blank"
            rel="noopener noreferrer"
-           className="inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black dark:text-white border border-black dark:border-white/20 transition-colors"
+           className="inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black dark:hover:text-white border border-black dark:border-white/20 transition-colors"
          >
            CONECTÉMONOS
          </a>

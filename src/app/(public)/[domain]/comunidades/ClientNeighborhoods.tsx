@@ -99,7 +99,7 @@ function ClientNeighborhoodsContent() {
                     className={`px-4 py-2 text-[10px] md:text-[12px] uppercase tracking-[0.1em] font-medium transition-all duration-300 border-b-2 ${
                       selectedProvince === prov 
                         ? 'border-black dark:border-white/20 text-black dark:text-white' 
-                        : 'border-transparent text-black/40 hover:text-black/80 dark:text-white/80'
+                        : 'border-transparent text-black/40 hover:text-black/80 dark:text-white/60 dark:hover:text-white'
                     }`}
                   >
                     {prov}
@@ -114,9 +114,9 @@ function ClientNeighborhoodsContent() {
                   placeholder="BUSCAR CANTÓN..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full border-b border-black/30 py-2 pl-8 pr-4 text-[12px] uppercase tracking-[0.1em] font-light focus:outline-none focus:border-black dark:border-white/20 placeholder:text-black/30"
+                  className="w-full bg-transparent text-black dark:text-white border-b border-black/30 dark:border-white/20 py-2 pl-8 pr-4 text-[12px] uppercase tracking-[0.1em] font-light focus:outline-none focus:border-black dark:focus:border-white/50 placeholder:text-black/30 dark:placeholder:text-white/30"
                 />
-                <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-black/40" />
+                <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-black/40 dark:text-white/40" />
              </div>
              
           </div>
