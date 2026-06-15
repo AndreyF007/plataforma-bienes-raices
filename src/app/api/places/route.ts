@@ -63,7 +63,7 @@ export async function GET(request: Request) {
       body: JSON.stringify({
         textQuery,
         languageCode: 'es',
-        maxResultCount: 6,
+        maxResultCount: 20,
         includedType: includedType !== 'point_of_interest' ? includedType : undefined,
         strictTypeFiltering: false // Desactivado para no excluir pequeños supermercados o negocios locales en zonas rurales
       })
