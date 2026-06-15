@@ -3,7 +3,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { Home, Settings, Building, LogOut, Grid, MessageSquare, Globe, ClipboardList, Mail } from "lucide-react";
 import LivePreviewPane from "@/components/admin/LivePreviewPane";
-import DashboardHeader from "@/components/admin/DashboardHeader";
 import { db } from "@/lib/db";
 
 export default async function DashboardLayout({
@@ -69,7 +68,6 @@ export default async function DashboardLayout({
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto relative">
         <div className="p-10">
-          <DashboardHeader />
           {children}
         </div>
       </main>
