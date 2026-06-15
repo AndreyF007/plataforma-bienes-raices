@@ -4,6 +4,7 @@ import Navbar from '@/components/ui/Navbar';
 import FloatingContact from '@/components/ui/FloatingContact';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import ClientNeighborhoods from './ClientNeighborhoods';
+import HeroGrid from './HeroGrid';
 import Footer from '@/components/ui/Footer';
 
 export default async function NeighborhoodsPage(props: { params: Promise<{ domain: string }> }) {
@@ -23,15 +24,16 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
       <FloatingContact />
 
       {/* 1. HERO SECTION */}
-      <section className="relative w-full h-[50vh] md:h-[60vh] flex flex-col justify-center items-center overflow-hidden bg-[#fafafa] dark:bg-neutral-900 pt-20 border-b border-black/10 dark:border-white/10">
-        <div className="relative z-10 flex flex-col items-center text-center px-6 mt-10 max-w-[900px]">
-          <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] text-black/50 dark:text-white/50 uppercase tracking-[0.2em] mb-4">
+      <section className="relative w-full h-[50vh] md:h-[60vh] flex flex-col justify-center items-center overflow-hidden bg-black pt-20 border-b border-black/10 dark:border-white/10">
+        <HeroGrid />
+        <div className="relative z-30 flex flex-col items-center text-center px-6 mt-10 max-w-[900px]">
+          <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] text-white/80 uppercase tracking-[0.2em] mb-4 drop-shadow-md">
             CANTONES DE COSTA RICA
           </p>
-          <h1 className="text-[36px] md:text-[60px] font-[family-name:var(--font-raleway)] font-light text-black dark:text-white tracking-[0.2em] uppercase mb-8 leading-tight">
+          <h1 className="text-[36px] md:text-[60px] font-[family-name:var(--font-raleway)] font-light text-white tracking-[0.2em] uppercase mb-8 leading-tight drop-shadow-lg">
             ÁREAS DE EXPERIENCIA
           </h1>
-          <p className="text-[16px] md:text-[20px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.6]">
+          <p className="text-[16px] md:text-[20px] text-white/90 font-[family-name:var(--font-quicksand)] leading-[1.6] drop-shadow-md">
             Explore nuestras propiedades en los 84 cantones del país.
           </p>
         </div>
