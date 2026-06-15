@@ -36,9 +36,6 @@ export default async function DashboardLayout({
         </div>
         
         <nav className="flex-1 p-4 space-y-2">
-          <a href="/dashboard" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-sm transition-colors">
-            <Home className="w-4 h-4" /> Inicio
-          </a>
           <a href="/dashboard/properties" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-sm transition-colors">
             <Building className="w-4 h-4" /> Propiedades
           </a>

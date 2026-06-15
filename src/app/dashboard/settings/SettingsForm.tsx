@@ -44,6 +44,8 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
     contactEmail: "contacto@agencia.com",
     officeAddress: "Avenida Principal 123, Ciudad",
     agentPhoto: "",
+    agentTitle: "",
+    disclaimerText: "",
     
     socialFacebook: "#",
     socialInstagram: "#",
