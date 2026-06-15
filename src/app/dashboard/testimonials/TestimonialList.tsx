@@ -65,7 +65,7 @@ export default function TestimonialList({ initialTestimonials }: { initialTestim
 
   if (testimonials.length === 0) {
     return (
-      <div className="bg-white dark:bg-neutral-950 border border-gray-200 rounded-sm p-12 text-center">
+      <div className="bg-white dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800 rounded-sm p-12 text-center">
         <p className="text-gray-500">Aún no tienes ningún testimonio. Cuando los clientes llenen el formulario en tu web, aparecerán aquí para tu aprobación.</p>
       </div>
     );
@@ -74,15 +74,15 @@ export default function TestimonialList({ initialTestimonials }: { initialTestim
   return (
     <div className="grid gap-4">
       {testimonials.map((t) => (
-        <div key={t.id} className="bg-white dark:bg-neutral-950 border border-gray-200 rounded-sm p-6 flex flex-col md:flex-row gap-6 relative">
+        <div key={t.id} className="bg-white dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800 rounded-sm p-6 flex flex-col md:flex-row gap-6 relative">
           
           <div className="flex-1 space-y-4">
             <div className="flex items-center gap-3">
               <h3 className="font-bold text-lg">{t.clientName}</h3>
-              <span className="text-xs bg-gray-100 px-2 py-1 uppercase tracking-widest text-gray-600 rounded-sm">{t.role}</span>
+              <span className="text-xs bg-gray-100 dark:bg-neutral-800 px-2 py-1 uppercase tracking-widest text-gray-600 dark:text-gray-300 rounded-sm">{t.role}</span>
               
               {!t.isApproved && (
-                <span className="flex items-center gap-1 text-[10px] bg-yellow-100 text-yellow-700 px-2 py-1 uppercase tracking-widest font-bold rounded-sm">
+                <span className="flex items-center gap-1 text-[10px] bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-500 px-2 py-1 uppercase tracking-widest font-bold rounded-sm">
                   <Clock className="w-3 h-3" /> Pendiente
                 </span>
               )}
@@ -94,18 +94,18 @@ export default function TestimonialList({ initialTestimonials }: { initialTestim
               ))}
             </div>
 
-            <p className="text-sm text-gray-600 italic">"{t.content}"</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300 italic">"{t.content}"</p>
             <p className="text-xs text-gray-400">{new Date(t.createdAt).toLocaleDateString()}</p>
           </div>
 
-          <div className="flex flex-row md:flex-col gap-2 justify-center border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-6 min-w-[150px]">
+          <div className="flex flex-row md:flex-col gap-2 justify-center border-t md:border-t-0 md:border-l border-gray-100 dark:border-neutral-800 pt-4 md:pt-0 md:pl-6 min-w-[150px]">
             <button 
               disabled={isLoading === t.id}
               onClick={() => handleToggleApproval(t.id, t.isApproved)}
               className={`flex items-center justify-center gap-2 w-full px-4 py-2 text-xs uppercase tracking-widest font-bold rounded-sm transition-colors ${
                 t.isApproved 
-                  ? "bg-gray-100 text-gray-600 hover:bg-gray-200" 
-                  : "bg-black text-white hover:bg-gray-800"
+                  ? "bg-gray-100 dark:bg-neutral-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-neutral-700" 
+                  : "bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200"
               } disabled:opacity-50`}
             >
               {t.isApproved ? <X className="w-4 h-4" /> : <Check className="w-4 h-4" />}
@@ -115,7 +115,7 @@ export default function TestimonialList({ initialTestimonials }: { initialTestim
             <button 
               disabled={isLoading === t.id}
               onClick={() => handleDelete(t.id)}
-              className="flex items-center justify-center gap-2 w-full px-4 py-2 text-xs uppercase tracking-widest font-bold text-red-600 border border-red-200 hover:bg-red-50 rounded-sm transition-colors disabled:opacity-50"
+              className="flex items-center justify-center gap-2 w-full px-4 py-2 text-xs uppercase tracking-widest font-bold text-red-600 border border-red-200 dark:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-sm transition-colors disabled:opacity-50"
             >
               <Trash2 className="w-4 h-4" />
               Eliminar
