@@ -476,7 +476,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
             )
           })}
           {filteredProperties.length === 0 && (
-            <div className="col-span-full py-20 text-center bg-gray-50 border border-gray-200">
+            <div className="col-span-full py-20 text-center bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800">
               <Search className="w-10 h-10 text-gray-300 mx-auto mb-4" />
               <p className="text-sm font-semibold uppercase tracking-widest text-gray-500">No se encontraron propiedades</p>
               <p className="text-xs text-gray-400 mt-2 font-[family-name:var(--font-quicksand)]">Intenta usar otros términos de búsqueda o agrega una propiedad.</p>
@@ -502,7 +502,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
             <form onSubmit={handleSubmit} className="space-y-6">
               
               {/* Bloque 1: Ubicación Jerárquica */}
-              <div className="bg-gray-50 p-6 border border-gray-100">
+              <div className="bg-gray-50 dark:bg-neutral-900 p-6 border border-gray-100 dark:border-neutral-800">
                 <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 mb-4">Ubicación Geográfica</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
@@ -631,7 +631,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
               </div>
 
               {/* Galería de Imágenes */}
-              <div className="bg-gray-50 p-6 border border-gray-100">
+              <div className="bg-gray-50 dark:bg-neutral-900 p-6 border border-gray-100 dark:border-neutral-800">
                 <div className="flex justify-between items-center mb-4">
                   <label className="block text-[10px] uppercase tracking-[0.2em] font-bold text-black/40">Galería Fotográfica (Máx 10)</label>
                   <span className="text-xs text-black dark:text-white font-bold">{existingImages.length + selectedFiles.length}/10</span>

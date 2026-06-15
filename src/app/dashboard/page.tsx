@@ -47,7 +47,7 @@ export default async function DashboardPage() {
             
             <div>
               <label className="block text-xs uppercase tracking-wider text-gray-400 mb-1">Imagen de Portada (Hero)</label>
-              <div className="mt-2 relative w-full h-32 bg-gray-100 overflow-hidden">
+              <div className="mt-2 relative w-full h-32 bg-gray-100 dark:bg-neutral-900 overflow-hidden">
                 <img src={tenant.heroImage || '/images/hero-bg.png'} alt="Hero" className="w-full h-full object-cover" />
               </div>
             </div>

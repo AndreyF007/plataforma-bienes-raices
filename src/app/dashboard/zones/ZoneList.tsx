@@ -109,7 +109,7 @@ export default function ZoneList({ initialZones }: { initialZones: Zone[] }) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {zones.map((z) => (
           <div key={z.id} className="bg-white dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800 shadow-sm flex flex-col relative overflow-hidden group">
-            <div className="h-48 bg-gray-100 relative">
+            <div className="h-48 bg-gray-100 dark:bg-neutral-900 relative">
               <img src={z.image} alt={z.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                  <h3 className="text-white font-light uppercase tracking-[0.2em] text-lg text-center px-4">{z.name}</h3>

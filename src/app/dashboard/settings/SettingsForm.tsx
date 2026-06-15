@@ -329,7 +329,7 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
                   <label className="block text-[10px] uppercase tracking-wider font-bold text-gray-500 dark:text-gray-400 mb-2">Foto del Agente (URL)</label>
                   <ImageUpload 
                     value={settings.agentPhoto || ""} 
-                    onChange={(url) => setSettings({ ...settings, agentPhoto: url })} 
+                    onChange={(url) => setSettings({ ...settings, agentPhoto: Array.isArray(url) ? url[0] : url })} 
                     label="Subir Foto del Agente"
                   />
                  </div>
