@@ -290,7 +290,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
               placeholder="Buscar por nombre, cantón..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-gray-50 border border-gray-200 pl-10 pr-4 py-3 text-[13px] font-[family-name:var(--font-quicksand)] focus:border-black dark:border-white/20 focus:ring-0 outline-none transition-all placeholder:text-gray-400 group-hover:bg-white dark:bg-neutral-950"
+              className="w-full bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 pl-10 pr-4 py-3 text-[13px] font-[family-name:var(--font-quicksand)] focus:border-black dark:focus:border-white/20 focus:ring-0 outline-none transition-all placeholder:text-gray-400 group-hover:bg-white dark:group-hover:bg-neutral-950"
             />
             <Search className="w-4 h-4 absolute left-3 top-3.5 text-black/30" />
             {searchQuery && (
@@ -385,7 +385,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                 }}
                 className="group relative bg-white dark:bg-neutral-950 aspect-square cursor-pointer overflow-hidden border border-black/10 shadow-sm hover:shadow-xl transition-all duration-300"
               >
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-black dark:text-white bg-gray-50 group-hover:bg-white dark:bg-neutral-950 transition-colors">
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-black dark:text-white bg-gray-50 dark:bg-neutral-950 group-hover:bg-white dark:group-hover:bg-neutral-900 transition-colors">
                   <h3 className="text-lg font-[family-name:var(--font-raleway)] font-medium text-center mb-2">{canton}</h3>
                   <span className={`text-[10px] uppercase tracking-widest font-bold ${count > 0 ? 'text-black/60 dark:text-white/60' : 'text-black/20'}`}>
                     {count} {count === 1 ? 'Propiedad' : 'Propiedades'}
@@ -406,7 +406,7 @@ export default function PropertyList({ initialProperties }: { initialProperties:
             const currentIndex = cardImageIndices[p.id] || 0;
 
             return (
-              <div key={p.id} className="bg-white dark:bg-neutral-950 border border-gray-200 shadow-sm flex flex-col group">
+              <div key={p.id} className="bg-white dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800 shadow-sm flex flex-col group">
                 {/* Carrusel de la tarjeta */}
                 <div 
                   className="h-56 bg-black relative overflow-hidden cursor-pointer"
@@ -425,13 +425,13 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                     <div className="absolute inset-0 flex items-center justify-between p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <button 
                         onClick={(e) => { e.stopPropagation(); prevCardImage(p.id, imgs.length); }}
-                        className="bg-white/80 hover:bg-white dark:bg-neutral-950 text-black dark:text-white p-1.5 rounded-full shadow-md transition-colors"
+                        className="bg-white/80 dark:bg-black/80 hover:bg-white dark:hover:bg-black text-black dark:text-white p-1.5 rounded-full shadow-md transition-colors"
                       >
                         <ChevronLeft className="w-4 h-4" />
                       </button>
                       <button 
                         onClick={(e) => { e.stopPropagation(); nextCardImage(p.id, imgs.length); }}
-                        className="bg-white/80 hover:bg-white dark:bg-neutral-950 text-black dark:text-white p-1.5 rounded-full shadow-md transition-colors"
+                        className="bg-white/80 dark:bg-black/80 hover:bg-white dark:hover:bg-black text-black dark:text-white p-1.5 rounded-full shadow-md transition-colors"
                       >
                         <ChevronRight className="w-4 h-4" />
                       </button>
@@ -448,26 +448,26 @@ export default function PropertyList({ initialProperties }: { initialProperties:
                     <h3 className="font-bold uppercase tracking-widest text-sm line-clamp-1">{p.title}</h3>
                     <span className="text-[9px] bg-black text-white px-2 py-0.5 uppercase tracking-wider font-semibold">{p.propertyType}</span>
                   </div>
-                  <p className="text-xs text-gray-500 mb-3 flex items-center gap-1 font-[family-name:var(--font-quicksand)]"><MapPin className="w-3 h-3"/> {p.canton}, {p.province}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-1 font-[family-name:var(--font-quicksand)]"><MapPin className="w-3 h-3"/> {p.canton}, {p.province}</p>
                   <p className="text-lg font-[family-name:var(--font-raleway)] font-medium text-black dark:text-white mb-4">{p.price}</p>
                   
-                  <div className="grid grid-cols-2 gap-y-3 gap-x-2 text-[10px] text-gray-600 mb-2 uppercase tracking-wide font-bold">
+                  <div className="grid grid-cols-2 gap-y-3 gap-x-2 text-[10px] text-gray-600 dark:text-gray-400 mb-2 uppercase tracking-wide font-bold">
                     <div className="flex items-center gap-1.5"><Bed className="w-3.5 h-3.5 text-black/40"/> {p.beds} Camas</div>
                     <div className="flex items-center gap-1.5"><Bath className="w-3.5 h-3.5 text-black/40"/> {p.baths} Baños</div>
                     <div className="flex items-center gap-1.5"><Maximize className="w-3.5 h-3.5 text-black/40"/> {p.constructionArea}m² C.</div>
                     <div className="flex items-center gap-1.5"><Maximize className="w-3.5 h-3.5 text-black/40"/> {p.lotArea}m² L.</div>
                   </div>
                 </div>
-                <div className="flex border-t border-gray-100">
+                <div className="flex border-t border-gray-100 dark:border-neutral-800">
                   <button 
                     onClick={() => handleOpenModal(p)}
-                    className="flex-1 py-4 text-[10px] uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors border-r border-gray-100"
+                    className="flex-1 py-4 text-[10px] uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-neutral-900 transition-colors border-r border-gray-100 dark:border-neutral-800"
                   >
                     <Edit2 className="w-3.5 h-3.5" /> Editar
                   </button>
                   <button 
                     onClick={() => handleDelete(p.id)}
-                    className="flex-1 py-4 text-[10px] uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2 hover:bg-red-50 text-red-600 transition-colors"
+                    className="flex-1 py-4 text-[10px] uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2 hover:bg-red-50 dark:hover:bg-red-900/30 text-red-600 transition-colors"
                   >
                     <Trash2 className="w-3.5 h-3.5" /> Eliminar
                   </button>
