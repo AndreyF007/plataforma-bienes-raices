@@ -76,8 +76,11 @@ export async function GET(request: Request) {
 
     const data = await res.json();
     
+    // Normalizar cantón (quitar tildes y guiones) para comparación
+    const normalizedCanton = canton.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/-/g, ' ');
+    
     // Formatear los lugares para la tabla
-    const places = (data.places || []).map((place: any) => {
+    let places = (data.places || []).map((place: any) => {
       // Extraer URL de la foto
       let imgUrl = "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=150&q=80"; // fallback
       if (place.photos && place.photos.length > 0) {
@@ -97,6 +100,15 @@ export async function GET(request: Request) {
         reviews: place.userRatingCount || Math.floor(Math.random() * 200) + 10,
         address: place.formattedAddress
       };
+    });
+
+    // FILTRO ESTRICTO: Google a veces devuelve lugares famosos nacionales (ej. City Mall Alajuela)
+    // cuando no encuentra suficientes resultados locales en zonas rurales.
+    // Para evitarlo, exigimos que la dirección devuelta contenga el nombre del cantón.
+    places = places.filter((p: any) => {
+      if (!p.address) return false;
+      const addr = p.address.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      return addr.includes(normalizedCanton);
     });
 
     return NextResponse.json(places);
