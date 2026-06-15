@@ -129,7 +129,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
       </section>
 
       {/* 2. VIDEOS DESTACADOS (FEATURED VIDEOS) */}
-      <section className="w-full py-12 px-6 bg-[#fafafa]">
+      <section className="w-full py-12 px-6 bg-[#fafafa] dark:bg-neutral-900 border-b border-black/10 dark:border-white/10">
          <div className="max-w-[1200px] mx-auto">
             <h2 className="text-[18px] md:text-[24px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] mb-8">
                Videos Destacados
@@ -243,7 +243,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
       </section>
 
       {/* 6. POINTS OF INTEREST (FULL WIDTH TABLE) */}
-      <section className="w-full py-[100px] px-6 bg-[#fafafa]">
+      <section className="w-full py-[100px] px-6 bg-[#fafafa] dark:bg-neutral-900">
          <div className="max-w-[1200px] mx-auto">
             <h2 className="text-[24px] md:text-[32px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.2em] mb-4">
                PUNTOS DE INTERÉS

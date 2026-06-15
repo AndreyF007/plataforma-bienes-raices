@@ -126,7 +126,7 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
        {/* Lista de Tarjetas POI (Tabla) */}
        <div className="flex flex-col relative min-h-[300px]">
          {loading && apiKey ? (
-            <div className="absolute inset-0 bg-[#fafafa]/80 backdrop-blur-sm z-10 flex items-center justify-center">
+            <div className="absolute inset-0 bg-[#fafafa]/80 dark:bg-neutral-900/80 backdrop-blur-sm z-10 flex items-center justify-center">
                <Loader2 className="w-8 h-8 animate-spin text-black dark:text-white" />
             </div>
          ) : isLoadedAndEmpty ? (
@@ -154,18 +154,18 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
                 
                 {/* CATEGORY */}
                 <div className="hidden md:flex items-center">
-                   <span className="text-[10px] bg-[#f0f0f0] px-2 py-1 text-black/70 rounded-[2px] uppercase font-semibold tracking-wider">
+                   <span className="text-[10px] bg-[#f0f0f0] dark:bg-white/10 px-2 py-1 text-black/70 dark:text-white/70 rounded-[2px] uppercase font-semibold tracking-wider">
                       {poi.type}
                    </span>
                 </div>
 
                 {/* DISTANCE */}
-                <div className="hidden md:flex items-center text-[12px] text-black/70 font-medium">
+                <div className="hidden md:flex items-center text-[12px] text-black/70 dark:text-white/70 font-medium">
                    {poi.distance}
                 </div>
 
                 {/* REVIEWS */}
-                <div className="hidden md:flex items-center text-[12px] text-black/70 font-medium">
+                <div className="hidden md:flex items-center text-[12px] text-black/70 dark:text-white/70 font-medium">
                    {poi.reviews} reviews
                 </div>
 
@@ -178,14 +178,14 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
                         </div>
                       ))}
                    </div>
-                   <span className="text-[12px] text-black/70 font-medium">{poi.rating || 5}/5</span>
+                   <span className="text-[12px] text-black/70 dark:text-white/70 font-medium">{poi.rating || 5}/5</span>
                 </div>
              </div>
            ))
          )}
          
          {!apiKey && (
-            <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 text-[11px] text-yellow-800 rounded-md">
+            <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-900/50 text-[11px] text-yellow-800 dark:text-yellow-200/80 rounded-md">
                <strong>Modo Demo:</strong> Mostrando lugares sugeridos genéricos. Activa la API Key para ver datos reales.
             </div>
          )}
