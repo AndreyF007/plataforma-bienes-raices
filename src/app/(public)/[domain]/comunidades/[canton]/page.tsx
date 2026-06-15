@@ -57,6 +57,10 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
 
   const combinedProperties = [...dbProps, ...allProperties];
 
+  // Buscar si existe la Zona en la base de datos
+  const zones = await db.zone.findMany({ where: { tenantId: tenantData.id } });
+  const zoneData = zones.find(z => z.name.toLowerCase() === formattedCanton.toLowerCase());
+
   // Wikipedia Data Fetch
   const wikiQuery = encodeURIComponent(`${formattedCanton}`);
   const wikiQueryCR = encodeURIComponent(`${formattedCanton} (Costa Rica)`);
@@ -74,30 +78,51 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
   
   // Selección determinista basada en el nombre del cantón
   const imgIndex = formattedCanton.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % luxuryImages.length;
-  let wikiImage = luxuryImages[imgIndex];
+  let wikiImage = zoneData?.coverImage || luxuryImages[imgIndex];
 
-  let wikiExtract = `Descubra el increíble estilo de vida y las excelentes oportunidades inmobiliarias que ${formattedCanton} tiene para ofrecer. Ubicado en Costa Rica, este cantón es una excelente zona para vivir o invertir.`;
+  let wikiExtract = zoneData?.description || `Descubra el increíble estilo de vida y las excelentes oportunidades inmobiliarias que ${formattedCanton} tiene para ofrecer. Ubicado en Costa Rica, este cantón es una excelente zona para vivir o invertir.`;
 
-  try {
-    let res = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${wikiQueryCR}`, { next: { revalidate: 86400 } });
-    if (!res.ok) res = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${wikiQuery}`, { next: { revalidate: 86400 } });
-    
-    if (res.ok) {
-      const data = await res.json();
-      if (data.extract) wikiExtract = data.extract;
-      // Ya NO usamos la imagen de Wikipedia porque suele ser el escudo, bandera o mapa en baja resolución.
+  if (!zoneData?.description) {
+    try {
+      let res = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${wikiQueryCR}`, { next: { revalidate: 86400 } });
+      if (!res.ok) res = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${wikiQuery}`, { next: { revalidate: 86400 } });
+      
+      if (res.ok) {
+        const data = await res.json();
+        if (data.extract) wikiExtract = data.extract;
+      }
+    } catch (e) {
+      console.error("Error fetching Wikipedia data:", e);
     }
-  } catch (e) {
-    console.error("Error fetching Wikipedia data:", e);
   }
 
-  // Generación Determinista de Estadísticas para que parezcan reales (basadas en la longitud del nombre)
+  // Valores dinámicos (DB o Mocks Deterministas)
   const nameLen = formattedCanton.length;
-  const mockPopulation = (nameLen * 3421 + 15000).toLocaleString('es-CR');
-  const mockAge = 32 + (nameLen % 12);
-  const mockIncome = (nameLen * 1850 + 25000).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-  const walkScore = 60 + (nameLen % 35);
-  const bikeScore = 50 + (nameLen % 40);
+  const mockPopulation = zoneData?.population || (nameLen * 3421 + 15000).toLocaleString('es-CR');
+  const mockAge = zoneData?.medianAge || (32 + (nameLen % 12));
+  const mockIncome = zoneData?.avgIncome || (nameLen * 1850 + 25000).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  const walkScore = zoneData?.walkScore || (60 + (nameLen % 35));
+  const bikeScore = zoneData?.bikeScore || (50 + (nameLen % 40));
+
+  let zoneVideos = [
+    { title: "Estilo de Vida en Costa Rica", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80", youtubeId: "LXb3EKWsInQ" },
+    { title: `Recorrido Inmobiliario en ${formattedCanton}`, img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80", youtubeId: "pA0H2_GjT50" },
+    { title: "Inversión Inmobiliaria 2026", img: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=600&q=80", youtubeId: "ScMzIvxBSi4" },
+    { title: "Costa Rica desde el Cielo", img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80", youtubeId: "vBkg2_Ebf-s" }
+  ];
+
+  if (zoneData?.videos && zoneData.videos !== "[]") {
+    try {
+      const parsed = JSON.parse(zoneData.videos);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        zoneVideos = parsed.map((id, index) => ({
+           title: `Video ${index + 1}`,
+           img: `https://img.youtube.com/vi/${id}/maxresdefault.jpg`,
+           youtubeId: id
+        }));
+      }
+    } catch(e) {}
+  }
 
   // Map Iframe URL (Si hay API Key, forzamos el Pin Exacto de Google Places, sino usamos el gratuito)
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -134,12 +159,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
             <h2 className="text-[18px] md:text-[24px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] mb-8">
                Videos Destacados
             </h2>
-            <VideoGallery videos={[
-               { title: "Estilo de Vida en Costa Rica", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80", youtubeId: "LXb3EKWsInQ" }, // Ejemplo: Video 4K Costa Rica
-               { title: `Recorrido Inmobiliario en ${formattedCanton}`, img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80", youtubeId: "pA0H2_GjT50" }, // Ejemplo: Luxury house tour
-               { title: "Inversión Inmobiliaria 2026", img: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=600&q=80", youtubeId: "ScMzIvxBSi4" }, // Ejemplo: Costa Rica Real Estate
-               { title: "Costa Rica desde el Cielo", img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80", youtubeId: "vBkg2_Ebf-s" } // Ejemplo: Drone Footage
-            ]} />
+            <VideoGallery videos={zoneVideos} />
          </div>
       </section>
 

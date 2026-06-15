@@ -14,16 +14,24 @@ export async function POST(req: NextRequest) {
 
     if (!user || !user.tenantId) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
-    const { name, image } = await req.json();
+    const { name, image, coverImage, description, population, medianAge, avgIncome, walkScore, bikeScore, videos } = await req.json();
 
     if (!name || !image) {
-      return NextResponse.json({ error: 'Todos los campos son requeridos' }, { status: 400 });
+      return NextResponse.json({ error: 'Todos los campos obligatorios son requeridos' }, { status: 400 });
     }
 
     const newZone = await db.zone.create({
       data: {
         name,
         image,
+        coverImage,
+        description,
+        population,
+        medianAge: medianAge ? parseInt(medianAge) : null,
+        avgIncome,
+        walkScore: walkScore ? parseInt(walkScore) : null,
+        bikeScore: bikeScore ? parseInt(bikeScore) : null,
+        videos,
         tenantId: user.tenantId
       }
     });
@@ -46,7 +54,7 @@ export async function PATCH(req: NextRequest) {
 
     if (!user || !user.tenantId) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
-    const { id, name, image } = await req.json();
+    const { id, name, image, coverImage, description, population, medianAge, avgIncome, walkScore, bikeScore, videos } = await req.json();
 
     if (!id) return NextResponse.json({ error: 'ID es requerido' }, { status: 400 });
 
@@ -57,7 +65,18 @@ export async function PATCH(req: NextRequest) {
 
     const updated = await db.zone.update({
       where: { id },
-      data: { name, image }
+      data: { 
+        name, 
+        image,
+        coverImage,
+        description,
+        population,
+        medianAge: medianAge ? parseInt(medianAge) : null,
+        avgIncome,
+        walkScore: walkScore ? parseInt(walkScore) : null,
+        bikeScore: bikeScore ? parseInt(bikeScore) : null,
+        videos
+      }
     });
 
     return NextResponse.json({ message: 'Zona actualizada', zone: updated }, { status: 200 });
