@@ -27,12 +27,13 @@ export async function GET(request: Request) {
       includedType = 'restaurant';
       break;
     case 'Compras':
-      queryType = 'centros comerciales y tiendas exclusivas';
-      includedType = 'shopping_mall';
+      queryType = 'compras, supermercados, locales y tiendas';
+      includedType = 'store';
       break;
+    case 'Naturaleza':
     case 'Activo':
-      queryType = 'parques, clubes deportivos y gimnasios';
-      includedType = 'park';
+      queryType = 'parques, senderos, cascadas y naturaleza';
+      includedType = 'tourist_attraction';
       break;
     case 'Belleza':
       queryType = 'spas y salones de belleza';
@@ -64,7 +65,7 @@ export async function GET(request: Request) {
         languageCode: 'es',
         maxResultCount: 6,
         includedType: includedType !== 'point_of_interest' ? includedType : undefined,
-        strictTypeFiltering: includedType !== 'point_of_interest' ? true : false
+        strictTypeFiltering: false // Desactivado para no excluir pequeños supermercados o negocios locales en zonas rurales
       })
     });
 

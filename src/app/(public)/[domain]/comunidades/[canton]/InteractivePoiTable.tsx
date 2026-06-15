@@ -15,10 +15,10 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
   const tabs = [
-    { id: 'All', label: 'Todos' },
+    { id: 'Todos', label: 'Todos' },
     { id: 'Restaurantes', label: 'Restaurantes' },
     { id: 'Compras', label: 'Compras' },
-    { id: 'Activo', label: 'Activo' },
+    { id: 'Naturaleza', label: 'Naturaleza' },
     { id: 'Belleza', label: 'Belleza' },
     { id: 'Vida Nocturna', label: 'Vida Nocturna' }
   ];
@@ -37,8 +37,8 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
       { name: "Boutique Elegance", img: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=150&q=80", type: "Ropa", distance: "0.3 km", rating: 5, reviews: 45 },
       { name: "Mercado Artesanal", img: "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=150&q=80", type: "Artesanías", distance: "0.8 km", rating: 4, reviews: 210 }
     ],
-    'Activo': [
-      { name: "Fitness Center", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=150&q=80", type: "Gimnasio", distance: "1.0 km", rating: 5, reviews: 90 },
+    'Naturaleza': [
+      { name: "Reserva Natural", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=150&q=80", type: "Naturaleza", distance: "1.0 km", rating: 5, reviews: 90 },
       { name: "Parque Central", img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=150&q=80", type: "Parque", distance: "0.1 km", rating: 4, reviews: 500 }
     ],
     'Belleza': [
