@@ -42,6 +42,8 @@ export default function SettingsForm({ initialName, initialHeroTitle, initialHer
     
     contactPhone: "+1 (555) 123-4567",
     contactEmail: "contacto@agencia.com",
+    officeAddress: "Avenida Principal 123, Ciudad",
+    agentPhoto: "",
     
     socialFacebook: "#",
     socialInstagram: "#",

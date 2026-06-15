@@ -66,7 +66,7 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
   return (
     <>
       {/* 2. BARRA DE FILTROS (STICKY) */}
-      <div className="sticky top-0 z-40 w-full border-b border-black/10 shadow-sm backdrop-blur-lg bg-white/90 transition-all duration-500">
+      <div className="sticky top-0 z-40 w-full border-b border-black/10 dark:border-white/10 shadow-sm backdrop-blur-lg bg-white/90 dark:bg-neutral-950/90 transition-all duration-500">
          <div className="max-w-[1000px] mx-auto px-6 py-6 flex flex-col md:flex-row gap-6 items-center justify-center">
             {/* Selects de Propiedad y Precio Exclusivamente */}
             <div className="flex flex-wrap md:flex-nowrap gap-6 w-full md:w-auto justify-center">

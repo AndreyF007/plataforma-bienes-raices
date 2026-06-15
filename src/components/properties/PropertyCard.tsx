@@ -57,7 +57,7 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/80 pointer-events-none" />
           
           <div className="absolute top-6 left-6 z-10 flex gap-2">
-            <span className="bg-white/90 backdrop-blur-sm text-black dark:text-white text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 font-bold">
+            <span className="bg-white/90 dark:bg-black/90 backdrop-blur-sm text-black dark:text-white text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 font-bold">
                 {prop.status}
             </span>
             <span className="bg-black/50 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 font-medium border border-white/20">
@@ -83,13 +83,13 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
             <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <button 
                 onClick={prevImg}
-                className="bg-black/40 backdrop-blur-md hover:bg-white dark:bg-neutral-950 text-white hover:text-black dark:text-white p-2 rounded-full border border-white/20 transition-all duration-300 transform -translate-x-4 group-hover:translate-x-0"
+                className="bg-black/40 dark:bg-black/40 backdrop-blur-md hover:bg-white dark:hover:bg-black text-white hover:text-black dark:hover:text-white p-2 rounded-full border border-white/20 transition-all duration-300 transform -translate-x-4 group-hover:translate-x-0"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button 
                 onClick={nextImg}
-                className="bg-black/40 backdrop-blur-md hover:bg-white dark:bg-neutral-950 text-white hover:text-black dark:text-white p-2 rounded-full border border-white/20 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0"
+                className="bg-black/40 dark:bg-black/40 backdrop-blur-md hover:bg-white dark:hover:bg-black text-white hover:text-black dark:hover:text-white p-2 rounded-full border border-white/20 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -134,7 +134,7 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-8 animate-in fade-in zoom-in-[0.98] duration-500">
           {/* Backdrop con Blur Extremo */}
           <div 
-            className="absolute inset-0 bg-white/90 backdrop-blur-xl z-0 cursor-pointer"
+            className="absolute inset-0 bg-white/90 dark:bg-black/90 backdrop-blur-xl z-0 cursor-pointer"
             onClick={() => setIsModalOpen(false)}
           />
           
@@ -157,10 +157,10 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
                 />
                 {images.length > 1 && (
                   <div className="absolute inset-0 flex items-center justify-between p-6 opacity-0 group-hover/modal:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <button onClick={prevImg} className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white dark:bg-neutral-950 text-white hover:text-black dark:text-white p-4 rounded-full border border-white/20 transition-colors">
+                    <button onClick={prevImg} className="pointer-events-auto bg-white/10 dark:bg-black/40 backdrop-blur-md hover:bg-white dark:hover:bg-black text-white hover:text-black dark:hover:text-white p-4 rounded-full border border-white/20 transition-colors">
                       <ChevronLeft className="w-6 h-6" />
                     </button>
-                    <button onClick={nextImg} className="pointer-events-auto bg-white/10 backdrop-blur-md hover:bg-white dark:bg-neutral-950 text-white hover:text-black dark:text-white p-4 rounded-full border border-white/20 transition-colors">
+                    <button onClick={nextImg} className="pointer-events-auto bg-white/10 dark:bg-black/40 backdrop-blur-md hover:bg-white dark:hover:bg-black text-white hover:text-black dark:hover:text-white p-4 rounded-full border border-white/20 transition-colors">
                       <ChevronRight className="w-6 h-6" />
                     </button>
                   </div>

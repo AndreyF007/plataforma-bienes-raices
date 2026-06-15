@@ -114,7 +114,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
                 <button 
                   onClick={handleNext}
                   disabled={!formData.address.trim()}
-                  className="mt-12 px-12 py-4 border border-white text-white hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors uppercase tracking-[0.2em] text-[12px] font-bold disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white"
+                  className="mt-12 px-12 py-4 border border-white text-white hover:bg-white dark:hover:bg-black hover:text-black dark:hover:text-white transition-colors uppercase tracking-[0.2em] text-[12px] font-bold disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white"
                 >
                   SIGUIENTE
                 </button>
@@ -182,7 +182,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
                   <button 
                     type="submit"
                     disabled={loading || !formData.consent}
-                    className="px-12 py-4 border border-white text-white hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors uppercase tracking-[0.2em] text-[12px] font-bold disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white flex items-center justify-center mx-auto gap-2 min-w-[250px]"
+                    className="px-12 py-4 border border-white text-white hover:bg-white dark:hover:bg-black hover:text-black dark:hover:text-white transition-colors uppercase tracking-[0.2em] text-[12px] font-bold disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-white flex items-center justify-center mx-auto gap-2 min-w-[250px]"
                   >
                     {loading && <Loader2 className="w-4 h-4 animate-spin" />}
                     OBTENGA MI VALORACIÓN
