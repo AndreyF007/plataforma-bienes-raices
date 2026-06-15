@@ -106,7 +106,7 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
              className={`px-6 py-2 rounded-full border border-black/20 text-[13px] transition-all
                ${activeTab === tab.id 
                  ? 'bg-black text-white border-black dark:border-white/20' 
-                 : 'bg-transparent text-black dark:text-white hover:bg-black/5'
+                 : 'bg-transparent text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10'
                }`}
            >
              {tab.label}

@@ -282,30 +282,29 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full mb-16">
-               {combinedProperties
-                  .filter(p => p.address.toLowerCase().includes(formattedCanton.toLowerCase()))
-                  .slice(0, 3)
-                  .map(prop => (
-                     <PropertyCard key={prop.id} prop={prop} />
-               ))}
-               {/* Si no hay suficientes propiedades de este cantón, llenamos con otras de lujo para mantener el diseño intacto */}
-               {combinedProperties.filter(p => p.address.toLowerCase().includes(formattedCanton.toLowerCase())).length === 0 && (
-                  combinedProperties.slice(0, 3).map(prop => (
-                     <PropertyCard key={prop.id} prop={prop} />
-                  ))
-               )}
+               {(() => {
+                 const matched = combinedProperties.filter(p => p.address.toLowerCase().includes(formattedCanton.toLowerCase()));
+                 let propsToShow = matched.slice(0, 3);
+                 if (propsToShow.length < 3) {
+                   const remaining = combinedProperties.filter(p => !propsToShow.includes(p));
+                   propsToShow = [...propsToShow, ...remaining.slice(0, 3 - propsToShow.length)];
+                 }
+                 return propsToShow.map(prop => (
+                    <PropertyCard key={prop.id} prop={prop} />
+                 ));
+               })()}
             </div>
 
             <Link 
                href={`/portal?canton=${encodeURIComponent(formattedCanton)}`} 
-               className="group flex items-center gap-8 py-6 px-12 border border-black/10 hover:border-black dark:border-white/20 transition-all duration-700 bg-[#fafafa] hover:bg-white dark:bg-neutral-950"
+               className="group flex items-center gap-8 py-6 px-12 border border-black/10 hover:border-black dark:border-white/20 transition-all duration-700 bg-[#fafafa] hover:bg-white dark:bg-neutral-950 dark:hover:bg-neutral-800"
             >
                <span className="text-[12px] md:text-[14px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.3em] font-light text-black dark:text-white">
                   Explorar la Colección en {formattedCanton}
                </span>
                <div className="relative flex items-center">
-                  <div className="w-8 h-[1px] bg-black group-hover:w-16 transition-all duration-700 ease-in-out"></div>
-                  <div className="absolute right-0 w-2 h-2 border-t border-r border-black dark:border-white/20 rotate-45 transform translate-x-[2px]"></div>
+                  <div className="w-8 h-[1px] bg-black dark:bg-white group-hover:w-16 transition-all duration-700 ease-in-out"></div>
+                  <div className="absolute right-0 w-2 h-2 border-t border-r border-black dark:border-white rotate-45 transform translate-x-[2px]"></div>
                </div>
             </Link>
          </div>
@@ -341,7 +340,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
            href="https://wa.me/50660413905?text=Hola,%20me%20gustar%C3%ADa%20comprar%20o%20vender%20una%20propiedad" 
            target="_blank"
            rel="noopener noreferrer"
-           className="inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black dark:text-white border border-black dark:border-white/20 transition-colors"
+           className="inline-block px-12 py-5 bg-black dark:bg-white text-white dark:text-black text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent dark:hover:bg-transparent hover:text-black dark:hover:text-white border border-black dark:border-white transition-colors"
          >
            CONECTÉMONOS
          </a>
