@@ -185,9 +185,9 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
 
             {/* Lado Derecho: Detalles Completos */}
             <div className="w-full md:w-[45%] bg-white dark:bg-neutral-950 p-8 md:p-12 overflow-y-auto flex flex-col custom-scrollbar">
-              <div className="text-[10px] uppercase tracking-[0.3em] font-semibold text-black/40 mb-6 flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-black"></span>
-                {prop.status} <span className="text-black/20">|</span> {prop.type}
+              <div className="text-[10px] uppercase tracking-[0.3em] font-semibold text-black/40 dark:text-white/40 mb-6 flex items-center gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white"></span>
+                {prop.status} <span className="text-black/20 dark:text-white/20">|</span> {prop.type}
               </div>
               
               <h2 className="text-[36px] md:text-[42px] font-[family-name:var(--font-raleway)] font-light text-black dark:text-white mb-2 leading-[1.1] uppercase tracking-wide">
@@ -197,48 +197,48 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
                 <MapPin className="w-4 h-4" /> {prop.address}
               </p>
               
-              <div className="bg-gray-50 border border-gray-100 p-8 mb-10 text-center">
+              <div className="bg-gray-50 dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 p-8 mb-10 text-center">
                 <p className="text-[32px] font-medium font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.priceStr}</p>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-black/40 mt-1">Precio de Venta</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1">Precio de Venta</p>
               </div>
               
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-4 mb-12">
                 <div className="flex flex-col items-center justify-center text-center">
-                  <Bed className="w-5 h-5 text-black/30 mb-2" />
-                  <span className="text-[18px] font-light">{prop.beds}</span>
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 mt-1">Camas</span>
+                  <Bed className="w-5 h-5 text-black/30 dark:text-white/30 mb-2" />
+                  <span className="text-[18px] font-light text-black dark:text-white">{prop.beds}</span>
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1">Camas</span>
                 </div>
                 <div className="flex flex-col items-center justify-center text-center">
-                  <Bath className="w-5 h-5 text-black/30 mb-2" />
-                  <span className="text-[18px] font-light">{prop.baths}</span>
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 mt-1">Baños</span>
+                  <Bath className="w-5 h-5 text-black/30 dark:text-white/30 mb-2" />
+                  <span className="text-[18px] font-light text-black dark:text-white">{prop.baths}</span>
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1">Baños</span>
                 </div>
                 <div className="flex flex-col items-center justify-center text-center">
-                  <Layers className="w-5 h-5 text-black/30 mb-2" />
-                  <span className="text-[18px] font-light">{prop.floors}</span>
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 mt-1">Pisos</span>
+                  <Layers className="w-5 h-5 text-black/30 dark:text-white/30 mb-2" />
+                  <span className="text-[18px] font-light text-black dark:text-white">{prop.floors}</span>
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1">Pisos</span>
                 </div>
                 <div className="flex flex-col items-center justify-center text-center">
-                  <Maximize className="w-5 h-5 text-black/30 mb-2" />
-                  <span className="text-[18px] font-light">{prop.constructionArea}</span>
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 mt-1">Const. (m²)</span>
+                  <Maximize className="w-5 h-5 text-black/30 dark:text-white/30 mb-2" />
+                  <span className="text-[18px] font-light text-black dark:text-white">{prop.constructionArea}</span>
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1">Const. (m²)</span>
                 </div>
                 <div className="flex flex-col items-center justify-center text-center">
-                  <Maximize className="w-5 h-5 text-black/30 mb-2" />
-                  <span className="text-[18px] font-light">{prop.lotArea}</span>
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 mt-1">Lote (m²)</span>
+                  <Maximize className="w-5 h-5 text-black/30 dark:text-white/30 mb-2" />
+                  <span className="text-[18px] font-light text-black dark:text-white">{prop.lotArea}</span>
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1">Lote (m²)</span>
                 </div>
                 <div className="flex flex-col items-center justify-center text-center">
-                  <Calendar className="w-5 h-5 text-black/30 mb-2" />
-                  <span className="text-[18px] font-light">{prop.yearBuilt || '-'}</span>
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 mt-1">Año</span>
+                  <Calendar className="w-5 h-5 text-black/30 dark:text-white/30 mb-2" />
+                  <span className="text-[18px] font-light text-black dark:text-white">{prop.yearBuilt || '-'}</span>
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1">Año</span>
                 </div>
               </div>
 
-              <div className="w-8 h-px bg-black/20 mb-8"></div>
+              <div className="w-8 h-px bg-black/20 dark:bg-white/20 mb-8"></div>
               
               <h4 className="text-[11px] uppercase tracking-[0.25em] font-bold mb-6 text-black dark:text-white">Acerca de la Propiedad</h4>
-              <div className="text-[14px] text-black/70 font-[family-name:var(--font-quicksand)] leading-loose mb-12 whitespace-pre-wrap break-words">
+              <div className="text-[14px] text-black/70 dark:text-white/70 font-[family-name:var(--font-quicksand)] leading-loose mb-12 whitespace-pre-wrap break-words">
                 {prop.description || "Póngase en contacto con nosotros para obtener más información exclusiva sobre esta propiedad de lujo."}
               </div>
 
