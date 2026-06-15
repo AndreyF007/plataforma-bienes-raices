@@ -340,7 +340,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
            href="https://wa.me/50660413905?text=Hola,%20me%20gustar%C3%ADa%20comprar%20o%20vender%20una%20propiedad" 
            target="_blank"
            rel="noopener noreferrer"
-           className="inline-block px-12 py-5 bg-black dark:bg-white text-white dark:text-black text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent dark:hover:bg-transparent hover:text-black dark:hover:text-white border border-black dark:border-white transition-colors"
+           className="inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black dark:bg-[#111] dark:text-white dark:hover:bg-white/10 dark:hover:text-white border border-black dark:border-white/20 transition-colors"
          >
            CONECTÉMONOS
          </a>
