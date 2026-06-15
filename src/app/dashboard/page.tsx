@@ -21,6 +21,9 @@ export default async function DashboardPage() {
     return <div>No hay una cuenta de agencia (tenant) asociada a este usuario.</div>;
   }
 
+  const propertiesCount = await db.property.count({ where: { tenantId: tenant.id } });
+  const zonesCount = await db.zone.count({ where: { tenantId: tenant.id } });
+
   return (
     <div>
       <h1 className="text-2xl font-light tracking-[0.2em] uppercase mb-8 border-b border-gray-200 pb-4">
@@ -58,7 +61,7 @@ export default async function DashboardPage() {
         <div className="space-y-8">
           <div className="bg-white dark:bg-neutral-950 p-8 border border-gray-100 shadow-sm flex items-center justify-between">
             <div>
-              <h3 className="text-2xl font-light">3</h3>
+              <h3 className="text-2xl font-light">{propertiesCount}</h3>
               <p className="text-xs text-gray-500 uppercase tracking-widest mt-1">Propiedades Activas</p>
             </div>
             <a href="/dashboard/properties" className="text-xs uppercase tracking-widest border-b border-black dark:border-white/20 pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors">Gestionar</a>
@@ -66,7 +69,7 @@ export default async function DashboardPage() {
           
           <div className="bg-white dark:bg-neutral-950 p-8 border border-gray-100 shadow-sm flex items-center justify-between">
             <div>
-              <h3 className="text-2xl font-light">3</h3>
+              <h3 className="text-2xl font-light">{zonesCount}</h3>
               <p className="text-xs text-gray-500 uppercase tracking-widest mt-1">Zonas de Mercado</p>
             </div>
             <a href="/dashboard/zones" className="text-xs uppercase tracking-widest border-b border-black dark:border-white/20 pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors">Gestionar</a>

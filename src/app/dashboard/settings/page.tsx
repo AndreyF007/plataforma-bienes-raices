@@ -44,7 +44,7 @@ export default async function SettingsAdminPage() {
         <p className="text-sm text-gray-500 mt-2 mb-6">Cambia el correo electrónico y la contraseña para iniciar sesión en tu panel.</p>
         
         <div className="bg-white dark:bg-neutral-950 border border-gray-200 p-8 shadow-sm">
-          <AccountForm initialEmail={user.email} />
+          <AccountForm initialEmail={user.email || ""} />
         </div>
       </div>
     </div>
