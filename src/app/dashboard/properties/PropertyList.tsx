@@ -310,10 +310,22 @@ export default function PropertyList({ initialProperties }: { initialProperties:
 
       {/* BREADCRUMBS & NAVIGATION */}
       {!isSearchActive && (
-        <div className="flex items-center gap-2 text-[11px] uppercase tracking-widest font-bold text-black/40 mb-6 bg-white dark:bg-neutral-950 py-4 px-6 border border-black/5 shadow-sm">
+        <div className="flex items-center gap-2 text-[11px] uppercase tracking-widest font-bold text-black/40 mb-6 bg-white dark:bg-neutral-950 py-4 px-6 border border-black/5 shadow-sm overflow-x-auto">
+          {viewMode !== 'PROVINCES' && (
+            <button 
+              onClick={() => {
+                if (viewMode === 'PROPERTIES') { setViewMode('CANTONS'); setSelectedCanton(null); }
+                else if (viewMode === 'CANTONS') { setViewMode('PROVINCES'); setSelectedProvince(null); setSelectedCanton(null); }
+              }}
+              className="flex items-center gap-1.5 text-black dark:text-white hover:opacity-70 transition-opacity border-r border-black/10 dark:border-white/10 pr-4 mr-2"
+            >
+              <ChevronLeft className="w-4 h-4" /> Regresar
+            </button>
+          )}
+
           <button 
             onClick={() => { setViewMode('PROVINCES'); setSelectedProvince(null); setSelectedCanton(null); }}
-            className={`hover:text-black dark:text-white transition-colors ${viewMode === 'PROVINCES' ? 'text-black dark:text-white' : ''}`}
+            className={`hover:text-black dark:text-white transition-colors whitespace-nowrap ${viewMode === 'PROVINCES' ? 'text-black dark:text-white' : ''}`}
           >
             Provincias
           </button>
