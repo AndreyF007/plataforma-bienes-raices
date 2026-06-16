@@ -102,17 +102,17 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
           <div className="flex justify-between items-center w-full pb-4 border-b border-black/10">
               <div className="flex flex-col items-center justify-center">
                 <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.beds}</span>
-                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40">Camas</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40">Camas</span>
               </div>
-              <div className="w-[1px] h-6 bg-black/10"></div>
+              <div className="w-[1px] h-6 bg-black/10 dark:bg-white/10"></div>
               <div className="flex flex-col items-center justify-center">
                 <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.baths}</span>
-                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40">Baños</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40">Baños</span>
               </div>
-              <div className="w-[1px] h-6 bg-black/10"></div>
+              <div className="w-[1px] h-6 bg-black/10 dark:bg-white/10"></div>
               <div className="flex flex-col items-center justify-center">
                 <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.constructionArea}</span>
-                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40">m² Const</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40">m² Const</span>
               </div>
           </div>
           
@@ -121,10 +121,10 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
           </p>
 
           <div className="mt-auto flex items-center justify-between group/btn">
-            <span className="text-[11px] uppercase tracking-[0.25em] font-bold text-black dark:text-white border-b border-transparent group-hover/btn:border-black dark:border-white/20 transition-colors pb-1">
+            <span className="text-[11px] uppercase tracking-[0.25em] font-bold text-black dark:text-white border-b border-transparent group-hover/btn:border-black dark:group-hover/btn:border-white transition-colors pb-1">
               Ver Detalles
             </span>
-            <span className="w-8 h-px bg-black group-hover/btn:w-16 transition-all duration-500"></span>
+            <span className="w-8 h-px bg-black dark:bg-white group-hover/btn:w-16 transition-all duration-500"></span>
           </div>
         </div>
       </div>
