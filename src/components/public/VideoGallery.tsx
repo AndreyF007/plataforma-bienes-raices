@@ -18,11 +18,11 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className={`grid grid-cols-1 ${videos.length === 1 ? 'w-full' : videos.length === 2 ? 'md:grid-cols-2' : videos.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-4'} gap-4`}>
         {videos.map((vid, idx) => (
           <div 
             key={idx} 
-            className="group relative w-full aspect-[4/3] bg-black cursor-pointer overflow-hidden"
+            className={`group relative w-full ${videos.length === 1 ? 'aspect-video' : 'aspect-[4/3]'} bg-black cursor-pointer overflow-hidden`}
             onClick={() => setActiveVideo(vid.youtubeId)}
           >
             <img src={vid.img} alt={vid.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700" />

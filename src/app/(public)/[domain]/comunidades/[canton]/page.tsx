@@ -159,7 +159,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
       <section className="w-full py-12 px-6 bg-[#fafafa] dark:bg-neutral-900 border-b border-black/10 dark:border-white/10">
          <div className="max-w-[1200px] mx-auto">
             <h2 className="text-[18px] md:text-[24px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] mb-8">
-               Videos Destacados
+               {zoneVideos.length === 1 ? `Video Destacado del cantón de ${formattedCanton}` : "Videos Destacados"}
             </h2>
             <VideoGallery videos={zoneVideos} />
          </div>
