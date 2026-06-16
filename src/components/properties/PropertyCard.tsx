@@ -99,23 +99,36 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
         
         {/* Detalles Rápidos Premium */}
         <div className="flex flex-col p-6 bg-white dark:bg-neutral-950 flex-grow">
-          <div className="flex justify-between items-center w-full pb-4 border-b border-black/10">
+          <div className="grid grid-cols-3 gap-y-4 gap-x-2 w-full pb-6 border-b border-black/10">
               <div className="flex flex-col items-center justify-center">
                 <Bed className="w-4 h-4 text-black/60 dark:text-white/60 mb-1" strokeWidth={1.5} />
                 <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.beds}</span>
-                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40">Camas</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 text-center mt-1">Camas</span>
               </div>
-              <div className="w-[1px] h-8 bg-black/10 dark:bg-white/10"></div>
               <div className="flex flex-col items-center justify-center">
                 <Bath className="w-4 h-4 text-black/60 dark:text-white/60 mb-1" strokeWidth={1.5} />
                 <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.baths}</span>
-                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40">Baños</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 text-center mt-1">Baños</span>
               </div>
-              <div className="w-[1px] h-8 bg-black/10 dark:bg-white/10"></div>
+              <div className="flex flex-col items-center justify-center">
+                <Layers className="w-4 h-4 text-black/60 dark:text-white/60 mb-1" strokeWidth={1.5} />
+                <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.floors}</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 text-center mt-1">Pisos</span>
+              </div>
               <div className="flex flex-col items-center justify-center">
                 <Maximize className="w-4 h-4 text-black/60 dark:text-white/60 mb-1" strokeWidth={1.5} />
                 <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.constructionArea}</span>
-                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40">m² Const</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 text-center mt-1">Const (m²)</span>
+              </div>
+              <div className="flex flex-col items-center justify-center">
+                <Maximize className="w-4 h-4 text-black/60 dark:text-white/60 mb-1" strokeWidth={1.5} />
+                <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.lotArea}</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 text-center mt-1">Lote (m²)</span>
+              </div>
+              <div className="flex flex-col items-center justify-center">
+                <Calendar className="w-4 h-4 text-black/60 dark:text-white/60 mb-1" strokeWidth={1.5} />
+                <span className="text-[16px] font-light font-[family-name:var(--font-raleway)] text-black dark:text-white">{prop.yearBuilt || '-'}</span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40 text-center mt-1">Año</span>
               </div>
           </div>
           
@@ -252,7 +265,7 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-3 py-5 bg-black text-white text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-black/80 transition-all duration-300 shadow-xl hover:shadow-2xl"
                 >
-                  Contactar Asesor Exclusive
+                  Contactar Asesor
                 </a>
               </div>
             </div>
