@@ -59,3 +59,15 @@ body {
   transition: none !important;
   scroll-behavior: auto !important;
 }
+
+/* =========================================
+   HERO ZOOM ANIMATION
+   ========================================= */
+@keyframes slowZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
+
+.animate-slow-zoom {
+  animation: slowZoom 20s ease-in-out infinite alternate;
+}

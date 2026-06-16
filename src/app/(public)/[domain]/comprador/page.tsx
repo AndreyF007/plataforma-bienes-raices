@@ -100,9 +100,9 @@ export default async function BuyersGuidePage(props: { params: Promise<{ domain:
 
       {/* 1. HERO SECTION */}
       <section className="group relative w-full h-[60vh] md:h-[80vh] flex flex-col justify-center items-center overflow-hidden bg-black pt-20">
-        <div className="absolute inset-0 z-0 bg-black">
+        <div className="absolute inset-0 z-0 bg-black overflow-hidden">
           <div 
-            className="w-full h-full bg-cover bg-center bg-fixed opacity-60"
+            className="w-full h-full bg-cover bg-center animate-slow-zoom opacity-60"
             style={{ backgroundImage: `url('https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=1920&q=80')` }}
           />
         </div>
@@ -151,14 +151,6 @@ export default async function BuyersGuidePage(props: { params: Promise<{ domain:
                   <p className="text-[16px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8]">
                     {step.desc}
                   </p>
-                  
-                  {step.num === "4" && (
-                    <div className="mt-8">
-                       <a href="mailto:info@example.com" className="inline-block px-10 py-4 border border-black dark:border-white/20 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors">
-                         PROGRAMAR UNA CONSULTA
-                       </a>
-                    </div>
-                  )}
                </div>
 
             </div>
@@ -168,7 +160,7 @@ export default async function BuyersGuidePage(props: { params: Promise<{ domain:
             <h3 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.15em] text-black dark:text-white mb-8 leading-tight">
                ¡FELICIDADES!
             </h3>
-            <p className="text-[16px] md:text-[18px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8]">
+            <p className="text-[16px] md:text-[18px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-12">
                Después de firmar el papeleo final para completar la compra, ahora es el propietario de una casa nueva. Puede tomar unos días para que se financie su préstamo una vez que el papeleo haya sido devuelto al prestamista, pero una vez que ese cheque se entregue al vendedor, estará todo listo para mudarse a la casa de sus sueños.
             </p>
          </div>
