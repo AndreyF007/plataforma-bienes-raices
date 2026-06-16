@@ -32,6 +32,11 @@ export default async function PortalPage(props: {
 
   if (!tenant) return <div>Tenant not found</div>;
 
+  let settings: any = {};
+  try {
+    settings = JSON.parse(tenant.siteSettings || "{}");
+  } catch(e) {}
+
   // Combinar propiedades de la BD con el mock data para no perder el diseño
   const dbProps = tenant.properties.map((p, idx) => {
     let imgs = [];
@@ -63,10 +68,7 @@ export default async function PortalPage(props: {
 
   const combinedProperties = [...dbProps, ...allProperties];
 
-  let settings: any = {};
-  try {
-    settings = JSON.parse(tenant.siteSettings || "{}");
-  } catch(e) {}
+
 
   const portalHeroSubtitle = settings.portalHeroSubtitle || "PROPIEDADES EXCLUSIVAS";
   const portalHeroTitle = settings.portalHeroTitle || "Descubre nuestra selección de propiedades de lujo";
@@ -96,7 +98,21 @@ export default async function PortalPage(props: {
       {/* COMPONENTE INTERACTIVO DE FILTROS Y GRID */}
       <PortalClient initialCanton={cantonParam} allProperties={combinedProperties} />
 
-      <Footer tenantName={tenant.name} domain={tenant.domain} />
+      <Footer 
+         tenantName={tenant.name} 
+         domain={tenant.domain}
+         facebookUrl={settings.socialFacebook}
+         instagramUrl={settings.socialInstagram}
+         tiktokUrl={settings.socialTiktok}
+         youtubeUrl={settings.socialYoutube}
+         footerText={settings.footerText}
+         agentPhoto={settings.agentPhoto}
+         agentTitle={settings.agentTitle}
+         contactEmail={settings.contactEmail}
+         contactPhone={settings.contactPhone}
+         officeAddress={settings.officeAddress}
+         disclaimerText={settings.disclaimerText}
+      />
     </main>
   );
 }

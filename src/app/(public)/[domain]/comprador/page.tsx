@@ -17,6 +17,11 @@ export default async function BuyersGuidePage(props: { params: Promise<{ domain:
   
   if (!tenantData) return notFound();
 
+  let settings: any = {};
+  try {
+    settings = JSON.parse(tenantData.siteSettings || "{}");
+  } catch(e) {}
+
   const steps = [
     {
       num: "1",
@@ -216,7 +221,21 @@ export default async function BuyersGuidePage(props: { params: Promise<{ domain:
       </section>
 
       {/* 7. FOOTER */}
-      <Footer tenantName={tenantData.name} domain={tenantData.domain} />
+      <Footer 
+         tenantName={tenantData.name} 
+         domain={tenantData.domain}
+         facebookUrl={settings.socialFacebook}
+         instagramUrl={settings.socialInstagram}
+         tiktokUrl={settings.socialTiktok}
+         youtubeUrl={settings.socialYoutube}
+         footerText={settings.footerText}
+         agentPhoto={settings.agentPhoto}
+         agentTitle={settings.agentTitle}
+         contactEmail={settings.contactEmail}
+         contactPhone={settings.contactPhone}
+         officeAddress={settings.officeAddress}
+         disclaimerText={settings.disclaimerText}
+      />
     </main>
   );
 }

@@ -35,6 +35,11 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
   
   if (!tenantData) return notFound();
 
+  let settings: any = {};
+  try {
+    settings = JSON.parse(tenantData.siteSettings || "{}");
+  } catch(e) {}
+
   // Mapear DB properties al formato que espera el UI
   const dbProps = tenantData.properties.map((p, idx) => ({
     id: `db-${p.id}`,
@@ -367,7 +372,21 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
       </section>
 
       {/* 9. FOOTER CON REDES Y CORREDOR */}
-      <Footer tenantName={tenantData.name} domain={tenantData.domain} />
+      <Footer 
+         tenantName={tenantData.name} 
+         domain={tenantData.domain}
+         facebookUrl={settings.socialFacebook}
+         instagramUrl={settings.socialInstagram}
+         tiktokUrl={settings.socialTiktok}
+         youtubeUrl={settings.socialYoutube}
+         footerText={settings.footerText}
+         agentPhoto={settings.agentPhoto}
+         agentTitle={settings.agentTitle}
+         contactEmail={settings.contactEmail}
+         contactPhone={settings.contactPhone}
+         officeAddress={settings.officeAddress}
+         disclaimerText={settings.disclaimerText}
+      />
     </main>
   );
 }

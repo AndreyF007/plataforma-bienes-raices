@@ -17,6 +17,11 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
   
   if (!tenantData) return notFound();
 
+  let settings: any = {};
+  try {
+    settings = JSON.parse(tenantData.siteSettings || "{}");
+  } catch(e) {}
+
   return (
     <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
       
@@ -62,7 +67,21 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
       </section>
 
       {/* 5. FOOTER */}
-      <Footer tenantName={tenantData.name} domain={tenantData.domain} />
+      <Footer 
+         tenantName={tenantData.name} 
+         domain={tenantData.domain}
+         facebookUrl={settings.socialFacebook}
+         instagramUrl={settings.socialInstagram}
+         tiktokUrl={settings.socialTiktok}
+         youtubeUrl={settings.socialYoutube}
+         footerText={settings.footerText}
+         agentPhoto={settings.agentPhoto}
+         agentTitle={settings.agentTitle}
+         contactEmail={settings.contactEmail}
+         contactPhone={settings.contactPhone}
+         officeAddress={settings.officeAddress}
+         disclaimerText={settings.disclaimerText}
+      />
     </main>
   );
 }
