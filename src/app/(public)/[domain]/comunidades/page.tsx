@@ -42,15 +42,6 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
       {/* 2. APLICACIÓN DE CLIENTE: BUSCADOR Y 84 CANTONES */}
       <ClientNeighborhoods />
 
-      {/* 3. CTA DE BÚSQUEDA */}
-      <section className="bg-[#eeeeee] dark:bg-neutral-900 py-[100px] px-6 text-center flex flex-col items-center border-t border-black/10 dark:border-white/10">
-         <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] text-black dark:text-white mb-4 max-w-[800px] leading-tight">
-           COMIENCE SU BÚSQUEDA DE PROPIEDADES
-         </h2>
-         <a href="/portal" className="mt-8 inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black dark:hover:text-white border border-black dark:border-white/20 transition-colors">
-           EXPLORAR CASAS
-         </a>
-      </section>
 
       {/* 4. CIERRE / CTA FILOSOFÍA */}
       <section className="bg-white dark:bg-neutral-950 py-[100px] px-6 text-center flex flex-col items-center">
