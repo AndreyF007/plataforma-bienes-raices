@@ -243,8 +243,8 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
                      </span>
                      <span className="text-[24px] font-light">{walkScore}</span>
                   </div>
-                  <div className="w-full h-2 bg-black/10 rounded-full overflow-hidden">
-                     <div className="h-full bg-black transition-all duration-1000" style={{ width: `${walkScore}%` }}></div>
+                  <div className="w-full h-2 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
+                     <div className="h-full bg-black dark:bg-white transition-all duration-1000" style={{ width: `${walkScore}%` }}></div>
                   </div>
                   <p className="text-[11px] text-black/50 dark:text-white/50 mt-2">
                      Este puntaje indica qué tan transitable a pie es la zona, basado en distancias a servicios esenciales.
@@ -259,8 +259,8 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
                      </span>
                      <span className="text-[24px] font-light">{bikeScore}</span>
                   </div>
-                  <div className="w-full h-2 bg-black/10 rounded-full overflow-hidden">
-                     <div className="h-full bg-black transition-all duration-1000" style={{ width: `${bikeScore}%` }}></div>
+                  <div className="w-full h-2 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
+                     <div className="h-full bg-black dark:bg-white transition-all duration-1000" style={{ width: `${bikeScore}%` }}></div>
                   </div>
                </div>
             </div>
