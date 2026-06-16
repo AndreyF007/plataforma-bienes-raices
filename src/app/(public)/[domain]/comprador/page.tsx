@@ -131,9 +131,6 @@ export default async function BuyersGuidePage(props: { params: Promise<{ domain:
          <p className="text-[16px] md:text-[18px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[60px]">
            Comprar una casa es uno de los hitos más emocionantes de su vida. Para prepararse para este momento, debe saber qué esperar durante el proceso. Esta guía paso a paso para compradores primerizos creada por su agente lo ayudará a reducir el estrés de comprar una casa y lo ayudará a disfrutar el viaje tanto como sea posible.
          </p>
-         <button className="px-10 py-5 border border-black dark:border-white/20 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors">
-           HAGA CLIC AQUÍ PARA LA GUÍA DE COMPRADORES
-         </button>
       </section>
 
       {/* 3. LOS 10 PASOS (Alternando Izquierda/Derecha) */}
@@ -147,7 +144,7 @@ export default async function BuyersGuidePage(props: { params: Promise<{ domain:
                </div>
 
                {/* Texto */}
-               <div className="w-full md:w-1/2 flex flex-col justify-center p-12 md:p-24 bg-[#fafafa]">
+               <div className="w-full md:w-1/2 flex flex-col justify-center p-12 md:p-24 bg-[#fafafa] dark:bg-neutral-900">
                   <h3 className="text-[24px] md:text-[32px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.15em] text-black dark:text-white mb-6 leading-tight">
                     PASO {step.num}: {step.title}
                   </h3>
