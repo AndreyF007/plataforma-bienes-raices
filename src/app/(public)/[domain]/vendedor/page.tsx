@@ -153,15 +153,6 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
          </div>
       </section>
 
-      {/* 4. TESTIMONIOS */}
-      <section id="testimonios" className="bg-white dark:bg-neutral-950 pt-[60px] pb-[100px] px-6 border-t border-black/5">
-        <div className="text-center mb-[60px]">
-           <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[30px] leading-tight">
-              TESTIMONIOS
-           </h2>
-        </div>
-        <TestimonialSlider tenantName={tenantData.name} />
-      </section>
 
       {/* 5. FORMULARIO DE VALORACIÓN (WHAT'S YOUR PROPERTY WORTH) */}
       <ValuationForm tenantId={tenantData.id} />
