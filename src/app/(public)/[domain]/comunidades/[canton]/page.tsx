@@ -110,10 +110,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
   const bikeScore = zoneData?.bikeScore || (50 + (nameLen % 40));
 
   let zoneVideos = [
-    { title: "Estilo de Vida en Costa Rica", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80", youtubeId: "LXb3EKWsInQ" },
-    { title: `Recorrido Inmobiliario en ${formattedCanton}`, img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80", youtubeId: "pA0H2_GjT50" },
-    { title: "Inversión Inmobiliaria 2026", img: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=600&q=80", youtubeId: "ScMzIvxBSi4" },
-    { title: "Costa Rica desde el Cielo", img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80", youtubeId: "vBkg2_Ebf-s" }
+    { title: `${formattedCanton} desde el Cielo`, img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80", youtubeId: "vBkg2_Ebf-s" }
   ];
 
   if (zoneData?.videos && zoneData.videos !== "[]") {
