@@ -89,7 +89,7 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
       <section className="group relative w-full h-[60vh] md:h-[80vh] flex flex-col justify-center items-center overflow-hidden bg-black pt-20">
         <div className="absolute inset-0 z-0 bg-black overflow-hidden">
           <div 
-            className="w-full h-full bg-cover bg-center opacity-60 group-hover:scale-105 transition-transform duration-[3000ms] ease-out"
+            className="w-full h-full bg-cover bg-center bg-fixed opacity-60 group-hover:scale-105 transition-transform duration-[3000ms] ease-out"
             style={{ backgroundImage: `url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80')` }}
           />
         </div>

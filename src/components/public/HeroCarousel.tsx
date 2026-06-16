@@ -45,7 +45,7 @@ export default function HeroCarousel({
           }`}
         >
           <div 
-            className="w-full h-full bg-cover bg-center opacity-60 group-hover:scale-105 transition-transform duration-[3000ms] ease-out"
+            className="w-full h-full bg-cover bg-center bg-fixed opacity-60 group-hover:scale-105 transition-transform duration-[3000ms] ease-out"
             style={{ 
               backgroundImage: `url(${img})`
             }}
