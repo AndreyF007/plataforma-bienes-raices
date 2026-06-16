@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from 'react';
-import { Search, MapPin, Home, DollarSign } from 'lucide-react';
+import { Search, MapPin, Home, DollarSign, Tag } from 'lucide-react';
 import PropertyCard, { PropertyData } from '@/components/properties/PropertyCard';
 
 interface PortalClientProps {
@@ -13,6 +13,7 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
   // Estados para los filtros (Eliminados Búsqueda y Ubicación por ser portal dedicado)
   const [propertyType, setPropertyType] = useState("Tipo de Propiedad");
   const [priceRange, setPriceRange] = useState("Cualquier Precio");
+  const [statusType, setStatusType] = useState("Operación");
   const [sortOrder, setSortOrder] = useState("Más Recientes");
   
   // Estado para la paginación (Cargar Más)
@@ -30,6 +31,11 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
     // 2. Filtro por Tipo de Propiedad
     if (propertyType !== "Tipo de Propiedad") {
       result = result.filter(p => p.type?.toLowerCase() === propertyType.toLowerCase());
+    }
+
+    // 3. Filtro por Operación (Venta / Alquiler)
+    if (statusType !== "Operación") {
+      result = result.filter(p => p.status?.toLowerCase().includes(statusType.toLowerCase()));
     }
 
     // 4. Filtro por Rango de Precio
@@ -54,7 +60,7 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
     }
 
     return result;
-  }, [allProperties, initialCanton, propertyType, priceRange, sortOrder]);
+  }, [allProperties, initialCanton, propertyType, priceRange, statusType, sortOrder]);
 
   // Manejador de Cargar Más
   const handleLoadMore = () => {
@@ -102,6 +108,22 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
                      <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="$500k - $1M">$500k - $1M (₡260M - ₡520M)</option>
                      <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="$1M - $3M">$1M - $3M (₡520M - ₡1.5B)</option>
                      <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="+ $3M">Más de $3M (₡1.5B+)</option>
+                  </select>
+                  <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
+                     <div className="w-2 h-2 border-b border-r border-black/40 rotate-45 transform -translate-y-1 group-hover:border-black dark:border-white/20 transition-colors duration-500"></div>
+                  </div>
+               </div>
+
+               <div className="relative w-full md:w-[280px] group">
+                  <Tag className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-black/40 group-hover:text-black dark:text-white transition-colors duration-500" />
+                  <select 
+                    value={statusType}
+                    onChange={(e) => setStatusType(e.target.value)}
+                    className="w-full pl-14 pr-10 py-4 bg-transparent border border-black/10 rounded-full text-[11px] uppercase tracking-[0.2em] outline-none appearance-none cursor-pointer hover:border-black dark:border-white/20 transition-all duration-500 text-black dark:text-white font-medium"
+                  >
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Operación">Venta o Alquiler</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Venta">En Venta</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Alquiler">En Alquiler</option>
                   </select>
                   <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
                      <div className="w-2 h-2 border-b border-r border-black/40 rotate-45 transform -translate-y-1 group-hover:border-black dark:border-white/20 transition-colors duration-500"></div>
