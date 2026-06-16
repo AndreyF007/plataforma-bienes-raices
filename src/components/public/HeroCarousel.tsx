@@ -35,7 +35,7 @@ export default function HeroCarousel({
   }, [images.length]);
 
   return (
-    <section id="hero" className="relative w-full h-[100vh] flex flex-col justify-center items-center overflow-hidden bg-black">
+    <section id="hero" className="group relative w-full h-[100vh] flex flex-col justify-center items-center overflow-hidden bg-black">
       {/* Background Images with Fade Transition and Parallax (bg-fixed) */}
       {images.map((img, index) => (
         <div
@@ -45,7 +45,7 @@ export default function HeroCarousel({
           }`}
         >
           <div 
-            className="w-full h-full bg-cover bg-center bg-fixed opacity-60"
+            className="w-full h-full bg-cover bg-center opacity-60 group-hover:scale-105 transition-transform duration-[3000ms] ease-out"
             style={{ 
               backgroundImage: `url(${img})`
             }}
