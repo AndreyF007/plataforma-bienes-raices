@@ -103,15 +103,10 @@ export async function GET(request: Request) {
       };
     });
 
-    // FILTRO ESTRICTO: Google a veces devuelve lugares famosos nacionales (ej. City Mall Alajuela)
-    // cuando no encuentra suficientes resultados locales en zonas rurales.
-    // Para evitarlo, exigimos que la dirección devuelta contenga el nombre del cantón.
-    places = places.filter((p: any) => {
-      if (!p.address) return false;
-      const addr = p.address.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      return addr.includes(normalizedCanton);
-    });
-
+    // Eliminado el filtro estricto local que requería el nombre exacto del cantón en la dirección,
+    // ya que la query original ("en el cantón de...") es suficiente para guiar a Google.
+    // Esto previene que pestañas como Compras o Naturaleza queden vacías.
+    
     return NextResponse.json(places);
   } catch (error) {
     console.error("API Route Error:", error);
