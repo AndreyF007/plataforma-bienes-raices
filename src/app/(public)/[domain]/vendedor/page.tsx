@@ -74,10 +74,10 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
   ];
 
   const actionButtons = [
-    { title: "BARRIOS", img: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=600&q=80", link: "/#comunidades" },
-    { title: "CARTERA", img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80", link: "/#testimonios" },
-    { title: "BÚSQUEDA DE CASAS", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80", link: "/portal" },
-    { title: "TRABAJA CON ELENA", img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80", link: "mailto:info@example.com" }
+    { title: "ZONAS DE COBERTURA", img: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=600&q=80", link: "/comunidades" },
+    { title: "TESTIMONIOS", img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80", link: "#testimonios" },
+    { title: "PORTAL DE PROPIEDADES", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80", link: "/portal" },
+    { title: `CONTACTAR A ${tenantData.name.split(' ')[0].toUpperCase()}`, img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80", link: `mailto:${settings.contactEmail || 'info@example.com'}` }
   ];
 
   return (
@@ -154,7 +154,7 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
       </section>
 
       {/* 4. TESTIMONIOS */}
-      <section className="bg-white dark:bg-neutral-950 pt-[60px] pb-[100px] px-6 border-t border-black/5">
+      <section id="testimonios" className="bg-white dark:bg-neutral-950 pt-[60px] pb-[100px] px-6 border-t border-black/5">
         <div className="text-center mb-[60px]">
            <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[30px] leading-tight">
               TESTIMONIOS
