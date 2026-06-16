@@ -77,10 +77,13 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
                     onChange={(e) => setPropertyType(e.target.value)}
                     className="w-full pl-14 pr-10 py-4 bg-transparent border border-black/10 rounded-full text-[11px] uppercase tracking-[0.2em] outline-none appearance-none cursor-pointer hover:border-black dark:border-white/20 transition-all duration-500 text-black dark:text-white font-medium"
                   >
-                     <option value="Tipo de Propiedad">Cualquier Tipo</option>
-                     <option value="Casas">Casas</option>
-                     <option value="Apartamentos">Apartamentos</option>
-                     <option value="Lotes">Lotes</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Tipo de Propiedad">Cualquier Tipo</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Casa">Casas</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Apartamento">Apartamentos</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Lote">Lotes</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Edificio">Edificios</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Finca">Fincas</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Local Comercial">Locales Comerciales</option>
                   </select>
                   <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
                      <div className="w-2 h-2 border-b border-r border-black/40 rotate-45 transform -translate-y-1 group-hover:border-black dark:border-white/20 transition-colors duration-500"></div>
@@ -94,11 +97,11 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
                     onChange={(e) => setPriceRange(e.target.value)}
                     className="w-full pl-14 pr-10 py-4 bg-transparent border border-black/10 rounded-full text-[11px] uppercase tracking-[0.2em] outline-none appearance-none cursor-pointer hover:border-black dark:border-white/20 transition-all duration-500 text-black dark:text-white font-medium"
                   >
-                     <option value="Cualquier Precio">Cualquier Presupuesto</option>
-                     <option value="< $500k">Menos de $500k</option>
-                     <option value="$500k - $1M">$500k - $1M</option>
-                     <option value="$1M - $3M">$1M - $3M</option>
-                     <option value="+ $3M">Más de $3M</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Cualquier Precio">Cualquier Presupuesto</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="< $500k">Menos de $500k (₡260M)</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="$500k - $1M">$500k - $1M (₡260M - ₡520M)</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="$1M - $3M">$1M - $3M (₡520M - ₡1.5B)</option>
+                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="+ $3M">Más de $3M (₡1.5B+)</option>
                   </select>
                   <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
                      <div className="w-2 h-2 border-b border-r border-black/40 rotate-45 transform -translate-y-1 group-hover:border-black dark:border-white/20 transition-colors duration-500"></div>
