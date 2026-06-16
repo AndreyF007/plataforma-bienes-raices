@@ -57,7 +57,7 @@ export async function GET(request: Request) {
       headers: {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': apiKey,
-        'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.rating,places.userRatingCount,places.types,places.photos',
+        'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.addressComponents,places.rating,places.userRatingCount,places.types,places.photos',
         'Referer': 'http://localhost:3000'
       },
       body: JSON.stringify({
@@ -99,13 +99,34 @@ export async function GET(request: Request) {
         distance: "Centro", // La API de texto no devuelve distancia exacta tan fácil sin origen
         rating: place.rating || 4,
         reviews: place.userRatingCount || Math.floor(Math.random() * 200) + 10,
-        address: place.formattedAddress
+        address: place.formattedAddress,
+        addressComponents: place.addressComponents
       };
     });
 
-    // Eliminado el filtro estricto local que requería el nombre exacto del cantón en la dirección,
-    // ya que la query original ("en el cantón de...") es suficiente para guiar a Google.
-    // Esto previene que pestañas como Compras o Naturaleza queden vacías.
+    // FILTRO ESTRICTO MEJORADO: Nos aseguramos de que el lugar esté realmente en el cantón.
+    // Revisamos la dirección formateada y todos los componentes de la dirección (addressComponents).
+    // Esto evita que se filtren lugares cuya dirección formateada solo mencione el distrito y la provincia.
+    places = places.filter((p: any) => {
+      let isMatch = false;
+      
+      // 1. Revisar dirección formateada
+      if (p.address) {
+        const addr = p.address.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if (addr.includes(normalizedCanton)) isMatch = true;
+      }
+      
+      // 2. Revisar componentes de la dirección (ej: "San Rafael" en vez de "Escazú")
+      if (!isMatch && p.addressComponents && Array.isArray(p.addressComponents)) {
+        isMatch = p.addressComponents.some((comp: any) => {
+           const longText = comp.longText ? comp.longText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
+           const shortText = comp.shortText ? comp.shortText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
+           return longText.includes(normalizedCanton) || shortText.includes(normalizedCanton);
+        });
+      }
+      
+      return isMatch;
+    });
     
     return NextResponse.json(places);
   } catch (error) {
