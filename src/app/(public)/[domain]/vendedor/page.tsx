@@ -118,9 +118,6 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
          <p className="text-[16px] md:text-[18px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[60px]">
            Poner su casa en el mercado puede ser un proceso estresante, especialmente cuando no sabe qué esperar. Afortunadamente, con la ayuda de un agente experimentado y esta guía fácil de seguir, puede completar el proceso sin problemas. Seguir estos pasos le ayudará a prepararse para organizarse y vender su casa al mejor precio posible.
          </p>
-         <button className="px-10 py-5 border border-black dark:border-white/20 text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-black hover:text-white transition-colors">
-           HAGA CLIC AQUÍ PARA LA GUÍA DE VENDEDORES
-         </button>
       </section>
 
       {/* 3. LOS 8 PASOS (Alternando Izquierda/Derecha) */}
@@ -134,7 +131,7 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
                </div>
 
                {/* Texto */}
-               <div className="w-full md:w-1/2 flex flex-col justify-center p-12 md:p-24 bg-[#fafafa]">
+               <div className="w-full md:w-1/2 flex flex-col justify-center p-12 md:p-24 bg-[#fafafa] dark:bg-neutral-900">
                   <h3 className="text-[24px] md:text-[32px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.15em] text-black dark:text-white mb-6 leading-tight">
                     PASO {step.num}: {step.title}
                   </h3>
