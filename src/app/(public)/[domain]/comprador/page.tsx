@@ -190,14 +190,7 @@ export default async function BuyersGuidePage(props: { params: Promise<{ domain:
          <p className="text-[16px] md:text-[18px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[40px]">
            Se compromete a estar en constante comunicación con sus clientes, manteniéndolos completamente informados durante todo el proceso de compra o venta.
          </p>
-         <a 
-           href="https://wa.me/50660413905?text=Hola,%20me%20gustar%C3%ADa%20comprar%20o%20vender%20una%20propiedad"
-           target="_blank"
-           rel="noopener noreferrer"
-           className="inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black dark:text-white border border-black dark:border-white/20 transition-colors"
-         >
-           CONECTÉMONOS
-         </a>
+
       </section>
 
       {/* 7. FOOTER */}
