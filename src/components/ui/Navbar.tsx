@@ -41,9 +41,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
                { label: 'GUÍA DEL VENDEDOR', href: '/vendedor' },
                { label: 'GUÍA DEL COMPRADOR', href: '/comprador' },
                { label: 'ZONAS DE COBERTURA', href: '/comunidades' },
-               { label: 'VÍDEOS DE ESTILO DE VIDA', href: '/videos' },
                { label: 'TESTIMONIOS', href: '/#testimonios' },
-               { label: 'EN LA PRENSA', href: '/prensa' },
                { label: `SOBRE ${tenantName.split(' ')[0]}`, href: '/#about' },
                { label: 'BLOG', href: '/blog' }
              ].map((item, idx) => (
@@ -105,12 +103,10 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
              { label: `SOBRE ${tenantName.split(' ')[0]}`, href: '/#about' },
              { label: `CHARLA SINCERA CON ${tenantName.split(' ')[0]}`, href: '/charla' },
              { label: 'VALORACIÓN DE LA VIVIENDA', href: '/valoracion' },
-             { label: 'EN LA PRENSA', href: '/prensa' },
              { label: 'ZONAS DE COBERTURA', href: '/comunidades' },
              { label: 'TESTIMONIOS', href: '/#testimonios' },
              { label: 'RECURSOS', href: '/recursos' },
              { label: 'REPARAR Y VENDER', href: '/reparar' },
-             { label: 'VÍDEOS DE ESTILO DE VIDA', href: '/videos' },
              { label: 'BLOG', href: '/blog' },
              { label: 'BOLETÍN', href: '/#newsletter' },
              { label: 'CONECTEMOS', href: 'mailto:info@example.com' },
