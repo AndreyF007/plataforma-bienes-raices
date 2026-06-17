@@ -87,7 +87,7 @@ export default async function BuyersGuidePage(props: { params: Promise<{ domain:
 
   const actionButtons = [
     { title: "ZONAS DE COBERTURA", img: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=600&q=80", link: "/comunidades" },
-    { title: "TESTIMONIOS", img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80", link: "#testimonios" },
+    { title: "TESTIMONIOS", img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80", link: "/#testimonios" },
     { title: "PORTAL DE PROPIEDADES", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80", link: "/portal" },
     { title: `CONTACTAR A ${tenantData.name.split(' ')[0].toUpperCase()}`, img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80", link: `mailto:${settings.contactEmail || 'info@example.com'}` }
   ];
