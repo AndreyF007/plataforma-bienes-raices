@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import { Home, Settings, Building, LogOut, Grid, MessageSquare, Globe, ClipboardList, Mail } from "lucide-react";
+import { Home, Settings, Building, LogOut, Grid, MessageSquare, Globe, ClipboardList, Mail, BookOpen } from "lucide-react";
 import LivePreviewPane from "@/components/admin/LivePreviewPane";
 import { db } from "@/lib/db";
 
@@ -37,6 +37,9 @@ export default async function DashboardLayout({
         <nav className="flex-1 p-4 space-y-2">
           <a href="/dashboard/properties" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-sm transition-colors">
             <Building className="w-4 h-4" /> Propiedades
+          </a>
+          <a href="/dashboard/blog" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-sm transition-colors">
+            <BookOpen className="w-4 h-4" /> Blog
           </a>
           <a href="/dashboard/zones" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-sm transition-colors">
             <Grid className="w-4 h-4" /> Zonas

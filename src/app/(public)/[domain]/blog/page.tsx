@@ -16,37 +16,20 @@ export default async function BlogPage(props: { params: Promise<{ domain: string
   
   if (!tenantData) return notFound();
 
-  // Dummy data for the blog layout
-  const blogPosts = [
-    {
-      id: 1,
-      title: "Las Mejores Zonas para Invertir en Bienes Raíces este 2026",
-      category: "MERCADO INMOBILIARIO",
-      date: "15 JUN 2026",
-      image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280&q=80"
+  // Fetch real blog posts from the database
+  const blogPosts = await db.blogPost.findMany({
+    where: { 
+      tenantId: tenantData.id,
+      published: true 
     },
-    {
-      id: 2,
-      title: "Cómo Preparar Tu Casa para la Venta: Guía Completa",
-      category: "CONSEJOS PARA VENDEDORES",
-      date: "10 JUN 2026",
-      image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280&q=80"
-    },
-    {
-      id: 3,
-      title: "Diseño Interior: Tendencias Minimalistas y Elegantes",
-      category: "ESTILO DE VIDA",
-      date: "05 JUN 2026",
-      image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280&q=80"
-    },
-    {
-      id: 4,
-      title: "Beneficios de Comprar Propiedades en Preventa",
-      category: "INVERSIÓN",
-      date: "28 MAY 2026",
-      image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280&q=80"
-    }
-  ];
+    orderBy: { createdAt: 'desc' }
+  });
+
+  const formatDate = (date: Date) => {
+    const d = new Date(date);
+    const months = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+  };
 
   return (
     <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
@@ -94,20 +77,27 @@ export default async function BlogPage(props: { params: Promise<{ domain: string
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
           {blogPosts.map((post, idx) => (
-            <article key={post.id} className="group cursor-pointer flex flex-col">
-              <div className="relative w-full pt-[70%] bg-neutral-200 dark:bg-neutral-800 overflow-hidden mb-8">
-                <img 
-                  src={post.image} 
-                  alt={post.title} 
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
-                />
-              </div>
+            <Link href={`/blog/${post.slug}`} key={post.id} className="group flex flex-col">
+              <article className="flex flex-col h-full cursor-pointer">
+                <div className="relative w-full pt-[70%] bg-neutral-200 dark:bg-neutral-800 overflow-hidden mb-8">
+                  {post.image ? (
+                    <img 
+                      src={post.image} 
+                      alt={post.title} 
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 w-full h-full flex items-center justify-center text-neutral-400 group-hover:scale-105 transition-transform duration-700 ease-in-out">
+                      {tenantData.name}
+                    </div>
+                  )}
+                </div>
               
               <div className="flex flex-col flex-1">
                 <div className="flex items-center text-[11px] md:text-[13px] font-bold uppercase tracking-[0.15em] text-black/60 dark:text-white/60 mb-4">
                   <span>{post.category}</span>
                   <span className="mx-3 w-1 h-1 rounded-full bg-black/40 dark:bg-white/40"></span>
-                  <span>{post.date}</span>
+                  <span>{formatDate(post.createdAt)}</span>
                 </div>
                 
                 <h3 className="text-[24px] md:text-[30px] font-[family-name:var(--font-raleway)] font-light leading-tight mb-6 uppercase tracking-[0.1em]">
@@ -122,7 +112,8 @@ export default async function BlogPage(props: { params: Promise<{ domain: string
                   </span>
                 </div>
               </div>
-            </article>
+              </article>
+            </Link>
           ))}
         </div>
 
