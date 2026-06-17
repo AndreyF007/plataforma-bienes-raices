@@ -36,7 +36,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
           
           <div className="hidden lg:flex flex-[5] justify-center items-center gap-2 xl:gap-4 flex-wrap px-2">
              {[
-               { label: 'HOME', href: '/' },
+               { label: 'INICIO', href: '/' },
                { label: 'BOLETÍN', href: '/#newsletter' },
                { label: 'GUÍA DEL VENDEDOR', href: '/vendedor' },
                { label: 'GUÍA DEL COMPRADOR', href: '/comprador' },
@@ -62,7 +62,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
           </div>
           
           <div className="flex flex-1 justify-end items-center gap-4 lg:gap-6">
-            <a href="https://wa.me/50660413905" target="_blank" rel="noopener noreferrer" className={`hidden lg:block text-[11px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.15em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>
+            <a href="https://wa.me/50660413905" target="_blank" rel="noopener noreferrer" className={`whitespace-nowrap hidden lg:block text-[11px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.15em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>
               +506 6041 3905
             </a>
             <ThemeToggle className={scrolled ? 'text-black dark:text-white' : 'text-white'} />
@@ -99,7 +99,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
         
         <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col items-center text-center">
            {[
-             { label: 'HOME', href: '/' },
+             { label: 'INICIO', href: '/' },
              { label: `SOBRE ${tenantName.split(' ')[0]}`, href: '/#about' },
              { label: `CHARLA SINCERA CON ${tenantName.split(' ')[0]}`, href: '/charla' },
              { label: 'VALORACIÓN DE LA VIVIENDA', href: '/valoracion' },
@@ -116,7 +116,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
                 key={idx} 
                 href={item.href} 
                 onClick={(e) => {
-                  if (item.label === 'BOLETÍN' || item.label === 'HOME') {
+                  if (item.label === 'BOLETÍN' || item.label === 'INICIO') {
                     if (item.label === 'BOLETÍN') {
                       e.preventDefault();
                       setIsNewsletterOpen(true);
