@@ -35,6 +35,11 @@ export default function middleware(req: NextRequest) {
     hostname = hostname.replace('.localhost:3000', `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
   }
 
+  if (hostname === 'localhost:3000' || hostname.endsWith('.vercel.app')) {
+    hostname = 'AndreyRealty';
+  }
+
+
   const searchParams = req.nextUrl.searchParams.toString();
   const path = `${url.pathname}${
     searchParams.length > 0 ? `?${searchParams}` : ''
