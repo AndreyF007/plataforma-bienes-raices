@@ -42,9 +42,11 @@ export default function Footer({
                <div className="w-32 h-32 rounded-full overflow-hidden mb-6 border-2 border-white/20">
                   <img src={agentPhoto} alt="Agente" className="w-full h-full object-cover" />
                </div>
-               <h3 className="text-[24px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] mb-2">{tenantName}</h3>
-               <p className="text-[12px] uppercase tracking-[0.1em] text-white/50 mb-6">{agentTitle}</p>
-               <div className="flex gap-4">
+               <h4 className="text-[16px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] mb-2 font-bold">{tenantName}</h4>
+               <p className="text-[12px] font-[family-name:var(--font-quicksand)] text-white/70 mb-8 uppercase tracking-widest">
+                 {agentTitle}
+               </p>
+               <div className="flex gap-4 justify-center md:justify-start w-full">
                   <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-colors">
                      <span className="text-[12px] uppercase font-bold">ig</span>
                   </a>
@@ -62,28 +64,28 @@ export default function Footer({
 
             <div className="md:w-2/3 flex flex-col gap-6 text-[14px] font-[family-name:var(--font-quicksand)] items-center md:items-start text-center md:text-left">
                <div className="flex items-center gap-4">
-                 <Mail className="w-6 h-6 stroke-1 text-white/50" />
+                 <Mail className="w-6 h-6 stroke-1 text-white" />
                   <div>
-                   <div className="uppercase tracking-widest text-[11px] mb-1 text-white/50">CORREO ELECTRÓNICO</div>
-                   <a href={`mailto:${contactEmail}`} className="underline underline-offset-4 hover:text-white/70 transition-colors">{contactEmail.toLowerCase()}</a>
+                   <div className="uppercase tracking-widest text-[11px] mb-1 text-white">CORREO ELECTRÓNICO</div>
+                   <a href={`mailto:${contactEmail}`} className="underline underline-offset-4 hover:text-white transition-colors">{contactEmail.toLowerCase()}</a>
                  </div>
                </div>
                <div className="flex items-center gap-4">
-                 <Phone className="w-6 h-6 stroke-1 text-white/50" />
+                 <Phone className="w-6 h-6 stroke-1 text-white" />
                   <div>
-                   <div className="uppercase tracking-widest text-[11px] mb-1 text-white/50">NÚMERO DE TELÉFONO</div>
-                   <a href={`https://wa.me/${contactPhone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-white/70 transition-colors">{contactPhone}</a>
+                   <div className="uppercase tracking-widest text-[11px] mb-1 text-white">NÚMERO DE TELÉFONO</div>
+                   <a href={`https://wa.me/${contactPhone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-white transition-colors">{contactPhone}</a>
                  </div>
                </div>
                <div className="flex items-center gap-4">
-                 <MapPin className="w-6 h-6 stroke-1 text-white/50" />
+                 <MapPin className="w-6 h-6 stroke-1 text-white" />
                   <div>
-                   <div className="uppercase tracking-widest text-[11px] mb-1 text-white/50">DIRECCIÓN DE LA OFICINA</div>
+                   <div className="uppercase tracking-widest text-[11px] mb-1 text-white">DIRECCIÓN DE LA OFICINA</div>
                    <div className="whitespace-pre-wrap">{officeAddress}</div>
                  </div>
                </div>
                <div className="mt-4 pt-4 border-t border-white/10 w-full">
-                  <p className="text-[10px] text-white/40 leading-relaxed text-justify whitespace-pre-wrap">
+                  <p className="text-[10px] text-white leading-relaxed text-justify whitespace-pre-wrap">
                     {disclaimerText}
                   </p>
                </div>
@@ -93,18 +95,9 @@ export default function Footer({
 
       {/* FOOTER */}
       <footer id="footer" className="bg-black text-white py-8 px-6 text-center border-t border-white/10">
-        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-[12px] text-white/50">
-             Copyright © {new Date().getFullYear()} {tenantName} | {footerText} | <PrivacyModal tenantName={tenantName} /> | <AdminLoginModal />
+          <div className="text-[12px] text-white w-full text-center">
+             Copyright © {new Date().getFullYear()} {tenantName} | {footerText} | <PrivacyModal tenantName={tenantName} /> | <AdminLoginModal tenantName={tenantName} />
           </div>
-          <div className="flex gap-4">
-             <span className="text-[12px] uppercase tracking-[0.2em] text-white/30">SÍGUENOS:</span>
-             <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-[12px] font-bold transition-colors">IG</a>
-             <a href={facebookUrl} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-[12px] font-bold transition-colors">FB</a>
-             <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-[12px] font-bold transition-colors">YT</a>
-             <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white text-[12px] font-bold transition-colors">TT</a>
-          </div>
-        </div>
       </footer>
     </>
   );

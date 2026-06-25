@@ -65,7 +65,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
       <div className="relative w-full max-w-[600px] bg-white dark:bg-neutral-950 text-black dark:text-white overflow-hidden flex flex-col shadow-2xl animate-in zoom-in-95 duration-300">
         
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-black/10 bg-gray-50">
+        <div className="flex items-center justify-between p-6 border-b border-black/10 dark:border-white/10 bg-gray-50 dark:bg-neutral-900">
           <h2 className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] uppercase tracking-widest font-bold">
             Dejar un Testimonio
           </h2>
@@ -84,7 +84,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
             <h3 className="text-[24px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] font-light mb-4">
               ¡Muchas Gracias!
             </h3>
-            <p className="text-[16px] text-black/70 font-[family-name:var(--font-quicksand)] max-w-sm mb-8">
+            <p className="text-[16px] text-black font-[family-name:var(--font-quicksand)] max-w-sm mb-8">
               Tu reseña ha sido enviada a <strong>{tenantName}</strong> y pronto será publicada en la página.
             </p>
             <button 
@@ -97,7 +97,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
         ) : (
           <form onSubmit={handleSubmit} className="p-6 md:p-8 flex flex-col gap-6">
             
-            <p className="text-[14px] text-black/60 dark:text-white/60 font-[family-name:var(--font-quicksand)] leading-relaxed mb-2">
+            <p className="text-[14px] text-black dark:text-white font-[family-name:var(--font-quicksand)] leading-relaxed mb-2">
               Tu opinión es muy importante para nosotros. Por favor, tómate un momento para calificar tu experiencia.
             </p>
 
@@ -110,7 +110,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
             )}
 
             <div className="flex flex-col gap-2">
-              <label className="text-[12px] uppercase tracking-widest font-bold text-black/70">Calificación</label>
+              <label className="text-[12px] uppercase tracking-widest font-bold text-black">Calificación</label>
               <div className="flex gap-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
@@ -130,7 +130,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
 
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 flex flex-col gap-2">
-                <label className="text-[12px] uppercase tracking-widest font-bold text-black/70">Tu Nombre</label>
+                <label className="text-[12px] uppercase tracking-widest font-bold text-black">Tu Nombre</label>
                 <input 
                   type="text" 
                   value={clientName}
@@ -142,7 +142,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
               </div>
 
               <div className="flex-1 flex flex-col gap-2">
-                <label className="text-[12px] uppercase tracking-widest font-bold text-black/70">Tipo de Cliente</label>
+                <label className="text-[12px] uppercase tracking-widest font-bold text-black">Tipo de Cliente</label>
                 <select 
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
@@ -158,7 +158,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[12px] uppercase tracking-widest font-bold text-black/70">Tu Reseña</label>
+              <label className="text-[12px] uppercase tracking-widest font-bold text-black">Tu Reseña</label>
               <textarea 
                 value={content}
                 onChange={(e) => setContent(e.target.value)}

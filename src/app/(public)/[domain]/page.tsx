@@ -8,7 +8,10 @@ import Footer from '@/components/ui/Footer';
 import NewsletterForm from '@/components/public/NewsletterForm';
 import ValuationForm from '@/components/public/ValuationForm';
 import HeroCarousel from '@/components/public/HeroCarousel';
+import FeaturedProperties from '@/components/public/FeaturedProperties';
+import { allProperties } from '@/data/mockProperties';
 import { Play, Mail, Phone } from 'lucide-react';
+import SchemaMarkup from '@/components/ui/SchemaMarkup';
 
 export default async function TenantHomePage(props: { params: Promise<{ domain: string }> }) {
   const params = await props.params;
@@ -31,6 +34,36 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
     settings = JSON.parse(tenantData.siteSettings || "{}");
   } catch(e) {}
 
+  const dbProps = tenantData.properties.map((p) => {
+    let imgs = [];
+    try {
+      try {
+        imgs = JSON.parse(p.images);
+      } catch (e) {}
+    } catch(e) {}
+    
+    return {
+      id: `db-${p.id}`,
+      title: p.title,
+      price: parseInt(p.price.replace(/\D/g,'')) || 0,
+      priceStr: p.price,
+      type: p.propertyType,
+      address: p.location,
+      beds: p.beds,
+      baths: p.baths,
+      constructionArea: p.constructionArea,
+      lotArea: p.lotArea,
+      yearBuilt: p.yearBuilt,
+      floors: p.floors,
+      img: imgs[0] || "",
+      images: imgs.length > 0 ? imgs : [""],
+      status: p.status,
+      description: p.description || ""
+    };
+  });
+
+  const combinedProperties = dbProps; // Exclusivo del inquilino
+
   const heroSubtitle = settings.heroSubtitle || "AGENTE INMOBILIARIO DE LUJO";
   const heroText = settings.heroText || "El mercado inmobiliario de lujo se mueve rápido. Necesitas un guía que conozca cada barrio, gane las negociaciones y haga el proceso sin esfuerzo.";
   const heroButton1Text = settings.heroButton1Text || "BUSCAR PROPIEDADES";
@@ -40,7 +73,7 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
 
   const aboutTitle = settings.aboutTitle || "TU GUÍA";
   const aboutSubtitle = settings.aboutSubtitle || tenantData.name;
-  const aboutImage = settings.aboutImage || "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1920&q=80";
+  const aboutImage = settings.agentPhoto || settings.aboutImage || "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1920&q=80";
   const aboutText1 = settings.aboutText1 || "Comprar o vender una casa de lujo en Silicon Valley es una de las decisiones más importantes que tomarás, y un agente inmobiliario inadecuado puede costarte cientos de miles de dólares.";
   const aboutText2 = settings.aboutText2 || "Cuenta con más de 15 años de experiencia en el sector inmobiliario, una trayectoria y un historial de ventas excepcional. Se especializa en las comunidades más codiciadas.";
   const aboutText3 = settings.aboutText3 || "Su método es sencillo: escuchar lo que realmente quieres, brindarte información honesta del mercado y negociar sin descanso en tu nombre. Sin presiones, sin rodeos, solo resultados.";
@@ -54,19 +87,21 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
   const newsletterText = settings.newsletterText || "Únase a nuestra lista VIP y reciba acceso anticipado a propiedades fuera del mercado y análisis profundo del sector de lujo.";
 
   return (
-    <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
+    <>
+      <SchemaMarkup tenantName={tenantData.name} domain={decodedDomain} settings={settings} />
+      <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
       
       {/* 1. Navbar de Pantalla Completa */}
-      <Navbar tenantName={tenantData.name} />
+      <Navbar tenantName={tenantData.name} contactPhone={settings.contactPhone} contactEmail={settings.contactEmail} />
 
       {/* 2. Botones Flotantes Permanentes */}
-      <FloatingContact />
+      <FloatingContact contactEmail={settings.contactEmail} contactPhone={settings.contactPhone} />
 
       {/* 3. HERO CAROUSEL */}
       <HeroCarousel 
         images={[
-          tenantData.heroImage || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80",
-          "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=1920&q=80"
+          settings.agentPhoto || tenantData.heroImage || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80",
+          tenantData.heroImage || "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=1920&q=80"
         ]}
         subtitle={heroSubtitle}
         title={tenantData.heroTitle || tenantData.name}
@@ -77,10 +112,20 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
         button2Link={heroButton2Link}
       />
 
+      {/* 3.5 CARRUSEL DE PROPIEDADES DESTACADAS */}
+      <FeaturedProperties properties={combinedProperties} />
+
       {/* 4. CONFIANZA / STATS SECTION */}
       {(() => {
-        const statsList = settings.statsList || tenantData.stats || [];
-        if (!statsList || statsList.length === 0) return null;
+        let statsList = settings.statsList || tenantData.stats || [];
+        if (!statsList || statsList.length === 0) {
+          statsList = [
+            { id: '1', value: '15+', label: 'Años de Experiencia' },
+            { id: '2', value: '500+', label: 'Propiedades Vendidas' },
+            { id: '3', value: '$100M+', label: 'Volumen de Ventas' },
+            { id: '4', value: '100%', label: 'Clientes Satisfechos' }
+          ];
+        }
         
         return (
           <section className="bg-white dark:bg-black transition-colors duration-300 py-[80px] md:py-[120px] px-6">
@@ -99,7 +144,7 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
                      <span className="text-[40px] md:text-[50px] font-[family-name:var(--font-raleway)] font-light text-black dark:text-white tracking-widest mb-2">
                        {stat.value}
                      </span>
-                     <span className="text-[12px] md:text-[14px] text-black/60 dark:text-white/60 font-[family-name:var(--font-quicksand)] uppercase tracking-wider font-bold">
+                     <span className="text-[12px] md:text-[14px] text-black dark:text-white font-[family-name:var(--font-quicksand)] uppercase tracking-wider font-bold">
                        {stat.label}
                      </span>
                    </div>
@@ -115,15 +160,15 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
         <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
           
           {/* Image Column */}
-          <div className="w-full md:w-1/2">
-             <div className="w-full aspect-[4/5] relative bg-gray-100 dark:bg-neutral-900">
+          <div className="w-full md:w-1/2 flex justify-center md:justify-end lg:justify-center">
+             <div className="w-full max-w-[450px] aspect-[4/5] max-h-[550px] relative bg-gray-100 dark:bg-neutral-900 hover:-translate-y-2 hover:scale-[1.02] transition-transform duration-500 cursor-pointer overflow-hidden shadow-xl">
                <img src={aboutImage} alt="Sobre Nosotros" className="absolute inset-0 w-full h-full object-cover" />
              </div>
           </div>
           
           {/* Text Column */}
           <div className="w-full md:w-1/2 flex flex-col items-start text-left">
-             <h3 className="text-[14px] md:text-[16px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[20px] text-black/60 dark:text-white/60">
+             <h3 className="text-[14px] md:text-[16px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[20px] text-black dark:text-white">
                {aboutTitle}
              </h3>
              <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] mb-[40px] leading-tight dark:text-white">
@@ -131,17 +176,17 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
              </h2>
              
              {aboutText1 && (
-               <p className="text-[15px] md:text-[17px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[20px]">
+               <p className="text-[15px] md:text-[17px] text-black dark:text-white font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[20px]">
                  {aboutText1}
                </p>
              )}
              {aboutText2 && (
-               <p className="text-[15px] md:text-[17px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[20px]">
+               <p className="text-[15px] md:text-[17px] text-black dark:text-white font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[20px]">
                  {aboutText2}
                </p>
              )}
              {aboutText3 && (
-               <p className="text-[15px] md:text-[17px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[50px]">
+               <p className="text-[15px] md:text-[17px] text-black dark:text-white font-[family-name:var(--font-quicksand)] leading-[1.8] mb-[50px]">
                  {aboutText3}
                </p>
              )}
@@ -152,45 +197,63 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
       </section>
 
       {/* 5.5 ZONAS DE COBERTURA */}
-      {tenantData.zones && tenantData.zones.length > 0 && (
-        <section className="bg-[#fcfcfc] dark:bg-neutral-900 py-[80px] md:py-[120px] px-6">
-          <div className="max-w-[1200px] mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black dark:text-white">
-                Zonas de Cobertura
-              </h2>
-              <div className="w-12 h-px bg-black dark:bg-white mx-auto mt-6"></div>
+      {(() => {
+        let zones = tenantData.zones || [];
+        if (zones.length === 0) {
+          zones = [
+            { id: 'z1', name: 'San José', image: 'https://images.unsplash.com/photo-1590059336111-82743825a07c?auto=format&fit=crop&w=800&q=80' },
+            { id: 'z2', name: 'Guanacaste', image: 'https://images.unsplash.com/photo-1590493060411-9a7c645b36bd?auto=format&fit=crop&w=800&q=80' },
+            { id: 'z3', name: 'Puntarenas', image: 'https://images.unsplash.com/photo-1563299796-17596c367e0e?auto=format&fit=crop&w=800&q=80' },
+            { id: 'z4', name: 'Limón', image: 'https://images.unsplash.com/photo-1620023403332-9017f8b9ec7c?auto=format&fit=crop&w=800&q=80' },
+            { id: 'z5', name: 'Alajuela', image: 'https://images.unsplash.com/photo-1549880181-56a44cf4a9a5?auto=format&fit=crop&w=800&q=80' },
+            { id: 'z6', name: 'Heredia', image: 'https://images.unsplash.com/photo-1616422285623-14981329ee7a?auto=format&fit=crop&w=800&q=80' },
+            { id: 'z7', name: 'Cartago', image: 'https://images.unsplash.com/photo-1583095123989-130a10996cb2?auto=format&fit=crop&w=800&q=80' }
+          ] as any[];
+        }
+
+        return (
+          <section className="bg-[#fcfcfc] dark:bg-neutral-900 py-[80px] md:py-[120px] px-6">
+            <div className="max-w-[1200px] mx-auto">
+              <div className="text-center mb-16">
+                <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black dark:text-white">
+                  Zonas de Cobertura
+                </h2>
+                <div className="w-12 h-px bg-black dark:bg-white mx-auto mt-6"></div>
+              </div>
+              
+              <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                {zones.map((zone) => (
+                  <a 
+                    key={zone.id} 
+                    href={`/comunidades?zona=${encodeURIComponent(zone.name)}`}
+                    className="min-w-[85vw] md:min-w-0 shrink-0 snap-center group relative w-full aspect-[4/3] overflow-hidden bg-black cursor-pointer block hover:-translate-y-2 hover:scale-[1.02] transition-transform duration-500"
+                  >
+                    <img 
+                      src={zone.image} 
+                      alt={zone.name} 
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" 
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <h3 className="text-white text-[16px] md:text-[20px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] drop-shadow-md">
+                        {zone.name}
+                      </h3>
+                    </div>
+                  </a>
+                ))}
+                <style dangerouslySetInnerHTML={{__html: `
+                  .hide-scrollbar::-webkit-scrollbar { display: none; }
+                `}} />
+              </div>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-              {tenantData.zones.map((zone) => (
-                <a 
-                  key={zone.id} 
-                  href={`/comunidades?zona=${encodeURIComponent(zone.name)}`}
-                  className="group relative w-full aspect-[4/3] overflow-hidden bg-black cursor-pointer block"
-                >
-                  <img 
-                    src={zone.image} 
-                    alt={zone.name} 
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" 
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <h3 className="text-white text-[16px] md:text-[20px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] drop-shadow-md">
-                      {zone.name}
-                    </h3>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+          </section>
+        );
+      })()}
 
       {/* 6. TESTIMONIOS */}
       <TestimonialSlider tenantName={tenantData.name} />
 
       {/* 7. VALORACIÓN DE VIVIENDA */}
-      <ValuationForm tenantId={tenantData.id} />
+      <ValuationForm tenantId={tenantData.id} bgImage={settings.agentPhoto || tenantData.heroImage || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80"} />
 
       {/* 8. SUSCRIPCIÓN (NEWSLETTER) */}
       <section className="bg-black py-[100px] px-6 text-center">
@@ -199,7 +262,7 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
           <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] mb-6">
             {newsletterTitle}
           </h2>
-          <p className="text-[16px] font-[family-name:var(--font-quicksand)] text-white/80 mb-10 leading-[1.8]">
+          <p className="text-[16px] font-[family-name:var(--font-quicksand)] text-white mb-10 leading-[1.8]">
             {newsletterText}
           </p>
           <NewsletterForm tenantName={tenantData.name} />
@@ -209,10 +272,10 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
       {/* 9. FOOTER */}
       <Footer 
          tenantName={tenantData.name} 
-         facebookUrl={settings.socialFacebook}
-         instagramUrl={settings.socialInstagram}
-         tiktokUrl={settings.socialTiktok}
-         youtubeUrl={settings.socialYoutube}
+         facebookUrl={settings.facebookUrl}
+         instagramUrl={settings.instagramUrl}
+         tiktokUrl={settings.tiktokUrl}
+         youtubeUrl={settings.youtubeUrl}
          footerText={settings.footerText}
          agentPhoto={settings.agentPhoto}
          agentTitle={settings.agentTitle}
@@ -223,5 +286,6 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
       />
 
     </main>
+    </>
   );
 }

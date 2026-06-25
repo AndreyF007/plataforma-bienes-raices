@@ -143,9 +143,9 @@ export default function HeroGrid() {
           );
         })}
       </div>
-      {/* Gradiente adicional encima para difuminar los bordes con el resto de la página */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#fafafa] dark:from-neutral-950 via-transparent to-transparent z-20 pointer-events-none opacity-80"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent z-20 pointer-events-none"></div>
+      {/* Gradiente adicional encima para oscurecer el fondo y resaltar el texto */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-20 pointer-events-none opacity-90"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent z-20 pointer-events-none"></div>
     </>
   );
 }

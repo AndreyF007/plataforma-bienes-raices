@@ -135,14 +135,14 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
   return (
     <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
       
-      <Navbar tenantName={tenantData.name} />
-      <FloatingContact />
+      <Navbar tenantName={tenantData.name} contactPhone={settings.contactPhone} contactEmail={settings.contactEmail} />
+      <FloatingContact contactEmail={settings.contactEmail} contactPhone={settings.contactPhone} />
 
       {/* 1. HERO SECTION & TITULO (COVER PHOTO) */}
       <section className="group relative w-full h-[60vh] min-h-[500px] flex flex-col items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-100 group-hover:scale-105 transition-transform duration-[3000ms] ease-out"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-100 animate-slow-zoom"
           style={{ backgroundImage: `url('${wikiImage || 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80'}')` }}
         />
         {/* Overlay oscuro para legibilidad y elegancia */}
@@ -172,7 +172,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
                ACERCA DE {formattedCanton}
             </h3>
             <div className="w-12 h-[1px] bg-black mb-8"></div>
-            <p className="text-[16px] md:text-[20px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[2] text-justify md:text-center">
+            <p className="text-[16px] md:text-[20px] text-black dark:text-white font-[family-name:var(--font-quicksand)] leading-[2] text-justify md:text-center">
                {wikiExtract}
             </p>
          </div>
@@ -184,7 +184,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
             <h2 className="text-[24px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] mb-4">
                Descripción General de {formattedCanton}, CR
             </h2>
-            <p className="text-[14px] text-black/60 dark:text-white/60 mb-8 font-[family-name:var(--font-quicksand)]">
+            <p className="text-[14px] text-black dark:text-white mb-8 font-[family-name:var(--font-quicksand)]">
                {mockPopulation} personas viven en {formattedCanton}, donde la edad media es de {mockAge} y el ingreso individual promedio estimado ronda los {mockIncome}. <br/>
                Datos provistos como estimaciones para fines ilustrativos.
             </p>
@@ -195,7 +195,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
                   <div className="p-4 bg-black/5 rounded-full"><Users className="w-8 h-8 text-black dark:text-white" /></div>
                   <div>
                      <h3 className="text-[32px] font-[family-name:var(--font-raleway)] font-light leading-none mb-2">{mockPopulation}</h3>
-                     <p className="text-[12px] uppercase tracking-[0.1em] text-black/50 dark:text-white/50">Población Total</p>
+                     <p className="text-[12px] uppercase tracking-[0.1em] text-black dark:text-white">Población Total</p>
                   </div>
                </div>
 
@@ -203,7 +203,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
                   <div className="p-4 bg-black/5 rounded-full"><Activity className="w-8 h-8 text-black dark:text-white" /></div>
                   <div>
                      <h3 className="text-[32px] font-[family-name:var(--font-raleway)] font-light leading-none mb-2">{mockAge} años</h3>
-                     <p className="text-[12px] uppercase tracking-[0.1em] text-black/50 dark:text-white/50">Edad Media</p>
+                     <p className="text-[12px] uppercase tracking-[0.1em] text-black dark:text-white">Edad Media</p>
                   </div>
                </div>
 
@@ -211,7 +211,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
                   <div className="p-4 bg-black/5 rounded-full"><DollarSign className="w-8 h-8 text-black dark:text-white" /></div>
                   <div>
                      <h3 className="text-[32px] font-[family-name:var(--font-raleway)] font-light leading-none mb-2">{mockIncome}</h3>
-                     <p className="text-[12px] uppercase tracking-[0.1em] text-black/50 dark:text-white/50">Ingreso Individual Promedio</p>
+                     <p className="text-[12px] uppercase tracking-[0.1em] text-black dark:text-white">Ingreso Individual Promedio</p>
                   </div>
                </div>
 
@@ -226,7 +226,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
                <h2 className="text-[24px] md:text-[32px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] mb-4">
                  Estilo de Vida en {formattedCanton}
                </h2>
-               <p className="text-[16px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)]">
+               <p className="text-[16px] text-black dark:text-white font-[family-name:var(--font-quicksand)]">
                  Conozca la accesibilidad de este cantón para peatones y ciclistas, indicadores clave para la calidad de vida diaria.
                </p>
             </div>
@@ -243,7 +243,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
                   <div className="w-full h-2 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
                      <div className="h-full bg-black dark:bg-white transition-all duration-1000" style={{ width: `${walkScore}%` }}></div>
                   </div>
-                  <p className="text-[11px] text-black/50 dark:text-white/50 mt-2">
+                  <p className="text-[11px] text-black dark:text-white mt-2">
                      Este puntaje indica qué tan transitable a pie es la zona, basado en distancias a servicios esenciales.
                   </p>
                </div>
@@ -270,7 +270,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
             <h2 className="text-[24px] md:text-[32px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.2em] mb-4">
                PUNTOS DE INTERÉS
             </h2>
-            <p className="text-[16px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] mb-12 max-w-[800px]">
+            <p className="text-[16px] text-black dark:text-white font-[family-name:var(--font-quicksand)] mb-12 max-w-[800px]">
                Explore cosas populares para hacer en el área, incluyendo excelentes restaurantes, tiendas exclusivas y vibrante vida nocturna.
             </p>
             
@@ -299,7 +299,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
             <h2 className="text-[28px] md:text-[40px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] mb-4 text-center">
                Propiedades en {formattedCanton}
             </h2>
-            <p className="text-[16px] text-black/60 dark:text-white/60 font-[family-name:var(--font-quicksand)] mb-12 text-center max-w-[600px]">
+            <p className="text-[16px] text-black dark:text-white font-[family-name:var(--font-quicksand)] mb-12 text-center max-w-[600px]">
                Descubra exclusivas residencias y oportunidades de inversión en esta prestigiosa zona.
             </p>
 
@@ -355,7 +355,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
          <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] text-black dark:text-white mb-8 max-w-[800px] leading-tight">
            "La filosofía de {tenantData.name} es simple: los clientes son lo primero."
          </h2>
-         <p className="text-[16px] md:text-[18px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[40px]">
+         <p className="text-[16px] md:text-[18px] text-black dark:text-white font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[40px]">
            ¿Te gustaría comprar o vender una propiedad en {formattedCanton}? Estamos aquí para ayudarte en cada paso del proceso.
          </p>
          <a 
@@ -364,7 +364,7 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
            rel="noopener noreferrer"
            className="inline-block px-12 py-5 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-medium hover:bg-transparent hover:text-black dark:bg-[#111] dark:text-white dark:hover:bg-white/10 dark:hover:text-white border border-black dark:border-white/20 transition-colors"
          >
-           CONECTÉMONOS
+           HABLEMOS
          </a>
       </section>
 

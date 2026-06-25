@@ -47,7 +47,7 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
           {/* Botón de cerrar (X) */}
           <button 
             onClick={() => setActiveVideo(null)}
-            className="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:text-white/70 transition-colors z-[110] p-4 bg-black/50 rounded-full cursor-pointer border border-white/20 hover:bg-black/80"
+            className="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:text-white transition-colors z-[110] p-4 bg-black/50 rounded-full cursor-pointer border border-white/20 hover:bg-black/80"
           >
             <X className="w-8 h-8" />
           </button>

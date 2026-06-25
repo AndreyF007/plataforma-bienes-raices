@@ -74,19 +74,19 @@ export default async function PortalPage(props: {
   const portalHeroTitle = settings.portalHeroTitle || "Descubre nuestra selección de propiedades de lujo";
 
   return (
-    <main className="w-full flex flex-col min-h-screen bg-[#fafafa] text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
-      <Navbar tenantName={tenant.name} />
+    <main className="w-full flex flex-col min-h-screen bg-[#fafafa] dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
+      <Navbar tenantName={tenant.name} contactPhone={settings?.contactPhone} contactEmail={settings?.contactEmail} />
 
       {/* 1. HERO PORTAL (COVER) */}
       <section className="relative w-full h-[50vh] min-h-[400px] flex flex-col items-center justify-center overflow-hidden pt-20">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 transition-transform duration-[10s]"
-          style={{ backgroundImage: `url('${tenant.heroImage || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80"}')` }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-slow-zoom"
+          style={{ backgroundImage: `url('${tenant.heroImage || "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80"}')` }}
         />
         <div className="absolute inset-0 bg-black/50" />
 
         <div className="relative z-10 flex flex-col items-center px-6 mt-12">
-          <p className="text-white/80 tracking-[0.2em] uppercase text-[12px] md:text-[14px] text-center max-w-[600px] font-bold mb-4">
+          <p className="text-white tracking-[0.2em] uppercase text-[12px] md:text-[14px] text-center max-w-[600px] font-bold mb-4">
             {portalHeroSubtitle}
           </p>
           <h1 className="text-[32px] md:text-[50px] font-[family-name:var(--font-raleway)] font-light text-white tracking-[0.1em] uppercase mb-4 text-center drop-shadow-md">
@@ -101,10 +101,10 @@ export default async function PortalPage(props: {
       <Footer 
          tenantName={tenant.name} 
          domain={tenant.domain}
-         facebookUrl={settings.socialFacebook}
-         instagramUrl={settings.socialInstagram}
-         tiktokUrl={settings.socialTiktok}
-         youtubeUrl={settings.socialYoutube}
+         facebookUrl={settings.facebookUrl}
+         instagramUrl={settings.instagramUrl}
+         tiktokUrl={settings.tiktokUrl}
+         youtubeUrl={settings.youtubeUrl}
          footerText={settings.footerText}
          agentPhoto={settings.agentPhoto}
          agentTitle={settings.agentTitle}

@@ -66,6 +66,7 @@ model Tenant {
   domain      String   @unique // e.g., "andres.com" or "localhost:3000"
   
   // Landing Page configuration (Elena Licari Clone)
+  isActive    Boolean  @default(true)
   heroImage   String?
   heroTitle   String?
   siteSettings String @default("{}")

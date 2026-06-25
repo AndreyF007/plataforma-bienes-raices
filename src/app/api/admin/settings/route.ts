@@ -10,23 +10,34 @@ export async function PATCH(req: NextRequest) {
 
     const user = await db.user.findUnique({
       where: { email: session.user.email as string },
+      include: { tenant: true }
     });
 
     if (!user || !user.tenantId) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
     const { name, heroTitle, heroImage, siteSettings } = await req.json();
 
-    if (!name) {
-      return NextResponse.json({ error: 'El nombre comercial es requerido' }, { status: 400 });
+    if (!name && !siteSettings) {
+      return NextResponse.json({ error: 'Data is required' }, { status: 400 });
+    }
+
+    let newSiteSettings = user.tenant?.siteSettings;
+    if (siteSettings) {
+      try {
+        const currentSettings = user.tenant?.siteSettings ? JSON.parse(user.tenant.siteSettings) : {};
+        newSiteSettings = JSON.stringify({ ...currentSettings, ...siteSettings });
+      } catch (e) {
+        newSiteSettings = JSON.stringify(siteSettings);
+      }
     }
 
     const updated = await db.tenant.update({
       where: { id: user.tenantId },
       data: { 
-        name, 
-        heroTitle, 
-        heroImage,
-        siteSettings: siteSettings ? JSON.stringify(siteSettings) : undefined
+        ...(name && { name }), 
+        ...(heroTitle !== undefined && { heroTitle }), 
+        ...(heroImage !== undefined && { heroImage }),
+        ...(newSiteSettings !== undefined && { siteSettings: newSiteSettings })
       }
     });
 

@@ -90,14 +90,14 @@ export default function ImageUpload({ label, value, onChange, multiple = false }
       {(!value || (multiple && value)) && (
         <div 
           onClick={() => !isUploading && fileInputRef.current?.click()}
-          className={`border-2 border-dashed border-gray-300 p-8 text-center cursor-pointer hover:border-black dark:border-white/20 hover:bg-gray-50 transition-colors flex flex-col items-center justify-center gap-3 ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`border-2 border-dashed border-gray-300 dark:border-neutral-700 p-8 text-center cursor-pointer hover:border-black dark:hover:border-white hover:bg-gray-50 dark:hover:bg-neutral-800 transition-colors flex flex-col items-center justify-center gap-3 ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           {isUploading ? (
             <Loader2 className="w-8 h-8 text-gray-400 animate-spin" />
           ) : (
             <UploadCloud className="w-8 h-8 text-gray-400" />
           )}
-          <div className="text-sm text-gray-600 font-[family-name:var(--font-quicksand)]">
+          <div className="text-sm text-gray-600 dark:text-gray-400 font-[family-name:var(--font-quicksand)]">
             {isUploading ? (
               <span>Subiendo archivo...</span>
             ) : (

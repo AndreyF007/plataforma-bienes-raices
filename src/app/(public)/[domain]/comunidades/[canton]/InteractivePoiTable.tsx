@@ -115,7 +115,7 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
        </div>
 
        {/* Table Header */}
-       <div className="hidden md:grid grid-cols-[2.5fr_1.2fr_1fr_1fr_1.5fr] gap-4 pb-4 border-b border-black/10 text-[11px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.15em] text-black/60 dark:text-white/60 font-semibold">
+       <div className="hidden md:grid grid-cols-[2.5fr_1.2fr_1fr_1fr_1.5fr] gap-4 pb-4 border-b border-black/10 text-[11px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.15em] text-black dark:text-white font-semibold">
           <div>NAME</div>
           <div>CATEGORY</div>
           <div>DISTANCE</div>
@@ -130,7 +130,7 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
                <Loader2 className="w-8 h-8 animate-spin text-black dark:text-white" />
             </div>
          ) : isLoadedAndEmpty ? (
-            <div className="flex flex-col items-center justify-center py-16 text-black/50 dark:text-white/50 text-[14px]">
+            <div className="flex flex-col items-center justify-center py-16 text-black dark:text-white text-[14px]">
                <MapPin className="w-8 h-8 mb-3 opacity-30" />
                <p>No se encontraron lugares en la categoría "{tabs.find(t => t.id === activeTab)?.label}" para {cantonName}.</p>
             </div>
@@ -147,25 +147,25 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
                         {poi.name} <span className="text-[10px]">↗</span>
                       </h4>
                       {poi.address && (
-                        <span className="text-[12px] text-black/60 dark:text-white/60 mt-0.5 line-clamp-1">{poi.address}</span>
+                        <span className="text-[12px] text-black dark:text-white mt-0.5 line-clamp-1">{poi.address}</span>
                       )}
                    </div>
                 </div>
                 
                 {/* CATEGORY */}
                 <div className="hidden md:flex items-center">
-                   <span className="text-[10px] bg-[#f0f0f0] dark:bg-white/10 px-2 py-1 text-black/70 dark:text-white/70 rounded-[2px] uppercase font-semibold tracking-wider">
+                   <span className="text-[10px] bg-[#f0f0f0] dark:bg-white/10 px-2 py-1 text-black dark:text-white rounded-[2px] uppercase font-semibold tracking-wider">
                       {poi.type}
                    </span>
                 </div>
 
                 {/* DISTANCE */}
-                <div className="hidden md:flex items-center text-[12px] text-black/70 dark:text-white/70 font-medium">
+                <div className="hidden md:flex items-center text-[12px] text-black dark:text-white font-medium">
                    {poi.distance}
                 </div>
 
                 {/* REVIEWS */}
-                <div className="hidden md:flex items-center text-[12px] text-black/70 dark:text-white/70 font-medium">
+                <div className="hidden md:flex items-center text-[12px] text-black dark:text-white font-medium">
                    {poi.reviews} reviews
                 </div>
 
@@ -178,7 +178,7 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
                         </div>
                       ))}
                    </div>
-                   <span className="text-[12px] text-black/70 dark:text-white/70 font-medium">{poi.rating || 5}/5</span>
+                   <span className="text-[12px] text-black dark:text-white font-medium">{poi.rating || 5}/5</span>
                 </div>
              </div>
            ))

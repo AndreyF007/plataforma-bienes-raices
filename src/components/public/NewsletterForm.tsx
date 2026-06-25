@@ -67,7 +67,7 @@ export default function NewsletterForm({ tenantName, isMainPage = false }: Newsl
       <div className="flex flex-col items-center justify-center p-8 border border-white/20 bg-white/5 backdrop-blur-md animate-in fade-in zoom-in duration-500 rounded-sm">
         <CheckCircle2 className="w-16 h-16 text-white mb-4" />
         <h3 className="text-[20px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.2em] mb-2">¡Gracias por Unirte!</h3>
-        <p className="text-[14px] text-white/80 font-[family-name:var(--font-quicksand)] text-center">
+        <p className="text-[14px] text-white font-[family-name:var(--font-quicksand)] text-center">
           Tu suscripción ha sido confirmada. Pronto recibirás nuestras exclusivas actualizaciones del mercado inmobiliario.
         </p>
         <button 
@@ -88,7 +88,7 @@ export default function NewsletterForm({ tenantName, isMainPage = false }: Newsl
         value={name}
         onChange={(e) => { setName(e.target.value); if(status==='error') setStatus('idle'); }}
         disabled={status === 'loading'}
-        className="w-full bg-transparent border border-white py-4 px-6 text-white placeholder:text-white/70 font-light focus:outline-none focus:border-white/50 focus:bg-white/5 disabled:opacity-50 transition-all" 
+        className="w-full bg-transparent border border-white py-4 px-6 text-white placeholder:text-white font-light focus:outline-none focus:border-white/50 focus:bg-white/5 disabled:opacity-50 transition-all" 
       />
       
       <input 
@@ -97,7 +97,7 @@ export default function NewsletterForm({ tenantName, isMainPage = false }: Newsl
         value={email}
         onChange={(e) => { setEmail(e.target.value); if(status==='error') setStatus('idle'); }}
         disabled={status === 'loading'}
-        className="w-full bg-transparent border border-white py-4 px-6 text-white placeholder:text-white/70 font-light focus:outline-none focus:border-white/50 focus:bg-white/5 disabled:opacity-50 transition-all" 
+        className="w-full bg-transparent border border-white py-4 px-6 text-white placeholder:text-white font-light focus:outline-none focus:border-white/50 focus:bg-white/5 disabled:opacity-50 transition-all" 
       />
       
       <button 
@@ -124,7 +124,7 @@ export default function NewsletterForm({ tenantName, isMainPage = false }: Newsl
           className="mt-1 w-4 h-4 cursor-pointer" 
           onClick={(e) => e.stopPropagation()}
         />
-        <p className="text-[10px] md:text-[12px] font-[family-name:var(--font-quicksand)] text-white/80 leading-relaxed cursor-pointer select-none">
+        <p className="text-[10px] md:text-[12px] font-[family-name:var(--font-quicksand)] text-white leading-relaxed cursor-pointer select-none">
           {isMainPage ? (
             <>Acepto que {tenantName} se comunique conmigo por teléfono, correo electrónico y mensaje de texto para ofrecerme servicios inmobiliarios. Para darme de baja, puedo responder "stop" en cualquier momento o "help" para obtener ayuda. También puedo hacer clic en el enlace para cancelar la suscripción que aparece en los correos electrónicos. Pueden aplicarse tarifas de mensajes y datos. La frecuencia de los mensajes puede variar. <span className="underline hover:text-white">Política de privacidad</span>.</>
           ) : (

@@ -50,7 +50,7 @@ export default function AccessibilityWidget() {
               <Accessibility className="w-5 h-5" />
               <h3 className="font-[family-name:var(--font-raleway)] text-[14px] font-bold tracking-widest uppercase">Accesibilidad</h3>
             </div>
-            <button onClick={() => setIsOpen(false)} className="hover:text-white/70 transition-colors">
+            <button onClick={() => setIsOpen(false)} className="hover:text-white transition-colors">
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -108,7 +108,7 @@ export default function AccessibilityWidget() {
           <div className="p-4 bg-gray-50 border-t border-black/5">
             <button 
               onClick={resetAll}
-              className="flex items-center justify-center gap-2 w-full py-2 text-[12px] font-bold uppercase tracking-widest text-black/50 dark:text-white/50 hover:text-red-500 transition-colors"
+              className="flex items-center justify-center gap-2 w-full py-2 text-[12px] font-bold uppercase tracking-widest text-black dark:text-white hover:text-red-500 transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
               Restablecer Ajustes
@@ -120,10 +120,10 @@ export default function AccessibilityWidget() {
       {/* Main Trigger Button */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-10 h-10 rounded-full bg-[#0066ff] border border-white/20 text-white flex items-center justify-center shadow-lg hover:bg-white dark:bg-neutral-950 hover:text-[#0066ff] hover:border-[#0066ff] transition-all duration-300"
+        className="w-12 h-12 rounded-full bg-[#0066ff] border border-white/20 text-white flex items-center justify-center shadow-lg hover:bg-white dark:bg-neutral-950 hover:text-[#0066ff] hover:border-[#0066ff] transition-all duration-300"
         aria-label="Abrir menú de accesibilidad"
       >
-        <Accessibility className="w-4 h-4 stroke-[1.5]" />
+        <Accessibility className="w-5 h-5 stroke-[1.5]" />
       </button>
 
     </div>

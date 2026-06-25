@@ -77,19 +77,19 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
             {/* Selects de Propiedad y Precio Exclusivamente */}
             <div className="flex flex-wrap md:flex-nowrap gap-6 w-full md:w-auto justify-center">
                <div className="relative w-full md:w-[280px] group">
-                  <Home className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-black/40 group-hover:text-black dark:text-white transition-colors duration-500" />
+                  <Home className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
                   <select 
                     value={propertyType}
                     onChange={(e) => setPropertyType(e.target.value)}
                     className="w-full pl-14 pr-10 py-4 bg-transparent border border-black/10 rounded-full text-[11px] uppercase tracking-[0.2em] outline-none appearance-none cursor-pointer hover:border-black dark:border-white/20 transition-all duration-500 text-black dark:text-white font-medium"
                   >
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Tipo de Propiedad">Cualquier Tipo</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Casa">Casas</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Apartamento">Apartamentos</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Lote">Lotes</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Edificio">Edificios</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Finca">Fincas</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Local Comercial">Locales Comerciales</option>
+                     <option className="text-black" value="Tipo de Propiedad">Cualquier Tipo</option>
+                     <option className="text-black" value="Casa">Casas</option>
+                     <option className="text-black" value="Apartamento">Apartamentos</option>
+                     <option className="text-black" value="Lote">Lotes</option>
+                     <option className="text-black" value="Edificio">Edificios</option>
+                     <option className="text-black" value="Finca">Fincas</option>
+                     <option className="text-black" value="Local Comercial">Locales Comerciales</option>
                   </select>
                   <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
                      <div className="w-2 h-2 border-b border-r border-black/40 rotate-45 transform -translate-y-1 group-hover:border-black dark:border-white/20 transition-colors duration-500"></div>
@@ -97,17 +97,17 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
                </div>
 
                <div className="relative w-full md:w-[280px] group">
-                  <DollarSign className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-black/40 group-hover:text-black dark:text-white transition-colors duration-500" />
+                  <DollarSign className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
                   <select 
                     value={priceRange}
                     onChange={(e) => setPriceRange(e.target.value)}
                     className="w-full pl-14 pr-10 py-4 bg-transparent border border-black/10 rounded-full text-[11px] uppercase tracking-[0.2em] outline-none appearance-none cursor-pointer hover:border-black dark:border-white/20 transition-all duration-500 text-black dark:text-white font-medium"
                   >
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Cualquier Precio">Cualquier Presupuesto</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="< $500k">Menos de $500k (₡260M)</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="$500k - $1M">$500k - $1M (₡260M - ₡520M)</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="$1M - $3M">$1M - $3M (₡520M - ₡1.5B)</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="+ $3M">Más de $3M (₡1.5B+)</option>
+                     <option className="text-black" value="Cualquier Precio">Cualquier Presupuesto</option>
+                     <option className="text-black" value="< $500k">Menos de $500k (₡260M)</option>
+                     <option className="text-black" value="$500k - $1M">$500k - $1M (₡260M - ₡520M)</option>
+                     <option className="text-black" value="$1M - $3M">$1M - $3M (₡520M - ₡1.5B)</option>
+                     <option className="text-black" value="+ $3M">Más de $3M (₡1.5B+)</option>
                   </select>
                   <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
                      <div className="w-2 h-2 border-b border-r border-black/40 rotate-45 transform -translate-y-1 group-hover:border-black dark:border-white/20 transition-colors duration-500"></div>
@@ -115,15 +115,15 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
                </div>
 
                <div className="relative w-full md:w-[280px] group">
-                  <Tag className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-black/40 group-hover:text-black dark:text-white transition-colors duration-500" />
+                  <Tag className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
                   <select 
                     value={statusType}
                     onChange={(e) => setStatusType(e.target.value)}
                     className="w-full pl-14 pr-10 py-4 bg-transparent border border-black/10 rounded-full text-[11px] uppercase tracking-[0.2em] outline-none appearance-none cursor-pointer hover:border-black dark:border-white/20 transition-all duration-500 text-black dark:text-white font-medium"
                   >
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Operación">Venta o Alquiler</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Venta">En Venta</option>
-                     <option className="text-black dark:text-white bg-white dark:bg-neutral-900" value="Alquiler">En Alquiler</option>
+                     <option className="text-black" value="Operación">Venta o Alquiler</option>
+                     <option className="text-black" value="Venta">En Venta</option>
+                     <option className="text-black" value="Alquiler">En Alquiler</option>
                   </select>
                   <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none">
                      <div className="w-2 h-2 border-b border-r border-black/40 rotate-45 transform -translate-y-1 group-hover:border-black dark:border-white/20 transition-colors duration-500"></div>
@@ -137,7 +137,7 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
       <section className="w-full py-[80px] px-6">
          <div className="max-w-[1400px] mx-auto">
             <div className="flex flex-col md:flex-row justify-between md:items-end mb-8 border-b border-black/10 pb-4 gap-4">
-               <span className="text-[13px] text-black/60 dark:text-white/60 uppercase tracking-[0.1em]">
+               <span className="text-[13px] text-black dark:text-white uppercase tracking-[0.1em]">
                   Mostrando {filteredProperties.length} {filteredProperties.length === 1 ? 'Propiedad' : 'Propiedades'} 
                   {initialCanton ? ` en ${initialCanton}` : ''}
                </span>
@@ -146,20 +146,25 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
                  onChange={(e) => setSortOrder(e.target.value)}
                  className="bg-transparent text-[12px] uppercase tracking-[0.1em] text-black dark:text-white outline-none cursor-pointer font-medium w-auto"
                >
-                  <option value="Más Recientes">Más Recientes</option>
-                  <option value="Precio: Mayor a Menor">Precio: Mayor a Menor</option>
-                  <option value="Precio: Menor a Mayor">Precio: Menor a Mayor</option>
+                  <option className="bg-white dark:bg-neutral-900 text-black dark:text-white" value="Más Recientes">Más Recientes</option>
+                  <option className="bg-white dark:bg-neutral-900 text-black dark:text-white" value="Precio: Mayor a Menor">Precio: Mayor a Menor</option>
+                  <option className="bg-white dark:bg-neutral-900 text-black dark:text-white" value="Precio: Menor a Mayor">Precio: Menor a Mayor</option>
                </select>
             </div>
 
             {displayedProperties.length > 0 ? (
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500">
+               <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pb-8 transition-all duration-500" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   {displayedProperties.map(prop => (
-                     <PropertyCard key={prop.id} prop={prop} />
+                     <div key={prop.id} className="min-w-[85vw] shrink-0 snap-center md:min-w-0 md:shrink md:w-auto">
+                        <PropertyCard prop={prop} />
+                     </div>
                   ))}
+                  <style dangerouslySetInnerHTML={{__html: `
+                    .hide-scrollbar::-webkit-scrollbar { display: none; }
+                  `}} />
                </div>
             ) : (
-               <div className="flex flex-col items-center justify-center py-32 text-black/50 dark:text-white/50 animate-in fade-in duration-700">
+               <div className="flex flex-col items-center justify-center py-32 text-black dark:text-white animate-in fade-in duration-700">
                   <MapPin className="w-12 h-12 mb-4 opacity-20" />
                   <p className="text-[18px] font-medium text-black dark:text-white mb-2">No se encontraron propiedades</p>
                   <p className="text-[14px] max-w-[400px] text-center">

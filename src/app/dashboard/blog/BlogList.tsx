@@ -3,6 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Edit2, Trash2, CheckCircle, XCircle } from "lucide-react";
+import dynamic from "next/dynamic";
+import "react-quill-new/dist/quill.snow.css";
+
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 type BlogPost = {
   id: string;
@@ -150,7 +154,7 @@ export default function BlogList({ initialPosts, tenantId }: { initialPosts: Blo
         <h2 className="text-xl font-medium text-black dark:text-white">Artículos Publicados ({posts.length})</h2>
         <button 
           onClick={() => handleOpenModal()}
-          className="flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-6 py-3 text-sm tracking-wider uppercase font-medium hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 text-sm tracking-wider uppercase font-medium hover:bg-blue-700 transition-colors rounded shadow-sm"
         >
           <Plus className="w-4 h-4" /> Nuevo Artículo
         </button>
@@ -274,8 +278,8 @@ export default function BlogList({ initialPosts, tenantId }: { initialPosts: Blo
                     onChange={(e) => setPublished(e.target.value === "true")}
                     className="p-3 bg-transparent border border-neutral-300 dark:border-neutral-700 focus:outline-none focus:border-black dark:focus:border-white w-full text-black dark:text-white"
                   >
-                    <option value="false">Borrador</option>
-                    <option value="true">Publicado</option>
+                    <option value="false" className="text-black">Borrador</option>
+                    <option value="true" className="text-black">Publicado</option>
                   </select>
                 </div>
               </div>
@@ -284,30 +288,42 @@ export default function BlogList({ initialPosts, tenantId }: { initialPosts: Blo
                 <label className="text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">Imagen de Portada</label>
                 <div className="flex items-center gap-4">
                   {selectedFile ? (
-                    <div className="w-32 h-20 bg-neutral-200 border border-neutral-300 flex items-center justify-center text-xs text-neutral-500 overflow-hidden px-2 text-center">
+                    <div className="w-32 h-20 bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 flex items-center justify-center text-xs text-neutral-500 overflow-hidden px-2 text-center">
                       {selectedFile.name}
                     </div>
                   ) : image ? (
-                    <img src={image} alt="Preview" className="w-32 h-20 object-cover border border-neutral-300" />
+                    <img src={image} alt="Preview" className="w-32 h-20 object-cover border border-neutral-300 dark:border-neutral-700" />
                   ) : null}
-                  <input 
-                    type="file" 
-                    accept="image/*"
-                    onChange={(e) => e.target.files && setSelectedFile(e.target.files[0])}
-                    className="text-sm"
-                  />
+                  <label className="cursor-pointer flex items-center justify-center px-6 py-3 border border-black dark:border-white text-xs uppercase tracking-wider font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
+                    {selectedFile || image ? "Cambiar Imagen" : "Subir Imagen"}
+                    <input 
+                      type="file" 
+                      accept="image/*"
+                      onChange={(e) => e.target.files && setSelectedFile(e.target.files[0])}
+                      className="hidden"
+                    />
+                  </label>
                 </div>
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">Contenido del Artículo (HTML Básico)</label>
-                <p className="text-[10px] text-neutral-500 mb-1">Puedes usar etiquetas HTML como &lt;h2&gt;, &lt;p&gt;, &lt;b&gt;, &lt;ul&gt; para dar formato.</p>
-                <textarea 
-                  value={content} 
-                  onChange={(e) => setContent(e.target.value)}
-                  className="p-4 bg-transparent border border-neutral-300 dark:border-neutral-700 focus:outline-none focus:border-black dark:focus:border-white w-full h-64 font-mono text-sm"
-                  required
-                />
+                <label className="text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">Contenido del Artículo</label>
+                <div className="bg-white text-black border border-neutral-300 dark:border-neutral-700 min-h-[400px] quill-editor-wrapper">
+                  <ReactQuill 
+                    theme="snow" 
+                    value={content} 
+                    onChange={setContent} 
+                    style={{ height: '350px', background: 'white', color: 'black' }}
+                    modules={{
+                      toolbar: [
+                        [{ 'header': [2, 3, 4, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['link', 'clean']
+                      ],
+                    }}
+                  />
+                </div>
               </div>
 
               <div className="flex justify-end gap-4 mt-4 pt-6 border-t border-neutral-200 dark:border-neutral-800">

@@ -53,9 +53,20 @@ export default async function DashboardLayout({
           <a href="/dashboard/newsletter" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-sm transition-colors">
             <Mail className="w-4 h-4" /> Lista VIP
           </a>
+          <a href="/dashboard/guias" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-sm transition-colors">
+            <BookOpen className="w-4 h-4" /> Guías
+          </a>
           <a href="/dashboard/settings" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-sm transition-colors">
             <Settings className="w-4 h-4" /> Configuración
           </a>
+
+          {user?.role === 'superadmin' && (
+            <div className="pt-4 mt-4 border-t border-white/10">
+              <a href="/superadmin" className="flex items-center gap-3 px-4 py-3 text-sm font-bold text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded-sm transition-colors">
+                🏢 Panel de Agencia
+              </a>
+            </div>
+          )}
         </nav>
         
         <div className="p-4 border-t border-white/10 space-y-2">

@@ -18,11 +18,11 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
   const backgrounds = [
-    "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80", // Nevado (Montañas)
-    "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=80", // Bosque con niebla
-    "https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=2000&q=80", // Río / Cascada
-    "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=2000&q=80", // Valle verde
-    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=2000&q=80"  // Montañas majestuosas
+    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80", // Nevado (Montañas)
+    "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=2000&q=80", // Bosque con niebla
+    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=80", // Río / Cascada
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80", // Valle verde
+    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2000&q=80"  // Montañas majestuosas
   ];
 
   useEffect(() => {
@@ -86,13 +86,14 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
       <div className="relative z-10 w-full max-w-[1000px] mx-auto px-4 md:px-16 flex flex-col items-center">
         
         {/* Section Title */}
-        <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] font-light tracking-[0.25em] text-white/80 uppercase mb-16 text-center">
+        <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] font-light tracking-[0.25em] text-white uppercase mb-16 text-center">
           LO QUE DICEN NUESTROS CLIENTES
         </p>
 
         {/* Sleek Side Arrows (Hidden on mobile, absolute positioning) */}
         <button 
           onClick={prev} 
+          aria-label="Testimonio anterior"
           className="hidden md:flex absolute left-0 top-[60%] -translate-y-1/2 w-12 h-12 border border-white/30 rounded-full items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-all duration-300 text-white"
         >
           <ChevronLeft className="w-5 h-5 stroke-[1.5]" />
@@ -100,6 +101,7 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
         
         <button 
           onClick={next} 
+          aria-label="Siguiente testimonio"
           className="hidden md:flex absolute right-0 top-[60%] -translate-y-1/2 w-12 h-12 border border-white/30 rounded-full items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-all duration-300 text-white"
         >
           <ChevronRight className="w-5 h-5 stroke-[1.5]" />
@@ -109,7 +111,7 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
         <div className="w-full flex flex-col items-center text-center px-4 transition-all duration-500 ease-in-out">
           
           {/* Luxury Quote Mark */}
-          <div className="text-[120px] leading-none font-serif text-white/20 select-none mb-[-40px]">
+          <div className="text-[120px] leading-none font-serif text-white select-none mb-[-40px]">
             "
           </div>
 
@@ -121,7 +123,7 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
           {/* Stars */}
           <div className="flex gap-1.5 mb-8">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className={`w-4 h-4 ${i < displayData[currentIndex].rating ? "fill-white text-white" : "text-white/20"}`} />
+              <Star key={i} className={`w-4 h-4 ${i < displayData[currentIndex].rating ? "fill-white text-white" : "text-white"}`} />
             ))}
           </div>
 
@@ -131,7 +133,7 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
             <h3 className="text-[14px] md:text-[16px] font-[family-name:var(--font-raleway)] font-semibold uppercase tracking-[0.25em] mb-2 text-white">
               {displayData[currentIndex].clientName}
             </h3>
-            <p className="text-[10px] md:text-[11px] uppercase tracking-widest text-white/50">
+            <p className="text-[10px] md:text-[11px] uppercase tracking-widest text-white">
               {displayData[currentIndex].role}
             </p>
           </div>
@@ -140,10 +142,10 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
 
         {/* Mobile Arrows (Visible only on small screens) */}
         <div className="flex md:hidden gap-4 mt-12 text-white">
-          <button onClick={prev} className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-all duration-300">
+          <button onClick={prev} aria-label="Testimonio anterior" className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-all duration-300">
             <ChevronLeft className="w-5 h-5 stroke-[1.5]" />
           </button>
-          <button onClick={next} className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-all duration-300">
+          <button onClick={next} aria-label="Siguiente testimonio" className="w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white dark:bg-neutral-950 hover:text-black dark:text-white transition-all duration-300">
             <ChevronRight className="w-5 h-5 stroke-[1.5]" />
           </button>
         </div>
@@ -157,13 +159,13 @@ export default function TestimonialSlider({ tenantName }: { tenantName: string }
           </button>
         </div>
 
-        <TestimonialSubmitModal 
-          tenantName={tenantName}
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
-
       </div>
+
+      <TestimonialSubmitModal 
+        tenantName={tenantName}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 }

@@ -5,7 +5,7 @@ import { X, Lock, Loader2, AlertCircle } from 'lucide-react';
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export default function AdminLoginModal() {
+export default function AdminLoginModal({ tenantName }: { tenantName?: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +39,7 @@ export default function AdminLoginModal() {
         onClick={(e) => { e.preventDefault(); setIsOpen(true); }}
         className="hover:text-white transition-colors opacity-50 hover:opacity-100"
       >
-        Portal
+        Acceso Agente
       </button>
 
       {isOpen && (
@@ -59,7 +59,7 @@ export default function AdminLoginModal() {
               <div className="flex items-center gap-3">
                 <Lock className="w-5 h-5 text-black dark:text-white" />
                 <h2 className="text-[14px] font-[family-name:var(--font-raleway)] uppercase tracking-widest font-bold">
-                  Acceso Privado
+                  Acceso Privado Agente
                 </h2>
               </div>
               <button 
@@ -74,8 +74,10 @@ export default function AdminLoginModal() {
             <form onSubmit={handleSubmit} className="p-8 flex flex-col gap-6 text-left">
               
               <div className="text-center mb-4">
-                <h1 className="text-[24px] font-light uppercase tracking-widest text-black dark:text-white mb-2 font-[family-name:var(--font-raleway)]">Portal Admin</h1>
-                <p className="text-[12px] text-gray-500 font-[family-name:var(--font-quicksand)]">Accede a tu panel para gestionar propiedades y testimonios.</p>
+                <h1 className="text-[24px] font-light uppercase tracking-widest text-black dark:text-white mb-2 font-[family-name:var(--font-raleway)]">
+                  {tenantName ? `Portal de ${tenantName}` : 'Portal Agente'}
+                </h1>
+                <p className="text-[12px] text-gray-500 font-[family-name:var(--font-quicksand)]">Accede a tu panel para gestionar tus propiedades y clientes.</p>
               </div>
 
               {/* Error Message */}
@@ -87,7 +89,7 @@ export default function AdminLoginModal() {
               )}
 
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-black/70">Correo Electrónico</label>
+                <label className="text-[10px] uppercase tracking-widest font-bold text-black">Correo Electrónico</label>
                 <input 
                   type="email" 
                   value={email}
@@ -99,7 +101,7 @@ export default function AdminLoginModal() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-black/70">Contraseña</label>
+                <label className="text-[10px] uppercase tracking-widest font-bold text-black">Contraseña</label>
                 <input 
                   type="password" 
                   value={password}

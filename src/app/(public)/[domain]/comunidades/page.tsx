@@ -25,20 +25,20 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
   return (
     <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
       
-      <Navbar tenantName={tenantData.name} />
-      <FloatingContact />
+      <Navbar tenantName={tenantData.name} contactPhone={settings?.contactPhone} contactEmail={settings?.contactEmail} />
+      <FloatingContact contactEmail={settings.contactEmail} contactPhone={settings.contactPhone} />
 
       {/* 1. HERO SECTION */}
       <section className="relative w-full h-[50vh] md:h-[60vh] flex flex-col justify-center items-center overflow-hidden bg-black pt-20 border-b border-black/10 dark:border-white/10">
         <HeroGrid />
         <div className="relative z-30 flex flex-col items-center text-center px-6 mt-10 max-w-[900px]">
-          <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] text-white/80 uppercase tracking-[0.2em] mb-4 drop-shadow-md">
+          <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] text-white uppercase tracking-[0.2em] mb-4 drop-shadow-md">
             CANTONES DE COSTA RICA
           </p>
           <h1 className="text-[36px] md:text-[60px] font-[family-name:var(--font-raleway)] font-light text-white tracking-[0.2em] uppercase mb-8 leading-tight drop-shadow-lg">
             ÁREAS DE EXPERIENCIA
           </h1>
-          <p className="text-[16px] md:text-[20px] text-white/90 font-[family-name:var(--font-quicksand)] leading-[1.6] drop-shadow-md">
+          <p className="text-[16px] md:text-[20px] text-white font-[family-name:var(--font-quicksand)] leading-[1.6] drop-shadow-md">
             Explore nuestras propiedades en los 84 cantones del país.
           </p>
         </div>
@@ -53,7 +53,7 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
          <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] text-black dark:text-white mb-8 max-w-[800px] leading-tight">
            "La filosofía de {tenantData.name} es simple: los clientes son lo primero."
          </h2>
-         <p className="text-[16px] md:text-[18px] text-black/80 dark:text-white/80 font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[40px]">
+         <p className="text-[16px] md:text-[18px] text-black dark:text-white font-[family-name:var(--font-quicksand)] leading-[1.8] max-w-[800px] mb-[40px]">
            Se compromete a estar en constante comunicación con sus clientes, manteniéndolos completamente informados durante todo el proceso de compra o venta.
          </p>
       </section>

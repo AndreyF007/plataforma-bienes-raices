@@ -5,9 +5,10 @@ import { Loader2 } from 'lucide-react';
 
 interface ValuationFormProps {
   tenantId: string;
+  bgImage?: string;
 }
 
-export default function ValuationForm({ tenantId }: ValuationFormProps) {
+export default function ValuationForm({ tenantId, bgImage }: ValuationFormProps) {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -70,7 +71,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
   };
 
   return (
-    <section id="valoracion" className="relative w-full min-h-[600px] flex items-center justify-center py-20 px-4 bg-[url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center bg-no-repeat bg-fixed">
+    <section id="valoracion" className="relative w-full min-h-[600px] flex items-center justify-center py-20 px-4 bg-cover bg-center bg-no-repeat bg-fixed" style={{ backgroundImage: `url('${bgImage || "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1920&q=80"}')` }}>
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/60 z-0"></div>
 
@@ -80,7 +81,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
         <div className="flex gap-12 items-center mb-16 relative">
           {[1, 2, 3].map((num) => (
              <div key={num} className="flex flex-col items-center relative z-10">
-               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-[family-name:var(--font-raleway)] transition-colors duration-500 ${step === num ? 'bg-[#e5d4c3] text-black dark:text-white font-bold' : step > num ? 'text-white' : 'text-white/50'}`}>
+               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-[family-name:var(--font-raleway)] transition-colors duration-500 ${step === num ? 'bg-[#e5d4c3] text-black dark:text-white font-bold' : step > num ? 'text-white' : 'text-white'}`}>
                  {num}
                </div>
              </div>
@@ -98,7 +99,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
               <h2 className="text-[24px] md:text-[32px] font-[family-name:var(--font-raleway)] font-light text-white uppercase tracking-[0.2em] mb-4">
                 ¿CUÁNTO VALE SU CASA?
               </h2>
-              <p className="text-[14px] text-white/80 font-[family-name:var(--font-quicksand)] mb-12">
+              <p className="text-[14px] text-white font-[family-name:var(--font-quicksand)] mb-12">
                 Ingrese su dirección para recibir una valoración detallada.
               </p>
               
@@ -128,7 +129,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
               <h2 className="text-[20px] md:text-[24px] font-[family-name:var(--font-raleway)] font-light text-white uppercase tracking-[0.2em] mb-2 text-center">
                 INFORMACIÓN DE CONTACTO
               </h2>
-              <p className="text-[14px] text-white/80 font-[family-name:var(--font-quicksand)] uppercase tracking-widest mb-10 text-center">
+              <p className="text-[14px] text-white font-[family-name:var(--font-quicksand)] uppercase tracking-widest mb-10 text-center">
                 ¡YA CASI ESTAMOS! ESTÁS A 1 PASO DE DISTANCIA
               </p>
 
@@ -173,7 +174,7 @@ export default function ValuationForm({ tenantId }: ValuationFormProps) {
                     type="checkbox" name="consent" required checked={formData.consent} onChange={handleChange}
                     className="mt-1 bg-transparent border-white/50"
                   />
-                  <p className="text-[10px] text-white/70 leading-relaxed font-[family-name:var(--font-quicksand)] text-justify">
+                  <p className="text-[10px] text-white leading-relaxed font-[family-name:var(--font-quicksand)] text-justify">
                     Acepto ser contactado vía llamada, correo electrónico y mensaje de texto para servicios inmobiliarios. Para optar por no participar, puede responder 'detener' en cualquier momento o responder 'ayuda' para obtener ayuda. También puede hacer clic en el enlace para cancelar la suscripción en los correos electrónicos. Es posible que se apliquen tarifas por mensajes y datos. La frecuencia de los mensajes puede variar. <a href="#" className="underline hover:text-white">Política de privacidad</a>.
                   </p>
                 </div>

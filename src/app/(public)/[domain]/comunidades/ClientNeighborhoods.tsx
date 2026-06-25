@@ -96,10 +96,10 @@ function ClientNeighborhoodsContent() {
                   <button
                     key={prov}
                     onClick={() => setSelectedProvince(prov)}
-                    className={`px-4 py-2 text-[10px] md:text-[12px] uppercase tracking-[0.1em] font-medium transition-all duration-300 border-b-2 ${
+                    className={`px-4 py-2 text-[10px] md:text-[12px] uppercase tracking-[0.1em] font-medium transition-all duration-300 border-b-2 hover:-translate-y-1 hover:scale-105 ${
                       selectedProvince === prov 
-                        ? 'border-black dark:border-white/20 text-black dark:text-white' 
-                        : 'border-transparent text-black/40 hover:text-black/80 dark:text-white/60 dark:hover:text-white'
+                        ? 'border-black dark:border-white text-black dark:text-white' 
+                        : 'border-transparent text-black dark:text-white'
                     }`}
                   >
                     {prov}
@@ -114,15 +114,15 @@ function ClientNeighborhoodsContent() {
                   placeholder="BUSCAR CANTÓN..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full bg-transparent text-black dark:text-white border-b border-black/30 dark:border-white/20 py-2 pl-8 pr-4 text-[12px] uppercase tracking-[0.1em] font-light focus:outline-none focus:border-black dark:focus:border-white/50 placeholder:text-black/30 dark:placeholder:text-white/30"
+                  className="w-full bg-transparent text-black dark:text-white border-b border-black/30 dark:border-white/20 py-2 pl-8 pr-4 text-[12px] uppercase tracking-[0.1em] font-light focus:outline-none focus:border-black dark:focus:border-white/50 placeholder:text-black dark:placeholder:text-white"
                 />
-                <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-black/40 dark:text-white/40" />
+                <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-black dark:text-white" />
              </div>
              
           </div>
 
           {/* Resultados de Búsqueda Info */}
-          <div className="text-[12px] text-black/50 dark:text-white/50 uppercase tracking-[0.1em] mb-8">
+          <div className="text-[12px] text-black dark:text-white uppercase tracking-[0.1em] mb-8">
             MOSTRANDO {filteredCantons.length} {filteredCantons.length === 1 ? 'CANTÓN' : 'CANTONES'} EN {selectedProvince.toUpperCase()}
           </div>
        </div>
@@ -147,7 +147,7 @@ function ClientNeighborhoodsContent() {
                  <h3 className="text-white text-[18px] md:text-[22px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.15em] mb-2 group-hover:-translate-y-4 transition-transform duration-500">
                    {hood.name}
                  </h3>
-                 <span className="text-white/60 text-[10px] uppercase tracking-[0.2em] mb-4 group-hover:-translate-y-4 transition-transform duration-500 delay-75">
+                 <span className="text-white text-[10px] uppercase tracking-[0.2em] mb-4 group-hover:-translate-y-4 transition-transform duration-500 delay-75">
                    {hood.province}
                  </span>
                  
@@ -163,8 +163,8 @@ function ClientNeighborhoodsContent() {
          </div>
        ) : (
          <div className="w-full py-20 text-center flex flex-col items-center justify-center min-h-[300px]">
-            <Search className="w-12 h-12 text-black/20 mb-4" />
-            <p className="text-[14px] text-black/50 dark:text-white/50 uppercase tracking-[0.1em] font-light">NO SE ENCONTRARON CANTONES CON ESE NOMBRE.</p>
+            <Search className="w-12 h-12 text-black mb-4" />
+            <p className="text-[14px] text-black dark:text-white uppercase tracking-[0.1em] font-light">NO SE ENCONTRARON CANTONES CON ESE NOMBRE.</p>
          </div>
        )}
     </div>

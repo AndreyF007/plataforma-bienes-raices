@@ -13,6 +13,11 @@ export default async function BlogPostPage(props: { params: Promise<{ domain: st
   const tenantData = await db.tenant.findUnique({
     where: { domain: decodedDomain },
   });
+  let settings: any = {};
+  try {
+    settings = JSON.parse(tenantData?.siteSettings || "{}");
+  } catch(e) {}
+
   
   if (!tenantData) return notFound();
 
@@ -32,13 +37,13 @@ export default async function BlogPostPage(props: { params: Promise<{ domain: st
 
   return (
     <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
-      <Navbar tenantName={tenantData.name} />
-      <FloatingContact />
+      <Navbar tenantName={tenantData.name} contactPhone={settings?.contactPhone} contactEmail={settings?.contactEmail} />
+      <FloatingContact contactEmail={settings.contactEmail} contactPhone={settings.contactPhone} />
 
       <article className="w-full pt-32 pb-24">
         {/* Header */}
         <header className="max-w-[1000px] mx-auto px-6 mb-12 text-center">
-          <div className="flex items-center justify-center text-[12px] md:text-[14px] font-bold uppercase tracking-[0.2em] text-black/60 dark:text-white/60 mb-6">
+          <div className="flex items-center justify-center text-[12px] md:text-[14px] font-bold uppercase tracking-[0.2em] text-black dark:text-white mb-6">
             <span>{post.category}</span>
             <span className="mx-3 w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40"></span>
             <span>{formatDate(post.createdAt)}</span>
@@ -77,7 +82,18 @@ export default async function BlogPostPage(props: { params: Promise<{ domain: st
         </div>
       </article>
 
-      <Footer tenantName={tenantData.name} />
+      <Footer 
+        tenantName={tenantData.name} 
+        domain={tenantData.domain}
+        facebookUrl={settings.facebookUrl}
+        instagramUrl={settings.instagramUrl}
+        youtubeUrl={settings.youtubeUrl}
+        tiktokUrl={settings.tiktokUrl}
+        agentPhoto={settings.agentPhoto}
+        agentTitle={settings.agentTitle}
+        contactEmail={settings.contactEmail}
+        contactPhone={settings.contactPhone}
+      />
     </main>
   );
 }

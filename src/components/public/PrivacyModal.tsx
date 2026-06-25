@@ -48,7 +48,7 @@ export default function PrivacyModal({ tenantName }: PrivacyModalProps) {
             </div>
 
             {/* Scrollable Body */}
-            <div className="overflow-y-auto p-6 md:p-10 text-[14px] leading-[1.8] font-[family-name:var(--font-quicksand)] text-black/80 dark:text-white/80 flex flex-col gap-6 text-left">
+            <div className="overflow-y-auto p-6 md:p-10 text-[14px] leading-[1.8] font-[family-name:var(--font-quicksand)] text-black dark:text-white flex flex-col gap-6 text-left">
               
               <p>Última actualización: <strong>Octubre 2026</strong></p>
               

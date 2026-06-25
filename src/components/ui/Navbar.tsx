@@ -6,7 +6,15 @@ import Link from 'next/link';
 import NewsletterModal from '../public/NewsletterModal';
 import { ThemeToggle } from '../ThemeToggle';
 
-export default function Navbar({ tenantName }: { tenantName: string }) {
+export default function Navbar({ 
+  tenantName, 
+  contactPhone = "+506 6041 3905", 
+  contactEmail = "info@andresrealty.com"
+}: { 
+  tenantName: string; 
+  contactPhone?: string; 
+  contactEmail?: string; 
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -19,6 +27,10 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const initials = tenantName.split(' ').length >= 2 
+    ? (tenantName.split(' ')[0][0] + tenantName.split(' ')[1][0]).toUpperCase() 
+    : tenantName.substring(0, 2).toUpperCase();
+
   return (
     <>
       <nav className={`fixed top-0 w-full z-[90] transition-all duration-300 ${scrolled ? 'bg-white/50 dark:bg-black/50 backdrop-blur-xl border-b border-black/5 dark:border-white/10 shadow-sm py-2' : 'bg-transparent py-4'}`}>
@@ -28,7 +40,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
           <div className="flex flex-1 lg:hidden">
             <div className="flex flex-col items-center w-fit">
                <div className={`w-8 h-8 rounded-full border flex items-center justify-center ${scrolled ? 'border-black dark:border-white' : 'border-white'}`}>
-                 <span className={`text-[10px] font-light ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>EL</span>
+                 <span className={`text-[10px] font-light ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>{initials}</span>
                </div>
                <span className={`text-[8px] tracking-[0.2em] uppercase mt-1 ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>{tenantName}</span>
             </div>
@@ -54,7 +66,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
                     setIsNewsletterOpen(true);
                   }
                 }}
-                className={`whitespace-nowrap text-[8.5px] xl:text-[9.5px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.1em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}
+                className={`whitespace-nowrap text-[10.5px] xl:text-[12px] font-[family-name:var(--font-raleway)] font-semibold tracking-[0.1em] hover:opacity-50 transition-opacity drop-shadow-md ${scrolled ? 'text-black dark:text-white drop-shadow-none' : 'text-white'}`}
               >
                 {item.label}
               </Link>
@@ -62,12 +74,15 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
           </div>
           
           <div className="flex flex-1 justify-end items-center gap-4 lg:gap-6">
-            <a href="https://wa.me/50660413905" target="_blank" rel="noopener noreferrer" className={`whitespace-nowrap hidden lg:block text-[11px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.15em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>
-              +506 6041 3905
-            </a>
+            {contactPhone && (
+              <a href={`https://wa.me/${contactPhone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp" className={`whitespace-nowrap text-[11px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.15em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>
+                {contactPhone}
+              </a>
+            )}
             <ThemeToggle className={scrolled ? 'text-black dark:text-white' : 'text-white'} />
             <button 
               onClick={() => setIsOpen(true)} 
+              aria-label="Abrir menú de navegación"
               className={`p-2 hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}
             >
               <Menu className="w-8 h-8 stroke-1" />
@@ -84,32 +99,47 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
       />
 
       {/* Fullscreen Menu */}
-      <div className={`fixed inset-0 bg-white dark:bg-black z-[100] transition-transform duration-500 flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="w-full px-6 h-20 flex justify-between items-center border-b border-black/10 dark:border-white/10">
+      <div className={`fixed inset-0 z-[100] transition-transform duration-500 flex flex-col ${isOpen ? 'translate-x-0' : 'translate-x-full'} overflow-hidden`}>
+        
+        {/* Static Costa Rica Flag Background */}
+        <div className="absolute inset-0 pointer-events-none -z-10">
+          <div style={{
+            width: '100%',
+            height: '100%',
+            background: `linear-gradient(to bottom, 
+              #001489 0%, #001489 16.66%, 
+              #FFFFFF 16.66%, #FFFFFF 33.33%, 
+              #DA291C 33.33%, #DA291C 66.66%, 
+              #FFFFFF 66.66%, #FFFFFF 83.33%, 
+              #001489 83.33%, #001489 100%)`
+          }} />
+        </div>
+        
+        {/* Dark Glass Overlay for Text Readability */}
+        <div className="absolute inset-0 bg-black/80 backdrop-blur-md pointer-events-none" style={{ zIndex: 1 }}></div>
+
+        <div className="relative z-10 w-full px-6 h-20 flex justify-between items-center border-b border-white/20">
            <div className="flex flex-col items-center w-fit">
-               <div className="w-8 h-8 rounded-full border border-black dark:border-white flex items-center justify-center">
-                 <span className="text-[10px] font-light text-black dark:text-white">EL</span>
+               <div className="w-8 h-8 rounded-full border border-white flex items-center justify-center shadow-lg">
+                 <span className="text-[10px] font-light text-white drop-shadow-md">{initials}</span>
                </div>
-               <span className="text-[8px] tracking-[0.2em] uppercase mt-1 text-black dark:text-white">{tenantName}</span>
+               <span className="text-[8px] tracking-[0.2em] uppercase mt-1 text-white drop-shadow-md">{tenantName}</span>
             </div>
-          <button onClick={() => setIsOpen(false)} className="p-2 text-black dark:text-white">
+          <button onClick={() => setIsOpen(false)} aria-label="Cerrar menú de navegación" className="p-2 text-white drop-shadow-md">
             <X className="w-8 h-8 stroke-1" />
           </button>
         </div>
         
-        <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col items-center text-center">
+        <div className="relative z-10 flex-1 overflow-y-auto px-6 py-8 flex flex-col items-center text-center">
            {[
              { label: 'INICIO', href: '/' },
              { label: `SOBRE ${tenantName.split(' ')[0]}`, href: '/#about' },
-             { label: `CHARLA SINCERA CON ${tenantName.split(' ')[0]}`, href: '/charla' },
-             { label: 'VALORACIÓN DE LA VIVIENDA', href: '/valoracion' },
+             { label: 'VALORACIÓN DE LA VIVIENDA', href: '/#valoracion' },
              { label: 'ZONAS DE COBERTURA', href: '/comunidades' },
              { label: 'TESTIMONIOS', href: '/#testimonios' },
-             { label: 'RECURSOS', href: '/recursos' },
-             { label: 'REPARAR Y VENDER', href: '/reparar' },
              { label: 'BLOG', href: '/blog' },
              { label: 'BOLETÍN', href: '/#newsletter' },
-             { label: 'CONECTEMOS', href: 'mailto:info@example.com' },
+             { label: 'HABLEMOS', href: `mailto:${contactEmail || 'info@example.com'}` },
              { label: 'MI PORTAL DE BÚSQUEDA', href: '/portal' }
            ].map((item, idx) => (
              <Link 
@@ -126,7 +156,7 @@ export default function Navbar({ tenantName }: { tenantName: string }) {
                     setIsOpen(false);
                   }
                 }}
-                className="text-[18px] md:text-[24px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-6 text-black dark:text-white hover:opacity-50 transition-opacity"
+                className="text-[18px] md:text-[24px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-6 text-white drop-shadow-xl shadow-black hover:opacity-50 hover:scale-105 transition-all duration-300"
              >
                {item.label}
              </Link>
