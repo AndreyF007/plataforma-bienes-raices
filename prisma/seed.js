@@ -10,12 +10,13 @@ async function main() {
     console.log('Seeding comprehensive dataset from seed_data.json...');
     const data = JSON.parse(fs.readFileSync(seedPath, 'utf8'));
 
+    const tenantIdMap = {};
+
     for (const tenant of (data.Tenant || [])) {
-      await prisma.tenant.upsert({
-        where: { id: tenant.id },
+      const upserted = await prisma.tenant.upsert({
+        where: { domain: tenant.domain },
         update: {
           name: tenant.name,
-          domain: tenant.domain,
           isActive: Boolean(tenant.isActive),
           heroImage: tenant.heroImage,
           heroTitle: tenant.heroTitle,
@@ -33,17 +34,18 @@ async function main() {
           updatedAt: tenant.updatedAt ? new Date(tenant.updatedAt) : new Date(),
         },
       });
+      tenantIdMap[tenant.id] = upserted.id;
     }
 
     for (const user of (data.User || [])) {
+      const mappedTenantId = tenantIdMap[user.tenantId] || user.tenantId;
       await prisma.user.upsert({
-        where: { id: user.id },
+        where: { email: user.email || user.id },
         update: {
           name: user.name,
-          email: user.email,
           password: user.password,
           role: user.role,
-          tenantId: user.tenantId,
+          tenantId: mappedTenantId,
         },
         create: {
           id: user.id,
@@ -52,12 +54,13 @@ async function main() {
           emailVerified: user.emailVerified ? new Date(user.emailVerified) : null,
           password: user.password,
           role: user.role,
-          tenantId: user.tenantId,
+          tenantId: mappedTenantId,
         },
       });
     }
 
     for (const zone of (data.Zone || [])) {
+      const mappedTenantId = tenantIdMap[zone.tenantId] || zone.tenantId;
       await prisma.zone.upsert({
         where: { id: zone.id },
         update: {
@@ -71,35 +74,38 @@ async function main() {
           walkScore: zone.walkScore,
           bikeScore: zone.bikeScore,
           videos: zone.videos,
-          tenantId: zone.tenantId,
+          tenantId: mappedTenantId,
         },
-        create: { ...zone },
+        create: { ...zone, tenantId: mappedTenantId },
       });
     }
 
     for (const prop of (data.Property || [])) {
+      const mappedTenantId = tenantIdMap[prop.tenantId] || prop.tenantId;
       await prisma.property.upsert({
         where: { id: prop.id },
-        update: { ...prop },
-        create: { ...prop },
+        update: { ...prop, tenantId: mappedTenantId },
+        create: { ...prop, tenantId: mappedTenantId },
       });
     }
 
     for (const test of (data.Testimonial || [])) {
+      const mappedTenantId = tenantIdMap[test.tenantId] || test.tenantId;
       const isApproved = Boolean(test.isApproved);
       const createdAt = test.createdAt ? new Date(test.createdAt) : new Date();
       await prisma.testimonial.upsert({
         where: { id: test.id },
-        update: { ...test, isApproved, createdAt },
-        create: { ...test, isApproved, createdAt },
+        update: { ...test, tenantId: mappedTenantId, isApproved, createdAt },
+        create: { ...test, tenantId: mappedTenantId, isApproved, createdAt },
       });
     }
 
     for (const stat of (data.Stat || [])) {
+      const mappedTenantId = tenantIdMap[stat.tenantId] || stat.tenantId;
       await prisma.stat.upsert({
         where: { id: stat.id },
-        update: { ...stat },
-        create: { ...stat },
+        update: { ...stat, tenantId: mappedTenantId },
+        create: { ...stat, tenantId: mappedTenantId },
       });
     }
 
