@@ -30,25 +30,41 @@ function FlippingCell({ img1, img2, flipInterval, initialDelay, breatheDelay }: 
   }, [flipInterval, initialDelay]);
 
   return (
-    <div className="relative overflow-hidden w-full h-full flip-container">
+    <div className="relative overflow-hidden w-full h-full flip-container bg-neutral-900">
       <div className="absolute inset-0 bg-black/10 dark:bg-black/30 z-20 pointer-events-none"></div>
       
       <div className={`flipper w-full h-full ${flipped ? 'flipped' : ''}`}>
-        <div className="front w-full h-full">
+        <div className="front w-full h-full bg-neutral-900">
            <img 
              src={img1} 
-             alt="Canton Costa Rica Front" 
-             onError={(e) => { (e.target as HTMLImageElement).src = '/images/zone-guanacaste.png'; }}
-             className="w-full h-full object-cover animate-breathe" 
+             alt="" 
+             onError={(e) => { 
+               const target = e.target as HTMLImageElement;
+               if (!target.dataset.failed) {
+                 target.dataset.failed = "true";
+                 target.src = '/images/zone-guanacaste.png';
+               } else {
+                 target.style.display = 'none';
+               }
+             }}
+             className="w-full h-full object-cover animate-breathe block bg-neutral-900" 
              style={{ animationDelay: breatheDelay + 's' }} 
            />
         </div>
-        <div className="back w-full h-full">
+        <div className="back w-full h-full bg-neutral-900">
            <img 
              src={img2} 
-             alt="Canton Costa Rica Back" 
-             onError={(e) => { (e.target as HTMLImageElement).src = '/images/zone-escazu.png'; }}
-             className="w-full h-full object-cover animate-breathe" 
+             alt="" 
+             onError={(e) => { 
+               const target = e.target as HTMLImageElement;
+               if (!target.dataset.failed) {
+                 target.dataset.failed = "true";
+                 target.src = '/images/zone-escazu.png';
+               } else {
+                 target.style.display = 'none';
+               }
+             }}
+             className="w-full h-full object-cover animate-breathe block bg-neutral-900" 
              style={{ animationDelay: (breatheDelay + 2) + 's' }} 
            />
         </div>

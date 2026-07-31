@@ -26,6 +26,19 @@ export async function GET(req: NextRequest, props: { params: Promise<{ filename:
       }
     });
   } catch (err) {
-    return new NextResponse("File Not Found", { status: 404 });
+    // Si la imagen solicitada no existe o fue borrada, servimos una fotografía de lujo garantizada en lugar de dar error 404
+    try {
+      const fallbackPath = path.join(process.cwd(), "public", "images", "zone-guanacaste.png");
+      const fallbackBuffer = await fs.readFile(fallbackPath);
+      return new NextResponse(fallbackBuffer, {
+        status: 200,
+        headers: {
+          "Content-Type": "image/png",
+          "Cache-Control": "public, max-age=3600"
+        }
+      });
+    } catch (fallbackErr) {
+      return new NextResponse("File Not Found", { status: 404 });
+    }
   }
 }
