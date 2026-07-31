@@ -43,18 +43,41 @@ export default function FeaturedProperties({ properties }: { properties: Propert
 
   return (
     <section className="w-full bg-[#fcfcfc] dark:bg-neutral-900 py-[80px] md:py-[120px] overflow-hidden transition-colors duration-300">
-      <div className="max-w-[1400px] mx-auto px-6 mb-12 flex items-end justify-between">
+      <div className="max-w-[1400px] mx-auto px-6 mb-8 md:mb-12 flex items-end justify-between">
         <div>
-          <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black dark:text-white mb-4">
+          <h2 className="text-[28px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-black dark:text-white mb-2 md:mb-4">
             Propiedades Destacadas
           </h2>
-          <div className="w-12 h-px bg-black dark:bg-white"></div>
+          <div className="w-12 h-px bg-black dark:bg-white mb-2 md:mb-0"></div>
+          <p className="md:hidden text-[11px] uppercase font-semibold text-[#8b6b23] dark:text-[#d4af37] tracking-[0.15em] flex items-center gap-1 mt-2">
+            Desliza para ver más <ArrowRight className="w-3.5 h-3.5 animate-pulse inline ml-1" />
+          </p>
+        </div>
+
+        {/* Botones de navegación con flechitas bien visibles e interactivos en celulares y computadoras */}
+        <div className="flex gap-2 mb-1">
+          <button 
+            onClick={() => scroll('left')} 
+            disabled={!canScrollLeft}
+            aria-label="Ver propiedad anterior"
+            className="w-11 h-11 md:w-13 md:h-13 flex items-center justify-center bg-white dark:bg-neutral-800 text-black dark:text-white border border-black/15 dark:border-white/15 rounded-full shadow-md hover:scale-105 active:scale-95 transition-all disabled:opacity-30 disabled:pointer-events-none"
+          >
+            <ChevronLeft className="w-6 h-6 ml-[-2px]" />
+          </button>
+          <button 
+            onClick={() => scroll('right')} 
+            disabled={!canScrollRight}
+            aria-label="Ver siguiente propiedad"
+            className="w-11 h-11 md:w-13 md:h-13 flex items-center justify-center bg-white dark:bg-neutral-800 text-black dark:text-white border border-black/15 dark:border-white/15 rounded-full shadow-md hover:scale-105 active:scale-95 transition-all disabled:opacity-30 disabled:pointer-events-none"
+          >
+            <ChevronRight className="w-6 h-6 mr-[-2px]" />
+          </button>
         </div>
       </div>
 
       <div className="relative max-w-[1400px] mx-auto px-6 group">
         
-        {/* Navigation Arrows (Absolute over the image part of the card) */}
+        {/* Navigation Arrows (Floating side buttons for Desktop) */}
         <button 
           onClick={() => scroll('left')} 
           disabled={!canScrollLeft}
