@@ -9,6 +9,7 @@ import InteractivePoiTable from './InteractivePoiTable';
 import PropertyCard from '@/components/properties/PropertyCard';
 import VideoGallery from '@/components/public/VideoGallery';
 import NewsletterForm from '@/components/public/NewsletterForm';
+import { getCantonDemographicStats } from '@/data/crDemographics';
 import { allProperties } from '@/data/mockProperties';
 
 export async function generateMetadata(props: { params: Promise<{ domain: string; canton: string }> }) {
@@ -103,13 +104,13 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
     }
   }
 
-  // Valores dinámicos (DB o Mocks Deterministas)
-  const nameLen = formattedCanton.length;
-  const mockPopulation = zoneData?.population || (nameLen * 3421 + 15000).toLocaleString('es-CR');
-  const mockAge = zoneData?.medianAge || (32 + (nameLen % 12));
-  const mockIncome = zoneData?.avgIncome || (nameLen * 1850 + 25000).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-  const walkScore = zoneData?.walkScore || (60 + (nameLen % 35));
-  const bikeScore = zoneData?.bikeScore || (50 + (nameLen % 40));
+  // Valores demográficos reales basados en estimaciones oficiales del INEC para cantones de Costa Rica (en Colones ₡)
+  const demography = getCantonDemographicStats(formattedCanton, zoneData);
+  const mockPopulation = demography.population;
+  const mockAge = demography.medianAge;
+  const mockIncome = demography.avgIncome;
+  const walkScore = demography.walkScore;
+  const bikeScore = demography.bikeScore;
 
   let zoneVideos = [
     { title: `${formattedCanton} desde el Cielo`, img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80", youtubeId: "vBkg2_Ebf-s" }

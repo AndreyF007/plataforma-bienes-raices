@@ -536,14 +536,41 @@ export default function ZoneList({ initialZones }: { initialZones: Zone[] }) {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-500 mb-2">Ingreso Promedio Individual</label>
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="block text-xs uppercase tracking-wider text-gray-500">Ingreso Promedio Individual</label>
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const val = formData.avgIncome ? formData.avgIncome.replace(/^(\$|₡)\s*/, '') : '650,000';
+                            setFormData({...formData, avgIncome: `₡${val}`});
+                          }}
+                          className="px-2.5 py-1 text-[11px] font-semibold bg-emerald-600 text-white rounded shadow-sm hover:bg-emerald-700 transition-colors flex items-center gap-1"
+                        >
+                          <span>Moneda: Colón (₡)</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const val = formData.avgIncome ? formData.avgIncome.replace(/^(\$|₡)\s*/, '') : '1,200';
+                            setFormData({...formData, avgIncome: `$${val}`});
+                          }}
+                          className="px-2.5 py-1 text-[11px] font-semibold bg-neutral-800 text-white dark:bg-neutral-200 dark:text-black rounded shadow-sm hover:opacity-80 transition-opacity flex items-center gap-1"
+                        >
+                          <span>Moneda: Dólar ($)</span>
+                        </button>
+                      </div>
+                    </div>
                     <input 
                       type="text" 
                       value={formData.avgIncome}
                       onChange={e => setFormData({...formData, avgIncome: e.target.value})}
-                      className="w-full border border-gray-300 dark:border-white/20 bg-transparent p-3 text-sm focus:border-black dark:focus:border-white outline-none" 
-                      placeholder="Ej. $45,000"
+                      className="w-full border border-gray-300 dark:border-white/20 bg-transparent p-3 text-sm focus:border-black dark:focus:border-white outline-none font-medium" 
+                      placeholder="Ej. ₡650,000 o $1,200 (Salario mensual según INEC)"
                     />
+                    <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed">
+                      💡 <strong>Dato Automático:</strong> Si dejas este campo en blanco, el sistema colocará automáticamente el promedio salarial real estimado por el <strong>INEC</strong> en <strong>Colones Costarricenses (₡)</strong> de acuerdo con el cantón seleccionado.
+                    </p>
                   </div>
                 </div>
               )}
