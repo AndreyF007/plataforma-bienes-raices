@@ -36,14 +36,14 @@ export default function Navbar({
       <nav className={`fixed top-0 w-full z-[90] transition-all duration-300 ${scrolled ? 'bg-white/50 dark:bg-black/50 backdrop-blur-xl border-b border-black/5 dark:border-white/10 shadow-sm py-2' : 'bg-transparent py-4'}`}>
         <div className="w-full px-6 md:px-12 h-12 flex justify-between items-center">
           
-          {/* LOGO MÓVIL (Oculto en escritorio) */}
-          <div className="flex flex-1 lg:hidden">
-            <div className="flex flex-col items-center w-fit">
-               <div className={`w-8 h-8 rounded-full border flex items-center justify-center ${scrolled ? 'border-black dark:border-white' : 'border-white'}`}>
+          {/* LOGO MÓVIL (Ahora enlaza directamente a Inicio con elegancia) */}
+          <div className="flex flex-1 lg:hidden items-center">
+            <Link href="/" aria-label="Volver al inicio" className="flex flex-col items-center w-fit group">
+               <div className={`w-8 h-8 rounded-full border flex items-center justify-center transition-transform duration-300 group-hover:scale-110 ${scrolled ? 'border-black dark:border-white' : 'border-white'}`}>
                  <span className={`text-[10px] font-light ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>{initials}</span>
                </div>
                <span className={`text-[8px] tracking-[0.2em] uppercase mt-1 ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>{tenantName}</span>
-            </div>
+            </Link>
           </div>
           
           <div className="hidden lg:flex flex-[5] justify-center items-center gap-2 xl:gap-4 flex-wrap px-2">
@@ -73,9 +73,22 @@ export default function Navbar({
             ))}
           </div>
           
-          <div className="flex flex-1 justify-end items-center gap-4 lg:gap-6">
+          <div className="flex flex-1 justify-end items-center gap-2 md:gap-6">
+            {/* Botón de INICIO elegante, luxury y accesible en móviles y tablets sin importar la página */}
+            <Link 
+              href="/"
+              aria-label="Ir a la página de Inicio"
+              className={`lg:hidden flex items-center px-3.5 py-1.5 rounded-full border text-[10px] font-[family-name:var(--font-raleway)] font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-md ${
+                scrolled 
+                  ? 'bg-black text-white dark:bg-white dark:text-black border-black/10 dark:border-white/10 hover:scale-105 active:scale-95' 
+                  : 'bg-white/20 backdrop-blur-md text-white border-white/40 hover:bg-white hover:text-black hover:scale-105 active:scale-95'
+              }`}
+            >
+              <span>INICIO</span>
+            </Link>
+
             {contactPhone && (
-              <a href={`https://wa.me/${contactPhone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp" className={`whitespace-nowrap text-[11px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.15em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>
+              <a href={`https://wa.me/${contactPhone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp" className={`hidden md:block whitespace-nowrap text-[11px] font-[family-name:var(--font-raleway)] font-medium tracking-[0.15em] hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}>
                 {contactPhone}
               </a>
             )}
@@ -83,9 +96,9 @@ export default function Navbar({
             <button 
               onClick={() => setIsOpen(true)} 
               aria-label="Abrir menú de navegación"
-              className={`p-2 hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}
+              className={`p-1.5 md:p-2 hover:opacity-50 transition-opacity ${scrolled ? 'text-black dark:text-white' : 'text-white'}`}
             >
-              <Menu className="w-8 h-8 stroke-1" />
+              <Menu className="w-7 h-7 md:w-8 md:h-8 stroke-1" />
             </button>
           </div>
           
