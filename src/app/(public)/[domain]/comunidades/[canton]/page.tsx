@@ -12,6 +12,7 @@ import NewsletterForm from '@/components/public/NewsletterForm';
 import { getCantonDemographicStats, getCantonCoverImage } from '@/data/crDemographics';
 import { allProperties } from '@/data/mockProperties';
 import CantonHero from './CantonHero';
+import CantonMap from './CantonMap';
 
 export async function generateMetadata(props: { params: Promise<{ domain: string; canton: string }> }) {
   const params = await props.params;
@@ -256,19 +257,8 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
          </div>
       </section>
 
-      {/* 7. GOOGLE MAPS IFRAME */}
-      <section className="w-full h-[500px] relative">
-         <iframe 
-            src={mapUrl}
-            width="100%" 
-            height="100%" 
-            style={{ border: 0 }} 
-            allowFullScreen={false} 
-            loading="lazy" 
-            referrerPolicy="no-referrer-when-downgrade"
-            className="absolute inset-0 grayscale contrast-125 opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-1000"
-         ></iframe>
-      </section>
+      {/* 7. GOOGLE MAPS CON SKELETON EJECUTIVO DE ALTA VELOCIDAD */}
+      <CantonMap mapUrl={mapUrl} cantonName={formattedCanton} />
 
       {/* 8. PROPIEDADES DESTACADAS EN VENTA */}
       <section className="w-full py-[120px] px-6 bg-white dark:bg-neutral-950">

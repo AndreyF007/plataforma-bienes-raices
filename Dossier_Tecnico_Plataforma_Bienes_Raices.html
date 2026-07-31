@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier Técnico Ejecutivo - Plataforma Inmobiliaria Luxury Real Estate</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #0a0f1d;
+            --gold: #b48325;
+            --gold-light: #f7f3eb;
+            --gray-dark: #334155;
+            --gray-light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--primary);
+            line-height: 1.6;
+            background-color: #ffffff;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                max-width: 100%;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            .no-break {
+                page-break-inside: avoid;
+            }
+            @page {
+                margin: 20mm 15mm 20mm 15mm;
+            }
+        }
+
+        .header {
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header-left h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .header-left p {
+            font-size: 14px;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .header-right {
+            text-align: right;
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title span {
+            color: var(--gold);
+        }
+
+        .intro-box {
+            background-color: var(--gold-light);
+            border-left: 4px solid var(--gold);
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 28px;
+            font-size: 13.5px;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+
+        .intro-box strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .tech-card {
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            background-color: var(--gray-light);
+        }
+
+        .tech-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tech-card h4 span {
+            color: var(--gold);
+        }
+
+        .tech-card p {
+            font-size: 12px;
+            color: var(--gray-dark);
+            line-height: 1.5;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .feature-list li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--gold);
+            font-size: 10px;
+        }
+
+        .feature-list li strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .value-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            margin-bottom: 28px;
+            font-size: 13px;
+        }
+
+        .value-table th {
+            background-color: var(--primary);
+            color: #ffffff;
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .value-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .value-table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .value-table td strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 11px;
+            color: #64748b;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #475569;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-left">
+            <h1>Plataforma Inmobiliaria</h1>
+            <p>Dossier Técnico Ejecutivo & Propiedad Intelectual</p>
+        </div>
+        <div class="header-right">
+            <strong>DOCUMENTO DE CERTIFICACIÓN TÉCNICA</strong><br>
+            Categoría: Luxury Real Estate Tech<br>
+            Edición: Costa Rica & Mercado Internacional (2026)
+        </div>
+    </div>
+
+    <div class="intro-box">
+        <strong>RESUMEN EJECUTIVO:</strong><br>
+        Esta plataforma web representa un <strong>Ecosistema Digital PropTech de Última Generación</strong>, diseñado bajo los estándares mundiales más exigentes de la industria del lujo residencial e inversionista (<em>High-Net-Worth Individuals</em>). A diferencia de los sitios tradicionales construidos sobre plantillas lentas o sistemas CMS genéricos como WordPress, este software fue programado desde cero (<em>Custom Code</em>) utilizando la misma pila tecnológica de empresas como <strong>Airbnb, Netflix y Vercel</strong>, garantizando seguridad bancaria, escalabilidad infinita, velocidad ultrarrápida y posicionamiento orgánico superior (SEO).
+    </div>
+
+    <div class="section-title"><span>I.</span> Stack Tecnológico & Motor de Ingeniería</div>
+    <div class="tech-grid">
+        <div class="tech-card no-break">
+            <h4><span>⚡</span> Next.js 16 & React 19</h4>
+            <p>Framework híbrido de vanguardia con Renderizado Instantáneo en el Servidor (SSR) para indexación SEO inmediata y dinamismo ultra-fluido en el cliente.</p>
+            <span class="badge">Core Framework</span>
+        </div>
+        <div class="tech-card no-break">
+            <h4><span>🔒</span> TypeScript 5.x</h4>
+            <p>Arquitectura blindada con tipado estricto que elimina errores en tiempo de ejecución y garantiza estabilidad en servidores ante picos de tráfico masivo.</p>
+            <span class="badge">Security & Typing</span>
+        </div>
+        <div class="tech-card no-break">
+            <h4><span>🗄️</span> PostgreSQL & Prisma ORM v6</h4>
+            <p>Base de datos relacional robusta en la nube con consultas optimizadas y modelado para propiedades, zonas demográficas y multimedia en 4K.</p>
+            <span class="badge">Enterprise Database</span>
+        </div>
+        <div class="tech-card no-break">
+            <h4><span>☁️</span> Supabase SSR & Cloud CDN</h4>
+            <p>Almacenamiento y distribución en redes de contenido globales (CDN) para streaming ultrarrápido de catálogos y fotografía arquitectónica en alta definición.</p>
+            <span class="badge">Cloud Storage</span>
+        </div>
+        <div class="tech-card no-break">
+            <h4><span>🛡️</span> NextAuth.js v4 & Bcrypt</h4>
+            <p>Sistema propietario de control de acceso e identidad de usuarios, con cifrado criptográfico con salado de contraseñas y sesiones protegidas.</p>
+            <span class="badge">Authentication</span>
+        </div>
+        <div class="tech-card no-break">
+            <h4><span>🎨</span> Tailwind CSS v4 & Framer Motion</h4>
+            <p>Motor de estilos adaptable con soporte de temas y micro-animaciones fluidas de nivel cinematográfico (60 fps) para un recorrido sensorial de lujo.</p>
+            <span class="badge">UI/UX & Design Engine</span>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section-title"><span>II.</span> Innovaciones Exclusivas & Propiedad Intelectual</div>
+    <ul class="feature-list">
+        <li class="no-break">
+            <strong>Arquitectura Multi-Inquilino (Marca Blanca & Multi-Tenancy):</strong><br>
+            El sistema está diseñado modularmente para albergar múltiples portales o subdominios independientes desde una sola consola central. Permite lanzar micrositios exclusivos para promocionar desarrollos residenciales, condominios horizontales o torres hoteleras sin replicar bases de datos.
+        </li>
+        <li class="no-break">
+            <strong>Motor Demográfico Algorítmico de Costa Rica:</strong><br>
+            Integra un directorio estadístico pre-cargado con los <strong>84 Cantones Oficiales de Costa Rica</strong> junto a los <strong>24 distritos residenciales y costeros de mayor plusvalía</strong> (<em>Escazú, Santa Ana, Lindora, Rohrmoser, Tamarindo, Conchal, Flamingo, Las Catalinas, Santa Teresa, Nosara, Uvita, etc.</em>). Muestra de forma interactiva estimaciones salariares reales basadas en el <strong>INEC en Colones Costarricenses (₡)</strong>, población, edad media e índices de caminabilidad (Walk Score) y conectividad (Bike Score).
+        </li>
+        <li class="no-break">
+            <strong>Motor de Búsqueda Inteligente con Filtros Contextuales:</strong><br>
+            El explorador de propiedades adapta su interfaz en tiempo real: al ingresar a un cantón o portafolio específico, oculta automáticamente selectores redundantes de localización para presentar herramientas refinadas por Presupuesto, Tipo de Operación y Estructura Arquitectónica, acelerando el embudo de conversión del comprador.
+        </li>
+        <li class="no-break">
+            <strong>Panel de Administración CMS Propietario en Tiempo Real:</strong><br>
+            Consola privada e intuitiva para la gestión total de la cartera. Permite a agentes inmobiliarios publicar propiedades en segundos, redactar artículos turísticos/inmobiliarios de alto impacto mediante editor enriquecido (<em>React Quill</em>) y curar galerías de portada con sincronización automática con Wikipedia y videos 4K de YouTube.
+        </li>
+    </ul>
+
+    <div class="section-title"><span>III.</span> Optimizaciones de Rendimiento, Velocidad y SEO</div>
+    <ul class="feature-list">
+        <li class="no-break">
+            <strong>Fotografía Arquitectónica en Alta Definición (Retina & 4K Display Ready):</strong><br>
+            Sistema progresivo que carga portadas sin degradación artificial ni desenfoques innecesarios (Cero Muros de Espera). Respaldado con gradientes ejecutivos orientados hacia la base para mantener una legibilidad impecable de tipografía blanca sobre cualquier fondo real.
+        </li>
+        <li class="no-break">
+            <strong>Experiencia Mobile-First & Gestos Táctiles Fluidos:</strong><br>
+            Calibración milimétrica para smartphones de gama alta con carruseles que responden suavemente al tacto, navegación limpia y botones flotantes ergonómicos para maximizar la retención del visitante móvil.
+        </li>
+        <li class="no-break">
+            <strong>SEO Técnico & Dominio en Core Web Vitals:</strong><br>
+            Estructura semántica HTML5, metadatos enriquecidos y renderizado del servidor que garantizan excelentes calificaciones en Google Lighthouse y PageSpeed Insights, favoreciendo los primeros puestos de búsqueda orgánica.
+        </li>
+    </ul>
+
+    <div class="section-title"><span>IV.</span> Valor Retornable de Inversión (Ventajas Comerciales)</div>
+    <table class="value-table no-break">
+        <thead>
+            <tr>
+                <th style="width: 35%;">Factor Estratégico</th>
+                <th>Beneficio Directo para el Adquirente / Fondo Inmobiliario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Ahorro en "Time-to-Market"</strong><br><span style="color:#64748b; font-size:11px;">Ventaja temporal</span></td>
+                <td>Ahorra entre <strong>8 y 12 meses</strong> de ingeniería de software a la medida, pruebas de usabilidad y estructuración demográfica. Producto llave en mano listo para comercialización en escala masiva.</td>
+            </tr>
+            <tr>
+                <td><strong>Propiedad Intelectual Total</strong><br><span style="color:#64748b; font-size:11px;">Independencia tecnológica</span></td>
+                <td>Libre de mensualidades obligatorias a sistemas cerrados o licencias de plantillas de terceros. Control soberano y vitalicio sobre el código fuente y la base de datos relacional de clientes y propiedades.</td>
+            </tr>
+            <tr>
+                <td><strong>Escalabilidad Cloud Serverless</strong><br><span style="color:#64748b; font-size:11px;">Infraestructura elástica</span></td>
+                <td>Arquitectura preparada para procesar concurrencia miles de visitantes y solicitudes de inversionistas internacionales sin degradación de velocidad, manteniéndose operativa 24/7/365.</td>
+            </tr>
+            <tr>
+                <td><strong>Percepción de Marca "Executive"</strong><br><span style="color:#64748b; font-size:11px;">Posicionamiento de lujo</span></td>
+                <td>La estética visual de alto nivel, tipografías refinadas y transiciones fluidas igualan la calidad digital de desarrolladoras globales, validando de inmediato propiedades de alto valor nominal.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        CERTIFICADO BAJO ESTÁNDARES DE DESARROLLO ARQUITECTÓNICO SISTEMÁTICO PARA BIENES RAÍCES DE ALTA GAMA.<br>
+        © 2026 PROPIEDAD INTELECTUAL & INGENIERÍA DE PLATAFORMA. COSTA RICA.
+    </div>
+
+</body>
+</html>
