@@ -9,19 +9,73 @@ interface PortalClientProps {
   allProperties: PropertyData[];
 }
 
-const PROVINCE_CANTON_MAPPING: Record<string, string[]> = {
-  "san josé": ["san josé", "escazú", "santa ana", "curridabat", "rohrmoser", "lindora", "mora", "ciudad colón", "moravia", "tibás", "goicoechea", "montes de oca", "san pedro", "pérez zeledón", "desamparados", "puriscal"],
-  "alajuela": ["alajuela", "grecia", "atenas", "san ramón", "naranjo", "san carlos", "ciudad quesada", "palmares", "orotina", "la garita"],
-  "cartago": ["cartago", "la unión", "tres ríos", "paraíso", "turrialba", "oreamuno", "el guarco"],
-  "heredia": ["heredia", "belén", "san rafael", "san isidro", "santo domingo", "barva", "cariari", "santa bárbara", "san pablo", "flores"],
-  "guanacaste": ["guanacaste", "liberia", "tamarindo", "flamingo", "papagayo", "santa cruz", "nicoya", "nosara", "conchal", "potrero", "las catalinas", "playa grande", "carrillo"],
-  "puntarenas": ["puntarenas", "jacó", "jaco", "herradura", "los sueños", "manuel antonio", "quepos", "uvita", "osa", "dominical", "santa teresa", "malpaís", "monteverde", "golfito", "esparza"],
-  "limón": ["limón", "puerto viejo", "cahuita", "talamanca", "pococí", "guápiles", "manzanillo", "cocles", "siquirres", "guácimo"]
+interface ProvinceInfo {
+  label: string;
+  defaultCanton: string;
+  keywords: string[];
+  cantons: string[];
+}
+
+const PROVINCE_DATA: Record<string, ProvinceInfo> = {
+  "San José": {
+    label: "Provincia de San José",
+    defaultCanton: "Cualquier Cantón de San José",
+    keywords: ["san josé", "escazú", "santa ana", "curridabat", "rohrmoser", "lindora", "mora", "ciudad colón", "moravia", "tibás", "goicoechea", "montes de oca", "san pedro", "pérez zeledón", "desamparados", "puriscal"],
+    cantons: ["Escazú", "Santa Ana", "Curridabat", "Rohrmoser & La Sabana", "Mora / Ciudad Colón", "Moravia & Tibás", "Montes de Oca / San Pedro", "Pérez Zeledón", "Desamparados", "Puriscal"]
+  },
+  "Alajuela": {
+    label: "Provincia de Alajuela",
+    defaultCanton: "Cualquier Cantón de Alajuela",
+    keywords: ["alajuela", "grecia", "atenas", "san ramón", "naranjo", "san carlos", "ciudad quesada", "palmares", "orotina", "la garita"],
+    cantons: ["Alajuela Centro / La Garita", "Grecia & Atenas", "San Carlos / Ciudad Quesada", "San Ramón & Naranjo", "Palmares & Orotina"]
+  },
+  "Cartago": {
+    label: "Provincia de Cartago",
+    defaultCanton: "Cualquier Cantón de Cartago",
+    keywords: ["cartago", "la unión", "tres ríos", "paraíso", "turrialba", "oreamuno", "el guarco"],
+    cantons: ["La Unión / Tres Ríos", "Cartago Centro", "Paraíso & Turrialba", "Oreamuno"]
+  },
+  "Heredia": {
+    label: "Provincia de Heredia",
+    defaultCanton: "Cualquier Cantón de Heredia",
+    keywords: ["heredia", "belén", "san rafael", "san isidro", "santo domingo", "barva", "cariari", "santa bárbara", "san pablo", "flores"],
+    cantons: ["Belén & Cariari", "Heredia Centro & San Pablo", "San Rafael & San Isidro", "Santo Domingo & Barva"]
+  },
+  "Guanacaste": {
+    label: "Provincia de Guanacaste",
+    defaultCanton: "Cualquier Cantón de Guanacaste",
+    keywords: ["guanacaste", "liberia", "tamarindo", "flamingo", "papagayo", "santa cruz", "nicoya", "nosara", "conchal", "potrero", "las catalinas", "playa grande", "carrillo"],
+    cantons: ["Tamarindo & Flamingo", "Papagayo & Hermosa", "Nosara & Las Catalinas", "Conchal & Potrero", "Liberia & Santa Cruz"]
+  },
+  "Puntarenas": {
+    label: "Provincia de Puntarenas",
+    defaultCanton: "Cualquier Cantón de Puntarenas",
+    keywords: ["puntarenas", "jacó", "jaco", "herradura", "los sueños", "manuel antonio", "quepos", "uvita", "osa", "dominical", "santa teresa", "malpaís", "monteverde", "golfito", "esparza"],
+    cantons: ["Jacó & Los Sueños", "Manuel Antonio & Quepos", "Uvita & Dominical", "Santa Teresa & Malpaís", "Monteverde & Esparza", "Osa / Puerto Jiménez"]
+  },
+  "Limón": {
+    label: "Provincia de Limón",
+    defaultCanton: "Cualquier Cantón de Limón",
+    keywords: ["limón", "puerto viejo", "cahuita", "talamanca", "pococí", "guápiles", "manzanillo", "cocles", "siquirres", "guácimo"],
+    cantons: ["Puerto Viejo & Cocles", "Cahuita & Manzanillo", "Limón Centro", "Guápiles & Pococí"]
+  }
 };
 
 export default function PortalClient({ initialCanton, allProperties }: PortalClientProps) {
-  // Estados para los filtros (Con nuevo filtro inteligente por Provincia y Cantón)
-  const [locationFilter, setLocationFilter] = useState(initialCanton || "Todas las Ubicaciones");
+  // Determinamos si el cantón inicial pertenece a una provincia en particular
+  const defaultProv = useMemo(() => {
+    if (!initialCanton) return "Todas las Provincias";
+    for (const [provName, data] of Object.entries(PROVINCE_DATA)) {
+      if (data.keywords.some(k => initialCanton.toLowerCase().includes(k) || k.includes(initialCanton.toLowerCase()))) {
+        return provName;
+      }
+    }
+    return "Todas las Provincias";
+  }, [initialCanton]);
+
+  // Estados para los filtros (Ahora en cascada inteligente Provincia -> Cantón)
+  const [provinceFilter, setProvinceFilter] = useState(defaultProv);
+  const [cantonFilter, setCantonFilter] = useState(initialCanton || "Cualquier Cantón");
   const [propertyType, setPropertyType] = useState("Tipo de Propiedad");
   const [priceRange, setPriceRange] = useState("Cualquier Precio");
   const [statusType, setStatusType] = useState("Operación");
@@ -30,42 +84,49 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
   // Estado para la paginación (Cargar Más)
   const [visibleCount, setVisibleCount] = useState(6);
 
+  // Cambio de Provincia: actualiza y reinicia en cascada el Cantón a los de esa provincia exclusivamente
+  const handleProvinceChange = (newProv: string) => {
+    setProvinceFilter(newProv);
+    if (newProv === "Todas las Provincias") {
+      setCantonFilter("Cualquier Cantón");
+    } else {
+      setCantonFilter(PROVINCE_DATA[newProv]?.defaultCanton || "Cualquier Cantón");
+    }
+  };
+
   // Lógica matemática y geográfica de filtrado en tiempo real
   const filteredProperties = useMemo(() => {
     let result = [...allProperties];
 
-    // 1. Filtro por Ubicación Inteligente (Provincia o Cantón/Comuna)
-    if (locationFilter && locationFilter !== "Todas las Ubicaciones") {
-      const cleanFilter = locationFilter.replace(/\s*\(Provincia\)\s*/i, "").trim().toLowerCase();
-      
-      // Verificamos si seleccionó una provincia para buscar cualquiera de sus cantones
-      if (PROVINCE_CANTON_MAPPING[cleanFilter]) {
-        const keywords = PROVINCE_CANTON_MAPPING[cleanFilter];
-        result = result.filter(p => {
-          const text = ((p.address || '') + ' ' + (p.title || '') + ' ' + ((p as any).location || '')).toLowerCase();
-          return keywords.some(kw => text.includes(kw));
-        });
-      } else {
-        // Búsqueda por cantones, comunidades o términos combinados (ej. "Tamarindo & Flamingo")
-        const terms = cleanFilter.split(/[\/&,]/).map(t => t.trim()).filter(Boolean);
-        result = result.filter(p => {
-          const text = ((p.address || '') + ' ' + (p.title || '') + ' ' + ((p as any).location || '')).toLowerCase();
-          return terms.some(term => text.includes(term));
-        });
-      }
+    // 1. Filtro Estricto por Provincia
+    if (provinceFilter !== "Todas las Provincias" && PROVINCE_DATA[provinceFilter]) {
+      const keywords = PROVINCE_DATA[provinceFilter].keywords;
+      result = result.filter(p => {
+        const text = ((p.address || '') + ' ' + (p.title || '') + ' ' + ((p as any).location || '')).toLowerCase();
+        return keywords.some(kw => text.includes(kw));
+      });
     }
 
-    // 2. Filtro por Tipo de Propiedad
+    // 2. Filtro Estricto por Cantón Específico
+    if (cantonFilter && !cantonFilter.startsWith("Cualquier") && cantonFilter !== "Cualquier Cantón") {
+      const terms = cantonFilter.toLowerCase().split(/[\/&,]/).map(t => t.trim()).filter(Boolean);
+      result = result.filter(p => {
+        const text = ((p.address || '') + ' ' + (p.title || '') + ' ' + ((p as any).location || '')).toLowerCase();
+        return terms.some(term => text.includes(term));
+      });
+    }
+
+    // 3. Filtro por Tipo de Propiedad
     if (propertyType !== "Tipo de Propiedad") {
       result = result.filter(p => p.type?.toLowerCase() === propertyType.toLowerCase());
     }
 
-    // 3. Filtro por Operación (Venta / Alquiler)
+    // 4. Filtro por Operación (Venta / Alquiler)
     if (statusType !== "Operación") {
       result = result.filter(p => p.status?.toLowerCase().includes(statusType.toLowerCase()));
     }
 
-    // 4. Filtro por Rango de Precio
+    // 5. Filtro por Rango de Precio
     if (priceRange !== "Cualquier Precio") {
       result = result.filter(p => {
         if (priceRange === "< $500k") return p.price < 500000;
@@ -76,7 +137,7 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
       });
     }
 
-    // 5. Ordenamiento (Sort)
+    // 6. Ordenamiento (Sort)
     if (sortOrder === "Precio: Mayor a Menor") {
       result.sort((a, b) => b.price - a.price);
     } else if (sortOrder === "Precio: Menor a Mayor") {
@@ -87,7 +148,7 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
     }
 
     return result;
-  }, [allProperties, locationFilter, propertyType, priceRange, statusType, sortOrder]);
+  }, [allProperties, provinceFilter, cantonFilter, propertyType, priceRange, statusType, sortOrder]);
 
   // Manejador de Cargar Más
   const handleLoadMore = () => {
@@ -98,105 +159,122 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
 
   return (
     <>
-      {/* 2. BARRA DE FILTROS (STICKY Y RESPONSIVA) */}
+      {/* 2. BARRA DE FILTROS EN CASCADA (STICKY & RESPONSIVA) */}
       <div className="sticky top-0 z-40 w-full border-b border-black/10 dark:border-white/10 shadow-sm backdrop-blur-lg bg-white/95 dark:bg-neutral-950/95 transition-all duration-500">
-         <div className="max-w-[1250px] mx-auto px-4 sm:px-6 py-5">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 w-full">
                
-               {/* FILTRO DE UBICACIÓN (PROVINCIA & CANTón) */}
+               {/* 1. FILTRO DE PROVINCIA */}
                <div className="relative w-full group">
-                  <MapPin className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
+                  <MapPin className="absolute left-4.5 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-600 dark:text-emerald-400 font-bold transition-colors duration-500" />
                   <select 
-                    value={locationFilter}
-                    onChange={(e) => setLocationFilter(e.target.value)}
-                    className="w-full pl-12 pr-10 py-3.5 bg-transparent border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.15em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-semibold truncate"
+                    value={provinceFilter}
+                    onChange={(e) => handleProvinceChange(e.target.value)}
+                    className="w-full pl-11 pr-9 py-3 bg-neutral-100 dark:bg-neutral-900 border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.12em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-bold truncate"
                   >
-                     <option className="text-black bg-white" value="Todas las Ubicaciones">Provincia / Cantón</option>
-                     <optgroup label="📍 PROVINCIAS DE COSTA RICA" className="text-black font-bold bg-neutral-100">
-                       <option className="text-black bg-white" value="San José (Provincia)">Provincia de San José</option>
-                       <option className="text-black bg-white" value="Alajuela (Provincia)">Provincia de Alajuela</option>
-                       <option className="text-black bg-white" value="Cartago (Provincia)">Provincia de Cartago</option>
-                       <option className="text-black bg-white" value="Heredia (Provincia)">Provincia de Heredia</option>
-                       <option className="text-black bg-white" value="Guanacaste (Provincia)">Provincia de Guanacaste</option>
-                       <option className="text-black bg-white" value="Puntarenas (Provincia)">Provincia de Puntarenas</option>
-                       <option className="text-black bg-white" value="Limón (Provincia)">Provincia de Limón</option>
-                     </optgroup>
-                     <optgroup label="🏙️ CANTONES & COMUNIDADES EXCLUSIVAS" className="text-black font-bold bg-neutral-100">
-                       <option className="text-black bg-white" value="Escazú">Escazú</option>
-                       <option className="text-black bg-white" value="Santa Ana">Santa Ana</option>
-                       <option className="text-black bg-white" value="Curridabat">Curridabat</option>
-                       <option className="text-black bg-white" value="Rohrmoser">Rohrmoser & La Sabana</option>
-                       <option className="text-black bg-white" value="Tres Ríos">La Unión / Tres Ríos</option>
-                       <option className="text-black bg-white" value="Belén">Belén & Cariari</option>
-                       <option className="text-black bg-white" value="Grecia">Grecia & Atenas</option>
-                       <option className="text-black bg-white" value="Tamarindo">Tamarindo & Flamingo</option>
-                       <option className="text-black bg-white" value="Papagayo">Papagayo & Conchal</option>
-                       <option className="text-black bg-white" value="Nosara">Nosara & Las Catalinas</option>
-                       <option className="text-black bg-white" value="Jacó">Jacó & Los Sueños</option>
-                       <option className="text-black bg-white" value="Manuel Antonio">Manuel Antonio & Quepos</option>
-                       <option className="text-black bg-white" value="Uvita">Uvita & Dominical</option>
-                       <option className="text-black bg-white" value="Puerto Viejo">Puerto Viejo & Cahuita</option>
-                     </optgroup>
+                     <option className="text-black bg-white" value="Todas las Provincias">📍 Provincia (Todas)</option>
+                     <option className="text-black bg-white font-semibold" value="San José">Provincia de San José</option>
+                     <option className="text-black bg-white font-semibold" value="Alajuela">Provincia de Alajuela</option>
+                     <option className="text-black bg-white font-semibold" value="Cartago">Provincia de Cartago</option>
+                     <option className="text-black bg-white font-semibold" value="Heredia">Provincia de Heredia</option>
+                     <option className="text-black bg-white font-semibold" value="Guanacaste">Provincia de Guanacaste</option>
+                     <option className="text-black bg-white font-semibold" value="Puntarenas">Provincia de Puntarenas</option>
+                     <option className="text-black bg-white font-semibold" value="Limón">Provincia de Limón</option>
                   </select>
-                  <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
-                     <div className="w-2 h-2 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-1 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                     <div className="w-1.5 h-1.5 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-0.5 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
                   </div>
                </div>
 
-               {/* FILTRO TIPO DE PROPIEDAD */}
+               {/* 2. FILTRO EN CASCADA DE CANTÓN (Se filtra estrictamente por Provincia) */}
                <div className="relative w-full group">
-                  <Home className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
+                  <MapPin className="absolute left-4.5 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
+                  <select 
+                    value={cantonFilter}
+                    onChange={(e) => setCantonFilter(e.target.value)}
+                    className="w-full pl-11 pr-9 py-3 bg-transparent border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.12em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-semibold truncate"
+                  >
+                     {provinceFilter !== "Todas las Provincias" ? (
+                       <>
+                         <option className="text-black font-bold bg-white" value={PROVINCE_DATA[provinceFilter]?.defaultCanton}>
+                           🏙️ Todos en {provinceFilter}
+                         </option>
+                         {PROVINCE_DATA[provinceFilter]?.cantons.map((c, idx) => (
+                           <option key={idx} className="text-black bg-white" value={c}>{c}</option>
+                         ))}
+                       </>
+                     ) : (
+                       <>
+                         <option className="text-black bg-white font-bold" value="Cualquier Cantón">🏙️ Cantón (Todas Prov.)</option>
+                         {Object.entries(PROVINCE_DATA).map(([provName, data]) => (
+                           <optgroup key={provName} label={`📍 PROV. DE ${provName.toUpperCase()}`} className="text-black font-bold bg-neutral-100">
+                             {data.cantons.map((c, idx) => (
+                               <option key={`${provName}-${idx}`} className="text-black bg-white" value={c}>{c}</option>
+                             ))}
+                           </optgroup>
+                         ))}
+                       </>
+                     )}
+                  </select>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                     <div className="w-1.5 h-1.5 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-0.5 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
+                  </div>
+               </div>
+
+               {/* 3. FILTRO TIPO DE PROPIEDAD */}
+               <div className="relative w-full group">
+                  <Home className="absolute left-4.5 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
                   <select 
                     value={propertyType}
                     onChange={(e) => setPropertyType(e.target.value)}
-                    className="w-full pl-12 pr-10 py-3.5 bg-transparent border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.15em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-semibold truncate"
+                    className="w-full pl-11 pr-9 py-3 bg-transparent border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.12em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-semibold truncate"
                   >
                      <option className="text-black bg-white" value="Tipo de Propiedad">Cualquier Tipo</option>
                      <option className="text-black bg-white" value="Casa">Casas de Lujo</option>
-                     <option className="text-black bg-white" value="Apartamento">Apartamentos & Penthouse</option>
+                     <option className="text-black bg-white" value="Apartamento">Apartamentos</option>
                      <option className="text-black bg-white" value="Lote">Lotes & Terrenos</option>
-                     <option className="text-black bg-white" value="Edificio">Edificios Corporativos</option>
+                     <option className="text-black bg-white" value="Edificio">Edificios</option>
                      <option className="text-black bg-white" value="Finca">Fincas & Haciendas</option>
                      <option className="text-black bg-white" value="Local Comercial">Locales Comerciales</option>
                   </select>
-                  <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
-                     <div className="w-2 h-2 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-1 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                     <div className="w-1.5 h-1.5 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-0.5 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
                   </div>
                </div>
 
-               {/* FILTRO DE PRESUPUESTO */}
+               {/* 4. FILTRO DE PRESUPUESTO */}
                <div className="relative w-full group">
-                  <DollarSign className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
+                  <DollarSign className="absolute left-4.5 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
                   <select 
                     value={priceRange}
                     onChange={(e) => setPriceRange(e.target.value)}
-                    className="w-full pl-12 pr-10 py-3.5 bg-transparent border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.15em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-semibold truncate"
+                    className="w-full pl-11 pr-9 py-3 bg-transparent border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.12em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-semibold truncate"
                   >
                      <option className="text-black bg-white" value="Cualquier Precio">Presupuesto (₡ / $)</option>
                      <option className="text-black bg-white" value="< $500k">Menos de $500k (₡260M)</option>
-                     <option className="text-black bg-white" value="$500k - $1M">$500k - $1M (₡260M - ₡520M)</option>
-                     <option className="text-black bg-white" value="$1M - $3M">$1M - $3M (₡520M - ₡1.5B)</option>
+                     <option className="text-black bg-white" value="$500k - $1M">$500k - $1M</option>
+                     <option className="text-black bg-white" value="$1M - $3M">$1M - $3M</option>
                      <option className="text-black bg-white" value="+ $3M">Más de $3M (₡1.5B+)</option>
                   </select>
-                  <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
-                     <div className="w-2 h-2 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-1 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                     <div className="w-1.5 h-1.5 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-0.5 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
                   </div>
                </div>
 
-               {/* FILTRO DE OPERACIÓN */}
-               <div className="relative w-full group">
-                  <Tag className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
+               {/* 5. FILTRO DE OPERACIÓN */}
+               <div className="relative w-full group sm:col-span-2 lg:col-span-1">
+                  <Tag className="absolute left-4.5 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
                   <select 
                     value={statusType}
                     onChange={(e) => setStatusType(e.target.value)}
-                    className="w-full pl-12 pr-10 py-3.5 bg-transparent border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.15em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-semibold truncate"
+                    className="w-full pl-11 pr-9 py-3 bg-transparent border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.12em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-semibold truncate"
                   >
                      <option className="text-black bg-white" value="Operación">Venta o Alquiler</option>
                      <option className="text-black bg-white" value="Venta">En Venta Exclusiva</option>
                      <option className="text-black bg-white" value="Alquiler">En Alquiler de Lujo</option>
                   </select>
-                  <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
-                     <div className="w-2 h-2 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-1 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                     <div className="w-1.5 h-1.5 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-0.5 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
                   </div>
                </div>
 
