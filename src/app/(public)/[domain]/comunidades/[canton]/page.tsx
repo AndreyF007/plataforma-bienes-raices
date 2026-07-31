@@ -11,6 +11,7 @@ import VideoGallery from '@/components/public/VideoGallery';
 import NewsletterForm from '@/components/public/NewsletterForm';
 import { getCantonDemographicStats } from '@/data/crDemographics';
 import { allProperties } from '@/data/mockProperties';
+import CantonHero from './CantonHero';
 
 export async function generateMetadata(props: { params: Promise<{ domain: string; canton: string }> }) {
   const params = await props.params;
@@ -141,22 +142,8 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
       <Navbar tenantName={tenantData.name} contactPhone={settings.contactPhone} contactEmail={settings.contactEmail} />
       <FloatingContact contactEmail={settings.contactEmail} contactPhone={settings.contactPhone} />
 
-      {/* 1. HERO SECTION & TITULO (COVER PHOTO) */}
-      <section className="group relative w-full h-[60vh] min-h-[500px] flex flex-col items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-100 animate-slow-zoom"
-          style={{ backgroundImage: `url('${wikiImage || 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80'}')` }}
-        />
-        {/* Overlay oscuro para legibilidad y elegancia */}
-        <div className="absolute inset-0 bg-black/40" />
-
-        <div className="relative z-10 flex flex-col items-center px-6">
-          <h1 className="text-[40px] md:text-[60px] font-[family-name:var(--font-raleway)] font-light text-white tracking-[0.1em] uppercase mb-8 text-center leading-tight drop-shadow-md">
-            {formattedCanton}
-          </h1>
-        </div>
-      </section>
+      {/* 1. HERO SECTION & TITULO (COVER PHOTO OPTIMIZADA CON CARGA PROGRESIVA DE LUJO) */}
+      <CantonHero bannerImage={wikiImage || 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=75&fm=webp'} cantonName={formattedCanton} />
 
       {/* 2. VIDEOS DESTACADOS (FEATURED VIDEOS) */}
       <section className="w-full py-12 px-6 bg-[#fafafa] dark:bg-neutral-900 border-b border-black/10 dark:border-white/10">
