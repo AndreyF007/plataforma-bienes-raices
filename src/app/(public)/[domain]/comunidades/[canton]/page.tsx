@@ -335,17 +335,17 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
       </section>
 
       {/* 9. NEWSLETTER */}
-      <section className="relative w-full py-[120px] px-6 bg-[url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center">
-         <div className="absolute inset-0 bg-[#8c8c8c]/90 mix-blend-multiply"></div>
-         <div className="relative z-10 max-w-[800px] mx-auto text-center text-white">
-            <h3 className="text-[14px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.2em] mb-[60px]">
-               INTERESTED IN AN IMPACTFUL MONTHLY NEWSLETTER?
+      <section className="relative w-full py-[100px] md:py-[130px] px-6 bg-[url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center overflow-hidden">
+         <div className="absolute inset-0 bg-neutral-950/80 backdrop-blur-[2px]"></div>
+         <div className="relative z-10 max-w-[850px] mx-auto text-center text-white">
+            <h3 className="text-[11px] md:text-[13px] font-[family-name:var(--font-raleway)] uppercase font-bold tracking-[0.3em] text-[#d4af37] mb-6">
+               BOLETÍN EXCLUSIVO DE ALTA GAMA
             </h3>
-            <h2 className="text-[36px] md:text-[52px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] mb-[60px] leading-tight">
-               INFORMACIÓN<br/>SOBRE EL<br/>MERCADO<br/>INMOBILIARIO,<br/>EVENTOS<br/>LOCALES,<br/>ARTÍCULOS<br/>SELECCIONADOS,<br/>HISTORIAS<br/>INSPIRADORAS Y<br/>UNA DOSIS DE<br/>POSITIVIDAD.
+            <h2 className="text-[26px] md:text-[42px] font-[family-name:var(--font-raleway)] font-light tracking-[0.05em] mb-6 leading-[1.3] text-white">
+               Análisis del Mercado Inmobiliario, Oportunidades Selectas y Estilo de Vida
             </h2>
-            <p className="text-[16px] font-[family-name:var(--font-quicksand)] mb-[60px]">
-               Sin spam: solo un excelente correo electrónico cada mes.<br/>Únete a continuación.
+            <p className="text-[15px] md:text-[17px] font-[family-name:var(--font-quicksand)] text-white/85 max-w-[650px] mx-auto mb-10 leading-relaxed font-light">
+               Una curaduría mensual con estadísticas privilegiadas del sector de lujo en Costa Rica, arquitectura de vanguardia y tendencias locales. Sin saturar tu buzón: solo contenido de excepcional valor cada mes.
             </p>
 
             <NewsletterForm tenantName={tenantData.name} />
