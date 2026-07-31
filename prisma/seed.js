@@ -31,6 +31,11 @@ async function main() {
     },
   });
 
+  await prisma.user.update({
+    where: { email: 'admin@andreyrealty.com' },
+    data: { tenantId: tenant.id }
+  });
+
   console.log('Database seeded successfully');
 }
 

@@ -83,7 +83,9 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
   
   // Selección determinista basada en el nombre del cantón
   const imgIndex = formattedCanton.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % luxuryImages.length;
-  let wikiImage = zoneData?.coverImage || luxuryImages[imgIndex];
+  let wikiImage = (zoneData?.coverImage && zoneData.coverImage !== '') 
+    ? zoneData.coverImage 
+    : ((zoneData?.image && zoneData.image !== '') ? zoneData.image : luxuryImages[imgIndex]);
 
   let wikiExtract = zoneData?.description || `Descubra el increíble estilo de vida y las excelentes oportunidades inmobiliarias que ${formattedCanton} tiene para ofrecer. Ubicado en Costa Rica, este cantón es una excelente zona para vivir o invertir.`;
 

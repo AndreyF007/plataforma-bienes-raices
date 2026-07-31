@@ -198,18 +198,31 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
 
       {/* 5.5 ZONAS DE COBERTURA */}
       {(() => {
-        let zones = tenantData.zones || [];
-        if (zones.length === 0) {
-          zones = [
-            { id: 'z1', name: 'San José', image: 'https://images.unsplash.com/photo-1590059336111-82743825a07c?auto=format&fit=crop&w=800&q=80' },
-            { id: 'z2', name: 'Guanacaste', image: 'https://images.unsplash.com/photo-1590493060411-9a7c645b36bd?auto=format&fit=crop&w=800&q=80' },
-            { id: 'z3', name: 'Puntarenas', image: 'https://images.unsplash.com/photo-1563299796-17596c367e0e?auto=format&fit=crop&w=800&q=80' },
-            { id: 'z4', name: 'Limón', image: 'https://images.unsplash.com/photo-1620023403332-9017f8b9ec7c?auto=format&fit=crop&w=800&q=80' },
-            { id: 'z5', name: 'Alajuela', image: 'https://images.unsplash.com/photo-1549880181-56a44cf4a9a5?auto=format&fit=crop&w=800&q=80' },
-            { id: 'z6', name: 'Heredia', image: 'https://images.unsplash.com/photo-1616422285623-14981329ee7a?auto=format&fit=crop&w=800&q=80' },
-            { id: 'z7', name: 'Cartago', image: 'https://images.unsplash.com/photo-1583095123989-130a10996cb2?auto=format&fit=crop&w=800&q=80' }
-          ] as any[];
-        }
+        const PROVINCE_LIST = [
+          { id: 'prov-sj', name: 'San José', defaultImg: '/images/zone-escazu.png', keywords: ['San José', 'Escazú', 'Santa Ana', 'Curridabat', 'Desamparados', 'Pérez Zeledón'] },
+          { id: 'prov-gua', name: 'Guanacaste', defaultImg: '/images/zone-guanacaste.png', keywords: ['Guanacaste', 'Tamarindo', 'Liberia', 'Nicoya', 'Santa Cruz', 'Papagayo', 'Carrillo', 'Nosara'] },
+          { id: 'prov-pnt', name: 'Puntarenas', defaultImg: '/images/zone-manuel.png', keywords: ['Puntarenas', 'Manuel Antonio', 'Jacó', 'Garabito', 'Monteverde', 'Quepos', 'Osa', 'Golfito'] },
+          { id: 'prov-lim', name: 'Limón', defaultImg: '/images/zone-nosara.png', keywords: ['Limón', 'Puerto Viejo', 'Cahuita', 'Talamanca', 'Tortuguero', 'Siquirres', 'Pococí', 'Guácimo', 'Matina'] },
+          { id: 'prov-ala', name: 'Alajuela', defaultImg: '/images/property-1.png', keywords: ['Alajuela', 'San Carlos', 'La Fortuna', 'Grecia', 'San Ramón', 'Atenas', 'Poás'] },
+          { id: 'prov-her', name: 'Heredia', defaultImg: '/images/property-2.png', keywords: ['Heredia', 'Belén', 'Santo Domingo', 'Barva', 'San Rafael', 'Sarapiquí', 'Santa Bárbara'] },
+          { id: 'prov-car', name: 'Cartago', defaultImg: '/images/property-3.png', keywords: ['Cartago', 'Tres Ríos', 'La Unión', 'Paraíso', 'Turrialba', 'Irazú', 'Oreamuno'] }
+        ];
+
+        const allZones = (tenantData.zones || []) as { name?: string, image?: string | null, coverImage?: string | null }[];
+
+        const provinceCards = PROVINCE_LIST.map(prov => {
+          const matchingZone = allZones.find(z => 
+            z.name && prov.keywords.some(kw => z.name?.toLowerCase() === kw.toLowerCase()) &&
+            (z.image || z.coverImage) && !((z.image || z.coverImage)?.includes('unsplash')) && !((z.image || z.coverImage)?.includes('wikimedia'))
+          );
+          const displayImg = matchingZone ? (matchingZone.image || matchingZone.coverImage) : prov.defaultImg;
+          
+          return {
+            id: prov.id,
+            name: prov.name,
+            image: displayImg || prov.defaultImg
+          };
+        });
 
         return (
           <section className="bg-[#fcfcfc] dark:bg-neutral-900 py-[80px] md:py-[120px] px-6">
@@ -222,7 +235,7 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
               </div>
               
               <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                {zones.map((zone) => (
+                {provinceCards.map((zone) => (
                   <a 
                     key={zone.id} 
                     href={`/comunidades?zona=${encodeURIComponent(zone.name)}`}

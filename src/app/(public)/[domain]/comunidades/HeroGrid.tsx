@@ -1,39 +1,24 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
-const premiumImages = [
-  "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1518182170546-076616fdacaf?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1520116468816-921d7b6935cc?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600566752229-250de6891eb2?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80"
+// Imágenes locales seguras y probadas en el sistema para respaldo por si fallan conexiones externas
+const fallbackLocalImages = [
+  "/images/zone-escazu.png",
+  "/images/zone-guanacaste.png",
+  "/images/zone-manuel.png",
+  "/images/zone-nosara.png",
+  "/images/property-1.png",
+  "/images/property-2.png",
+  "/images/property-3.png",
+  "/images/property-4.png",
+  "/images/hero-bg.png"
 ];
 
 function FlippingCell({ img1, img2, flipInterval, initialDelay, breatheDelay }: { img1: string, img2: string, flipInterval: number, initialDelay: number, breatheDelay: number }) {
   const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
-    // Start the flip animation after a staggered initial delay
     const timeout = setTimeout(() => {
       setFlipped(f => !f);
       const interval = setInterval(() => {
@@ -46,14 +31,14 @@ function FlippingCell({ img1, img2, flipInterval, initialDelay, breatheDelay }: 
 
   return (
     <div className="relative overflow-hidden w-full h-full flip-container">
-      {/* Overlay global para cada celda, mucho más claro ahora */}
       <div className="absolute inset-0 bg-black/10 dark:bg-black/30 z-20 pointer-events-none"></div>
       
       <div className={`flipper w-full h-full ${flipped ? 'flipped' : ''}`}>
         <div className="front w-full h-full">
            <img 
              src={img1} 
-             alt="Costa Rica Property Front" 
+             alt="Canton Costa Rica Front" 
+             onError={(e) => { (e.target as HTMLImageElement).src = '/images/zone-guanacaste.png'; }}
              className="w-full h-full object-cover animate-breathe" 
              style={{ animationDelay: breatheDelay + 's' }} 
            />
@@ -61,7 +46,8 @@ function FlippingCell({ img1, img2, flipInterval, initialDelay, breatheDelay }: 
         <div className="back w-full h-full">
            <img 
              src={img2} 
-             alt="Costa Rica Property Back" 
+             alt="Canton Costa Rica Back" 
+             onError={(e) => { (e.target as HTMLImageElement).src = '/images/zone-escazu.png'; }}
              className="w-full h-full object-cover animate-breathe" 
              style={{ animationDelay: (breatheDelay + 2) + 's' }} 
            />
@@ -71,23 +57,45 @@ function FlippingCell({ img1, img2, flipInterval, initialDelay, breatheDelay }: 
   );
 }
 
-export default function HeroGrid() {
+interface ZoneProp {
+  image?: string | null;
+  coverImage?: string | null;
+}
+
+export default function HeroGrid({ zones }: { zones?: ZoneProp[] }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <div className="absolute inset-0 bg-black/5" />;
+  // Seleccionar y mezclar al azar entre las fotos reales que ha subido el usuario para los cantones
+  const pairs = useMemo(() => {
+    const uploaded = (zones || [])
+      .flatMap(z => [z.image, z.coverImage])
+      .filter((img): img is string => typeof img === 'string' && img.trim() !== '' && !img.includes('wikimedia'));
 
-  // Generar pares de imágenes
-  const pairs = [];
-  for (let i = 0; i < 12; i++) {
-    pairs.push({
-      img1: premiumImages[i],
-      img2: premiumImages[i + 12]
-    });
-  }
+    // Combinar las subidas (dándoles máxima prioridad y duplicándolas si se requiere) con las locales garantizadas
+    let pool = Array.from(new Set([...uploaded, ...fallbackLocalImages]));
+    
+    // Mezclar al azar y construir las 24 fotos necesarias
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    const selected: string[] = [];
+    for (let i = 0; i < 24; i++) {
+      selected.push(shuffled[i % shuffled.length]);
+    }
+
+    const newPairs = [];
+    for (let i = 0; i < 12; i++) {
+      newPairs.push({
+        img1: selected[i],
+        img2: selected[i + 12]
+      });
+    }
+    return newPairs;
+  }, [zones]);
+
+  if (!mounted) return <div className="absolute inset-0 bg-black/5" />;
 
   return (
     <>

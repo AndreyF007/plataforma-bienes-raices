@@ -131,8 +131,45 @@ export default async function TenantLayout(props: {
 
   const contactPhone = settings.contactPhone || "+506 6041 3905";
 
+  // Estructura de Datos (JSON-LD) optimizada 100% para Buscadores (Google SEO) y Motores de Inteligencia Artificial (GEO/ChatGPT/Perplexity/Gemini)
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": tenantData.name,
+    "description": settings.heroText || `Agente y asesor de bienes raíces de lujo especializado en propiedades exclusivas en Costa Rica.`,
+    "url": `https://${decodedDomain}`,
+    "telephone": contactPhone,
+    "email": settings.contactEmail || "info@andreyrealty.com",
+    "priceRange": "$$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "San José",
+      "addressRegion": "Costa Rica",
+      "addressCountry": "CR"
+    },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "San José" },
+      { "@type": "AdministrativeArea", "name": "Guanacaste" },
+      { "@type": "AdministrativeArea", "name": "Puntarenas" },
+      { "@type": "AdministrativeArea", "name": "Limón" },
+      { "@type": "AdministrativeArea", "name": "Alajuela" },
+      { "@type": "AdministrativeArea", "name": "Heredia" },
+      { "@type": "AdministrativeArea", "name": "Cartago" }
+    ],
+    "sameAs": [
+      settings.socialFacebook,
+      settings.socialInstagram,
+      settings.socialTiktok,
+      settings.socialYoutube
+    ].filter(Boolean)
+  };
+
   return (
     <div className={`min-h-screen ${quicksand.variable} ${raleway.variable} font-sans antialiased bg-white dark:bg-neutral-950 text-black dark:text-white relative`}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
       {props.children}
       <WhatsAppButton phone={contactPhone} />
     </div>

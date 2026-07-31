@@ -17,6 +17,11 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
   
   if (!tenantData) return notFound();
 
+  const zones = await db.zone.findMany({
+    where: { tenantId: tenantData.id },
+    select: { id: true, name: true, image: true, coverImage: true }
+  });
+
   let settings: any = {};
   try {
     settings = JSON.parse(tenantData.siteSettings || "{}");
@@ -30,7 +35,7 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
 
       {/* 1. HERO SECTION */}
       <section className="relative w-full h-[50vh] md:h-[60vh] flex flex-col justify-center items-center overflow-hidden bg-black pt-20 border-b border-black/10 dark:border-white/10">
-        <HeroGrid />
+        <HeroGrid zones={zones} />
         <div className="relative z-30 flex flex-col items-center text-center px-6 mt-10 max-w-[900px]">
           <p className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] text-white uppercase tracking-[0.2em] mb-4 drop-shadow-md">
             CANTONES DE COSTA RICA
@@ -45,7 +50,7 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
       </section>
 
       {/* 2. APLICACIÓN DE CLIENTE: BUSCADOR Y 84 CANTONES */}
-      <ClientNeighborhoods />
+      <ClientNeighborhoods zones={zones} />
 
 
       {/* 4. CIERRE / CTA FILOSOFÍA */}

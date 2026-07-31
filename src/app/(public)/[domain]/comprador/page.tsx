@@ -188,6 +188,9 @@ export default async function BuyersGuidePage(props: { params: Promise<{ domain:
          ))}
       </section>
 
+      {/* 5.5 TESTIMONIOS */}
+      <TestimonialSlider tenantName={tenantData.name} />
+
       {/* 6. CIERRE / CTA FILOSOFÍA */}
       <section className="bg-white dark:bg-neutral-950 py-[100px] px-6 text-center flex flex-col items-center">
          <h2 className="text-[32px] md:text-[40px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] text-black dark:text-white mb-8 max-w-[800px] leading-tight">
