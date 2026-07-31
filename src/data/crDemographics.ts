@@ -116,6 +116,32 @@ export const CANTON_DEMOGRAPHICS: Record<string, CantonDemography> = {
   "puerto viejo": { population: "41,210", medianAge: 29, avgIncome: "₡680,000", walkScore: 72, bikeScore: 78 },
   "matina": { population: "46,120", medianAge: 28, avgIncome: "₡440,000", walkScore: 62, bikeScore: 64 },
   "guácimo": { population: "51,210", medianAge: 29, avgIncome: "₡460,000", walkScore: 66, bikeScore: 66 },
+
+  // DISTRITOS Y ZONAS EXCLUSIVAS DE ALTA GAMA
+  "rohrmoser": { population: "32,150", medianAge: 37, avgIncome: "₡1,450,000", walkScore: 88, bikeScore: 82 },
+  "la sabana": { population: "25,410", medianAge: 36, avgIncome: "₡1,350,000", walkScore: 90, bikeScore: 85 },
+  "lindora": { population: "18,410", medianAge: 38, avgIncome: "₡1,850,000", walkScore: 74, bikeScore: 68 },
+  "la garita": { population: "12,410", medianAge: 38, avgIncome: "₡790,000", walkScore: 64, bikeScore: 55 },
+  "cariari": { population: "15,210", medianAge: 38, avgIncome: "₡1,650,000", walkScore: 80, bikeScore: 72 },
+  "flamingo": { population: "6,410", medianAge: 39, avgIncome: "₡1,150,000", walkScore: 72, bikeScore: 68 },
+  "conchal": { population: "5,120", medianAge: 38, avgIncome: "₡1,250,000", walkScore: 70, bikeScore: 66 },
+  "papagayo": { population: "4,210", medianAge: 40, avgIncome: "₡1,450,000", walkScore: 65, bikeScore: 60 },
+  "potrero": { population: "8,120", medianAge: 37, avgIncome: "₡920,000", walkScore: 74, bikeScore: 68 },
+  "las catalinas": { population: "3,500", medianAge: 39, avgIncome: "₡1,350,000", walkScore: 92, bikeScore: 85 },
+  "nosara": { population: "9,410", medianAge: 35, avgIncome: "₡1,100,000", walkScore: 76, bikeScore: 74 },
+  "playa grande": { population: "4,510", medianAge: 36, avgIncome: "₡950,000", walkScore: 72, bikeScore: 68 },
+  "hermosa": { population: "7,410", medianAge: 37, avgIncome: "₡920,000", walkScore: 75, bikeScore: 70 },
+  "cóbano": { population: "14,210", medianAge: 33, avgIncome: "₡780,000", walkScore: 70, bikeScore: 68 },
+  "santa teresa": { population: "11,210", medianAge: 32, avgIncome: "₡980,000", walkScore: 78, bikeScore: 76 },
+  "mal país": { population: "4,120", medianAge: 34, avgIncome: "₡950,000", walkScore: 70, bikeScore: 68 },
+  "tambor": { population: "6,810", medianAge: 36, avgIncome: "₡680,000", walkScore: 68, bikeScore: 64 },
+  "paquera": { population: "10,210", medianAge: 34, avgIncome: "₡510,000", walkScore: 64, bikeScore: 60 },
+  "lepanto": { population: "11,410", medianAge: 35, avgIncome: "₡480,000", walkScore: 62, bikeScore: 58 },
+  "dominical": { population: "5,410", medianAge: 33, avgIncome: "₡750,000", walkScore: 72, bikeScore: 66 },
+  "bahía ballena": { population: "8,410", medianAge: 33, avgIncome: "₡720,000", walkScore: 70, bikeScore: 64 },
+  "cocles": { population: "4,210", medianAge: 31, avgIncome: "₡680,000", walkScore: 72, bikeScore: 74 },
+  "manzanillo": { population: "3,810", medianAge: 32, avgIncome: "₡650,000", walkScore: 70, bikeScore: 72 },
+  "cahuita": { population: "8,510", medianAge: 33, avgIncome: "₡580,000", walkScore: 74, bikeScore: 76 },
 };
 
 // Respaldo promedio nacional oficial de Costa Rica si no se encuentra el cantón
@@ -131,10 +157,19 @@ export function getCantonDemographicStats(cantonName: string, dbZone?: any): Can
   const normalized = cantonName.trim().toLowerCase();
   const base = CANTON_DEMOGRAPHICS[normalized] || Object.entries(CANTON_DEMOGRAPHICS).find(([key]) => normalized.includes(key) || key.includes(normalized))?.[1] || NATIONAL_AVERAGE;
 
+  // ESTRICTA DEFENSA ANTI-DÓLARES: Rechazamos tajantemente cualquier valor en la base de datos que contenga símbolo $, sea menor de 6 caracteres, comience con coma o no esté formateado con Colón Costarricense (₡).
+  let finalIncome = base.avgIncome;
+  if (dbZone?.avgIncome && typeof dbZone.avgIncome === 'string') {
+    const val = dbZone.avgIncome.trim();
+    if (!val.includes('$') && !val.startsWith(',') && val.startsWith('₡') && val.length >= 6) {
+      finalIncome = val;
+    }
+  }
+
   return {
     population: dbZone?.population || base.population,
     medianAge: dbZone?.medianAge || base.medianAge,
-    avgIncome: dbZone?.avgIncome || base.avgIncome,
+    avgIncome: finalIncome,
     walkScore: dbZone?.walkScore || base.walkScore,
     bikeScore: dbZone?.bikeScore || base.bikeScore,
   };

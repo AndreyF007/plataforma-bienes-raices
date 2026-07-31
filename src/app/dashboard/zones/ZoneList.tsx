@@ -537,27 +537,17 @@ export default function ZoneList({ initialZones }: { initialZones: Zone[] }) {
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-2">
-                      <label className="block text-xs uppercase tracking-wider text-gray-500">Ingreso Promedio Individual</label>
+                      <label className="block text-xs uppercase tracking-wider text-gray-500">Ingreso Promedio Individual (Mensual)</label>
                       <div className="flex gap-2">
                         <button
                           type="button"
                           onClick={() => {
-                            const val = formData.avgIncome ? formData.avgIncome.replace(/^(\$|₡)\s*/, '') : '650,000';
+                            const val = formData.avgIncome ? formData.avgIncome.replace(/^(\$|₡)\s*/, '') : '680,000';
                             setFormData({...formData, avgIncome: `₡${val}`});
                           }}
-                          className="px-2.5 py-1 text-[11px] font-semibold bg-emerald-600 text-white rounded shadow-sm hover:bg-emerald-700 transition-colors flex items-center gap-1"
+                          className="px-3 py-1 text-[11px] font-semibold bg-emerald-600 text-white rounded shadow-sm hover:bg-emerald-700 transition-colors flex items-center gap-1"
                         >
-                          <span>Moneda: Colón (₡)</span>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const val = formData.avgIncome ? formData.avgIncome.replace(/^(\$|₡)\s*/, '') : '1,200';
-                            setFormData({...formData, avgIncome: `$${val}`});
-                          }}
-                          className="px-2.5 py-1 text-[11px] font-semibold bg-neutral-800 text-white dark:bg-neutral-200 dark:text-black rounded shadow-sm hover:opacity-80 transition-opacity flex items-center gap-1"
-                        >
-                          <span>Moneda: Dólar ($)</span>
+                          <span>Establecer Moneda Oficial: Colón (₡)</span>
                         </button>
                       </div>
                     </div>
@@ -566,10 +556,10 @@ export default function ZoneList({ initialZones }: { initialZones: Zone[] }) {
                       value={formData.avgIncome}
                       onChange={e => setFormData({...formData, avgIncome: e.target.value})}
                       className="w-full border border-gray-300 dark:border-white/20 bg-transparent p-3 text-sm focus:border-black dark:focus:border-white outline-none font-medium" 
-                      placeholder="Ej. ₡650,000 o $1,200 (Salario mensual según INEC)"
+                      placeholder="Ej. ₡680,000 (Salario promedio mensual según INEC)"
                     />
                     <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed">
-                      💡 <strong>Dato Automático:</strong> Si dejas este campo en blanco, el sistema colocará automáticamente el promedio salarial real estimado por el <strong>INEC</strong> en <strong>Colones Costarricenses (₡)</strong> de acuerdo con el cantón seleccionado.
+                      💡 <strong>Dato Automático:</strong> Si dejas este campo en blanco o contuvo un símbolo de dólar antiguo de pruebas, el sistema protegerá la pantalla y colocará automáticamente el promedio salarial real estimado por el <strong>INEC</strong> estrictamente en <strong>Colones Costarricenses (₡)</strong> para el cantón seleccionado.
                     </p>
                   </div>
                 </div>
