@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
+import { getCantonCoverImage } from '@/data/crDemographics';
 
 interface Canton {
   name: string;
@@ -18,91 +19,6 @@ function ClientNeighborhoodsContent({ zones = [] }: { zones?: any[] }) {
   const [selectedProvince, setSelectedProvince] = useState(initialZone);
 
   const provinces = ["Todas", "San José", "Alajuela", "Cartago", "Heredia", "Guanacaste", "Puntarenas", "Limón"];
-
-  // Conjunto de imágenes 100% auténticas de paisajes y monumentos costarricenses (bosques tropicales, volcanes, playas y arquitectura local - CERO nieve, CERO desierto)
-  const authenticCRFallbacks = [
-    "https://upload.wikimedia.org/wikipedia/commons/e/ea/Teatro_Nacional_de_Costa_Rica.jpg", // Teatro Nacional
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg/1280px-Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg", // Volcán Arenal
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Manuel_Antonio_Beach_Costa_Rica.jpg/1280px-Manuel_Antonio_Beach_Costa_Rica.jpg", // Manuel Antonio
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Bas%C3%ADlica_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_Cartago_Costa_Rica.jpg/1280px-Bas%C3%ADlica_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_Cartago_Costa_Rica.jpg", // Basílica Cartago
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Monteverde_Cloud_Forest_Reserve_Costa_Rica.jpg/1280px-Monteverde_Cloud_Forest_Reserve_Costa_Rica.jpg", // Monteverde
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Tamarindo_Beach_Costa_Rica.jpg/1280px-Tamarindo_Beach_Costa_Rica.jpg", // Tamarindo
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Puerto_Viejo_de_Talamanca_Beach.jpg/1280px-Puerto_Viejo_de_Talamanca_Beach.jpg", // Puerto Viejo Limon
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Volcan_Poas_Crater_Costa_Rica.jpg/1280px-Volcan_Poas_Crater_Costa_Rica.jpg", // Volcán Poás
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/El_Fort%C3%ADn_Heredia_Costa_Rica.jpg/1280px-El_Fort%C3%ADn_Heredia_Costa_Rica.jpg", // El Fortín Heredia
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Rio_Celeste_Waterfall_Costa_Rica.jpg/1280px-Rio_Celeste_Waterfall_Costa_Rica.jpg", // Río Celeste
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Coffee_Plantation_Costa_Rica.jpg/1280px-Coffee_Plantation_Costa_Rica.jpg", // Cafetales Tarrazú/Los Santos
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Corcovado_National_Park_Costa_Rica.jpg/1280px-Corcovado_National_Park_Costa_Rica.jpg", // Corcovado
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Zarcero_Topiary_Park_Costa_Rica.jpg/1280px-Zarcero_Topiary_Park_Costa_Rica.jpg", // Zarcero Parque
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sarchi_Oxcart_Costa_Rica.jpg/1280px-Sarchi_Oxcart_Costa_Rica.jpg" // Sarchí Carreta Tica
-  ];
-
-  // Mapas específicos de fotos reales por cantón para que TODAS las tarjetitas muestren lugares representativos costarricenses
-  const defaultCantonImages: Record<string, string> = {
-    // San José (20)
-    "San José": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Teatro_Nacional_de_Costa_Rica.jpg",
-    "Escazú": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Church_of_San_Miguel_in_Escazu.jpg",
-    "Desamparados": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Catedral_de_Nuestra_Se%C3%B1ora_de_los_Desamparados.jpg",
-    "Puriscal": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Ruinas_de_la_Antigua_Iglesia_de_Puriscal.jpg",
-    "Tarrazú": "https://upload.wikimedia.org/wikipedia/commons/3/33/San_Marcos_de_Tarraz%C3%BAn%2C_Costa_Rica.jpg",
-    "Aserrí": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-    "Mora": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Ciudad_Col%C3%B3n_centro.jpg",
-    "Goicoechea": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-    "Santa Ana": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Valley_of_Santa_Ana%2C_Costa_Rica.jpg",
-    "Alajuelita": "https://upload.wikimedia.org/wikipedia/commons/8/8e/La_Cruz_de_Alajuelita_Cerro_San_Miguel.jpg",
-    "Vázquez de Coronado": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Iglesia_de_Coronado_Costa_Rica.jpg",
-    "Acosta": "https://upload.wikimedia.org/wikipedia/commons/5/5e/San_Ignacio_de_Acosta_templo.jpg",
-    "Tibás": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Estadio_Ricardo_Saprissa.jpg",
-    "Moravia": "https://upload.wikimedia.org/wikipedia/commons/d/df/San_Vicente_de_Moravia_iglesia.jpg",
-    "Montes de Oca": "https://upload.wikimedia.org/wikipedia/commons/6/64/Fuente_de_la_Hispanidad_Costa_Rica.jpg",
-    "Turrubares": "https://upload.wikimedia.org/wikipedia/commons/2/25/San_Pablo_de_Turrubares_Costa_Rica.jpg",
-    "Dota": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Santa_Maria_de_Dota_Costa_Rica.jpg",
-    "Curridabat": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Curridabat_centro_iglesia.jpg",
-    "Pérez Zeledón": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Cerro_Chirrip%C3%B3_Costa_Rica.jpg",
-    "León Cortés Castro": "https://upload.wikimedia.org/wikipedia/commons/0/02/San_Pablo_de_Leon_Cortes.jpg",
-
-    // Alajuela (16)
-    "Alajuela": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Juan_Santamaria_Statue_Alajuela.jpg/800px-Juan_Santamaria_Statue_Alajuela.jpg",
-    "San Ramón": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/San_Ramon_Costa_Rica_Church.jpg/800px-San_Ramon_Costa_Rica_Church.jpg",
-    "Grecia": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Metal_Church_Grecia_Costa_Rica.jpg/800px-Metal_Church_Grecia_Costa_Rica.jpg",
-    "San Carlos": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg/800px-Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg",
-    "Zarcero": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Zarcero_Topiary_Park_Costa_Rica.jpg/800px-Zarcero_Topiary_Park_Costa_Rica.jpg",
-    "Sarchí": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sarchi_Oxcart_Costa_Rica.jpg/800px-Sarchi_Oxcart_Costa_Rica.jpg",
-    "Poás": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Volcan_Poas_Crater_Costa_Rica.jpg/800px-Volcan_Poas_Crater_Costa_Rica.jpg",
-    "Atenas": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Atenas_Central_Park_Costa_Rica.jpg/800px-Atenas_Central_Park_Costa_Rica.jpg",
-    
-    // Cartago (8)
-    "Cartago": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Bas%C3%ADlica_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_Cartago_Costa_Rica.jpg/800px-Bas%C3%ADlica_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_Cartago_Costa_Rica.jpg",
-    "Oreamuno": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Irazu_Volcano_Crater_Costa_Rica.jpg/800px-Irazu_Volcano_Crater_Costa_Rica.jpg",
-    "Paraíso": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Orosi_Valley_Costa_Rica.jpg/800px-Orosi_Valley_Costa_Rica.jpg",
-    "Turrialba": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Turrialba_Volcano_Costa_Rica.jpg/800px-Turrialba_Volcano_Costa_Rica.jpg",
-
-    // Heredia (10)
-    "Heredia": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/El_Fort%C3%ADn_Heredia_Costa_Rica.jpg/800px-El_Fort%C3%ADn_Heredia_Costa_Rica.jpg",
-    "Barva": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Barva_Volcano_Lagoon_Costa_Rica.jpg/800px-Barva_Volcano_Lagoon_Costa_Rica.jpg",
-    "Sarapiquí": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Sarapiqui_River_Rainforest.jpg/800px-Sarapiqui_River_Rainforest.jpg",
-
-    // Guanacaste (11)
-    "Liberia": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Liberia_Costa_Rica_Colonial_Architecture.jpg/800px-Liberia_Costa_Rica_Colonial_Architecture.jpg",
-    "Nicoya": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Iglesia_Colonial_de_Nicoya.jpg/800px-Iglesia_Colonial_de_Nicoya.jpg",
-    "Santa Cruz": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Tamarindo_Beach_Costa_Rica.jpg/800px-Tamarindo_Beach_Costa_Rica.jpg",
-    "Carrillo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Playa_Conchal_Guanacaste.jpg/800px-Playa_Conchal_Guanacaste.jpg",
-    "Tilarán": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Lake_Arenal_Windmills_Tilaran.jpg/800px-Lake_Arenal_Windmills_Tilaran.jpg",
-
-    // Puntarenas (13)
-    "Puntarenas": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Paseo_de_los_Turistas_Puntarenas.jpg/800px-Paseo_de_los_Turistas_Puntarenas.jpg",
-    "Quepos": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Manuel_Antonio_Beach_Costa_Rica.jpg/800px-Manuel_Antonio_Beach_Costa_Rica.jpg",
-    "Monteverde": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Monteverde_Cloud_Forest_Reserve_Costa_Rica.jpg/800px-Monteverde_Cloud_Forest_Reserve_Costa_Rica.jpg",
-    "Garabito": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Jaco_Beach_Costa_Rica.jpg/800px-Jaco_Beach_Costa_Rica.jpg",
-    "Osa": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Corcovado_National_Park_Costa_Rica.jpg/800px-Corcovado_National_Park_Costa_Rica.jpg",
-    "Golfito": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Golfito_Bay_Costa_Rica.jpg/800px-Golfito_Bay_Costa_Rica.jpg",
-
-    // Limón (6)
-    "Limón": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Puerto_Limon_Coast_Costa_Rica.jpg/800px-Puerto_Limon_Coast_Costa_Rica.jpg",
-    "Talamanca": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Puerto_Viejo_de_Talamanca_Beach.jpg/800px-Puerto_Viejo_de_Talamanca_Beach.jpg",
-    "Pococí": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Tortuguero_Canals_Costa_Rica.jpg/800px-Tortuguero_Canals_Costa_Rica.jpg",
-    "Siquirres": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Pacuare_River_Rapids_Costa_Rica.jpg/800px-Pacuare_River_Rapids_Costa_Rica.jpg"
-  };
 
   // Base de datos de los 84 Cantones
   const allCantonsData = [
@@ -122,7 +38,7 @@ function ClientNeighborhoodsContent({ zones = [] }: { zones?: any[] }) {
     "Limón", "Pococí", "Siquirres", "Talamanca", "Matina", "Guácimo"
   ];
 
-  // Mapear la provincia según el índice para evitar hardcodear 84 objetos a mano
+  // Mapear la provincia según el índice y utilizar la función unificada de imágenes del sistema
   const mappedCantons: Canton[] = allCantonsData.map((name, index) => {
     let prov = "";
     if (index < 20) prov = "San José";
@@ -134,14 +50,7 @@ function ClientNeighborhoodsContent({ zones = [] }: { zones?: any[] }) {
     else prov = "Limón";
 
     const matchedZone = zones?.find(z => z.name.toLowerCase() === name.toLowerCase());
-    // Prioridad 1: Imagen que tengas en base de datos de administración (si se modificó)
-    // Prioridad 2: Nuestro mapa específico de hitos ticos para el cantón
-    // Prioridad 3: Fotos costarricenses de bosques/playas en rotación (CERO desiertos ni nieve)
-    let customImg = matchedZone ? (matchedZone.image || matchedZone.coverImage) : null;
-    if (!customImg || customImg.includes("unsplash.com")) {
-      customImg = defaultCantonImages[name] || null;
-    }
-    const finalImg = (customImg && customImg !== '') ? customImg : authenticCRFallbacks[index % authenticCRFallbacks.length];
+    const finalImg = getCantonCoverImage(name, matchedZone, index);
 
     return {
       name,

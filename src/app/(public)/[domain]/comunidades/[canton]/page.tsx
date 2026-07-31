@@ -9,7 +9,7 @@ import InteractivePoiTable from './InteractivePoiTable';
 import PropertyCard from '@/components/properties/PropertyCard';
 import VideoGallery from '@/components/public/VideoGallery';
 import NewsletterForm from '@/components/public/NewsletterForm';
-import { getCantonDemographicStats } from '@/data/crDemographics';
+import { getCantonDemographicStats, getCantonCoverImage } from '@/data/crDemographics';
 import { allProperties } from '@/data/mockProperties';
 import CantonHero from './CantonHero';
 
@@ -72,22 +72,9 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
   const wikiQuery = encodeURIComponent(`${formattedCanton}`);
   const wikiQueryCR = encodeURIComponent(`${formattedCanton} (Costa Rica)`);
   
-  // Array de imágenes de ultra-lujo (4K) para garantizar calidad cristalina
-  const luxuryImages = [
-    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80", // Mansión moderna
-    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80", // Casa de lujo clásica
-    "https://images.unsplash.com/photo-1613490908676-e17502b4d24a?auto=format&fit=crop&w=1920&q=80", // Villa de montaña
-    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1920&q=80", // Vista panorámica
-    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80", // Paisaje verde
-    "https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?auto=format&fit=crop&w=1920&q=80", // Casa estilo hacienda
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80", // Arquitectura tropical
-  ];
-  
-  // Selección determinista basada en el nombre del cantón
-  const imgIndex = formattedCanton.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % luxuryImages.length;
-  let wikiImage = (zoneData?.coverImage && zoneData.coverImage !== '') 
-    ? zoneData.coverImage 
-    : ((zoneData?.image && zoneData.image !== '') ? zoneData.image : luxuryImages[imgIndex]);
+  // Selección determinista y 100% consistente con la grilla de cantones de las tarjetas
+  const imgIndex = formattedCanton.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const wikiImage = getCantonCoverImage(formattedCanton, zoneData, imgIndex);
 
   let wikiExtract = zoneData?.description || `Descubra el increíble estilo de vida y las excelentes oportunidades inmobiliarias que ${formattedCanton} tiene para ofrecer. Ubicado en Costa Rica, este cantón es una excelente zona para vivir o invertir.`;
 
