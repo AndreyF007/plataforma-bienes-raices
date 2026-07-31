@@ -98,22 +98,31 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
   const filteredProperties = useMemo(() => {
     let result = [...allProperties];
 
-    // 1. Filtro Estricto por Provincia
-    if (provinceFilter !== "Todas las Provincias" && PROVINCE_DATA[provinceFilter]) {
-      const keywords = PROVINCE_DATA[provinceFilter].keywords;
-      result = result.filter(p => {
-        const text = ((p.address || '') + ' ' + (p.title || '') + ' ' + ((p as any).location || '')).toLowerCase();
-        return keywords.some(kw => text.includes(kw));
-      });
-    }
-
-    // 2. Filtro Estricto por Cantón Específico
-    if (cantonFilter && !cantonFilter.startsWith("Cualquier") && cantonFilter !== "Cualquier Cantón") {
-      const terms = cantonFilter.toLowerCase().split(/[\/&,]/).map(t => t.trim()).filter(Boolean);
+    // 1 & 2. Filtros de Ubicación (Provincia y Cantón)
+    if (initialCanton) {
+      // Al entrar a una comunidad ("LA COLECCIÓN EN [CANTÓN]"), la ubicación ya está fijada al cantón
+      const terms = initialCanton.toLowerCase().split(/[\/&,]/).map(t => t.trim()).filter(Boolean);
       result = result.filter(p => {
         const text = ((p.address || '') + ' ' + (p.title || '') + ' ' + ((p as any).location || '')).toLowerCase();
         return terms.some(term => text.includes(term));
       });
+    } else {
+      // En la página principal del catálogo ("Descubre nuestra selección"), aplicamos la cascada geográfica
+      if (provinceFilter !== "Todas las Provincias" && PROVINCE_DATA[provinceFilter]) {
+        const keywords = PROVINCE_DATA[provinceFilter].keywords;
+        result = result.filter(p => {
+          const text = ((p.address || '') + ' ' + (p.title || '') + ' ' + ((p as any).location || '')).toLowerCase();
+          return keywords.some(kw => text.includes(kw));
+        });
+      }
+
+      if (cantonFilter && !cantonFilter.startsWith("Cualquier") && cantonFilter !== "Cualquier Cantón") {
+        const terms = cantonFilter.toLowerCase().split(/[\/&,]/).map(t => t.trim()).filter(Boolean);
+        result = result.filter(p => {
+          const text = ((p.address || '') + ' ' + (p.title || '') + ' ' + ((p as any).location || '')).toLowerCase();
+          return terms.some(term => text.includes(term));
+        });
+      }
     }
 
     // 3. Filtro por Tipo de Propiedad
@@ -148,7 +157,7 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
     }
 
     return result;
-  }, [allProperties, provinceFilter, cantonFilter, propertyType, priceRange, statusType, sortOrder]);
+  }, [allProperties, initialCanton, provinceFilter, cantonFilter, propertyType, priceRange, statusType, sortOrder]);
 
   // Manejador de Cargar Más
   const handleLoadMore = () => {
@@ -159,67 +168,72 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
 
   return (
     <>
-      {/* 2. BARRA DE FILTROS EN CASCADA (STICKY & RESPONSIVA) */}
+      {/* 2. BARRA DE FILTROS (STICKY & RESPONSIVA) */}
       <div className="sticky top-0 z-40 w-full border-b border-black/10 dark:border-white/10 shadow-sm backdrop-blur-lg bg-white/95 dark:bg-neutral-950/95 transition-all duration-500">
          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 w-full">
+            <div className={`grid grid-cols-1 gap-3 sm:gap-4 w-full ${initialCanton ? 'sm:grid-cols-3' : 'sm:grid-cols-2 lg:grid-cols-5'}`}>
                
-               {/* 1. FILTRO DE PROVINCIA */}
-               <div className="relative w-full group">
-                  <MapPin className="absolute left-4.5 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-600 dark:text-emerald-400 font-bold transition-colors duration-500" />
-                  <select 
-                    value={provinceFilter}
-                    onChange={(e) => handleProvinceChange(e.target.value)}
-                    className="w-full pl-11 pr-9 py-3 bg-neutral-100 dark:bg-neutral-900 border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.12em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-bold truncate"
-                  >
-                     <option className="text-black bg-white" value="Todas las Provincias">📍 Provincia (Todas)</option>
-                     <option className="text-black bg-white font-semibold" value="San José">Provincia de San José</option>
-                     <option className="text-black bg-white font-semibold" value="Alajuela">Provincia de Alajuela</option>
-                     <option className="text-black bg-white font-semibold" value="Cartago">Provincia de Cartago</option>
-                     <option className="text-black bg-white font-semibold" value="Heredia">Provincia de Heredia</option>
-                     <option className="text-black bg-white font-semibold" value="Guanacaste">Provincia de Guanacaste</option>
-                     <option className="text-black bg-white font-semibold" value="Puntarenas">Provincia de Puntarenas</option>
-                     <option className="text-black bg-white font-semibold" value="Limón">Provincia de Limón</option>
-                  </select>
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                     <div className="w-1.5 h-1.5 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-0.5 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
-                  </div>
-               </div>
+               {/* 1 & 2. FILTROS DE PROVINCIA Y CANTÓN (Exclusivos para el catálogo general "Descubre nuestra selección de propiedades de lujo") */}
+               {!initialCanton && (
+                 <>
+                   {/* 1. FILTRO DE PROVINCIA */}
+                   <div className="relative w-full group">
+                      <MapPin className="absolute left-4.5 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-600 dark:text-emerald-400 font-bold transition-colors duration-500" />
+                      <select 
+                        value={provinceFilter}
+                        onChange={(e) => handleProvinceChange(e.target.value)}
+                        className="w-full pl-11 pr-9 py-3 bg-neutral-100 dark:bg-neutral-900 border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.12em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-bold truncate"
+                      >
+                         <option className="text-black bg-white" value="Todas las Provincias">📍 Provincia (Todas)</option>
+                         <option className="text-black bg-white font-semibold" value="San José">Provincia de San José</option>
+                         <option className="text-black bg-white font-semibold" value="Alajuela">Provincia de Alajuela</option>
+                         <option className="text-black bg-white font-semibold" value="Cartago">Provincia de Cartago</option>
+                         <option className="text-black bg-white font-semibold" value="Heredia">Provincia de Heredia</option>
+                         <option className="text-black bg-white font-semibold" value="Guanacaste">Provincia de Guanacaste</option>
+                         <option className="text-black bg-white font-semibold" value="Puntarenas">Provincia de Puntarenas</option>
+                         <option className="text-black bg-white font-semibold" value="Limón">Provincia de Limón</option>
+                      </select>
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                         <div className="w-1.5 h-1.5 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-0.5 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
+                      </div>
+                   </div>
 
-               {/* 2. FILTRO EN CASCADA DE CANTÓN (Se filtra estrictamente por Provincia) */}
-               <div className="relative w-full group">
-                  <MapPin className="absolute left-4.5 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
-                  <select 
-                    value={cantonFilter}
-                    onChange={(e) => setCantonFilter(e.target.value)}
-                    className="w-full pl-11 pr-9 py-3 bg-transparent border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.12em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-semibold truncate"
-                  >
-                     {provinceFilter !== "Todas las Provincias" ? (
-                       <>
-                         <option className="text-black font-bold bg-white" value={PROVINCE_DATA[provinceFilter]?.defaultCanton}>
-                           🏙️ Todos en {provinceFilter}
-                         </option>
-                         {PROVINCE_DATA[provinceFilter]?.cantons.map((c, idx) => (
-                           <option key={idx} className="text-black bg-white" value={c}>{c}</option>
-                         ))}
-                       </>
-                     ) : (
-                       <>
-                         <option className="text-black bg-white font-bold" value="Cualquier Cantón">🏙️ Cantón (Todas Prov.)</option>
-                         {Object.entries(PROVINCE_DATA).map(([provName, data]) => (
-                           <optgroup key={provName} label={`📍 PROV. DE ${provName.toUpperCase()}`} className="text-black font-bold bg-neutral-100">
-                             {data.cantons.map((c, idx) => (
-                               <option key={`${provName}-${idx}`} className="text-black bg-white" value={c}>{c}</option>
+                   {/* 2. FILTRO EN CASCADA DE CANTÓN */}
+                   <div className="relative w-full group">
+                      <MapPin className="absolute left-4.5 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
+                      <select 
+                        value={cantonFilter}
+                        onChange={(e) => setCantonFilter(e.target.value)}
+                        className="w-full pl-11 pr-9 py-3 bg-transparent border border-black/15 dark:border-white/20 rounded-full text-[11px] uppercase tracking-[0.12em] outline-none appearance-none cursor-pointer hover:border-black dark:hover:border-white transition-all duration-500 text-black dark:text-white font-semibold truncate"
+                      >
+                         {provinceFilter !== "Todas las Provincias" ? (
+                           <>
+                             <option className="text-black font-bold bg-white" value={PROVINCE_DATA[provinceFilter]?.defaultCanton}>
+                               🏙️ Todos en {provinceFilter}
+                             </option>
+                             {PROVINCE_DATA[provinceFilter]?.cantons.map((c, idx) => (
+                               <option key={idx} className="text-black bg-white" value={c}>{c}</option>
                              ))}
-                           </optgroup>
-                         ))}
-                       </>
-                     )}
-                  </select>
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                     <div className="w-1.5 h-1.5 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-0.5 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
-                  </div>
-               </div>
+                           </>
+                         ) : (
+                           <>
+                             <option className="text-black bg-white font-bold" value="Cualquier Cantón">🏙️ Cantón (Todas Prov.)</option>
+                             {Object.entries(PROVINCE_DATA).map(([provName, data]) => (
+                               <optgroup key={provName} label={`📍 PROV. DE ${provName.toUpperCase()}`} className="text-black font-bold bg-neutral-100">
+                                 {data.cantons.map((c, idx) => (
+                                   <option key={`${provName}-${idx}`} className="text-black bg-white" value={c}>{c}</option>
+                                 ))}
+                               </optgroup>
+                             ))}
+                           </>
+                         )}
+                      </select>
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                         <div className="w-1.5 h-1.5 border-b border-r border-black/40 dark:border-white/40 rotate-45 transform -translate-y-0.5 group-hover:border-black dark:group-hover:border-white transition-colors duration-500"></div>
+                      </div>
+                   </div>
+                 </>
+               )}
 
                {/* 3. FILTRO TIPO DE PROPIEDAD */}
                <div className="relative w-full group">
@@ -262,7 +276,7 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
                </div>
 
                {/* 5. FILTRO DE OPERACIÓN */}
-               <div className="relative w-full group sm:col-span-2 lg:col-span-1">
+               <div className={`relative w-full group ${!initialCanton ? 'sm:col-span-2 lg:col-span-1' : ''}`}>
                   <Tag className="absolute left-4.5 top-1/2 -translate-y-1/2 w-4 h-4 text-black group-hover:text-black dark:text-white transition-colors duration-500" />
                   <select 
                     value={statusType}
