@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Star, MapPin, Loader2 } from 'lucide-react';
+import { getCantonPois } from '@/data/crPois';
 
 interface InteractivePoiTableProps {
   cantonName: string;
@@ -22,37 +23,6 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
     { id: 'Belleza', label: 'Spa & Bienestar' },
     { id: 'Vida Nocturna', label: 'Bares & Vida Nocturna' }
   ];
-
-  // Directorio de estilo de vida personalizado por cantón con estándares de alta gama
-  const poiData: Record<string, any[]> = {
-    'Todos': [
-      { name: `Gastronomía de Autor en ${cantonName}`, img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=300&q=85", type: "Restaurante • Alta Cocina", distance: "0.4 km", rating: 5, reviews: 142 },
-      { name: `Plaza Comercial & Boutiques`, img: "https://images.unsplash.com/photo-1519999482648-25049ddd37b1?auto=format&fit=crop&w=300&q=85", type: "Compras & Moda", distance: "0.8 km", rating: 4.8, reviews: 98 },
-      { name: `Club & Spa de Bienestar`, img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=300&q=85", type: "Spa & Relajación", distance: "0.5 km", rating: 5, reviews: 115 },
-      { name: `Reserva Natural & Senderos de ${cantonName}`, img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=300&q=85", type: "Naturaleza • Recreación", distance: "1.2 km", rating: 4.9, reviews: 210 }
-    ],
-    'Restaurantes': [
-      { name: `Gastronomía de Autor en ${cantonName}`, img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=300&q=85", type: "Restaurante • Alta Cocina", distance: "0.4 km", rating: 5, reviews: 142 },
-      { name: `Cafetería de Especialidad & Repostería`, img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=300&q=85", type: "Café Gourmet", distance: "0.6 km", rating: 4.8, reviews: 85 },
-      { name: `Bistro & Fusión Internacional`, img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=300&q=85", type: "Cena Exclusiva", distance: "1.1 km", rating: 5, reviews: 340 }
-    ],
-    'Compras': [
-      { name: `Plaza Comercial & Boutiques`, img: "https://images.unsplash.com/photo-1519999482648-25049ddd37b1?auto=format&fit=crop&w=300&q=85", type: "Compras & Moda", distance: "0.8 km", rating: 4.8, reviews: 98 },
-      { name: `Galería de Diseño & Interiorismo`, img: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=300&q=85", type: "Mobiliario • Arte", distance: "0.9 km", rating: 5, reviews: 64 }
-    ],
-    'Naturaleza': [
-      { name: `Reserva Natural & Senderos de ${cantonName}`, img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=300&q=85", type: "Naturaleza • Recreación", distance: "1.2 km", rating: 4.9, reviews: 210 },
-      { name: `Parque Central & Jardines Botánicos`, img: "https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=300&q=85", type: "Parque Público", distance: "0.3 km", rating: 4.7, reviews: 320 }
-    ],
-    'Belleza': [
-      { name: `Club & Spa de Bienestar`, img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=300&q=85", type: "Spa & Relajación", distance: "0.5 km", rating: 5, reviews: 115 },
-      { name: `Salón de Estética & Cuidado Personal`, img: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=300&q=85", type: "Estética", distance: "0.7 km", rating: 4.8, reviews: 90 }
-    ],
-    'Vida Nocturna': [
-      { name: `Lounge Bar & Coctelería de Autor`, img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=300&q=85", type: "Coctelería • Lounge", distance: "0.5 km", rating: 4.9, reviews: 180 },
-      { name: `Terraza Panorámica & Vinos`, img: "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?auto=format&fit=crop&w=300&q=85", type: "Wine Bar • Vista", distance: "1.0 km", rating: 5, reviews: 230 }
-    ]
-  };
 
   useEffect(() => {
     if (!apiKey) return;
@@ -86,7 +56,8 @@ export default function InteractivePoiTable({ cantonName }: InteractivePoiTableP
       isLoadedAndEmpty = true;
     }
   } else {
-    displayData = poiData[activeTab] || poiData['Todos'] || [];
+    // Consulta estricta al motor de datos verificados geográficamente y autenticados con hitos de cada cantón
+    displayData = getCantonPois(cantonName, activeTab);
   }
 
   return (
