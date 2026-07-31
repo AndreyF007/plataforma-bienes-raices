@@ -153,15 +153,12 @@ export default function PortalClient({ initialCanton, allProperties }: PortalCli
             </div>
 
             {displayedProperties.length > 0 ? (
-               <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pb-8 transition-all duration-500" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 transition-all duration-500">
                   {displayedProperties.map(prop => (
-                     <div key={prop.id} className="min-w-[85vw] shrink-0 snap-center md:min-w-0 md:shrink md:w-auto">
+                     <div key={prop.id} className="w-full transform transition-all duration-500 hover:-translate-y-1">
                         <PropertyCard prop={prop} />
                      </div>
                   ))}
-                  <style dangerouslySetInnerHTML={{__html: `
-                    .hide-scrollbar::-webkit-scrollbar { display: none; }
-                  `}} />
                </div>
             ) : (
                <div className="flex flex-col items-center justify-center py-32 text-black dark:text-white animate-in fade-in duration-700">

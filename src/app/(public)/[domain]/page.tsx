@@ -234,28 +234,25 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
                 <div className="w-12 h-px bg-black dark:bg-white mx-auto mt-6"></div>
               </div>
               
-              <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
                 {provinceCards.map((zone) => (
                   <a 
                     key={zone.id} 
                     href={`/comunidades?zona=${encodeURIComponent(zone.name)}`}
-                    className="min-w-[85vw] md:min-w-0 shrink-0 snap-center group relative w-full aspect-[4/3] overflow-hidden bg-black cursor-pointer block hover:-translate-y-2 hover:scale-[1.02] transition-transform duration-500"
+                    className="group relative w-full aspect-[16/10] md:aspect-[4/3] overflow-hidden bg-black cursor-pointer block rounded-sm shadow-lg hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500"
                   >
                     <img 
                       src={zone.image} 
                       alt={zone.name} 
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" 
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-75 group-hover:opacity-100" 
                     />
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <h3 className="text-white text-[16px] md:text-[20px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] drop-shadow-md">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6 pointer-events-none">
+                      <h3 className="text-white text-[18px] md:text-[20px] font-[family-name:var(--font-raleway)] font-semibold uppercase tracking-[0.15em] drop-shadow-md">
                         {zone.name}
                       </h3>
                     </div>
                   </a>
                 ))}
-                <style dangerouslySetInnerHTML={{__html: `
-                  .hide-scrollbar::-webkit-scrollbar { display: none; }
-                `}} />
               </div>
             </div>
           </section>
