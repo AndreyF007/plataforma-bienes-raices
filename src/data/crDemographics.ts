@@ -178,28 +178,28 @@ export function getCantonDemographicStats(cantonName: string, dbZone?: any): Can
 export const DEFAULT_CANTON_IMAGES: Record<string, string> = {
   // San José (20)
   "san josé": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Teatro_Nacional_de_Costa_Rica.jpg",
-  "escazú": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Church_of_San_Miguel_in_Escazu.jpg",
-  "desamparados": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Catedral_de_Nuestra_Se%C3%B1ora_de_los_Desamparados.jpg",
-  "puriscal": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Ruinas_de_la_Antigua_Iglesia_de_Puriscal.jpg",
+  "escazú": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Valley_of_Santa_Ana%2C_Costa_Rica.jpg",
+  "desamparados": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
+  "puriscal": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
   "tarrazú": "https://upload.wikimedia.org/wikipedia/commons/3/33/San_Marcos_de_Tarraz%C3%BAn%2C_Costa_Rica.jpg",
   "aserrí": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
   "mora": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Ciudad_Col%C3%B3n_centro.jpg",
   "ciudad colón": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Ciudad_Col%C3%B3n_centro.jpg",
   "goicoechea": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
   "santa ana": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Valley_of_Santa_Ana%2C_Costa_Rica.jpg",
-  "alajuelita": "https://upload.wikimedia.org/wikipedia/commons/8/8e/La_Cruz_de_Alajuelita_Cerro_San_Miguel.jpg",
-  "vázquez de coronado": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Iglesia_de_Coronado_Costa_Rica.jpg",
-  "coronado": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Iglesia_de_Coronado_Costa_Rica.jpg",
-  "acosta": "https://upload.wikimedia.org/wikipedia/commons/5/5e/San_Ignacio_de_Acosta_templo.jpg",
-  "tibás": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Estadio_Ricardo_Saprissa.jpg",
-  "moravia": "https://upload.wikimedia.org/wikipedia/commons/d/df/San_Vicente_de_Moravia_iglesia.jpg",
+  "alajuelita": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
+  "vázquez de coronado": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
+  "coronado": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
+  "acosta": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
+  "tibás": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
+  "moravia": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
   "montes de oca": "https://upload.wikimedia.org/wikipedia/commons/6/64/Fuente_de_la_Hispanidad_Costa_Rica.jpg",
   "san pedro": "https://upload.wikimedia.org/wikipedia/commons/6/64/Fuente_de_la_Hispanidad_Costa_Rica.jpg",
-  "turrubares": "https://upload.wikimedia.org/wikipedia/commons/2/25/San_Pablo_de_Turrubares_Costa_Rica.jpg",
+  "turrubares": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
   "dota": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Santa_Maria_de_Dota_Costa_Rica.jpg",
-  "curridabat": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Curridabat_centro_iglesia.jpg",
+  "curridabat": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
   "pérez zeledón": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Cerro_Chirrip%C3%B3_Costa_Rica.jpg",
-  "león cortés castro": "https://upload.wikimedia.org/wikipedia/commons/0/02/San_Pablo_de_Leon_Cortes.jpg",
+  "león cortés castro": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
 
   // Alajuela (16)
   "alajuela": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Juan_Santamaria_Statue_Alajuela.jpg/800px-Juan_Santamaria_Statue_Alajuela.jpg",
@@ -256,11 +256,11 @@ export const AUTHENTIC_CR_FALLBACKS = [
 ];
 
 export function getCantonCoverImage(cantonName: string, dbZone?: { image?: string | null; coverImage?: string | null }, fallbackIndex: number = 0): string {
-  // 1. Prioridad máxima: foto personalizada subida o establecida en la base de datos por el administrador
+  // 1. Prioridad absoluta: foto personalizada guardada o establecida en la base de datos por el administrador
   let customImg = dbZone ? (dbZone.coverImage || dbZone.image) : null;
   
-  // Si no se personalizó en DB o quedó un placeholder genérico de unsplash/desiertos, usar nuestra galería oficial tica
-  if (!customImg || customImg.trim() === '' || customImg.includes("unsplash.com")) {
+  // Solo si el administrador NO ha configurado una foto en la base de datos, usamos la galería oficial por defecto
+  if (!customImg || customImg.trim() === '') {
     const normalized = cantonName.trim().toLowerCase();
     customImg = DEFAULT_CANTON_IMAGES[normalized] || Object.entries(DEFAULT_CANTON_IMAGES).find(([key]) => normalized.includes(key) || key.includes(normalized))?.[1] || null;
   }
