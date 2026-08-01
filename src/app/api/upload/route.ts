@@ -18,21 +18,31 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No files uploaded" }, { status: 400 });
     }
 
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    await fs.mkdir(uploadDir, { recursive: true });
-
     const uploadedUrls: string[] = [];
 
     for (const file of files) {
       const buffer = Buffer.from(await file.arrayBuffer());
-      // Create a unique filename
-      const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-      const filename = uniqueSuffix + "-" + file.name.replace(/\s+/g, "_");
+      const mimeType = file.type || "image/jpeg";
       
-      const filepath = path.join(uploadDir, filename);
-      await fs.writeFile(filepath, buffer);
+      // En entornos Serverless en la nube (como Vercel), el disco de sistema es de SOLO LECTURA (Read-Only).
+      // Al convertir la imagen en un Data URL (Base64), garantizamos que se pueda guardar directamente
+      // de manera nativa y permanente dentro de la base de datos PostgreSQL del portal, sin depender 
+      // ni requerir servicios externos de almacenamiento en la nube ni fallar por bloqueos de disco.
+      const base64Url = `data:${mimeType};base64,${buffer.toString("base64")}`;
       
-      uploadedUrls.push(`/api/images/${filename}`);
+      try {
+        // Opcional: Si el servidor corre de manera local con acceso de escritura al disco, creamos un respaldo en disco
+        const uploadDir = path.join(process.cwd(), "public", "uploads");
+        await fs.mkdir(uploadDir, { recursive: true });
+        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+        const filename = uniqueSuffix + "-" + file.name.replace(/\s+/g, "_");
+        const filepath = path.join(uploadDir, filename);
+        await fs.writeFile(filepath, buffer);
+      } catch (fsError) {
+        // Ignoramos silenciosamente la restricción EROFS (Read-Only) al correr en los clústers de Vercel
+      }
+      
+      uploadedUrls.push(base64Url);
     }
 
     return NextResponse.json({ urls: uploadedUrls }, { status: 200 });
