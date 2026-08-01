@@ -31,7 +31,7 @@ export const authOptions: NextAuthOptions = {
         if (!user && isAdminEmail) {
           // Buscamos el tenant principal de Andrey Realty o el primer tenant disponible en la base de datos
           const tenant = await db.tenant.findFirst({
-            where: { domain: { equals: 'AndreyRealty', mode: 'insensitive' } }
+            where: { domain: 'AndreyRealty' }
           }) || await db.tenant.findFirst();
 
           const hashedPassword = await bcrypt.hash('admin123', 10);
@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
         // Si el usuario es Andrey Martínez o admin y no tenía tenantId vinculado, aseguramos la vinculación
         if (isAdminEmail && !user.tenantId) {
           const tenant = await db.tenant.findFirst({
-            where: { domain: { equals: 'AndreyRealty', mode: 'insensitive' } }
+            where: { domain: 'AndreyRealty' }
           }) || await db.tenant.findFirst();
           if (tenant) {
             await db.user.update({
