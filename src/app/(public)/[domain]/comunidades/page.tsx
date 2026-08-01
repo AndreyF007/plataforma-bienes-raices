@@ -7,6 +7,9 @@ import ClientNeighborhoods from './ClientNeighborhoods';
 import HeroGrid from './HeroGrid';
 import Footer from '@/components/ui/Footer';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function NeighborhoodsPage(props: { params: Promise<{ domain: string }> }) {
   const params = await props.params;
   const decodedDomain = decodeURIComponent(params.domain);

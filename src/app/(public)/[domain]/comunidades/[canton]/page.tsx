@@ -24,6 +24,9 @@ export async function generateMetadata(props: { params: Promise<{ domain: string
   };
 }
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function CantonPage(props: { params: Promise<{ domain: string; canton: string }> }) {
   const params = await props.params;
   const decodedDomain = decodeURIComponent(params.domain);

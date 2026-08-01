@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
-import { getCantonCoverImage } from '@/data/crDemographics';
+import { getCantonCardImage } from '@/data/crDemographics';
 
 interface Canton {
   name: string;
@@ -50,7 +50,7 @@ function ClientNeighborhoodsContent({ zones = [] }: { zones?: any[] }) {
     else prov = "Limón";
 
     const matchedZone = zones?.find(z => z.name.toLowerCase() === name.toLowerCase());
-    const finalImg = getCantonCoverImage(name, matchedZone, index);
+    const finalImg = getCantonCardImage(name, matchedZone, index);
 
     return {
       name,

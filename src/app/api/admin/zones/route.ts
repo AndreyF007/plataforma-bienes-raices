@@ -2,6 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getServerSession } from 'next-auth/next';
+import { revalidatePath } from 'next/cache';
 
 export async function POST(req: NextRequest) {
   try {
@@ -35,6 +36,13 @@ export async function POST(req: NextRequest) {
         tenantId: user.tenantId
       }
     });
+
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/comunidades', 'page');
+      revalidatePath('/[domain]/comunidades', 'page');
+      revalidatePath('/[domain]/comunidades/[canton]', 'page');
+    } catch (e) {}
 
     return NextResponse.json({ message: 'Zona creada', zone: newZone }, { status: 201 });
   } catch (error) {
@@ -79,6 +87,13 @@ export async function PATCH(req: NextRequest) {
       }
     });
 
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/comunidades', 'page');
+      revalidatePath('/[domain]/comunidades', 'page');
+      revalidatePath('/[domain]/comunidades/[canton]', 'page');
+    } catch (e) {}
+
     return NextResponse.json({ message: 'Zona actualizada', zone: updated }, { status: 200 });
   } catch (error) {
     console.error(error);
@@ -108,6 +123,13 @@ export async function DELETE(req: NextRequest) {
     }
 
     await db.zone.delete({ where: { id } });
+
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/comunidades', 'page');
+      revalidatePath('/[domain]/comunidades', 'page');
+      revalidatePath('/[domain]/comunidades/[canton]', 'page');
+    } catch (e) {}
 
     return NextResponse.json({ message: 'Zona eliminada' }, { status: 200 });
   } catch (error) {

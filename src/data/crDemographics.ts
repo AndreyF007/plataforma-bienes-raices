@@ -255,9 +255,52 @@ export const AUTHENTIC_CR_FALLBACKS = [
   "https://upload.wikimedia.org/wikipedia/commons/a/a2/Valley_of_Santa_Ana%2C_Costa_Rica.jpg"
 ];
 
+function isUnwantedOldImage(url?: string | null): boolean {
+  if (!url || typeof url !== 'string') return false;
+  // Filtrar automáticamente antiguas URLs eclesiásticas o religiosas de Wikipedia si quedaron residuales en la BD
+  const l = url.toLowerCase();
+  if (l.includes('wikimedia.org') && (
+      l.includes('church') || l.includes('iglesia') || l.includes('catedral') || 
+      l.includes('templo') || l.includes('cruz_de_alajuelita') || l.includes('ruinas')
+  )) {
+    return true;
+  }
+  return false;
+}
+
+export function getCantonCardImage(cantonName: string, dbZone?: { image?: string | null; coverImage?: string | null }, fallbackIndex: number = 0): string {
+  // 1. Prioridad para Tarjeta/Miniatura: Foto de la tarjeta en BD (image) y luego foto panorámica (coverImage)
+  let customImg = dbZone ? (dbZone.image || dbZone.coverImage) : null;
+  
+  if (isUnwantedOldImage(customImg) && customImg === dbZone?.image) {
+    customImg = dbZone?.coverImage || null;
+  }
+  if (isUnwantedOldImage(customImg)) {
+    customImg = null;
+  }
+  
+  if (!customImg || customImg.trim() === '') {
+    const normalized = cantonName.trim().toLowerCase();
+    customImg = DEFAULT_CANTON_IMAGES[normalized] || Object.entries(DEFAULT_CANTON_IMAGES).find(([key]) => normalized.includes(key) || key.includes(normalized))?.[1] || null;
+  }
+  
+  if (!customImg || customImg.trim() === '') {
+    customImg = AUTHENTIC_CR_FALLBACKS[Math.abs(fallbackIndex) % AUTHENTIC_CR_FALLBACKS.length];
+  }
+
+  return customImg;
+}
+
 export function getCantonCoverImage(cantonName: string, dbZone?: { image?: string | null; coverImage?: string | null }, fallbackIndex: number = 0): string {
-  // 1. Prioridad absoluta: foto personalizada guardada o establecida en la base de datos por el administrador
+  // 1. Prioridad absoluta para Portada: Foto Hero (coverImage) y luego miniatura (image)
   let customImg = dbZone ? (dbZone.coverImage || dbZone.image) : null;
+  
+  if (isUnwantedOldImage(customImg) && customImg === dbZone?.coverImage) {
+    customImg = dbZone?.image || null;
+  }
+  if (isUnwantedOldImage(customImg)) {
+    customImg = null;
+  }
   
   // Solo si el administrador NO ha configurado una foto en la base de datos, usamos la galería oficial por defecto
   if (!customImg || customImg.trim() === '') {
