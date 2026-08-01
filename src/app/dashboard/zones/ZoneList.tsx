@@ -23,7 +23,7 @@ const PROVINCES_DATA = [
   {
     name: "San José",
     description: "Capital y corazón del país. Incluye 20 cantones oficiales.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/e/ea/Teatro_Nacional_de_Costa_Rica.jpg",
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
     cantons: [
       "San José", "Escazú", "Desamparados", "Puriscal", "Tarrazú", "Aserrí", "Mora", "Goicoechea", "Santa Ana", "Alajuelita", "Vázquez de Coronado", "Acosta", "Tibás", "Moravia", "Montes de Oca", "Turrubares", "Dota", "Curridabat", "Pérez Zeledón", "León Cortés Castro"
     ]
@@ -31,7 +31,7 @@ const PROVINCES_DATA = [
   {
     name: "Alajuela",
     description: "Tierra de volcanes, aeropuerto, parques exóticos y llanuras. 16 cantones.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Juan_Santamaria_Statue_Alajuela.jpg/800px-Juan_Santamaria_Statue_Alajuela.jpg",
+    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
     cantons: [
       "Alajuela", "San Ramón", "Grecia", "San Mateo", "Atenas", "Naranjo", "Palmares", "Poás", "Orotina", "San Carlos", "Zarcero", "Sarchí", "Upala", "Los Chiles", "Guatuso", "Río Cuarto"
     ]
@@ -39,7 +39,7 @@ const PROVINCES_DATA = [
   {
     name: "Cartago",
     description: "Antigua metrópoli, historia colonial, valles exuberantes e Irazú. 8 cantones.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Bas%C3%ADlica_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_Cartago_Costa_Rica.jpg/1280px-Bas%C3%ADlica_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_Cartago_Costa_Rica.jpg",
+    image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
     cantons: [
       "Cartago", "Paraíso", "La Unión", "Jiménez", "Turrialba", "Alvarado", "Oreamuno", "El Guarco"
     ]
@@ -47,7 +47,7 @@ const PROVINCES_DATA = [
   {
     name: "Heredia",
     description: "La Ciudad de las Flores, montañas del Barva y bosques lluviosos. 10 cantones.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/El_Fort%C3%ADn_Heredia_Costa_Rica.jpg/1280px-El_Fort%C3%ADn_Heredia_Costa_Rica.jpg",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
     cantons: [
       "Heredia", "Barva", "Santo Domingo", "Santa Bárbara", "San Rafael", "San Isidro", "Belén", "Flores", "San Pablo", "Sarapiquí"
     ]
@@ -55,7 +55,7 @@ const PROVINCES_DATA = [
   {
     name: "Guanacaste",
     description: "La pampa del Pacífico Norte, playas paradisíacas de arena dorada. 11 cantones.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Tamarindo_Beach_Costa_Rica.jpg/1280px-Tamarindo_Beach_Costa_Rica.jpg",
+    image: "/images/zone-guanacaste.png",
     cantons: [
       "Liberia", "Nicoya", "Santa Cruz", "Bagaces", "Carrillo", "Cañas", "Abangares", "Tilarán", "Nandayure", "La Cruz", "Hojancha"
     ]
@@ -63,7 +63,7 @@ const PROVINCES_DATA = [
   {
     name: "Puntarenas",
     description: "La Perla del Pacífico, Manuel Antonio, Monteverde y Corcovado. 13 cantones.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Manuel_Antonio_Beach_Costa_Rica.jpg/1280px-Manuel_Antonio_Beach_Costa_Rica.jpg",
+    image: "/images/zone-manuel.png",
     cantons: [
       "Puntarenas", "Esparza", "Buenos Aires", "Montes de Oro", "Osa", "Quepos", "Golfito", "Coto Brus", "Parrita", "Corredores", "Garabito", "Monteverde", "Puerto Jiménez"
     ]
@@ -71,7 +71,7 @@ const PROVINCES_DATA = [
   {
     name: "Limón",
     description: "La costa del Caribe, biodiversidad en Puerto Viejo y Tortuguero. 6 cantones.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Puerto_Viejo_de_Talamanca_Beach.jpg/1280px-Puerto_Viejo_de_Talamanca_Beach.jpg",
+    image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
     cantons: [
       "Limón", "Pococí", "Siquirres", "Talamanca", "Matina", "Guácimo"
     ]
@@ -79,37 +79,37 @@ const PROVINCES_DATA = [
 ];
 
 const DEFAULT_CANTON_IMAGES: Record<string, string> = {
-  "San José": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Teatro_Nacional_de_Costa_Rica.jpg",
-  "Escazú": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Valley_of_Santa_Ana%2C_Costa_Rica.jpg",
-  "Desamparados": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "Puriscal": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "Tarrazú": "https://upload.wikimedia.org/wikipedia/commons/3/33/San_Marcos_de_Tarraz%C3%BAn%2C_Costa_Rica.jpg",
-  "Aserrí": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "Mora": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Ciudad_Col%C3%B3n_centro.jpg",
-  "Goicoechea": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-  "Santa Ana": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Valley_of_Santa_Ana%2C_Costa_Rica.jpg",
-  "Alajuelita": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "Vázquez de Coronado": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-  "Acosta": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "Tibás": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-  "Moravia": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-  "Montes de Oca": "https://upload.wikimedia.org/wikipedia/commons/6/64/Fuente_de_la_Hispanidad_Costa_Rica.jpg",
-  "Turrubares": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "Dota": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Santa_Maria_de_Dota_Costa_Rica.jpg",
-  "Curridabat": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-  "Pérez Zeledón": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Cerro_Chirrip%C3%B3_Costa_Rica.jpg",
-  "León Cortés Castro": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "Alajuela": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Juan_Santamaria_Statue_Alajuela.jpg/800px-Juan_Santamaria_Statue_Alajuela.jpg",
-  "San Ramón": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/San_Ramon_Costa_Rica_Church.jpg/800px-San_Ramon_Costa_Rica_Church.jpg",
-  "Grecia": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Metal_Church_Grecia_Costa_Rica.jpg/800px-Metal_Church_Grecia_Costa_Rica.jpg",
-  "San Carlos": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg/800px-Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg",
-  "Zarcero": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Zarcero_Topiary_Park_Costa_Rica.jpg/800px-Zarcero_Topiary_Park_Costa_Rica.jpg",
-  "Sarchí": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sarchi_Oxcart_Costa_Rica.jpg/800px-Sarchi_Oxcart_Costa_Rica.jpg",
-  "Cartago": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Bas%C3%ADlica_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_Cartago_Costa_Rica.jpg/800px-Bas%C3%ADlica_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_Cartago_Costa_Rica.jpg",
-  "Heredia": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/El_Fort%C3%ADn_Heredia_Costa_Rica.jpg/800px-El_Fort%C3%ADn_Heredia_Costa_Rica.jpg",
-  "Liberia": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Liberia_Costa_Rica_Colonial_Architecture.jpg/800px-Liberia_Costa_Rica_Colonial_Architecture.jpg",
-  "Puntarenas": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Paseo_de_los_Turistas_Puntarenas.jpg/800px-Paseo_de_los_Turistas_Puntarenas.jpg",
-  "Limón": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Puerto_Limon_Coast_Costa_Rica.jpg/800px-Puerto_Limon_Coast_Costa_Rica.jpg"
+  "San José": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+  "Escazú": "/images/zone-escazu.png",
+  "Desamparados": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+  "Puriscal": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+  "Tarrazú": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+  "Aserrí": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+  "Mora": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+  "Goicoechea": "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1200&q=80",
+  "Santa Ana": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
+  "Alajuelita": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+  "Vázquez de Coronado": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+  "Acosta": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+  "Tibás": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+  "Moravia": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+  "Montes de Oca": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+  "Turrubares": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+  "Dota": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+  "Curridabat": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+  "Pérez Zeledón": "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1200&q=80",
+  "León Cortés Castro": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
+  "Alajuela": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+  "San Ramón": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+  "Grecia": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+  "San Carlos": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+  "Zarcero": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+  "Sarchí": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+  "Cartago": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
+  "Heredia": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+  "Liberia": "/images/zone-guanacaste.png",
+  "Puntarenas": "/images/zone-manuel.png",
+  "Limón": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80"
 };
 
 export default function ZoneList({ initialZones }: { initialZones: Zone[] }) {
@@ -160,7 +160,7 @@ export default function ZoneList({ initialZones }: { initialZones: Zone[] }) {
       });
     } else {
       setEditingId(null);
-      const defaultImg = prefilledImg || (prefilledName ? (DEFAULT_CANTON_IMAGES[prefilledName] || "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg/800px-Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg") : "");
+      const defaultImg = prefilledImg || (prefilledName ? (DEFAULT_CANTON_IMAGES[prefilledName] || "/images/zone-escazu.png") : "");
       setFormData({ 
         name: prefilledName || "", 
         image: defaultImg, 
@@ -356,7 +356,9 @@ export default function ZoneList({ initialZones }: { initialZones: Zone[] }) {
             {cantonsList.map(({ cantonName, province }) => {
               const matchedZone = zones.find(z => z.name.toLowerCase() === cantonName.toLowerCase());
               const isCustomized = !!matchedZone;
-              const displayImg = matchedZone ? (matchedZone.image || matchedZone.coverImage) : (DEFAULT_CANTON_IMAGES[cantonName] || "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg/800px-Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg");
+              const rawImg = matchedZone ? (matchedZone.image || matchedZone.coverImage) : null;
+              const isOldWiki = rawImg ? (rawImg.toLowerCase().includes("wikimedia") || rawImg.toLowerCase().includes("wikipedia")) : false;
+              const displayImg = (!isOldWiki && rawImg) ? rawImg : (DEFAULT_CANTON_IMAGES[cantonName] || "/images/zone-escazu.png");
               const displayDesc = matchedZone?.description ? matchedZone.description : `Cantón perteneciente a la provincia de ${province}.`;
 
               return (

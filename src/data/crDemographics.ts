@@ -176,93 +176,93 @@ export function getCantonDemographicStats(cantonName: string, dbZone?: any): Can
 }
 
 export const DEFAULT_CANTON_IMAGES: Record<string, string> = {
-  // San José (20)
-  "san josé": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Teatro_Nacional_de_Costa_Rica.jpg",
-  "escazú": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Valley_of_Santa_Ana%2C_Costa_Rica.jpg",
-  "desamparados": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "puriscal": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "tarrazú": "https://upload.wikimedia.org/wikipedia/commons/3/33/San_Marcos_de_Tarraz%C3%BAn%2C_Costa_Rica.jpg",
-  "aserrí": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "mora": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Ciudad_Col%C3%B3n_centro.jpg",
-  "ciudad colón": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Ciudad_Col%C3%B3n_centro.jpg",
-  "goicoechea": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-  "santa ana": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Valley_of_Santa_Ana%2C_Costa_Rica.jpg",
-  "alajuelita": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "vázquez de coronado": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-  "coronado": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-  "acosta": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "tibás": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-  "moravia": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-  "montes de oca": "https://upload.wikimedia.org/wikipedia/commons/6/64/Fuente_de_la_Hispanidad_Costa_Rica.jpg",
-  "san pedro": "https://upload.wikimedia.org/wikipedia/commons/6/64/Fuente_de_la_Hispanidad_Costa_Rica.jpg",
-  "turrubares": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
-  "dota": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Santa_Maria_de_Dota_Costa_Rica.jpg",
-  "curridabat": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Guadalupe_Goicoechea_parque.jpg",
-  "pérez zeledón": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Cerro_Chirrip%C3%B3_Costa_Rica.jpg",
-  "león cortés castro": "https://upload.wikimedia.org/wikipedia/commons/9/90/Vista_de_Aserri_y_sus_monta%C3%B1as.jpg",
+  // San José (20) - Propiedades de lujo en Valle Central y montaña
+  "san josé": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+  "escazú": "/images/zone-escazu.png",
+  "desamparados": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+  "puriscal": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+  "tarrazú": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+  "aserrí": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+  "mora": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+  "ciudad colón": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+  "goicoechea": "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1200&q=80",
+  "santa ana": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
+  "alajuelita": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+  "vázquez de coronado": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+  "coronado": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+  "acosta": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+  "tibás": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+  "moravia": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+  "montes de oca": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+  "san pedro": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+  "turrubares": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+  "dota": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+  "curridabat": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+  "pérez zeledón": "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1200&q=80",
+  "león cortés castro": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
 
   // Alajuela (16)
-  "alajuela": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Juan_Santamaria_Statue_Alajuela.jpg/800px-Juan_Santamaria_Statue_Alajuela.jpg",
-  "san ramón": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/San_Ramon_Costa_Rica_Church.jpg/800px-San_Ramon_Costa_Rica_Church.jpg",
-  "grecia": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Metal_Church_Grecia_Costa_Rica.jpg/800px-Metal_Church_Grecia_Costa_Rica.jpg",
-  "san carlos": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg/800px-Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg",
-  "ciudad quesada": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg/800px-Volc%C3%A1n_Arenal_desde_el_lago_Arenal.jpg",
-  "zarcero": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Zarcero_Topiary_Park_Costa_Rica.jpg/800px-Zarcero_Topiary_Park_Costa_Rica.jpg",
-  "sarchí": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sarchi_Oxcart_Costa_Rica.jpg/800px-Sarchi_Oxcart_Costa_Rica.jpg",
-  "poás": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Volcan_Poas_Crater_Costa_Rica.jpg/800px-Volcan_Poas_Crater_Costa_Rica.jpg",
-  "atenas": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Atenas_Central_Park_Costa_Rica.jpg/800px-Atenas_Central_Park_Costa_Rica.jpg",
+  "alajuela": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+  "san ramón": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+  "grecia": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+  "san carlos": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+  "ciudad quesada": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+  "zarcero": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+  "sarchí": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+  "poás": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+  "atenas": "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1200&q=80",
   
   // Cartago (8)
-  "cartago": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Bas%C3%ADlica_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_Cartago_Costa_Rica.jpg/800px-Bas%C3%ADlica_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_Cartago_Costa_Rica.jpg",
-  "oreamuno": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Irazu_Volcano_Crater_Costa_Rica.jpg/800px-Irazu_Volcano_Crater_Costa_Rica.jpg",
-  "paraíso": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Orosi_Valley_Costa_Rica.jpg/800px-Orosi_Valley_Costa_Rica.jpg",
-  "turrialba": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Turrialba_Volcano_Costa_Rica.jpg/800px-Turrialba_Volcano_Costa_Rica.jpg",
+  "cartago": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
+  "oreamuno": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+  "paraíso": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+  "turrialba": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
 
   // Heredia (10)
-  "heredia": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/El_Fort%C3%ADn_Heredia_Costa_Rica.jpg/800px-El_Fort%C3%ADn_Heredia_Costa_Rica.jpg",
-  "barva": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Barva_Volcano_Lagoon_Costa_Rica.jpg/800px-Barva_Volcano_Lagoon_Costa_Rica.jpg",
-  "sarapiquí": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Sarapiqui_River_Rainforest.jpg/800px-Sarapiqui_River_Rainforest.jpg",
+  "heredia": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+  "barva": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+  "sarapiquí": "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
 
   // Guanacaste (11)
-  "liberia": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Liberia_Costa_Rica_Colonial_Architecture.jpg/800px-Liberia_Costa_Rica_Colonial_Architecture.jpg",
-  "nicoya": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Iglesia_Colonial_de_Nicoya.jpg/800px-Iglesia_Colonial_de_Nicoya.jpg",
-  "santa cruz": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Tamarindo_Beach_Costa_Rica.jpg/800px-Tamarindo_Beach_Costa_Rica.jpg",
-  "carrillo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Playa_Conchal_Guanacaste.jpg/800px-Playa_Conchal_Guanacaste.jpg",
-  "tilarán": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Lake_Arenal_Windmills_Tilaran.jpg/800px-Lake_Arenal_Windmills_Tilaran.jpg",
+  "liberia": "/images/zone-guanacaste.png",
+  "nicoya": "/images/zone-nosara.png",
+  "santa cruz": "/images/zone-guanacaste.png",
+  "carrillo": "/images/zone-nosara.png",
+  "tilarán": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
 
   // Puntarenas (13)
-  "puntarenas": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Paseo_de_los_Turistas_Puntarenas.jpg/800px-Paseo_de_los_Turistas_Puntarenas.jpg",
-  "quepos": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Manuel_Antonio_Beach_Costa_Rica.jpg/800px-Manuel_Antonio_Beach_Costa_Rica.jpg",
-  "monteverde": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Monteverde_Cloud_Forest_Reserve_Costa_Rica.jpg/800px-Monteverde_Cloud_Forest_Reserve_Costa_Rica.jpg",
-  "garabito": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Jaco_Beach_Costa_Rica.jpg/800px-Jaco_Beach_Costa_Rica.jpg",
-  "jacó": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Jaco_Beach_Costa_Rica.jpg/800px-Jaco_Beach_Costa_Rica.jpg",
-  "osa": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Corcovado_National_Park_Costa_Rica.jpg/800px-Corcovado_National_Park_Costa_Rica.jpg",
-  "golfito": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Golfito_Bay_Costa_Rica.jpg/800px-Golfito_Bay_Costa_Rica.jpg",
+  "puntarenas": "/images/zone-manuel.png",
+  "quepos": "/images/zone-manuel.png",
+  "monteverde": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+  "garabito": "/images/zone-manuel.png",
+  "jacó": "/images/zone-manuel.png",
+  "osa": "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1200&q=80",
+  "golfito": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
 
   // Limón (6)
-  "limón": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Puerto_Limon_Coast_Costa_Rica.jpg/800px-Puerto_Limon_Coast_Costa_Rica.jpg",
-  "talamanca": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Puerto_Viejo_de_Talamanca_Beach.jpg/800px-Puerto_Viejo_de_Talamanca_Beach.jpg",
-  "puerto viejo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Puerto_Viejo_de_Talamanca_Beach.jpg/800px-Puerto_Viejo_de_Talamanca_Beach.jpg",
-  "pococí": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Tortuguero_Canals_Costa_Rica.jpg/800px-Tortuguero_Canals_Costa_Rica.jpg",
-  "siquirres": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Pacuare_River_Rapids_Costa_Rica.jpg/800px-Pacuare_River_Rapids_Costa_Rica.jpg"
+  "limón": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+  "talamanca": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+  "puerto viejo": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+  "pococí": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+  "siquirres": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
 };
 
 export const AUTHENTIC_CR_FALLBACKS = [
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Manuel_Antonio_Beach_Costa_Rica.jpg/800px-Manuel_Antonio_Beach_Costa_Rica.jpg",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Monteverde_Cloud_Forest_Reserve_Costa_Rica.jpg/800px-Monteverde_Cloud_Forest_Reserve_Costa_Rica.jpg",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Corcovado_National_Park_Costa_Rica.jpg/800px-Corcovado_National_Park_Costa_Rica.jpg",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Orosi_Valley_Costa_Rica.jpg/800px-Orosi_Valley_Costa_Rica.jpg",
-  "https://upload.wikimedia.org/wikipedia/commons/a/a2/Valley_of_Santa_Ana%2C_Costa_Rica.jpg"
+  "/images/zone-escazu.png",
+  "/images/zone-guanacaste.png",
+  "/images/zone-manuel.png",
+  "/images/zone-nosara.png",
+  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80"
 ];
 
 function isUnwantedOldImage(url?: string | null): boolean {
   if (!url || typeof url !== 'string') return false;
-  // Filtrar automáticamente antiguas URLs eclesiásticas o religiosas de Wikipedia si quedaron residuales en la BD
   const l = url.toLowerCase();
-  if (l.includes('wikimedia.org') && (
-      l.includes('church') || l.includes('iglesia') || l.includes('catedral') || 
-      l.includes('templo') || l.includes('cruz_de_alajuelita') || l.includes('ruinas')
-  )) {
+  // Rechazar inmediatamente CUALQUIER URL antigua de Wikipedia o Wikimedia (evita carro rojo de Fuente Hispanidad, iglesias y pantallas negras por bloqueo 403)
+  if (l.includes('wikimedia.org') || l.includes('wikipedia') || l.includes('hispanidad') || l.includes('church') || l.includes('iglesia') || l.includes('catedral')) {
     return true;
   }
   return false;

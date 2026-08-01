@@ -3,6 +3,7 @@
 import { useState, useRef, useMemo } from "react";
 import { Plus, Edit2, Trash2, X, Loader2, Upload, Image as ImageIcon, ChevronLeft, ChevronRight, Bed, Bath, Maximize, MapPin, Calendar, Layers, Search, Map as MapIcon, ChevronRight as ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { compressImage } from "@/utils/imageCompressor";
 
 interface Property {
   id: string;
@@ -191,7 +192,12 @@ export default function PropertyList({ initialProperties }: { initialProperties:
       let newUploadedUrls: string[] = [];
       if (selectedFiles.length > 0) {
         const formDataUpload = new FormData();
-        selectedFiles.forEach(f => formDataUpload.append("images", f));
+        for (let i = 0; i < selectedFiles.length; i++) {
+          const f = selectedFiles[i];
+          const compressed = await compressImage(f);
+          const name = compressed instanceof Blob && !(compressed instanceof File) ? f.name.replace(/\.[^/.]+$/, "") + ".jpg" : f.name;
+          formDataUpload.append("images", compressed, name);
+        }
         const uploadRes = await fetch("/api/upload", { method: "POST", body: formDataUpload });
         if (!uploadRes.ok) throw new Error("Fallo al subir imágenes");
         const uploadData = await uploadRes.json();

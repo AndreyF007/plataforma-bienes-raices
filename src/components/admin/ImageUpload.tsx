@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { UploadCloud, X, Loader2, Image as ImageIcon } from "lucide-react";
+import { compressImage } from "@/utils/imageCompressor";
 
 interface ImageUploadProps {
   label: string;
@@ -24,7 +25,12 @@ export default function ImageUpload({ label, value, onChange, multiple = false }
 
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
-      formData.append("images", files[i]);
+      const origFile = files[i];
+      const compressed = await compressImage(origFile);
+      const newName = compressed instanceof Blob && !(compressed instanceof File)
+        ? origFile.name.replace(/\.[^/.]+$/, "") + ".jpg"
+        : origFile.name;
+      formData.append("images", compressed, newName);
     }
 
     try {
