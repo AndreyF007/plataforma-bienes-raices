@@ -268,10 +268,26 @@ function isUnwantedOldImage(url?: string | null): boolean {
   return false;
 }
 
+function isUserUploaded(url?: string | null): boolean {
+  if (!url || typeof url !== 'string' || url.trim() === '') return false;
+  const l = url.toLowerCase();
+  if (l.includes('wikimedia') || l.includes('wikipedia') || l.includes('hispanidad') || l.includes('unsplash')) {
+    return false;
+  }
+  return true;
+}
+
 export function getCantonCardImage(cantonName: string, dbZone?: { image?: string | null; coverImage?: string | null }, fallbackIndex: number = 0): string {
-  // 1. Prioridad para Tarjeta/Miniatura: Foto de la tarjeta en BD (image) y luego foto panorámica (coverImage)
+  // 1. Prioridad ABSOLUTA: Si el usuario subió su propia foto real en el panel de administración (WhatsApp, cámara, archivo local)
+  if (dbZone?.image && isUserUploaded(dbZone.image)) {
+    return dbZone.image;
+  }
+  if (dbZone?.coverImage && isUserUploaded(dbZone.coverImage)) {
+    return dbZone.coverImage;
+  }
+
+  // 2. Si no hay foto subida por el usuario, usar lo que tenga en BD siempre que no sea Wikimedia prohibida
   let customImg = dbZone ? (dbZone.image || dbZone.coverImage) : null;
-  
   if (isUnwantedOldImage(customImg) && customImg === dbZone?.image) {
     customImg = dbZone?.coverImage || null;
   }
@@ -292,9 +308,16 @@ export function getCantonCardImage(cantonName: string, dbZone?: { image?: string
 }
 
 export function getCantonCoverImage(cantonName: string, dbZone?: { image?: string | null; coverImage?: string | null }, fallbackIndex: number = 0): string {
-  // 1. Prioridad absoluta para Portada: Foto Hero (coverImage) y luego miniatura (image)
+  // 1. Prioridad ABSOLUTA: Si el usuario subió su propia foto real en el panel de administración
+  if (dbZone?.coverImage && isUserUploaded(dbZone.coverImage)) {
+    return dbZone.coverImage;
+  }
+  if (dbZone?.image && isUserUploaded(dbZone.image)) {
+    return dbZone.image;
+  }
+
+  // 2. Si no hay foto subida por el usuario, usar la portada de la BD siempre que no sea Wikimedia prohibida
   let customImg = dbZone ? (dbZone.coverImage || dbZone.image) : null;
-  
   if (isUnwantedOldImage(customImg) && customImg === dbZone?.coverImage) {
     customImg = dbZone?.image || null;
   }
@@ -302,13 +325,12 @@ export function getCantonCoverImage(cantonName: string, dbZone?: { image?: strin
     customImg = null;
   }
   
-  // Solo si el administrador NO ha configurado una foto en la base de datos, usamos la galería oficial por defecto
+  // Solo si el administrador NO ha configurado una foto auténtica, usamos la galería oficial por defecto
   if (!customImg || customImg.trim() === '') {
     const normalized = cantonName.trim().toLowerCase();
     customImg = DEFAULT_CANTON_IMAGES[normalized] || Object.entries(DEFAULT_CANTON_IMAGES).find(([key]) => normalized.includes(key) || key.includes(normalized))?.[1] || null;
   }
   
-  // Respaldo oficial costarricense si el cantón no tiene foto asignada
   if (!customImg || customImg.trim() === '') {
     customImg = AUTHENTIC_CR_FALLBACKS[Math.abs(fallbackIndex) % AUTHENTIC_CR_FALLBACKS.length];
   }
