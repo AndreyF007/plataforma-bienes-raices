@@ -6,6 +6,29 @@ import TestimonialSlider from '@/components/ui/TestimonialSlider';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import Footer from '@/components/ui/Footer';
+import { Metadata } from 'next';
+
+export async function generateMetadata(props: { params: Promise<{ domain: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const decodedDomain = decodeURIComponent(params.domain);
+  const tenantData = await db.tenant.findUnique({ where: { domain: decodedDomain } });
+  const name = tenantData?.name || 'Andrey Realty';
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+  
+  return {
+    title: `Guía para Compradores de Propiedades y Casas de Lujo | ${name}`,
+    description: `Descubra paso a paso cómo adquirir su propiedad o residencia ideal en Costa Rica con asesoramiento legal, financiero y de inversión experto con ${name}.`,
+    keywords: ['Comprar casa en Costa Rica', 'Guía para comprar propiedades en Costa Rica', 'Bienes raíces Costa Rica', 'Inversión inmobiliaria', name],
+    alternates: {
+      canonical: `${protocol}://${decodedDomain}/comprador`
+    },
+    openGraph: {
+      title: `Guía para Comprar Propiedades en Costa Rica | ${name}`,
+      description: `Los pasos indispensables y asesoramiento exclusivo para comprar residencias de alto nivel en Costa Rica.`,
+      url: `${protocol}://${decodedDomain}/comprador`,
+    }
+  };
+}
 
 export default async function BuyersGuidePage(props: { params: Promise<{ domain: string }> }) {
   const params = await props.params;
@@ -94,9 +117,54 @@ export default async function BuyersGuidePage(props: { params: Promise<{ domain:
     { title: `CONTACTAR A ${tenantData.name.split(' ')[0].toUpperCase()}`, img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80", link: `mailto:${settings.contactEmail || 'info@example.com'}` }
   ];
 
+  // Esquemas JSON-LD (HowTo & FAQ) para indexación enriquecida en Google y Motores de IA
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": `Cómo Comprar una Propiedad o Casa de Lujo en Costa Rica con ${tenantData.name}`,
+    "description": "Guía paso a paso sobre cómo realizar una compra inmobiliaria segura y rentable en Costa Rica.",
+    "step": DEFAULT_STEPS.map((step, idx) => ({
+      "@type": "HowToStep",
+      "position": idx + 1,
+      "name": step.title,
+      "text": step.desc,
+      "image": step.img
+    }))
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Cuáles son los primeros pasos para comprar una casa en Costa Rica?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El primer paso indispensable es realizar una investigación exhaustiva del tipo de propiedad (casa, condominio o terreno), evaluar ubicaciones estratégicas y contar con una preaprobación financiera o estructura de fondos clara."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `¿Por qué es fundamental contar con la asesoría de ${tenantData.name} al comprar?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `En ${tenantData.name} protegemos sus intereses en cada etapa, verificando el estudio de título, negociando el precio óptimo de cierre y coordinando con abogados highly calificados y peritos evaluadores del mercado inmobiliario costarricense.`
+        }
+      }
+    ]
+  };
+
   return (
     <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Navbar tenantName={tenantData.name} contactPhone={settings?.contactPhone} contactEmail={settings?.contactEmail} />
       <FloatingContact contactEmail={settings.contactEmail} contactPhone={settings.contactPhone} />
 

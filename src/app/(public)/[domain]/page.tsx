@@ -168,9 +168,9 @@ export default async function TenantHomePage(props: { params: Promise<{ domain: 
           
           {/* Text Column */}
           <div className="w-full md:w-1/2 flex flex-col items-start text-left">
-             <h3 className="text-[14px] md:text-[16px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[20px] text-black dark:text-white">
+             <p className="text-[14px] md:text-[16px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.2em] mb-[20px] text-black dark:text-white">
                {aboutTitle}
-             </h3>
+             </p>
              <h2 className="text-[36px] md:text-[48px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] mb-[40px] leading-tight dark:text-white">
                {aboutSubtitle.toUpperCase()}<sup className="text-xl">®</sup>
              </h2>

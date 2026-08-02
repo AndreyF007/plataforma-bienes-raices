@@ -9,11 +9,42 @@ export async function GET(
   const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
   const baseUrl = `${protocol}://${decodedDomain}`;
 
-  const robots = `User-agent: *
+  const robots = `# Configuración oficial para motores de búsqueda (SEO) e Inteligencia Artificial (GEO/AEO)
+User-agent: *
 Allow: /
 Disallow: /dashboard/
 Disallow: /api/admin/
 Disallow: /login/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /dashboard/
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /dashboard/
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /dashboard/
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 Sitemap: ${baseUrl}/sitemap.xml
 `;

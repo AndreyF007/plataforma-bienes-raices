@@ -6,6 +6,29 @@ import TestimonialSlider from '@/components/ui/TestimonialSlider';
 import Footer from '@/components/ui/Footer';
 import ValuationForm from '@/components/public/ValuationForm';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export async function generateMetadata(props: { params: Promise<{ domain: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const decodedDomain = decodeURIComponent(params.domain);
+  const tenantData = await db.tenant.findUnique({ where: { domain: decodedDomain } });
+  const name = tenantData?.name || 'Andrey Realty';
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+  
+  return {
+    title: `Guía para Vendedores y Valoración de Propiedades en Costa Rica | ${name}`,
+    description: `Venda su propiedad de lujo al mejor valor de mercado en Costa Rica. Obtenga un avalúo y valoración profesional con estrategias de marketing de alcance internacional con ${name}.`,
+    keywords: ['Vender casa en Costa Rica', 'Valoración de propiedades en Costa Rica', 'Avalúo de casas', 'Venta de inmuebles de lujo', name],
+    alternates: {
+      canonical: `${protocol}://${decodedDomain}/vendedor`
+    },
+    openGraph: {
+      title: `Venda y Valore su Propiedad al Máximo Rendimiento | ${name}`,
+      description: `Estrategias avanzadas y comercialización global para vender su propiedad inmobiliaria en Costa Rica al mejor precio.`,
+      url: `${protocol}://${decodedDomain}/vendedor`,
+    }
+  };
+}
 
 export default async function SellersGuidePage(props: { params: Promise<{ domain: string }> }) {
   const params = await props.params;
@@ -82,9 +105,55 @@ export default async function SellersGuidePage(props: { params: Promise<{ domain
     { title: `CONTACTAR A ${tenantData.name.split(' ')[0].toUpperCase()}`, img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80", link: `mailto:${settings.contactEmail || 'info@example.com'}` }
   ];
 
+  // Esquemas JSON-LD (Service & FAQ) para captar clientes vendedores en Google y Motores IA (ChatGPT, Gemini)
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": ["Service", "RealEstateAgent"],
+    "name": `Servicio de Comercialización y Valoración Inmobiliaria - ${tenantData.name}`,
+    "description": "Servicio especializado en evaluación comercial, mercadotecnia digital global y venta de residencias y terrenos en Costa Rica al máximo precio de mercado.",
+    "provider": {
+      "@type": "RealEstateAgent",
+      "name": tenantData.name
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Costa Rica"
+    }
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Cuál es la mejor estrategia para vender una casa al precio más alto en Costa Rica?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La clave consiste en fijar el precio con un análisis competitivo de mercado preciso, realizar una presentación impecable de la propiedad y utilizar canales de difusión de lujo internacional para atraer compradores altamente calificados."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `¿Cómo me ayuda ${tenantData.name} a valorar mi propiedad hoy mismo?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `A través de nuestra herramienta de valoración y el respaldo de consultores expertos, en ${tenantData.name} calculamos el valor óptimo de su inmueble analizando transacciones recientes y tendencias exclusivas en su cantón o comunidad en Costa Rica.`
+        }
+      }
+    ]
+  };
+
   return (
     <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Navbar tenantName={tenantData.name} contactPhone={settings?.contactPhone} contactEmail={settings?.contactEmail} />
       <FloatingContact contactEmail={settings.contactEmail} contactPhone={settings.contactPhone} />
 

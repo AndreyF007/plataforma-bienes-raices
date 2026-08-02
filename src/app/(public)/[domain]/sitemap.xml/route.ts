@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { DEFAULT_CANTON_IMAGES } from '@/data/crDemographics';
+import { allProperties } from '@/data/mockProperties';
 
 export async function GET(
   request: Request,
@@ -19,7 +21,7 @@ export async function GET(
   const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
   const baseUrl = `${protocol}://${decodedDomain}`;
 
-  // Basic routes
+  // Basic static routes
   const routes = [
     '',
     '/portal',
@@ -35,43 +37,63 @@ export async function GET(
     select: { slug: true, updatedAt: true },
   });
 
-  // Dynamically fetch properties
-  const properties = await db.property.findMany({
+  // Dynamically fetch database properties
+  const dbProperties = await db.property.findMany({
     where: { tenantId: tenantData.id },
     select: { id: true },
+  });
+
+  // Dynamically fetch zones in DB to ensure zero cantons are left behind
+  const dbZones = await db.zone.findMany({
+    where: { tenantId: tenantData.id },
+    select: { name: true },
   });
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
+  const seenUrls = new Set<string>();
+  const addUrl = (loc: string, changefreq: string, priority: string, lastmod?: string) => {
+    if (seenUrls.has(loc)) return;
+    seenUrls.add(loc);
+    xml += `  <url>\n`;
+    xml += `    <loc>${loc}</loc>\n`;
+    xml += `    <lastmod>${lastmod || new Date().toISOString()}</lastmod>\n`;
+    xml += `    <changefreq>${changefreq}</changefreq>\n`;
+    xml += `    <priority>${priority}</priority>\n`;
+    xml += `  </url>\n`;
+  };
+
   // Add static routes
   routes.forEach((route) => {
-    xml += `  <url>\n`;
-    xml += `    <loc>${baseUrl}${route}</loc>\n`;
-    xml += `    <lastmod>${new Date().toISOString()}</lastmod>\n`;
-    xml += `    <changefreq>daily</changefreq>\n`;
-    xml += `    <priority>${route === '' ? '1.0' : '0.8'}</priority>\n`;
-    xml += `  </url>\n`;
+    addUrl(`${baseUrl}${route}`, 'daily', route === '' ? '1.0' : '0.8');
+  });
+
+  // Add all 84 cantons and communities (from DB + default catalogue)
+  const allCantonNames = new Set<string>();
+  Object.keys(DEFAULT_CANTON_IMAGES).forEach(name => allCantonNames.add(name));
+  dbZones.forEach(z => {
+    if (z.name) allCantonNames.add(z.name);
+  });
+
+  allCantonNames.forEach((cantonName) => {
+    const slug = cantonName.toLowerCase().replace(/ /g, '-');
+    addUrl(`${baseUrl}/comunidades/${encodeURIComponent(slug)}`, 'weekly', '0.85');
   });
 
   // Add blog posts
   posts.forEach((post) => {
-    xml += `  <url>\n`;
-    xml += `    <loc>${baseUrl}/blog/${post.slug}</loc>\n`;
-    xml += `    <lastmod>${post.updatedAt.toISOString()}</lastmod>\n`;
-    xml += `    <changefreq>weekly</changefreq>\n`;
-    xml += `    <priority>0.7</priority>\n`;
-    xml += `  </url>\n`;
+    addUrl(`${baseUrl}/blog/${post.slug}`, 'weekly', '0.7', post.updatedAt.toISOString());
   });
 
-  // Add properties
-  properties.forEach((property) => {
-    xml += `  <url>\n`;
-    xml += `    <loc>${baseUrl}/propiedad/${property.id}</loc>\n`;
-    xml += `    <lastmod>${new Date().toISOString()}</lastmod>\n`;
-    xml += `    <changefreq>weekly</changefreq>\n`;
-    xml += `    <priority>0.9</priority>\n`;
-    xml += `  </url>\n`;
+  // Add DB properties
+  dbProperties.forEach((property) => {
+    addUrl(`${baseUrl}/propiedad/db-${property.id}`, 'weekly', '0.9');
+  });
+
+  // Add mock properties
+  allProperties.forEach((property) => {
+    addUrl(`${baseUrl}/propiedad/${property.id}`, 'weekly', '0.85');
   });
 
   xml += `</urlset>`;

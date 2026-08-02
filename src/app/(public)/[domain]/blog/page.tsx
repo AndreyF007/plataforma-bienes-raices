@@ -6,6 +6,29 @@ import Footer from '@/components/ui/Footer';
 import { Search, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import BlogClient from '@/components/public/BlogClient';
+import { Metadata } from 'next';
+
+export async function generateMetadata(props: { params: Promise<{ domain: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const decodedDomain = decodeURIComponent(params.domain);
+  const tenantData = await db.tenant.findUnique({ where: { domain: decodedDomain } });
+  const name = tenantData?.name || 'Andrey Realty';
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+  
+  return {
+    title: `Blog Inmobiliario de Lujo en Costa Rica | ${name}`,
+    description: `Noticias del mercado inmobiliario, consejos para compra y venta de residenciales de lujo, tendencias arquitectónicas y estilo de vida en Costa Rica con ${name}.`,
+    alternates: {
+      canonical: `${protocol}://${decodedDomain}/blog`
+    },
+    openGraph: {
+      title: `Blog y Mercado Inmobiliario | ${name}`,
+      description: `Artículos exclusivos, tendencias y guía para invertir inteligentemente en Costa Rica.`,
+      url: `${protocol}://${decodedDomain}/blog`,
+    }
+  };
+}
+
 export default async function BlogPage(props: { params: Promise<{ domain: string }> }) {
   const params = await props.params;
   const decodedDomain = decodeURIComponent(params.domain);

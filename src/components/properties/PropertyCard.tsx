@@ -258,14 +258,20 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
                 {prop.description || "Póngase en contacto con nosotros para obtener más información exclusiva sobre esta propiedad de lujo."}
               </div>
 
-              <div className="mt-auto pt-8 border-t border-black/5">
+              <div className="mt-auto pt-8 border-t border-black/5 flex flex-col gap-3">
                 <a 
                   href={`https://wa.me/50660413905?text=Hola,%20estoy%20interesado%20en%20la%20propiedad:%20${encodeURIComponent(prop.title)}%20(${prop.priceStr})`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-3 py-5 bg-black text-white text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-black/80 transition-all duration-300 shadow-xl hover:shadow-2xl"
+                  className="w-full flex items-center justify-center gap-3 py-5 bg-black dark:bg-white text-white dark:text-black text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-black/80 transition-all duration-300 shadow-xl hover:shadow-2xl"
                 >
-                  Contactar Asesor
+                  Contactar Asesor por WhatsApp
+                </a>
+                <a
+                  href={`/propiedad/${prop.id}`}
+                  className="w-full flex items-center justify-center gap-2 py-4 border border-black dark:border-white/30 text-black dark:text-white text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 text-center"
+                >
+                  Ver Página y Dossier Completo
                 </a>
               </div>
             </div>

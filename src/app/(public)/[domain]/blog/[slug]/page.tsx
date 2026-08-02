@@ -5,6 +5,46 @@ import FloatingContact from '@/components/ui/FloatingContact';
 import Footer from '@/components/ui/Footer';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
+import { Metadata } from 'next';
+
+export async function generateMetadata(props: { params: Promise<{ domain: string, slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const decodedDomain = decodeURIComponent(params.domain);
+  const tenantData = await db.tenant.findUnique({ where: { domain: decodedDomain } });
+  if (!tenantData) return { title: 'Artículo no encontrado' };
+  
+  const post = await db.blogPost.findUnique({ where: { slug: params.slug } });
+  if (!post || !post.published) return { title: 'Artículo no encontrado | Andrey Realty' };
+
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+  const url = `${protocol}://${decodedDomain}/blog/${post.slug}`;
+  const description = post.content.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...';
+
+  return {
+    title: `${post.title} | Blog Inmobiliario | ${tenantData.name}`,
+    description,
+    keywords: [post.title, post.category || 'Bienes Raíces', 'Costa Rica Real Estate', tenantData.name, 'Blog Inmobiliario'],
+    authors: [{ name: tenantData.name }],
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      locale: 'es_CR',
+      url,
+      title: post.title,
+      description,
+      siteName: tenantData.name,
+      publishedTime: post.createdAt.toISOString(),
+      modifiedTime: post.updatedAt.toISOString(),
+      images: post.image ? [{ url: post.image, width: 1200, height: 630, alt: post.title }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+      images: post.image ? [post.image] : [],
+    },
+  };
+}
 
 export default async function BlogPostPage(props: { params: Promise<{ domain: string, slug: string }> }) {
   const params = await props.params;
@@ -35,8 +75,44 @@ export default async function BlogPostPage(props: { params: Promise<{ domain: st
     return `${d.getDate()} de ${months[d.getMonth()]} de ${d.getFullYear()}`;
   };
 
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+  const url = `${protocol}://${decodedDomain}/blog/${post.slug}`;
+  const cleanDescription = post.content.replace(/<[^>]*>?/gm, '').substring(0, 250);
+
+  // Esquema Semantico para Motores de Búsqueda e Inteligencia Artificial (Google News, ChatGPT, Perplexity)
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": cleanDescription,
+    "image": post.image ? [post.image] : [],
+    "datePublished": post.createdAt.toISOString(),
+    "dateModified": post.updatedAt.toISOString(),
+    "author": {
+      "@type": "RealEstateAgent",
+      "name": tenantData.name,
+      "url": `${protocol}://${decodedDomain}`
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": tenantData.name,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${protocol}://${decodedDomain}/favicon.ico`
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": url
+    }
+  };
+
   return (
     <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <Navbar tenantName={tenantData.name} contactPhone={settings?.contactPhone} contactEmail={settings?.contactEmail} />
       <FloatingContact contactEmail={settings.contactEmail} contactPhone={settings.contactPhone} />
 

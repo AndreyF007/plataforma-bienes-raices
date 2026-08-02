@@ -6,6 +6,29 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 import ClientNeighborhoods from './ClientNeighborhoods';
 import HeroGrid from './HeroGrid';
 import Footer from '@/components/ui/Footer';
+import { Metadata } from 'next';
+
+export async function generateMetadata(props: { params: Promise<{ domain: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const decodedDomain = decodeURIComponent(params.domain);
+  const tenantData = await db.tenant.findUnique({ where: { domain: decodedDomain } });
+  const name = tenantData?.name || 'Andrey Realty';
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+  
+  return {
+    title: `Directorio de los 84 Cantones y Comunidades de Lujo en Costa Rica | ${name}`,
+    description: `Explora el catálogo completo y perfil de estilo de vida de los 84 cantones de Costa Rica. Encuentra casas, condominios y residencias en Escazú, Santa Ana, Tamarindo, Coronado y más con ${name}.`,
+    keywords: ['Cantons Costa Rica', 'Comunidades de Costa Rica', 'Bienes raíces Escazu', 'Casas en Santa Ana', 'Inmobiliaria en Costa Rica'],
+    alternates: {
+      canonical: `${protocol}://${decodedDomain}/comunidades`
+    },
+    openGraph: {
+      title: `Los 84 Cantons y Comunidades Inmobiliarias de Costa Rica | ${name}`,
+      description: `Guía demográfica y propiedades en venta en todas las comunidades del país.`,
+      url: `${protocol}://${decodedDomain}/comunidades`,
+    }
+  };
+}
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -30,9 +53,26 @@ export default async function NeighborhoodsPage(props: { params: Promise<{ domai
     settings = JSON.parse(tenantData.siteSettings || "{}");
   } catch(e) {}
 
+  const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `Directorio Inmobiliario de las 84 Comunidades y Cantons de Costa Rica - ${tenantData.name}`,
+    "description": "Catálogo nacional de cantons de Costa Rica con información demográfica de plusvalía y ofertas de residencias de lujo en venta.",
+    "url": `${protocol}://${decodedDomain}/comunidades`,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": tenantData.name,
+      "url": `${protocol}://${decodedDomain}`
+    }
+  };
+
   return (
     <main className="w-full flex flex-col min-h-screen bg-white dark:bg-neutral-950 text-black dark:text-white font-[family-name:var(--font-quicksand)] selection:bg-black selection:text-white">
-      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
       <Navbar tenantName={tenantData.name} contactPhone={settings?.contactPhone} contactEmail={settings?.contactEmail} />
       <FloatingContact contactEmail={settings.contactEmail} contactPhone={settings.contactPhone} />
 
