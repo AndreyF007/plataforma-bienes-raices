@@ -57,6 +57,65 @@ export async function PATCH(req: NextRequest) {
   }
 }
 
+// POST: Crear un nuevo testimonio manualmente desde el dashboard
+export async function POST(req: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+    const user = await db.user.findUnique({ where: { email: session.user.email as string } });
+    if (!user || !user.tenantId) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+
+    const data = await req.json();
+    const newTestimonial = await db.testimonial.create({
+      data: {
+        clientName: data.clientName,
+        role: data.role || "Cliente",
+        content: data.content,
+        rating: data.rating || 5,
+        isApproved: data.isApproved ?? true,
+        tenantId: user.tenantId
+      }
+    });
+
+    return NextResponse.json({ message: 'Testimonio creado', testimonial: newTestimonial }, { status: 201 });
+  } catch (error) {
+    console.error('Error creating testimonial:', error);
+    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
+  }
+}
+
+// PUT: Editar un testimonio existente
+export async function PUT(req: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+    const user = await db.user.findUnique({ where: { email: session.user.email as string } });
+    if (!user || !user.tenantId) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+
+    const data = await req.json();
+    const { id, clientName, role, content, rating, isApproved } = data;
+    
+    if (!id) return NextResponse.json({ error: 'ID es obligatorio' }, { status: 400 });
+
+    const testimonial = await db.testimonial.findUnique({ where: { id } });
+    if (!testimonial || testimonial.tenantId !== user.tenantId) {
+      return NextResponse.json({ error: 'Testimonial not found or forbidden' }, { status: 404 });
+    }
+
+    const updatedTestimonial = await db.testimonial.update({
+      where: { id },
+      data: { clientName, role, content, rating, isApproved }
+    });
+
+    return NextResponse.json({ message: 'Testimonio editado', testimonial: updatedTestimonial }, { status: 200 });
+  } catch (error) {
+    console.error('Error editing testimonial:', error);
+    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
+  }
+}
+
 // DELETE: Eliminar un testimonio
 export async function DELETE(req: NextRequest) {
   try {
