@@ -26,7 +26,7 @@ export default function Footer({
   youtubeUrl = "#",
   tiktokUrl = "#",
   footerText = "Todos los derechos reservados. Luxury Real Estate.",
-  agentPhoto = "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=300&q=80",
+  agentPhoto = "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80",
   agentTitle = "Experto Inmobiliario de Costa Rica",
   contactEmail = `realtor@${domain}`,
   contactPhone = "+506 6041 3905",
