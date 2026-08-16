@@ -10,6 +10,7 @@ import PropertyCard from '@/components/properties/PropertyCard';
 import VideoGallery from '@/components/public/VideoGallery';
 import NewsletterForm from '@/components/public/NewsletterForm';
 import { getCantonDemographicStats, getCantonCoverImage } from '@/data/crDemographics';
+import { getCantonDescription } from '@/data/cantonDescriptions';
 import { allProperties } from '@/data/mockProperties';
 import CantonHero from './CantonHero';
 import CantonMap from './CantonMap';
@@ -94,9 +95,12 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
   const imgIndex = formattedCanton.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   const wikiImage = getCantonCoverImage(formattedCanton, zoneData, imgIndex);
 
-  let wikiExtract = zoneData?.description || `Descubra el increíble estilo de vida y las excelentes oportunidades inmobiliarias que ${formattedCanton} tiene para ofrecer. Ubicado en Costa Rica, este cantón es una excelente zona para vivir o invertir.`;
+  // Descripción del cantón: prioridad 1) BD del tenant, 2) descripción curada, 3) Wikipedia, 4) genérico
+  const curatedDescription = getCantonDescription(formattedCanton);
+  let wikiExtract = zoneData?.description || curatedDescription || `Descubra el increíble estilo de vida y las excelentes oportunidades inmobiliarias que ${formattedCanton} tiene para ofrecer. Ubicado en Costa Rica, este cantón es una excelente zona para vivir o invertir.`;
 
-  if (!zoneData?.description) {
+  // Solo intentar Wikipedia si no tenemos ni descripción de BD ni curada
+  if (!zoneData?.description && !curatedDescription) {
     try {
       let res = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${wikiQueryCR}`, { next: { revalidate: 86400 } });
       if (!res.ok) res = await fetch(`https://es.wikipedia.org/api/rest_v1/page/summary/${wikiQuery}`, { next: { revalidate: 86400 } });
