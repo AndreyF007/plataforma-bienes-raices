@@ -55,16 +55,16 @@ export default function AdminLoginModal({ tenantName }: { tenantName?: string })
           <div className="relative w-full max-w-[450px] bg-white dark:bg-neutral-950 text-black dark:text-white overflow-hidden flex flex-col shadow-2xl animate-in zoom-in-95 duration-300">
             
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-black/10 bg-gray-50">
+            <div className="flex items-center justify-between p-6 border-b border-black/10 dark:border-white/10 bg-gray-50 dark:bg-neutral-900">
               <div className="flex items-center gap-3">
                 <Lock className="w-5 h-5 text-black dark:text-white" />
-                <h2 className="text-[14px] font-[family-name:var(--font-raleway)] uppercase tracking-widest font-bold">
+                <h2 className="text-[14px] font-[family-name:var(--font-raleway)] uppercase tracking-widest font-bold text-black dark:text-white">
                   Acceso Privado Agente
                 </h2>
               </div>
               <button 
                 onClick={() => status !== 'loading' && setIsOpen(false)}
-                className="p-2 hover:bg-black/5 rounded-full transition-colors disabled:opacity-50"
+                className="p-2 hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors disabled:opacity-50"
                 disabled={status === 'loading'}
               >
                 <X className="w-5 h-5 stroke-1" />
@@ -77,37 +77,39 @@ export default function AdminLoginModal({ tenantName }: { tenantName?: string })
                 <h1 className="text-[24px] font-light uppercase tracking-widest text-black dark:text-white mb-2 font-[family-name:var(--font-raleway)]">
                   {tenantName ? `Portal de ${tenantName}` : 'Portal Agente'}
                 </h1>
-                <p className="text-[12px] text-gray-500 font-[family-name:var(--font-quicksand)]">Accede a tu panel para gestionar tus propiedades y clientes.</p>
+                <p className="text-[12px] text-gray-500 dark:text-gray-400 font-[family-name:var(--font-quicksand)]">Accede a tu panel para gestionar tus propiedades y clientes.</p>
               </div>
 
               {/* Error Message */}
               {status === 'error' && (
-                <div className="flex items-center gap-2 text-red-700 bg-red-50 p-3 border border-red-200">
+                <div className="flex items-center gap-2 text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/30 p-3 border border-red-200 dark:border-red-800">
                   <AlertCircle className="w-4 h-4 flex-shrink-0" />
                   <p className="text-[12px]">{errorMessage}</p>
                 </div>
               )}
 
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-black">Correo Electrónico</label>
+                <label className="text-[10px] uppercase tracking-widest font-bold text-black dark:text-white">Correo Electrónico</label>
                 <input 
                   type="email" 
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); if(status==='error') setStatus('idle'); }}
                   disabled={status === 'loading'}
-                  className="w-full bg-white dark:bg-neutral-950 border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black dark:border-white/20 transition-colors disabled:opacity-50"
+                  autoComplete="off"
+                  className="w-full bg-transparent border border-black/20 dark:border-white/20 px-4 py-3 text-[14px] text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors disabled:opacity-50 placeholder:text-gray-400 dark:placeholder:text-neutral-500"
                   required
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-black">Contraseña</label>
+                <label className="text-[10px] uppercase tracking-widest font-bold text-black dark:text-white">Contraseña</label>
                 <input 
                   type="password" 
                   value={password}
                   onChange={(e) => { setPassword(e.target.value); if(status==='error') setStatus('idle'); }}
                   disabled={status === 'loading'}
-                  className="w-full bg-white dark:bg-neutral-950 border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black dark:border-white/20 transition-colors disabled:opacity-50"
+                  autoComplete="off"
+                  className="w-full bg-transparent border border-black/20 dark:border-white/20 px-4 py-3 text-[14px] text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors disabled:opacity-50 placeholder:text-gray-400 dark:placeholder:text-neutral-500"
                   required
                 />
               </div>
@@ -115,7 +117,7 @@ export default function AdminLoginModal({ tenantName }: { tenantName?: string })
               <button 
                 type="submit" 
                 disabled={status === 'loading'}
-                className="w-full mt-4 bg-black text-white py-4 text-[12px] uppercase tracking-[0.2em] font-bold hover:bg-black/80 transition-colors flex justify-center items-center h-[50px] disabled:opacity-50"
+                className="w-full mt-4 bg-black dark:bg-white text-white dark:text-black py-4 text-[12px] uppercase tracking-[0.2em] font-bold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors flex justify-center items-center h-[50px] disabled:opacity-50"
               >
                 {status === 'loading' ? <Loader2 className="w-5 h-5 animate-spin" /> : 'INICIAR SESIÓN'}
               </button>
