@@ -327,8 +327,23 @@ export function getCantonCoverImage(cantonName: string, dbZone?: { image?: strin
   
   // Solo si el administrador NO ha configurado una foto auténtica, usamos la galería oficial por defecto
   if (!customImg || customImg.trim() === '') {
-    const normalized = cantonName.trim().toLowerCase();
-    customImg = DEFAULT_CANTON_IMAGES[normalized] || Object.entries(DEFAULT_CANTON_IMAGES).find(([key]) => normalized.includes(key) || key.includes(normalized))?.[1] || null;
+    const normalizeText = (text: string) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
+    const normalizedInput = normalizeText(cantonName);
+    
+    // Primero exacta
+    const exact = cantonName.trim().toLowerCase();
+    if (DEFAULT_CANTON_IMAGES[exact]) {
+      customImg = DEFAULT_CANTON_IMAGES[exact];
+    } else {
+      // Luego sin tildes
+      for (const [key, value] of Object.entries(DEFAULT_CANTON_IMAGES)) {
+        const normalizedKey = normalizeText(key);
+        if (normalizedKey === normalizedInput || normalizedInput.includes(normalizedKey) || normalizedKey.includes(normalizedInput)) {
+          customImg = value;
+          break;
+        }
+      }
+    }
   }
   
   if (!customImg || customImg.trim() === '') {

@@ -105,8 +105,21 @@ export const CANTON_DESCRIPTIONS: Record<string, string> = {
 };
 
 export function getCantonDescription(cantonName: string): string | null {
-  const normalized = cantonName.trim().toLowerCase();
-  return CANTON_DESCRIPTIONS[normalized] || 
-    Object.entries(CANTON_DESCRIPTIONS).find(([key]) => normalized.includes(key) || key.includes(normalized))?.[1] || 
-    null;
+  const normalizeText = (text: string) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
+  
+  const normalizedInput = normalizeText(cantonName);
+  
+  // Primero busqueda exacta con tildes (por si acaso)
+  const exact = cantonName.trim().toLowerCase();
+  if (CANTON_DESCRIPTIONS[exact]) return CANTON_DESCRIPTIONS[exact];
+
+  // Búsqueda sin tildes
+  for (const [key, value] of Object.entries(CANTON_DESCRIPTIONS)) {
+    const normalizedKey = normalizeText(key);
+    if (normalizedKey === normalizedInput || normalizedInput.includes(normalizedKey) || normalizedKey.includes(normalizedInput)) {
+      return value;
+    }
+  }
+
+  return null;
 }
