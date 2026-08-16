@@ -16,7 +16,7 @@ export default function CantonHero({ bannerImage, cantonName }: CantonHeroProps)
     let url = bannerImage;
     // Optimización para alta definición sin pérdida de nitidez ni desenfoque en monitores Retina / 4K
     if (url && url.includes('images.unsplash.com')) {
-      url = url.replace(/w=\d+/, 'w=1920').replace(/q=\d+/, 'q=90');
+      url = url.replace(/w=\d+/, 'w=2400').replace(/q=\d+/, 'q=95');
     }
     setOptimizedSrc(url || '/images/hero-bg.png');
   }, [bannerImage]);
