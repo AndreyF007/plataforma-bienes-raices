@@ -271,7 +271,7 @@ function isUnwantedOldImage(url?: string | null): boolean {
 function isUserUploaded(url?: string | null): boolean {
   if (!url || typeof url !== 'string' || url.trim() === '') return false;
   const l = url.toLowerCase();
-  if (l.includes('wikimedia') || l.includes('wikipedia') || l.includes('hispanidad') || l.includes('unsplash')) {
+  if (l.includes('wikimedia') || l.includes('wikipedia') || l.includes('hispanidad') || l.includes('unsplash') || l.includes('whatsapp')) {
     return false;
   }
   return true;
