@@ -263,7 +263,7 @@ export default function PropertyCard({ prop }: PropertyCardProps) {
                   href={`https://wa.me/50660413905?text=Hola,%20estoy%20interesado%20en%20la%20propiedad:%20${encodeURIComponent(prop.title)}%20(${prop.priceStr})`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-3 py-5 bg-black dark:bg-white text-white dark:text-black text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-black/80 transition-all duration-300 shadow-xl hover:shadow-2xl"
+                  className="w-full flex items-center justify-center gap-3 py-5 bg-black dark:bg-white text-white dark:text-black text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-all duration-300 shadow-xl hover:shadow-2xl"
                 >
                   Contactar Asesor por WhatsApp
                 </a>
