@@ -187,29 +187,33 @@ export default async function PropertyPage(props: PropertyDetailProps) {
           alt={property.title}
           className="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
+        {/* Stronger gradient at the bottom so text is highly legible, but leaves top clear for the photo */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none" />
         
         <div className="absolute top-6 left-6 md:left-12 z-20 flex flex-wrap gap-3">
           <BackButton />
         </div>
 
-        <div className="absolute bottom-10 left-6 md:left-16 right-6 z-20 max-w-5xl">
-          <div className="flex flex-wrap gap-3 mb-4">
-            <span className="bg-white text-black text-[11px] uppercase tracking-[0.25em] px-4 py-1.5 font-bold shadow-lg">
+        {/* Pushed further down on mobile (bottom-6 instead of bottom-10) */}
+        <div className="absolute bottom-6 md:bottom-10 left-6 md:left-16 right-6 z-20 max-w-5xl">
+          <div className="flex flex-wrap gap-2 md:gap-3 mb-3 md:mb-4">
+            <span className="bg-white text-black text-[10px] md:text-[11px] uppercase tracking-[0.25em] px-3 md:px-4 py-1.5 font-bold shadow-lg">
               {property.status}
             </span>
-            <span className="bg-black/80 backdrop-blur-md text-white border border-white/20 text-[11px] uppercase tracking-[0.25em] px-4 py-1.5 font-bold shadow-lg">
+            <span className="bg-black/80 backdrop-blur-md text-white border border-white/20 text-[10px] md:text-[11px] uppercase tracking-[0.25em] px-3 md:px-4 py-1.5 font-bold shadow-lg">
               {property.type}
             </span>
           </div>
-          <h1 className="text-[32px] md:text-[56px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-white leading-tight mb-2 drop-shadow-2xl">
+          {/* Reduced mobile font size (24px down from 32px) to prevent taking too many lines */}
+          <h1 className="text-[24px] md:text-[56px] font-[family-name:var(--font-raleway)] font-light uppercase tracking-[0.1em] text-white leading-tight mb-2 drop-shadow-2xl">
             {property.title}
           </h1>
-          <p className="text-[28px] md:text-[40px] font-[family-name:var(--font-raleway)] font-semibold text-white tracking-widest drop-shadow-lg text-emerald-400">
+          {/* Reduced mobile price size (22px down from 28px) */}
+          <p className="text-[22px] md:text-[40px] font-[family-name:var(--font-raleway)] font-semibold text-white tracking-widest drop-shadow-lg text-emerald-400">
             {property.priceStr}
           </p>
-          <div className="flex items-center gap-2 text-[14px] md:text-[16px] text-white/90 tracking-widest uppercase mt-3">
-            <MapPin className="w-5 h-5 text-red-500 shrink-0" />
+          <div className="flex items-center gap-2 text-[12px] md:text-[16px] text-white/90 tracking-widest uppercase mt-2 md:mt-3">
+            <MapPin className="w-4 h-4 md:w-5 md:h-5 text-red-500 shrink-0" />
             <span>{property.address} • Costa Rica</span>
           </div>
         </div>
