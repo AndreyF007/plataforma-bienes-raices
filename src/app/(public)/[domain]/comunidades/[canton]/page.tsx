@@ -350,12 +350,19 @@ export default async function CantonPage(props: { params: Promise<{ domain: stri
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full mb-16">
                {(() => {
                  const matched = combinedProperties.filter(p => p.address.toLowerCase().includes(formattedCanton.toLowerCase()));
-                 let propsToShow = matched.slice(0, 3);
-                 if (propsToShow.length < 3) {
-                   const remaining = combinedProperties.filter(p => !propsToShow.includes(p));
-                   propsToShow = [...propsToShow, ...remaining.slice(0, 3 - propsToShow.length)];
+                 if (matched.length === 0) {
+                   return (
+                     <div className="col-span-full text-center py-16">
+                       <p className="text-[18px] font-[family-name:var(--font-raleway)] uppercase tracking-widest text-black/40 dark:text-white/40 mb-4">
+                         Próximamente
+                       </p>
+                       <p className="text-[14px] text-black/60 dark:text-white/60 font-[family-name:var(--font-quicksand)] max-w-md mx-auto">
+                         Actualmente no hay propiedades listadas en {formattedCanton}. Contáctenos para conocer oportunidades exclusivas antes de que se publiquen.
+                       </p>
+                     </div>
+                   );
                  }
-                 return propsToShow.map(prop => (
+                 return matched.slice(0, 6).map(prop => (
                     <PropertyCard key={prop.id} prop={prop} />
                  ));
                })()}
