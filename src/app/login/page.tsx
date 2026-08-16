@@ -29,8 +29,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 font-sans">
-      <div className="max-w-md w-full bg-white dark:bg-neutral-950 p-10 rounded-sm shadow-xl border border-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-black font-sans">
+      <div className="max-w-md w-full bg-white dark:bg-neutral-950 p-10 rounded-sm shadow-xl border border-gray-100 dark:border-neutral-800">
         <div className="text-center mb-10">
           <h1 className="text-2xl font-light uppercase tracking-widest text-black dark:text-white mb-2">Ingresar</h1>
           <p className="text-sm text-gray-500 font-light">Accede a tu panel de administración</p>
@@ -45,7 +45,7 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-200 focus:border-black dark:border-white/20 focus:ring-0 outline-none transition-colors"
+              className="w-full px-4 py-3 bg-white dark:bg-neutral-900 text-black dark:text-white border border-gray-200 dark:border-neutral-800 focus:border-black dark:focus:border-white focus:ring-0 outline-none transition-colors"
               required
             />
           </div>
@@ -56,7 +56,7 @@ export default function LoginPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-200 focus:border-black dark:border-white/20 focus:ring-0 outline-none transition-colors"
+              className="w-full px-4 py-3 bg-white dark:bg-neutral-900 text-black dark:text-white border border-gray-200 dark:border-neutral-800 focus:border-black dark:focus:border-white focus:ring-0 outline-none transition-colors"
               required
             />
           </div>

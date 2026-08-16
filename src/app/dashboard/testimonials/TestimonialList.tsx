@@ -185,19 +185,19 @@ export default function TestimonialList({ initialTestimonials }: { initialTestim
               <form id="testimonial-form" onSubmit={handleSave} className="space-y-4">
                 <div>
                   <label className="block text-xs uppercase tracking-widest text-gray-500 mb-1">Nombre del Cliente</label>
-                  <input required type="text" value={editingTestimonial.clientName || ''} onChange={e => setEditingTestimonial({...editingTestimonial, clientName: e.target.value})} className="w-full bg-gray-50 dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800 px-4 py-2 rounded-sm focus:outline-none focus:border-black dark:focus:border-white" />
+                  <input required type="text" value={editingTestimonial.clientName || ''} onChange={e => setEditingTestimonial({...editingTestimonial, clientName: e.target.value})} className="w-full bg-gray-50 dark:bg-neutral-950 text-black dark:text-white border border-gray-200 dark:border-neutral-800 px-4 py-2 rounded-sm focus:outline-none focus:border-black dark:focus:border-white" />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-widest text-gray-500 mb-1">Rol / Tipo</label>
-                  <input required type="text" value={editingTestimonial.role || ''} onChange={e => setEditingTestimonial({...editingTestimonial, role: e.target.value})} placeholder="Ej: Comprador, Inversionista..." className="w-full bg-gray-50 dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800 px-4 py-2 rounded-sm focus:outline-none focus:border-black dark:focus:border-white" />
+                  <input required type="text" value={editingTestimonial.role || ''} onChange={e => setEditingTestimonial({...editingTestimonial, role: e.target.value})} placeholder="Ej: Comprador, Inversionista..." className="w-full bg-gray-50 dark:bg-neutral-950 text-black dark:text-white border border-gray-200 dark:border-neutral-800 px-4 py-2 rounded-sm focus:outline-none focus:border-black dark:focus:border-white" />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-widest text-gray-500 mb-1">Puntuación (1-5)</label>
-                  <input required type="number" min="1" max="5" value={editingTestimonial.rating || 5} onChange={e => setEditingTestimonial({...editingTestimonial, rating: parseInt(e.target.value)})} className="w-full bg-gray-50 dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800 px-4 py-2 rounded-sm focus:outline-none focus:border-black dark:focus:border-white" />
+                  <input required type="number" min="1" max="5" value={editingTestimonial.rating || 5} onChange={e => setEditingTestimonial({...editingTestimonial, rating: parseInt(e.target.value)})} className="w-full bg-gray-50 dark:bg-neutral-950 text-black dark:text-white border border-gray-200 dark:border-neutral-800 px-4 py-2 rounded-sm focus:outline-none focus:border-black dark:focus:border-white" />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-widest text-gray-500 mb-1">Testimonio</label>
-                  <textarea required rows={4} value={editingTestimonial.content || ''} onChange={e => setEditingTestimonial({...editingTestimonial, content: e.target.value})} className="w-full bg-gray-50 dark:bg-neutral-950 border border-gray-200 dark:border-neutral-800 px-4 py-2 rounded-sm focus:outline-none focus:border-black dark:focus:border-white"></textarea>
+                  <textarea required rows={4} value={editingTestimonial.content || ''} onChange={e => setEditingTestimonial({...editingTestimonial, content: e.target.value})} className="w-full bg-gray-50 dark:bg-neutral-950 text-black dark:text-white border border-gray-200 dark:border-neutral-800 px-4 py-2 rounded-sm focus:outline-none focus:border-black dark:focus:border-white"></textarea>
                 </div>
                 <div className="flex items-center gap-2 mt-2">
                   <input type="checkbox" id="isApproved" checked={editingTestimonial.isApproved} onChange={e => setEditingTestimonial({...editingTestimonial, isApproved: e.target.checked})} className="w-4 h-4" />
