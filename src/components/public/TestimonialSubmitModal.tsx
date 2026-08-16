@@ -66,12 +66,12 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
         
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-black/10 dark:border-white/10 bg-gray-50 dark:bg-neutral-900">
-          <h2 className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] uppercase tracking-widest font-bold">
+          <h2 className="text-[14px] md:text-[18px] font-[family-name:var(--font-raleway)] uppercase tracking-widest font-bold text-black dark:text-white">
             Dejar un Testimonio
           </h2>
           <button 
             onClick={() => status !== 'loading' && onClose()}
-            className="p-2 hover:bg-black/5 rounded-full transition-colors disabled:opacity-50"
+            className="p-2 hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors disabled:opacity-50"
             disabled={status === 'loading'}
           >
             <X className="w-6 h-6 stroke-1" />
@@ -81,15 +81,15 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
         {status === 'success' ? (
           <div className="flex flex-col items-center justify-center p-12 text-center">
             <CheckCircle2 className="w-20 h-20 text-green-500 mb-6" />
-            <h3 className="text-[24px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] font-light mb-4">
+            <h3 className="text-[24px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.1em] font-light mb-4 text-black dark:text-white">
               ¡Muchas Gracias!
             </h3>
-            <p className="text-[16px] text-black font-[family-name:var(--font-quicksand)] max-w-sm mb-8">
+            <p className="text-[16px] text-black dark:text-neutral-300 font-[family-name:var(--font-quicksand)] max-w-sm mb-8">
               Tu reseña ha sido enviada a <strong>{tenantName}</strong> y pronto será publicada en la página.
             </p>
             <button 
               onClick={onClose}
-              className="px-10 py-3 bg-black text-white text-[12px] uppercase tracking-[0.2em] font-bold hover:bg-black/80 transition-colors"
+              className="px-10 py-3 bg-black dark:bg-white text-white dark:text-black text-[12px] uppercase tracking-[0.2em] font-bold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
             >
               Cerrar
             </button>
@@ -97,20 +97,20 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
         ) : (
           <form onSubmit={handleSubmit} className="p-6 md:p-8 flex flex-col gap-6">
             
-            <p className="text-[14px] text-black dark:text-white font-[family-name:var(--font-quicksand)] leading-relaxed mb-2">
+            <p className="text-[14px] text-black dark:text-neutral-300 font-[family-name:var(--font-quicksand)] leading-relaxed mb-2">
               Tu opinión es muy importante para nosotros. Por favor, tómate un momento para calificar tu experiencia.
             </p>
 
             {/* Error Message */}
             {status === 'error' && (
-              <div className="flex items-center gap-2 text-red-700 bg-red-50 p-3 rounded-md border border-red-200">
+              <div className="flex items-center gap-2 text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/30 p-3 rounded-md border border-red-200 dark:border-red-800">
                 <AlertCircle className="w-5 h-5 flex-shrink-0" />
                 <p className="text-[12px]">{errorMessage}</p>
               </div>
             )}
 
             <div className="flex flex-col gap-2">
-              <label className="text-[12px] uppercase tracking-widest font-bold text-black">Calificación</label>
+              <label className="text-[12px] uppercase tracking-widest font-bold text-black dark:text-white">Calificación</label>
               <div className="flex gap-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
@@ -121,7 +121,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
                     disabled={status === 'loading'}
                   >
                     <Star 
-                      className={`w-8 h-8 transition-colors ${rating >= star ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
+                      className={`w-8 h-8 transition-colors ${rating >= star ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300 dark:text-neutral-600'}`} 
                     />
                   </button>
                 ))}
@@ -130,41 +130,41 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
 
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 flex flex-col gap-2">
-                <label className="text-[12px] uppercase tracking-widest font-bold text-black">Tu Nombre</label>
+                <label className="text-[12px] uppercase tracking-widest font-bold text-black dark:text-white">Tu Nombre</label>
                 <input 
                   type="text" 
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
                   disabled={status === 'loading'}
-                  className="w-full bg-white dark:bg-neutral-950 border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black dark:border-white/20 disabled:opacity-50"
+                  className="w-full bg-transparent border border-black/20 dark:border-white/20 px-4 py-3 text-[14px] text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white disabled:opacity-50 placeholder:text-gray-400 dark:placeholder:text-neutral-500"
                   placeholder="Ej. Ana García"
                 />
               </div>
 
               <div className="flex-1 flex flex-col gap-2">
-                <label className="text-[12px] uppercase tracking-widest font-bold text-black">Tipo de Cliente</label>
+                <label className="text-[12px] uppercase tracking-widest font-bold text-black dark:text-white">Tipo de Cliente</label>
                 <select 
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                   disabled={status === 'loading'}
-                  className="w-full bg-white dark:bg-neutral-950 border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black dark:border-white/20 disabled:opacity-50"
+                  className="w-full bg-transparent border border-black/20 dark:border-white/20 px-4 py-3 text-[14px] text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white disabled:opacity-50"
                 >
-                  <option value="Comprador">Comprador</option>
-                  <option value="Vendedor">Vendedor</option>
-                  <option value="Inversor">Inversor</option>
-                  <option value="Inquilino">Inquilino</option>
+                  <option value="Comprador" className="bg-white dark:bg-neutral-900 text-black dark:text-white">Comprador</option>
+                  <option value="Vendedor" className="bg-white dark:bg-neutral-900 text-black dark:text-white">Vendedor</option>
+                  <option value="Inversor" className="bg-white dark:bg-neutral-900 text-black dark:text-white">Inversor</option>
+                  <option value="Inquilino" className="bg-white dark:bg-neutral-900 text-black dark:text-white">Inquilino</option>
                 </select>
               </div>
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-[12px] uppercase tracking-widest font-bold text-black">Tu Reseña</label>
+              <label className="text-[12px] uppercase tracking-widest font-bold text-black dark:text-white">Tu Reseña</label>
               <textarea 
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 disabled={status === 'loading'}
                 rows={4}
-                className="w-full bg-white dark:bg-neutral-950 border border-black/20 px-4 py-3 text-[14px] focus:outline-none focus:border-black dark:border-white/20 disabled:opacity-50 resize-none"
+                className="w-full bg-transparent border border-black/20 dark:border-white/20 px-4 py-3 text-[14px] text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white disabled:opacity-50 resize-none placeholder:text-gray-400 dark:placeholder:text-neutral-500"
                 placeholder="Cuéntanos cómo fue tu experiencia..."
               />
             </div>
@@ -172,7 +172,7 @@ export default function TestimonialSubmitModal({ tenantName, isOpen, onClose }: 
             <button 
               type="submit" 
               disabled={status === 'loading'}
-              className="w-full mt-4 bg-black text-white py-4 text-[12px] uppercase tracking-[0.2em] font-bold hover:bg-black/80 transition-colors flex justify-center items-center h-[50px] disabled:opacity-50"
+              className="w-full mt-4 bg-black dark:bg-white text-white dark:text-black py-4 text-[12px] uppercase tracking-[0.2em] font-bold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors flex justify-center items-center h-[50px] disabled:opacity-50"
             >
               {status === 'loading' ? <Loader2 className="w-5 h-5 animate-spin" /> : 'ENVIAR TESTIMONIO'}
             </button>

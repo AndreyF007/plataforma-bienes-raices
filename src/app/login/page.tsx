@@ -33,37 +33,41 @@ export default function LoginPage() {
       <div className="max-w-md w-full bg-white dark:bg-neutral-950 p-10 rounded-sm shadow-xl border border-gray-100 dark:border-neutral-800">
         <div className="text-center mb-10">
           <h1 className="text-2xl font-light uppercase tracking-widest text-black dark:text-white mb-2">Ingresar</h1>
-          <p className="text-sm text-gray-500 font-light">Accede a tu panel de administración</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 font-light">Accede a tu panel de administración</p>
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-6">
-          {error && <div className="p-3 bg-red-50 text-red-500 text-sm text-center border border-red-100">{error}</div>}
+          {error && <div className="p-3 bg-red-50 dark:bg-red-900/30 text-red-500 text-sm text-center border border-red-100 dark:border-red-800">{error}</div>}
           
           <div>
-            <label className="block text-xs uppercase tracking-wider text-gray-500 mb-2">Email</label>
+            <label className="block text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 bg-white dark:bg-neutral-900 text-black dark:text-white border border-gray-200 dark:border-neutral-800 focus:border-black dark:focus:border-white focus:ring-0 outline-none transition-colors"
+              autoComplete="off"
+              style={{ colorScheme: "dark" }}
+              className="w-full px-4 py-3 bg-transparent text-black dark:text-white border border-gray-200 dark:border-neutral-700 focus:border-black dark:focus:border-white focus:ring-0 outline-none transition-colors placeholder:text-gray-400"
               required
             />
           </div>
           
           <div>
-            <label className="block text-xs uppercase tracking-wider text-gray-500 mb-2">Contraseña</label>
+            <label className="block text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">Contraseña</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 bg-white dark:bg-neutral-900 text-black dark:text-white border border-gray-200 dark:border-neutral-800 focus:border-black dark:focus:border-white focus:ring-0 outline-none transition-colors"
+              autoComplete="off"
+              style={{ colorScheme: "dark" }}
+              className="w-full px-4 py-3 bg-transparent text-black dark:text-white border border-gray-200 dark:border-neutral-700 focus:border-black dark:focus:border-white focus:ring-0 outline-none transition-colors placeholder:text-gray-400"
               required
             />
           </div>
           
           <button
             type="submit"
-            className="w-full bg-black text-white px-4 py-4 text-xs uppercase tracking-widest hover:bg-black/90 transition-colors mt-8"
+            className="w-full bg-black dark:bg-white text-white dark:text-black px-4 py-4 text-xs uppercase tracking-widest hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors mt-8"
           >
             Iniciar Sesión
           </button>
