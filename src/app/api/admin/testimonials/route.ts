@@ -2,6 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getServerSession } from 'next-auth/next';
+import { revalidatePath } from 'next/cache';
 
 // PATCH: Aprobar o desaprobar un testimonio
 export async function PATCH(req: NextRequest) {
@@ -43,6 +44,7 @@ export async function PATCH(req: NextRequest) {
       data: { isApproved }
     });
 
+    revalidatePath('/dashboard/testimonials');
     return NextResponse.json(
       { message: 'Testimonio actualizado', testimonial: updatedTestimonial },
       { status: 200 }
@@ -78,6 +80,7 @@ export async function POST(req: NextRequest) {
       }
     });
 
+    revalidatePath('/dashboard/testimonials');
     return NextResponse.json({ message: 'Testimonio creado', testimonial: newTestimonial }, { status: 201 });
   } catch (error) {
     console.error('Error creating testimonial:', error);
@@ -109,6 +112,7 @@ export async function PUT(req: NextRequest) {
       data: { clientName, role, content, rating, isApproved }
     });
 
+    revalidatePath('/dashboard/testimonials');
     return NextResponse.json({ message: 'Testimonio editado', testimonial: updatedTestimonial }, { status: 200 });
   } catch (error) {
     console.error('Error editing testimonial:', error);
@@ -155,6 +159,7 @@ export async function DELETE(req: NextRequest) {
       where: { id }
     });
 
+    revalidatePath('/dashboard/testimonials');
     return NextResponse.json(
       { message: 'Testimonio eliminado con éxito' },
       { status: 200 }
