@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface CantonHeroProps {
   bannerImage: string;
@@ -14,7 +15,7 @@ export default function CantonHero({ bannerImage, cantonName }: CantonHeroProps)
 
   useEffect(() => {
     let url = bannerImage;
-    // Optimización para alta definición sin pérdida de nitidez ni desenfoque en monitores Retina / 4K
+    // Optimización para alta definición. Si es Unsplash, pedimos la máxima resolución.
     if (url && url.includes('images.unsplash.com')) {
       url = url.replace(/w=\d+/, 'w=2400').replace(/q=\d+/, 'q=95');
     }
@@ -27,24 +28,33 @@ export default function CantonHero({ bannerImage, cantonName }: CantonHeroProps)
       {/* 1. FONDO OSCURO INICIAL (Se muestra detrás de la foto en lo que carga de la red) */}
       <div className="absolute inset-0 bg-neutral-900 pointer-events-none z-0" />
 
-      {/* 2. IMAGEN EN ALTA DEFINICIÓN SIN MÁSCARAS BORROSAS */}
+      {/* 2. IMAGEN EN ALTA DEFINICIÓN USANDO NEXT/IMAGE PARA ESCALADO LANCZOS PROFESIONAL */}
       {!hasError && (
-        <img
+        <Image
           src={optimizedSrc}
           alt={`Vista panorámica de ${cantonName}`}
+          fill
+          priority
+          quality={100}
+          sizes="100vw"
           onLoad={() => setIsLoaded(true)}
-          onError={(e) => {
+          onError={() => {
             if (optimizedSrc !== '/images/hero-bg.png') {
               setOptimizedSrc('/images/hero-bg.png');
             } else {
               setHasError(true);
             }
           }}
-          className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-700 ${
-            isLoaded 
-              ? 'opacity-100' 
-              : 'opacity-0'
+          className={`object-cover z-0 transition-opacity duration-700 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
+          // Aplicamos un ligero contraste y corrección de color para contrarrestar el suavizado del estiramiento
+          style={{
+            objectPosition: 'center 40%', // Ligeramente más arriba del centro para evitar cortar el cielo
+            filter: 'contrast(1.05) saturate(1.05)',
+            transform: 'translateZ(0)',
+            willChange: 'transform'
+          }}
         />
       )}
 
