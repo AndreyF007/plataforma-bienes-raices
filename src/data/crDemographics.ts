@@ -308,19 +308,15 @@ export function getCantonCardImage(cantonName: string, dbZone?: { image?: string
 }
 
 export function getCantonCoverImage(cantonName: string, dbZone?: { image?: string | null; coverImage?: string | null }, fallbackIndex: number = 0): string {
-  // 1. Prioridad ABSOLUTA: Si el usuario subió su propia foto real en el panel de administración
+  // 1. Prioridad ABSOLUTA: Si el usuario subió explícitamente una foto panorámica de portada (coverImage)
   if (dbZone?.coverImage && isUserUploaded(dbZone.coverImage)) {
     return dbZone.coverImage;
   }
-  if (dbZone?.image && isUserUploaded(dbZone.image)) {
-    return dbZone.image;
-  }
+  // IMPORTANTE: Ya NO hacemos fallback a dbZone.image porque las imágenes cuadradas de las tarjetas
+  // se ven borrosas al estirarse en el Hero panorámico. Si no hay coverImage, usamos Unsplash.
 
-  // 2. Si no hay foto subida por el usuario, usar la portada de la BD siempre que no sea Wikimedia prohibida
-  let customImg = dbZone ? (dbZone.coverImage || dbZone.image) : null;
-  if (isUnwantedOldImage(customImg) && customImg === dbZone?.coverImage) {
-    customImg = dbZone?.image || null;
-  }
+  // 2. Revisar si hay portada válida
+  let customImg = dbZone?.coverImage || null;
   if (isUnwantedOldImage(customImg)) {
     customImg = null;
   }

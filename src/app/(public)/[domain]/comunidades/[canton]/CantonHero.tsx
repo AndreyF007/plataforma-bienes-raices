@@ -23,63 +23,50 @@ export default function CantonHero({ bannerImage, cantonName }: CantonHeroProps)
   }, [bannerImage]);
 
   return (
-    <section className="relative w-full flex flex-col md:flex-row bg-[#050505] min-h-[500px] overflow-hidden">
+    <section className="group relative w-full h-[55vh] min-h-[420px] flex flex-col items-center justify-center overflow-hidden bg-neutral-950">
       
-      {/* LEFT SIDE: TEXT (Editorial Layout) */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-start px-8 md:px-16 lg:px-24 py-16 md:py-24 z-20">
-        <div className="animate-fade-in w-full">
-          <span className="inline-block text-[10px] sm:text-[12px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.4em] text-amber-500/90 font-semibold mb-4 drop-shadow">
-            Comunidad & Estilo de Vida
-          </span>
-          <h1 className="text-[42px] sm:text-[56px] lg:text-[72px] font-[family-name:var(--font-raleway)] font-extralight text-white tracking-[0.1em] uppercase leading-[1.1] mb-6">
-            {cantonName}
-          </h1>
-          <div className="w-20 h-[2px] bg-amber-500/80 mb-6"></div>
-          <p className="text-neutral-400 font-[family-name:var(--font-quicksand)] text-sm md:text-base max-w-md leading-relaxed">
-            Descubra las propiedades más exclusivas y el estilo de vida premium que ofrece esta zona.
-          </p>
-        </div>
-      </div>
+      {/* FONDO OSCURO INICIAL */}
+      <div className="absolute inset-0 bg-neutral-900 pointer-events-none z-0" />
 
-      {/* RIGHT SIDE: IMAGE */}
-      <div className="w-full md:w-1/2 relative min-h-[300px] md:min-h-full flex-grow">
-        {/* The image itself */}
-        {!hasError && (
-          <Image
-            src={optimizedSrc}
-            alt={`Vista panorámica de ${cantonName}`}
-            fill
-            priority
-            quality={100}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            onLoad={() => setIsLoaded(true)}
-            onError={() => {
-              if (optimizedSrc !== '/images/hero-bg.png') {
-                setOptimizedSrc('/images/hero-bg.png');
-              } else {
-                setHasError(true);
-              }
-            }}
-            className={`object-cover object-center z-0 transition-opacity duration-1000 ${
-              isLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
-            style={{
-              filter: 'contrast(1.05) saturate(1.1)',
-              transform: 'translateZ(0)'
-            }}
-          />
-        )}
-        
-        {/* Desktop Edge Gradient Blending */}
-        <div className="hidden md:block absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-[#050505] via-[#050505]/70 to-transparent z-10" />
-        
-        {/* Mobile Top Edge Gradient Blending */}
-        <div className="md:hidden absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#050505] to-transparent z-10" />
-        
-        {/* General Vignette for luxury feel */}
-        <div className="absolute inset-0 bg-black/10 z-10 pointer-events-none" />
-      </div>
+      {/* IMAGEN EN ALTA DEFINICIÓN (Sin divisiones ni desenfoques) */}
+      {!hasError && (
+        <Image
+          src={optimizedSrc}
+          alt={`Vista panorámica de ${cantonName}`}
+          fill
+          priority
+          quality={100}
+          sizes="100vw"
+          onLoad={() => setIsLoaded(true)}
+          onError={() => {
+            if (optimizedSrc !== '/images/hero-bg.png') {
+              setOptimizedSrc('/images/hero-bg.png');
+            } else {
+              setHasError(true);
+            }
+          }}
+          className={`object-cover object-center z-0 transition-opacity duration-1000 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{
+            transform: 'translateZ(0)' // Aceleración por hardware
+          }}
+        />
+      )}
 
+      {/* CAPA DE GRADIENTE PARA LEGIBILIDAD DEL TEXTO */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40 z-10 pointer-events-none" />
+
+      {/* TÍTULO DEL CANTÓN CON ANIMACIÓN ENTRADA */}
+      <div className="relative z-20 flex flex-col items-center px-6 mt-12 text-center animate-fade-in">
+        <span className="text-[11px] sm:text-[13px] font-[family-name:var(--font-raleway)] uppercase tracking-[0.3em] text-amber-500/90 font-medium mb-3 drop-shadow">
+          COMUNIDAD & ESTILO DE VIDA
+        </span>
+        <h1 className="text-[38px] sm:text-[52px] md:text-[64px] font-[family-name:var(--font-raleway)] font-extralight text-white tracking-[0.15em] uppercase mb-4 leading-tight drop-shadow-lg">
+          {cantonName}
+        </h1>
+        <div className="w-16 h-[1px] bg-amber-500/70 mt-2"></div>
+      </div>
     </section>
   );
 }
